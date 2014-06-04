@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RGB Tool</string>
+    <string name="title_activity_color_picker">ColorPickerActivity</string>
+    <string name="rgb_tool_channel_title">RGB channel values</string>
+    <string name="argb_label">ARGB</string>
+    <string name="rgb_label">RGB</string>
+    <string name="hsb_label">HSB</string>
+    <string name="color_hexadecimal_label">HEX</string>
+    <string name="color_list_empty">No colors</string>
+
+    <!-- MainActivity action items -->
+    <string name="action_camera">Color from image</string>
+    <string name="action_color_list">Color list</string>
+    <string name="action_print">Print color</string>
+    <string name="action_share">Share color</string>
+    <string name="pick_color">Image from…</string>
+    <string name="print_color_dialog_message_hint">Message</string>
+    <string name="print_color_dialog_message_set">Set</string>
+    <string name="print_color_dialog_message_skip">Skip</string>
+
+    <!-- UColor items -->
+    <string name="color_red">R</string>
+    <string name="color_green">G</string>
+    <string name="color_blue">B</string>
+    <string name="color_opacity">O</string>
+    <string name="color_hue">H</string>
+    <string name="color_saturation">S</string>
+    <string name="color_brightness">B</string>
+
+    <!-- Print -->
+    <string name="print_error">Printing error</string>
+    <string name="print_job_started">Printing started</string>
+    <string name="print_job_canceled">Printing canceled</string>
+
+    <!-- Generic items -->
+    <string name="empty_string">""</string>
+    <string name="not_found_string">not found</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="album_name">RGB-Tool</string>
+
+</resources>

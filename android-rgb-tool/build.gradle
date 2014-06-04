@@ -1,0 +1,47 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    if(project.hasProperty("RGBTool.signing.properties")
+            && new File(project.property("RGBTool.signing.properties")).exists()) {
+
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("RGBTool.signing.properties"))))
+
+        signingConfigs {
+            release {
+                storeFile file(props['keystore'])
+                storePassword props['keystore.password']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    compile 'com.github.chrisbanes.photoview:library:1.2.2'
+    compile 'com.jakewharton:butterknife:5.0.1'
+    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+}

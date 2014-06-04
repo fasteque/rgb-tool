@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/rgb_top_panel"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/rgb_panel_margin_top"
+              android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
+              android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+              android:layout_marginRight="@dimen/rgb_panel_margin_right"
+              android:background="@drawable/card_background" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="7dp"
+        android:stretchColumns="0,1,2,3,4">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                style="@style/RGBPanelLabel"
+                android:text="@string/rgb_label" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_red" />
+
+            <TextView
+                android:id="@+id/textView_RGB_R"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                style="@style/RGBPanelComponent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_green" />
+
+            <TextView
+                android:id="@+id/textView_RGB_G"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                style="@style/RGBPanelComponent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_blue" />
+
+            <TextView
+                android:id="@+id/textView_RGB_B"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                style="@style/RGBPanelComponent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_opacity" />
+
+            <TextView
+                android:id="@+id/textView_RGB_O"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                style="@style/RGBPanelComponent" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                style="@style/RGBPanelLabel"
+                android:text="@string/hsb_label" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_hue" />
+
+            <TextView
+                android:id="@+id/textView_HSB_H"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                style="@style/RGBPanelComponent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_saturation" />
+
+            <TextView
+                android:id="@+id/textView_HSB_S"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                style="@style/RGBPanelComponent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                style="@style/RGBPanelComponentLabel"
+                android:text="@string/color_brightness" />
+
+            <TextView
+                android:id="@+id/textView_HSB_B"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                style="@style/RGBPanelComponent" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                style="@style/RGBPanelLabel"
+                android:text="@string/color_hexadecimal_label" />
+
+            <TextView
+                android:id="@+id/textView_Hexadecimal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="120"
+                style="@style/RGBPanelComponent" />
+
+            <ImageButton
+                android:id="@+id/btn_save_color"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_gravity="right"
+                android:src="@drawable/btn_save_color" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

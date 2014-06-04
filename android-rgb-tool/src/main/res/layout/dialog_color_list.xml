@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_silver">
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/rgb_panel_color_list_margin"
+        android:scrollbars="none"
+        android:dividerHeight="3dp"
+        android:divider="@color/light_silver"
+        android:drawSelectorOnTop="false"
+        android:cacheColorHint="@color/light_accent_color" />
+
+    <include layout="@layout/empty_layout" />
+</RelativeLayout>

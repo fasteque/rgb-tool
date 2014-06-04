@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fastebro.androidrgbtool.ui.MainActivity" >
+
+    <item android:id="@+id/action_camera"
+          android:title="@string/action_camera"
+          android:icon="@drawable/ic_menu_camera"
+          android:orderInCategory="100"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_color_list"
+        android:title="@string/action_color_list"
+        android:icon="@drawable/ic_menu_color_list"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_print"
+        android:title="@string/action_print"
+        android:icon="@drawable/ic_menu_print"
+        android:orderInCategory="102"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_share"
+        android:title="@string/action_share"
+        android:showAsAction="ifRoom"
+        android:orderInCategory="103"
+        android:actionProviderClass="android.widget.ShareActionProvider" />
+</menu>

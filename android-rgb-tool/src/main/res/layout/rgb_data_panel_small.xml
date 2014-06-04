@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/rgb_panel"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/rgb_panel_margin_top"
+              android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
+              android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+              android:layout_marginRight="@dimen/rgb_panel_margin_right"
+              android:background="@drawable/card_background_translucent"
+              android:clickable="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:orientation="vertical"
+        android:gravity="right" >
+
+                <ImageButton
+                    android:id="@+id/btn_dismiss_panel"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/btn_dismiss" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/RGBPanelLabel"
+                android:text="@string/argb_label" />
+
+            <TextView
+                android:id="@+id/rgb_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+                style="@style/RGBPanelComponentLabel" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/RGBPanelLabel"
+                android:text="@string/hsb_label" />
+
+            <TextView
+                android:id="@+id/hsb_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+                style="@style/RGBPanelComponentLabel" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/RGBPanelLabel"
+                android:text="@string/color_hexadecimal_label" />
+
+            <TextView
+                android:id="@+id/hex_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+                style="@style/RGBPanelComponent" />
+
+    </LinearLayout>
+
+</LinearLayout>

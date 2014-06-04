@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RGBOBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/silver</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RGBPanelLabel" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="RGBPanelComponentLabel" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="RGBPanelComponent" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+</resources>
