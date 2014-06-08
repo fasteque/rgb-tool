@@ -3,30 +3,16 @@ package com.fastebro.androidrgbtool.ui;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.UImage;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
-
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 import java.io.File;
-import java.io.IOException;
 
 
 public class ColorPickerActivity extends Activity {

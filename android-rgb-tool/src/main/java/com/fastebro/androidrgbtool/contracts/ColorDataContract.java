@@ -6,8 +6,10 @@ import android.provider.BaseColumns;
  * Created by daltomare on 02/04/14.
  */
 public final class ColorDataContract {
-    // To prevent someone from accidentally instantiating the contract class,
-    // give it an empty constructor.
+    /*
+        To prevent someone from accidentally instantiating
+        the contract class, give it an empty constructor.
+     */
     public ColorDataContract() {
     }
 

@@ -8,7 +8,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,7 +126,6 @@ public class ColorListDialogFragment extends DialogFragment
 
     @Override
     public void onLoadFinished(Loader loader, Object data) {
-        Log.d("DEBUG", "onLoadFinished");
         getView().findViewById(R.id.list_empty_progress).setVisibility(View.GONE);
 
         if (((Cursor) data).getCount() <= 0) {
@@ -144,7 +142,6 @@ public class ColorListDialogFragment extends DialogFragment
 
     @Override
     public void onLoaderReset(Loader loader) {
-        Log.d("DEBUG", "onLoaderReset");
         // This is called when the last Cursor provided to onLoadFinished()
         // above is about to be closed.  We need to make sure we are no
         // longer using it.
@@ -158,7 +155,6 @@ public class ColorListDialogFragment extends DialogFragment
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
         String[] mSelectionArgs = {String.valueOf(colorId)};
 
-        Log.d("DEBUG", "delete");
         getActivity().getContentResolver().delete(
                 RGBToolContentProvider.CONTENT_URI,
                 mSelectionClause,

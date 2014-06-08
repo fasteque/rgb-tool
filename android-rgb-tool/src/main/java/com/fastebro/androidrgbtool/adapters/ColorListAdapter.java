@@ -3,7 +3,6 @@ package com.fastebro.androidrgbtool.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SimpleCursorAdapter;
@@ -40,7 +39,7 @@ public class ColorListAdapter extends SimpleCursorAdapter {
         ImageButton deleteColor = (ImageButton) view.findViewById(R.id.btn_delete_color);
 
         final int colorId = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry._ID));
-        Log.d("DEBUG", "colorId: " + colorId);
+
         int rgbRValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R));
         int rgbGValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G));
         int rgbBValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B));

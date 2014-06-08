@@ -2,7 +2,6 @@ package com.fastebro.androidrgbtool.utils;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 
