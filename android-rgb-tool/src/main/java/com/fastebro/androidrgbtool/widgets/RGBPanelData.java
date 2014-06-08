@@ -67,29 +67,25 @@ public class RGBPanelData extends LinearLayout {
         blue = touchedRGB & 0xFF;
         hsb = UColor.RGBToHSB(red, green, blue);
 
-        setRGBValue(touchedRGB);
-        setHSBValue(touchedRGB);
+        setRGBValue();
+        setHSBValue();
         setHEXValue(touchedRGB);
     }
 
 
-    public void setRGBValue(int touchedRGB) {
+    public void setRGBValue() {
         if (mRGBValue != null) {
             mRGBValue.setText("(" + alpha + ", " + red + ", " + green + ", " + blue + ")");
-        } else {
-            mRGBValue.setText(" - ");
         }
     }
 
 
-    public void setHSBValue(int touchedRGB) {
+    public void setHSBValue() {
         if (mHSBValue != null) {
             mHSBValue.setText("");
             mHSBValue.append("(" + String.format("%.0f", hsb[0]));
             mHSBValue.append(", " + String.format("%.0f%%", (hsb[1] * 100.0f)));
             mHSBValue.append(", " + String.format("%.0f%%", (hsb[2] * 100.0f)) + ")");
-        } else {
-            mHSBValue.setText(" - ");
         }
     }
 
@@ -97,8 +93,6 @@ public class RGBPanelData extends LinearLayout {
     public void setHEXValue(int touchedRGB) {
         if (mHEXValue != null) {
             mHEXValue.setText("#" + Integer.toHexString(touchedRGB));
-        } else {
-            mHEXValue.setText(" - ");
         }
     }
 }
