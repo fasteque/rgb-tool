@@ -50,7 +50,9 @@ public class ColorPickerActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
 
-        getActionBar().setDisplayShowTitleEnabled(false);
+        if(getActionBar() != null) {
+            getActionBar().hide();
+        }
 
         mMainLayout = (RelativeLayout) findViewById(R.id.color_picker_main_layout);
 
