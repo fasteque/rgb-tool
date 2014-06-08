@@ -300,6 +300,8 @@ public class MainActivity extends Activity
                 null,
                 RGBToolContentProvider.CONTENT_URI,
                 values);
+
+        btn_SaveColor.setVisibility(View.INVISIBLE);
     }
 
 
@@ -431,18 +433,22 @@ public class MainActivity extends Activity
                 }
 
                 refreshUI();
-
-                if(UDatabase.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
-                                        RGB_B_COLOR, RGB_OPACITY))
-                {
-                    btn_SaveColor.setVisibility(View.INVISIBLE);
-                }
-                else
-                {
-                    btn_SaveColor.setVisibility(View.VISIBLE);
-                }
             }
         };
+    }
+
+
+    private void updateSaveColorButton()
+    {
+        if(UDatabase.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
+                RGB_B_COLOR, RGB_OPACITY))
+        {
+            btn_SaveColor.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            btn_SaveColor.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -454,6 +460,7 @@ public class MainActivity extends Activity
         updateHSBField();
         updateHexadecimalField();
         updateSharedColor();
+        updateSaveColorButton();
     }
 
     /**

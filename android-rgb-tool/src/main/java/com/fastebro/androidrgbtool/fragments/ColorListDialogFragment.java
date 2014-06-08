@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.fastebro.androidrgbtool.R;
@@ -26,9 +25,10 @@ import com.fastebro.androidrgbtool.utils.UDatabase;
  * Created by danielealtomare on 17/04/14.
  */
 public class ColorListDialogFragment extends DialogFragment
-        implements AdapterView.OnItemClickListener,
+        implements
         LoaderManager.LoaderCallbacks,
-        OnColorDeleteListener {
+        OnColorDeleteListener,
+        AdapterView.OnItemClickListener {
 
     private ColorListAdapter mAdapter;
 
@@ -79,7 +79,7 @@ public class ColorListDialogFragment extends DialogFragment
                 R.layout.color_list_row, null,
                 new String[] { ColorDataContract.ColorEntry.COLUMN_COLOR_HEX },
                 new int[] { R.id.hex_value }, 0);
-        mAdapter.setOnColorClickListener(this);
+//        mAdapter.setOnColorClickListener(this);
 
         ListView listview = (ListView)view.findViewById(android.R.id.list);
         listview.setOnItemClickListener(this);

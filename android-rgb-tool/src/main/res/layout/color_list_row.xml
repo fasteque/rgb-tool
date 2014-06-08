@@ -3,7 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_background" >
+    android:background="@drawable/card_background"
+    android:descendantFocusability="blocksDescendants" >
 
     <RelativeLayout
         android:orientation="vertical"
@@ -114,6 +115,8 @@
                 android:layout_width="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@null"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:src="@drawable/btn_delete_color" />
 
         </RelativeLayout>
