@@ -2,14 +2,12 @@ package com.fastebro.androidrgbtool.utils;
 
 import android.graphics.Color;
 
-public class UColor
-{
+public class UColor {
     /**
      * @param n
      * @return
      */
-    public static String getRGB(float n)
-    {
+    public static String getRGB(float n) {
         return String.format("%f", n).replaceAll("\\.0*$", "");
     }
 
@@ -18,8 +16,7 @@ public class UColor
      * @param n
      * @return
      */
-    public static String RGBToHex(float n)
-    {
+    public static String RGBToHex(float n) {
         StringBuffer sb = new StringBuffer();
         sb.append(Integer.toHexString((int) n));
         // Add '0' character at first index if the string length < 2.
@@ -32,14 +29,12 @@ public class UColor
 
 
     /**
-     *
      * @param r
      * @param g
      * @param b
      * @return
      */
-    public static float[] RGBToHSB(float r, float g, float b)
-    {
+    public static float[] RGBToHSB(float r, float g, float b) {
         float[] hsb = new float[3];
         Color.RGBToHSV((int) r, (int) g, (int) b, hsb);
         return hsb;
@@ -47,7 +42,6 @@ public class UColor
 
 
     /**
-     *
      * @param rgbRColor
      * @param rgbGColor
      * @param rgbBColor
@@ -55,10 +49,9 @@ public class UColor
      * @return
      */
     public static String getColorMessage(float rgbRColor,
-                                        float rgbGColor,
-                                        float rgbBColor,
-                                        float rgbOpacity)
-    {
+                                         float rgbGColor,
+                                         float rgbBColor,
+                                         float rgbOpacity) {
         StringBuilder message = new StringBuilder();
 
         message.append("RGB Tool");

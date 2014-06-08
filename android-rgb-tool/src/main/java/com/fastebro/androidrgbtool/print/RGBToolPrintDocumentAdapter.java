@@ -26,8 +26,7 @@ import java.io.IOException;
  * Created by danielealtomare on 25/03/14.
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
-public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
-{
+public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
     private Context mContext;
     private String mMessage;
     private float mRGBRColor;
@@ -43,8 +42,7 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
                                        float rgbRColor,
                                        float rgbGColor,
                                        float rgbBColor,
-                                       float rgbOpacity)
-    {
+                                       float rgbOpacity) {
         mContext = context;
         mMessage = message;
         mRGBRColor = rgbRColor;
@@ -55,15 +53,13 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
 
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
     }
 
 
     @Override
-    public void onFinish()
-    {
+    public void onFinish() {
         super.onFinish();
     }
 
@@ -72,14 +68,12 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
     public void onLayout(PrintAttributes oldAttributes,
                          PrintAttributes newAttributes,
                          CancellationSignal cancellationSignal,
-                         LayoutResultCallback callback, Bundle extras)
-    {
+                         LayoutResultCallback callback, Bundle extras) {
         // Create a new PdfDocument with the requested page attributes
         mPdfDocument = new PrintedPdfDocument(mContext, newAttributes);
 
         // Respond to cancellation request
-        if (cancellationSignal.isCanceled())
-        {
+        if (cancellationSignal.isCanceled()) {
             Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
                     Toast.LENGTH_SHORT).show();
 
@@ -91,8 +85,7 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
         // Compute the expected number of printed pages
         int pages = computePageCount(newAttributes);
 
-        if (pages > 0)
-        {
+        if (pages > 0) {
             // Return print information to print framework
             PrintDocumentInfo info = new PrintDocumentInfo.Builder(
                     "rgbtool_" +
@@ -101,16 +94,15 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
                                     UColor.RGBToHex(mRGBRColor),
                                     UColor.RGBToHex(mRGBGColor),
                                     UColor.RGBToHex(mRGBBColor)) +
-                    ".pdf")
+                            ".pdf"
+            )
                     .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
                     .setPageCount(pages)
                     .build();
 
             // Content layout reflow is complete
             callback.onLayoutFinished(info, true);
-        }
-        else
-        {
+        } else {
             // Otherwise report an error to the print framework
             callback.onLayoutFailed("Page count calculation failed.");
         }
@@ -122,57 +114,49 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
     public void onWrite(PageRange[] pages,
                         ParcelFileDescriptor destination,
                         CancellationSignal cancellationSignal,
-                        WriteResultCallback callback)
-    {
+                        WriteResultCallback callback) {
         // Iterate over each page of the document,
         // check if it's in the output range.
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             // Check to see if this page is in the output range.
 //            if (containsPage(pageRanges, i))
 //            {
-                // If so, add it to writtenPagesArray. writtenPagesArray.size()
-                // is used to compute the next output page index.
+            // If so, add it to writtenPagesArray. writtenPagesArray.size()
+            // is used to compute the next output page index.
 //                writtenPagesArray.append(writtenPagesArray.size(), i);
-                PdfDocument.Page page = mPdfDocument.startPage(i);
+            PdfDocument.Page page = mPdfDocument.startPage(i);
 
-                // check for cancellation
-                if (cancellationSignal.isCanceled())
-                {
-                    Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
-                            Toast.LENGTH_SHORT).show();
+            // check for cancellation
+            if (cancellationSignal.isCanceled()) {
+                Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
+                        Toast.LENGTH_SHORT).show();
 
-                    callback.onWriteCancelled();
-                    mPdfDocument.close();
-                    mPdfDocument = null;
+                callback.onWriteCancelled();
+                mPdfDocument.close();
+                mPdfDocument = null;
 
-                    return;
-                }
-
-                // Draw page content for printing
-                drawPage(page);
-
-                // Rendering is complete, so page can be finalized.
-                mPdfDocument.finishPage(page);
+                return;
             }
+
+            // Draw page content for printing
+            drawPage(page);
+
+            // Rendering is complete, so page can be finalized.
+            mPdfDocument.finishPage(page);
+        }
 //        }
 
         // Write PDF document to file
-        try
-        {
+        try {
             mPdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Toast.makeText(mContext, mContext.getString(R.string.print_error),
                     Toast.LENGTH_SHORT).show();
 
             callback.onWriteFailed(e.toString());
 
             return;
-        }
-        finally
-        {
+        } finally {
             mPdfDocument.close();
             mPdfDocument = null;
         }
@@ -184,20 +168,17 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
     }
 
 
-    private int computePageCount(PrintAttributes printAttributes)
-    {
+    private int computePageCount(PrintAttributes printAttributes) {
         return 1;
     }
 
 
-    private int getPrintItemCount()
-    {
+    private int getPrintItemCount() {
         return 1;
     }
 
 
-    private void drawPage(PdfDocument.Page page)
-    {
+    private void drawPage(PdfDocument.Page page) {
         Canvas canvas = page.getCanvas();
         StringBuilder token = new StringBuilder();
 
@@ -236,13 +217,12 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter
                 UColor.RGBToHex(mRGBBColor)));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 100, paint);
 
-        paint.setColor(Color.argb((int)mRGBOpacity, (int)mRGBRColor,
-                (int)mRGBGColor, (int)mRGBBColor));
+        paint.setColor(Color.argb((int) mRGBOpacity, (int) mRGBRColor,
+                (int) mRGBGColor, (int) mRGBBColor));
         canvas.drawRect(leftMargin, titleBaseLine + 125, 126, 269, paint);
 
         // User message.
-        if(mMessage != null)
-        {
+        if (mMessage != null) {
             paint.setColor(Color.BLACK);
             paint.setTextSize(11);
             canvas.drawText(mMessage, leftMargin, 294, paint);

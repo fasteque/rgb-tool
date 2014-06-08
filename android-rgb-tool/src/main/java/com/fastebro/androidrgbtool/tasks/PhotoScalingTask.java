@@ -15,56 +15,45 @@ import java.io.*;
 /**
  * Created by danielealtomare on 5/22/13.
  */
-public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean>
-{
+public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
     private String mPhotoPath;
     private PhotoScaling mPhotoScalingCallback;
     private boolean mUseTempFile;
     private Context mContext;
 
-    public PhotoScalingTask(Activity activity, String photoPath, boolean useTempFile)
-    {
+    public PhotoScalingTask(Activity activity, String photoPath, boolean useTempFile) {
         mPhotoPath = photoPath;
         mUseTempFile = useTempFile;
         mContext = activity;
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
-        try
-        {
+        try {
             mPhotoScalingCallback = (PhotoScaling) activity;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement PhotoScaling interface");
         }
     }
 
 
     @Override
-    protected void onCancelled(Boolean result)
-    {
+    protected void onCancelled(Boolean result) {
         super.onCancelled(result);
     }
 
 
     @Override
-    protected Boolean doInBackground(Void... params)
-    {
+    protected Boolean doInBackground(Void... params) {
         // Resize the image
-        try
-        {
-            if(mUseTempFile)
-            {
+        try {
+            if (mUseTempFile) {
                 copyFile(mPhotoPath);
             }
 
             savePrescaledBitmap(mPhotoPath);
 
             return true;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
 
             return false;
@@ -73,23 +62,19 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean>
 
 
     @Override
-    protected void onPostExecute(Boolean result)
-    {
-        if (result)
-        {
+    protected void onPostExecute(Boolean result) {
+        if (result) {
             mPhotoScalingCallback.onScalingComplete(mPhotoPath, mUseTempFile);
         }
     }
 
 
-    private void copyFile(String inputPath)
-    {
+    private void copyFile(String inputPath) {
         InputStream in = null;
         OutputStream out = null;
         String filename;
 
-        try
-        {
+        try {
             filename = new File(inputPath).getName();
             in = new FileInputStream(inputPath);
             out = new FileOutputStream(mContext.getFilesDir() + "/" + filename);
@@ -108,20 +93,15 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean>
             out = null;
 
             mPhotoPath = mContext.getFilesDir() + "/" + filename;
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
     }
 
 
-    private void savePrescaledBitmap(String filename) throws IOException
-    {
+    private void savePrescaledBitmap(String filename) throws IOException {
         File file = null;
         FileInputStream fis;
 
@@ -142,12 +122,12 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean>
         resizeScale = 1;
 
         if (opts.outHeight > UImage.JPEG_FILE_IMAGE_MAX_SIZE ||
-                opts.outWidth > UImage.JPEG_FILE_IMAGE_MAX_SIZE)
-        {
-            resizeScale = (int)Math.pow(2, (int) Math.round(
+                opts.outWidth > UImage.JPEG_FILE_IMAGE_MAX_SIZE) {
+            resizeScale = (int) Math.pow(2, (int) Math.round(
                     Math.log(UImage.JPEG_FILE_IMAGE_MAX_SIZE /
                             (double) Math.max(opts.outHeight, opts.outWidth))
-                            / Math.log(0.5)));
+                            / Math.log(0.5)
+            ));
         }
 
         // Load pre-scaled bitmap

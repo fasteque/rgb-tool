@@ -6,8 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 
-public class SQLiteRGBToolHelper extends SQLiteOpenHelper
-{
+public class SQLiteRGBToolHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
@@ -29,7 +28,7 @@ public class SQLiteRGBToolHelper extends SQLiteOpenHelper
                     ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S + INTEGER_TYPE + COMMA_SEP +
                     ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B + INTEGER_TYPE + COMMA_SEP +
                     ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE + INTEGER_TYPE +
-            " )";
+                    " )";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + ColorDataContract.ColorEntry.TABLE_NAME;
@@ -38,22 +37,19 @@ public class SQLiteRGBToolHelper extends SQLiteOpenHelper
     private static final int DATABASE_VERSION = 1;
 
 
-    public SQLiteRGBToolHelper(Context context)
-    {
+    public SQLiteRGBToolHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
 
     @Override
-    public void onCreate(SQLiteDatabase database)
-    {
+    public void onCreate(SQLiteDatabase database) {
         database.execSQL(SQL_CREATE_ENTRIES);
     }
 
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO: save the current data
 
         db.execSQL(SQL_DELETE_ENTRIES);

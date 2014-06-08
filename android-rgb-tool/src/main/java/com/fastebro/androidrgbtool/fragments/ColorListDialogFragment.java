@@ -32,14 +32,14 @@ public class ColorListDialogFragment extends DialogFragment
 
     private ColorListAdapter mAdapter;
 
-    public ColorListDialogFragment() { }
+    public ColorListDialogFragment() {
+    }
 
 
     /* The activity that creates an instance of this dialog fragment must
  * implement this interface in order to receive event callbacks.
  */
-    public interface ColorListDialogListener
-    {
+    public interface ColorListDialogListener {
         public void onColorClick(float RGBRComponent,
                                  float RGBGComponent,
                                  float RGBBComponent,
@@ -51,18 +51,14 @@ public class ColorListDialogFragment extends DialogFragment
     private ColorListDialogListener mListener;
 
     @Override
-    public void onAttach(Activity activity)
-    {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
 
         // Verify that the host activity implements the callback interface
-        try
-        {
+        try {
             // Instantiate the ColorListDialogListener so we can send events to the host
             mListener = (ColorListDialogListener) activity;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
                     + " must implement ColorListDialogListener");
@@ -71,17 +67,16 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_color_list, container);
 
         mAdapter = new ColorListAdapter(getActivity(),
                 R.layout.color_list_row, null,
-                new String[] { ColorDataContract.ColorEntry.COLUMN_COLOR_HEX },
-                new int[] { R.id.hex_value }, 0);
+                new String[]{ColorDataContract.ColorEntry.COLUMN_COLOR_HEX},
+                new int[]{R.id.hex_value}, 0);
         mAdapter.setOnColorClickListener(this);
 
-        ListView listview = (ListView)view.findViewById(android.R.id.list);
+        ListView listview = (ListView) view.findViewById(android.R.id.list);
         listview.setOnItemClickListener(this);
         listview.setAdapter(mAdapter);
 
@@ -95,19 +90,16 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        Cursor cursor = (Cursor)mAdapter.getItem(position);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Cursor cursor = (Cursor) mAdapter.getItem(position);
 
-        if(cursor != null)
-        {
+        if (cursor != null) {
             int rgbRValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R));
             int rgbGValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G));
             int rgbBValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B));
             int rgbAValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A));
 
-            if(mListener != null)
-            {
+            if (mListener != null) {
                 mListener.onColorClick(rgbRValue,
                         rgbGValue, rgbBValue, rgbAValue, null);
                 dismiss();
@@ -117,8 +109,7 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args)
-    {
+    public Loader onCreateLoader(int id, Bundle args) {
         // This is called when a new Loader needs to be created.  This
         // sample only has one Loader, so we don't care about the ID.
         // First, pick the base URI to use depending on whether we are
@@ -135,17 +126,13 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public void onLoadFinished(Loader loader, Object data)
-    {
+    public void onLoadFinished(Loader loader, Object data) {
         Log.d("DEBUG", "onLoadFinished");
         getView().findViewById(R.id.list_empty_progress).setVisibility(View.GONE);
 
-        if(((Cursor)data).getCount() <= 0)
-        {
+        if (((Cursor) data).getCount() <= 0) {
             getView().findViewById(R.id.list_empty_text).setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             getView().findViewById(R.id.list_empty_text).setVisibility(View.GONE);
         }
 
@@ -156,8 +143,7 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public void onLoaderReset(Loader loader)
-    {
+    public void onLoaderReset(Loader loader) {
         Log.d("DEBUG", "onLoaderReset");
         // This is called when the last Cursor provided to onLoadFinished()
         // above is about to be closed.  We need to make sure we are no
@@ -167,8 +153,7 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public void onColorClick(int colorId)
-    {
+    public void onColorClick(int colorId) {
         // Defines selection criteria for the rows to delete.
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
         String[] mSelectionArgs = {String.valueOf(colorId)};

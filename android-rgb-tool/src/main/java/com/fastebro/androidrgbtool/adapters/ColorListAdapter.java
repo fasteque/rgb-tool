@@ -16,36 +16,28 @@ import com.fastebro.androidrgbtool.utils.UColor;
 /**
  * Created by daltomare on 17/04/14.
  */
-public class ColorListAdapter extends SimpleCursorAdapter
-{
+public class ColorListAdapter extends SimpleCursorAdapter {
     private OnColorDeleteListener mOnColorClickListener = null;
 
-//    public ColorListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags)
-//    {
-//        super(context, layout, c, from, to, flags);
-//    }
 
-    public ColorListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags)
-    {
+    public ColorListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
     }
 
 
-    public void setOnColorClickListener(OnColorDeleteListener listener)
-    {
+    public void setOnColorClickListener(OnColorDeleteListener listener) {
         this.mOnColorClickListener = listener;
     }
 
 
     @Override
-    public void bindView(View view, Context context, final Cursor cursor)
-    {
+    public void bindView(View view, Context context, final Cursor cursor) {
         super.bindView(view, context, cursor);
 
         View color = view.findViewById(R.id.rgb_panel_color);
-        TextView rgbValue = (TextView)view.findViewById(R.id.rgb_value);
-        TextView hsbValue = (TextView)view.findViewById(R.id.hsb_value);
-        ImageButton deleteColor = (ImageButton)view.findViewById(R.id.btn_delete_color);
+        TextView rgbValue = (TextView) view.findViewById(R.id.rgb_value);
+        TextView hsbValue = (TextView) view.findViewById(R.id.hsb_value);
+        ImageButton deleteColor = (ImageButton) view.findViewById(R.id.btn_delete_color);
 
         final int colorId = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry._ID));
         Log.d("DEBUG", "colorId: " + colorId);
@@ -56,7 +48,7 @@ public class ColorListAdapter extends SimpleCursorAdapter
         float[] hsb;
 
         rgbValue.setText("(" + rgbAValue + ", " +
-                rgbRValue  + ", " + rgbGValue  + ", " +
+                rgbRValue + ", " + rgbGValue + ", " +
                 rgbBValue + ")");
 
         hsb = UColor.RGBToHSB(rgbRValue, rgbGValue, rgbBValue);
@@ -68,13 +60,10 @@ public class ColorListAdapter extends SimpleCursorAdapter
 
         color.setBackgroundColor(Color.argb(rgbAValue, rgbRValue, rgbGValue, rgbBValue));
 
-        deleteColor.setOnClickListener(new View.OnClickListener()
-        {
+        deleteColor.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(mOnColorClickListener != null)
-                {
+            public void onClick(View v) {
+                if (mOnColorClickListener != null) {
                     mOnColorClickListener.onColorClick(colorId);
                 }
             }

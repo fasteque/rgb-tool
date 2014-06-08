@@ -5,15 +5,14 @@ import android.provider.BaseColumns;
 /**
  * Created by daltomare on 02/04/14.
  */
-public final class ColorDataContract
-{
+public final class ColorDataContract {
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
-    public ColorDataContract() {}
+    public ColorDataContract() {
+    }
 
     /* Inner class that defines the table contents */
-    public static abstract class ColorEntry implements BaseColumns
-    {
+    public static abstract class ColorEntry implements BaseColumns {
         public static final String TABLE_NAME = "colors";
         public static final String COLUMN_COLOR_NAME = "color_name";
         public static final String COLUMN_COLOR_HEX = "color_hex";

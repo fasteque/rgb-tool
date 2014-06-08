@@ -29,8 +29,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class ColorPickerActivity extends Activity
-{
+public class ColorPickerActivity extends Activity {
     private ImageView mImageView;
     private PhotoViewAttacher mAttacher;
     private Bitmap mBitmap;
@@ -45,12 +44,11 @@ public class ColorPickerActivity extends Activity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
 
-        if(getActionBar() != null) {
+        if (getActionBar() != null) {
             getActionBar().hide();
         }
 
@@ -59,23 +57,19 @@ public class ColorPickerActivity extends Activity
         mRGBPanelDataLayout = new RGBPanelData(this);
         mRGBPanelDataLayout.setVisibility(View.GONE);
 
-        if(getIntent() != null)
-        {
+        if (getIntent() != null) {
             // get the path of the image and set it.
             Bundle bundle = getIntent().getExtras();
 
-            if(bundle != null)
-            {
+            if (bundle != null) {
                 mCurrentPath = bundle.getString(UImage.EXTRA_JPEG_FILE_PATH);
                 mDeleteFile = bundle.getBoolean(UImage.EXTRA_DELETE_FILE);
             }
 
-            if(mCurrentPath != null)
-            {
+            if (mCurrentPath != null) {
                 mImageView = (ImageView) findViewById(R.id.iv_photo);
 
-                try
-                {
+                try {
                     mBitmap = BitmapFactory.decodeFile(mCurrentPath);
                     mImageView.setImageBitmap(mBitmap);
                     mImageView.setOnTouchListener(imgSourceOnTouchListener);
@@ -83,9 +77,7 @@ public class ColorPickerActivity extends Activity
                     mAttacher.setMaximumScale(mAttacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
                     mAttacher.setOnViewTapListener(new PhotoViewTapListener());
                     mAttacher.setOnPhotoTapListener(new PhotoViewTapListener());
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -97,10 +89,8 @@ public class ColorPickerActivity extends Activity
 
 
     @Override
-    protected void onDestroy()
-    {
-        if(mDeleteFile)
-        {
+    protected void onDestroy() {
+        if (mDeleteFile) {
             new File(mCurrentPath).delete();
         }
 
@@ -109,17 +99,14 @@ public class ColorPickerActivity extends Activity
 
     private class PhotoViewTapListener
             implements PhotoViewAttacher.OnViewTapListener,
-            PhotoViewAttacher.OnPhotoTapListener
-    {
+            PhotoViewAttacher.OnPhotoTapListener {
         @Override
-        public void onViewTap(View view, float x, float y)
-        {
+        public void onViewTap(View view, float x, float y) {
             // Not being used so far.
         }
 
         @Override
-        public void onPhotoTap(View view, float x, float y)
-        {
+        public void onPhotoTap(View view, float x, float y) {
             // x and y represent the percentage of the Drawable where the user clicked.
             int imageX = (int) (x * mBitmap.getWidth());
             int imageY = (int) (y * mBitmap.getHeight());
@@ -127,10 +114,8 @@ public class ColorPickerActivity extends Activity
             int touchedRGB = mBitmap.getPixel(imageX, imageY);
 
 
-            if(imageY < mBitmap.getHeight() / 2)
-            {
-                if(isRGBPanelTop)
-                {
+            if (imageY < mBitmap.getHeight() / 2) {
+                if (isRGBPanelTop) {
                     isRGBPanelTop = false;
 
                     mRGBPanelDataLayout.setVisibility(View.GONE);
@@ -144,21 +129,15 @@ public class ColorPickerActivity extends Activity
                     mRGBPanelDataLayout.updateData(touchedRGB);
 
                     mRGBPanelDataLayout.setVisibility(View.VISIBLE);
-                }
-                else
-                {
+                } else {
                     mRGBPanelDataLayout.updateData(touchedRGB);
 
-                    if(mRGBPanelDataLayout.getVisibility() == View.GONE)
-                    {
+                    if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
                         mRGBPanelDataLayout.setVisibility(View.VISIBLE);
                     }
                 }
-            }
-            else
-            {
-                if(!isRGBPanelTop)
-                {
+            } else {
+                if (!isRGBPanelTop) {
                     isRGBPanelTop = true;
 
                     mRGBPanelDataLayout.setVisibility(View.GONE);
@@ -172,13 +151,10 @@ public class ColorPickerActivity extends Activity
                     mRGBPanelDataLayout.updateData(touchedRGB);
 
                     mRGBPanelDataLayout.setVisibility(View.VISIBLE);
-                }
-                else
-                {
+                } else {
                     mRGBPanelDataLayout.updateData(touchedRGB);
 
-                    if(mRGBPanelDataLayout.getVisibility() == View.GONE)
-                    {
+                    if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
                         mRGBPanelDataLayout.setVisibility(View.VISIBLE);
                     }
                 }

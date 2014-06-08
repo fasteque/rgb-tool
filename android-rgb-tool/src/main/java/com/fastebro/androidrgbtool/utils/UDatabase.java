@@ -9,27 +9,25 @@ import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 /**
  * Created by danielealtomare on 17/05/14.
  */
-public class UDatabase
-{
+public class UDatabase {
     public static final String[] COLORS_SUMMARY_PROJECTION = new String[]
-    {
-            ColorDataContract.ColorEntry._ID,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_H,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HEX,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_NAME
-    };
+            {
+                    ColorDataContract.ColorEntry._ID,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_H,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_HEX,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE,
+                    ColorDataContract.ColorEntry.COLUMN_COLOR_NAME
+            };
 
 
     public static boolean findColor(Context context, float rValue,
-                              float gValue, float bValue, float aValue)
-    {
+                                    float gValue, float bValue, float aValue) {
         // Defines selection criteria for the rows to delete.
         String mSelectionClause = ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R + "=? AND " +
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G + "=? AND " +

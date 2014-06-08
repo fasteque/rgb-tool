@@ -19,8 +19,7 @@ import java.util.HashSet;
 /**
  * Created by danielealtomare on 04/02/14.
  */
-public class RGBToolContentProvider extends ContentProvider
-{
+public class RGBToolContentProvider extends ContentProvider {
     private SQLiteRGBToolHelper database;
 
     private static final String AUTHORITY = "com.fastebro.androidrgbtool.rgbtoolprovider";
@@ -35,16 +34,15 @@ public class RGBToolContentProvider extends ContentProvider
     private static final int COLOR_ID = 20;
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-    static
-    {
+
+    static {
         sURIMatcher.addURI(AUTHORITY, BASE_PATH, COLORS);
         sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", COLOR_ID);
     }
 
 
     @Override
-    public boolean onCreate()
-    {
+    public boolean onCreate() {
         database = new SQLiteRGBToolHelper(getContext());
 
         return false;
@@ -52,8 +50,7 @@ public class RGBToolContentProvider extends ContentProvider
 
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
-    {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         // Use SQLiteQueryBuilder instead of query() method.
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -64,8 +61,7 @@ public class RGBToolContentProvider extends ContentProvider
 
         int uriType = sURIMatcher.match(uri);
 
-        switch (uriType)
-        {
+        switch (uriType) {
             case COLORS:
                 break;
             case COLOR_ID:
@@ -83,12 +79,9 @@ public class RGBToolContentProvider extends ContentProvider
                 selectionArgs, null, null, sortOrder);
 
         // Notify potential listeners.
-        try
-        {
+        try {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
-        }
-        catch (NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             // TODO
         }
 
@@ -97,8 +90,7 @@ public class RGBToolContentProvider extends ContentProvider
 
 
     @Override
-    public String getType(Uri uri)
-    {
+    public String getType(Uri uri) {
         // TODO
 
         return null;
@@ -106,18 +98,15 @@ public class RGBToolContentProvider extends ContentProvider
 
 
     @Override
-    public Uri insert(Uri uri, ContentValues values)
-    {
+    public Uri insert(Uri uri, ContentValues values) {
         int uriType = sURIMatcher.match(uri);
 
         SQLiteDatabase sqlDB = database.getWritableDatabase();
 
         long id;
 
-        if(sqlDB != null)
-        {
-            switch (uriType)
-            {
+        if (sqlDB != null) {
+            switch (uriType) {
                 case COLORS:
                     id = sqlDB.insert(ColorDataContract.ColorEntry.TABLE_NAME, null, values);
                     break;
@@ -126,12 +115,9 @@ public class RGBToolContentProvider extends ContentProvider
             }
 
             // Notify potential listeners.
-            try
-            {
+            try {
                 getContext().getContentResolver().notifyChange(uri, null);
-            }
-            catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
                 // TODO
             }
 
@@ -143,16 +129,14 @@ public class RGBToolContentProvider extends ContentProvider
 
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs)
-    {
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
 
         SQLiteDatabase sqlDB = database.getWritableDatabase();
 
         int rowsDeleted = 0;
 
-        if(sqlDB != null)
-        {
+        if (sqlDB != null) {
             switch (uriType) {
                 case COLORS:
                     rowsDeleted = sqlDB.delete(ColorDataContract.ColorEntry.TABLE_NAME, selection,
@@ -177,12 +161,9 @@ public class RGBToolContentProvider extends ContentProvider
             }
 
             // Notify potential listeners.
-            try
-            {
+            try {
                 getContext().getContentResolver().notifyChange(uri, null);
-            }
-            catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
                 // TODO
             }
 
@@ -193,16 +174,14 @@ public class RGBToolContentProvider extends ContentProvider
 
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)
-    {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
 
         SQLiteDatabase sqlDB = database.getWritableDatabase();
 
         int rowsUpdated = 0;
 
-        if(sqlDB != null)
-        {
+        if (sqlDB != null) {
             switch (uriType) {
                 case COLORS:
                     rowsUpdated = sqlDB.update(ColorDataContract.ColorEntry.TABLE_NAME,
@@ -232,12 +211,9 @@ public class RGBToolContentProvider extends ContentProvider
             }
 
             // Notify potential listeners.
-            try
-            {
+            try {
                 getContext().getContentResolver().notifyChange(uri, null);
-            }
-            catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
                 // TODO
             }
 
@@ -247,31 +223,28 @@ public class RGBToolContentProvider extends ContentProvider
     }
 
 
-    private void checkColumns(String[] projection)
-    {
+    private void checkColumns(String[] projection) {
         String[] available =
-        {
-            ColorDataContract.ColorEntry._ID,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_NAME,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HEX,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_H,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B,
-            ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE
-        };
+                {
+                        ColorDataContract.ColorEntry._ID,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_NAME,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_HEX,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_H,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B,
+                        ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE
+                };
 
-        if (projection != null)
-        {
+        if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
             HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));
 
             // check if all columns which are requested are available
-            if (!availableColumns.containsAll(requestedColumns))
-            {
+            if (!availableColumns.containsAll(requestedColumns)) {
                 throw new IllegalArgumentException("Unknown columns in projection");
             }
         }

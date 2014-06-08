@@ -28,10 +28,8 @@ public class GLRender implements Renderer {
      * Android normally restarts an Activity on rotation, and in that case, the
      * renderer will be destroyed and a new one created.
      *
-     * @param width
-     *            The new width, in pixels.
-     * @param height
-     *            The new height, in pixels.
+     * @param width  The new width, in pixels.
+     * @param height The new height, in pixels.
      */
     @Override
     public void onSurfaceChanged(GL10 glUnused, int width, int height) {
@@ -48,7 +46,7 @@ public class GLRender implements Renderer {
         // Clear the rendering surface.
         glColorMask(true, true, true, true);
         glClearColor(R_COLOR, G_COLOR, B_COLOR, COLOR_OPACITY);
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
 }
