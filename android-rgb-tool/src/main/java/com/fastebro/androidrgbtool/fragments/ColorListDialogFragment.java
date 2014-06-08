@@ -79,7 +79,7 @@ public class ColorListDialogFragment extends DialogFragment
                 R.layout.color_list_row, null,
                 new String[] { ColorDataContract.ColorEntry.COLUMN_COLOR_HEX },
                 new int[] { R.id.hex_value }, 0);
-//        mAdapter.setOnColorClickListener(this);
+        mAdapter.setOnColorClickListener(this);
 
         ListView listview = (ListView)view.findViewById(android.R.id.list);
         listview.setOnItemClickListener(this);
