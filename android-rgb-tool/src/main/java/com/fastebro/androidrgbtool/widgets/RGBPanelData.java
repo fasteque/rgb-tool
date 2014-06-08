@@ -8,14 +8,21 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.UColor;
 
 public class RGBPanelData extends LinearLayout {
-    private ImageButton mDismissPanelButton;
-    private TextView mRGBValue;
-    private TextView mHSBValue;
-    private TextView mHEXValue;
+
+    @InjectView(R.id.rgb_value)
+    TextView mRGBValue;
+    @InjectView(R.id.hsb_value)
+    TextView mHSBValue;
+    @InjectView(R.id.hex_value)
+    TextView mHEXValue;
+    @InjectView(R.id.btn_dismiss_panel)
+    ImageButton mDismissPanelButton;
 
     int alpha;
     int red;
@@ -45,18 +52,13 @@ public class RGBPanelData extends LinearLayout {
     private void setupPanel(final Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.rgb_data_panel_small, this);
-
-        mDismissPanelButton = (ImageButton) findViewById(R.id.btn_dismiss_panel);
+        ButterKnife.inject(this);
         mDismissPanelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 setVisibility(GONE);
             }
         });
-
-        mRGBValue = (TextView) findViewById(R.id.rgb_value);
-        mHSBValue = (TextView) findViewById(R.id.hsb_value);
-        mHEXValue = (TextView) findViewById(R.id.hex_value);
     }
 
 
