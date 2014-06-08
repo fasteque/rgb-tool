@@ -145,13 +145,6 @@ public class MainActivity extends Activity
         seekBar_B.setOnSeekBarChangeListener(getRGB());
         seekBar_O.setOnSeekBarChangeListener(getRGB());
 
-        // First fields update.
-        glSurfaceView.requestRender();
-        updateRGBField();
-        updateHSBField();
-        updateHexadecimalField();
-        updateColorName();
-
         // Save color currently displayed.
         btn_SaveColor.setOnClickListener(new View.OnClickListener()
         {
@@ -165,6 +158,8 @@ public class MainActivity extends Activity
                         "");
             }
         });
+
+        refreshUI();
     }
 
 
@@ -459,6 +454,7 @@ public class MainActivity extends Activity
         updateRGBField();
         updateHSBField();
         updateHexadecimalField();
+        updateColorName();
         updateSharedColor();
         updateSaveColorButton();
     }
