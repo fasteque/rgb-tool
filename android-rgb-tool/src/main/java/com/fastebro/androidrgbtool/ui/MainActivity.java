@@ -17,9 +17,12 @@ import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.*;
-import android.widget.*;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+import android.widget.ShareActionProvider;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
