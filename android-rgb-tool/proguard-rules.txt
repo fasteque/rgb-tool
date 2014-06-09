@@ -33,3 +33,6 @@
 -keep class uk.co.senab.photoview.** { *; }
 -keep interface uk.co.senab.photoview.** { *; }
 
+
+####### Picasso #######
+-dontwarn com.squareup.okhttp.**

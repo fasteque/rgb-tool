@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">RGB Tool</string>
-    <string name="title_activity_color_picker">ColorPickerActivity</string>
     <string name="rgb_tool_channel_title">RGB channel values</string>
     <string name="argb_label">ARGB</string>
     <string name="rgb_label">RGB</string>
@@ -37,7 +36,8 @@
     <!-- Generic items -->
     <string name="empty_string">""</string>
     <string name="not_found_string">not found</string>
-    <string name="loading">Loading&#8230;</string>
+    <string name="loading">Loading…</string>
     <string name="album_name">RGB-Tool</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -248,9 +248,6 @@ public class MainActivity extends Activity
             case R.id.action_print:
                 showPrintColorDialog();
                 return true;
-//            case R.id.action_share:
-//                updateSharedColor();
-//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -353,11 +350,16 @@ public class MainActivity extends Activity
     }
 
 
-    private void openGallery() {
+    private void openDeviceGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
+    }
+
+
+    private void openRGBToolGallery() {
+        startActivity(new Intent(this, RGBToolGalleryActivity.class));
     }
 
 
@@ -678,9 +680,12 @@ public class MainActivity extends Activity
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case 0:
-                                    openGallery();
+                                    openRGBToolGallery();
                                     break;
                                 case 1:
+                                    openDeviceGallery();
+                                    break;
+                                case 2:
                                     dispatchTakePictureIntent();
                                     break;
                                 default:
