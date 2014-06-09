@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">RGB Tool</string>
+    <string name="rgb_gallery_name">RGB Tool Gallery</string>
     <string name="rgb_tool_channel_title">RGB channel values</string>
     <string name="argb_label">ARGB</string>
     <string name="rgb_label">RGB</string>

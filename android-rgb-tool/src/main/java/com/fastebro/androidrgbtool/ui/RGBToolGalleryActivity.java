@@ -45,7 +45,7 @@ public class RGBToolGalleryActivity extends Activity
                     RGBToolImagesQuery.IMAGES_URI,
                     new String[] {"_data", "_id"},
                     "_data LIKE ?",
-                    new String[] {"%RGB-Tool%"},
+                    new String[] {"%" + getString(R.string.album_name) +"%"},
                     null);
         }
 

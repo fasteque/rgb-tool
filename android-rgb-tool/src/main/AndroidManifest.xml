@@ -43,7 +43,8 @@
 
         <activity
             android:name=".ui.RGBToolGalleryActivity"
-            android:exported="false" >
+            android:exported="false"
+            android:label="@string/rgb_gallery_name">
         </activity>
 
         <provider
