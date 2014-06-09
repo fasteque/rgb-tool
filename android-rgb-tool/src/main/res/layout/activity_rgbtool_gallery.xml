@@ -10,11 +10,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:numColumns="4"
-        android:horizontalSpacing="3dp"
-        android:verticalSpacing="3dp"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="none"
-        android:listSelector="@null"
+        android:listSelector="@android:color/transparent"
         android:gravity="center" />
 
 </RelativeLayout>

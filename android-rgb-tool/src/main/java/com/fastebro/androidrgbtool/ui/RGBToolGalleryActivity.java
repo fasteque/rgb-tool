@@ -83,7 +83,6 @@ public class RGBToolGalleryActivity extends Activity
                 colorPickerIntent.putExtra(UImage.EXTRA_JPEG_FILE_PATH, photoPath);
                 colorPickerIntent.putExtra(UImage.EXTRA_DELETE_FILE, false);
                 startActivity(colorPickerIntent);
-                finish();
             }
         }
     }
