@@ -5,8 +5,8 @@
               android:layout_height="wrap_content" >
     <ImageView
         android:id="@+id/thumbnail"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/rgb_grid_view_item_width"
+        android:layout_height="@dimen/rgb_grid_view_item_height"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@drawable/robot"/>

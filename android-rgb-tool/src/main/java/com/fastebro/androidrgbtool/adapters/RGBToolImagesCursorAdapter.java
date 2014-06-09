@@ -48,7 +48,7 @@ public class RGBToolImagesCursorAdapter extends CursorAdapter {
 
         Picasso.with(context)
                 .load(imageUri)
-                .resize(128, 128)
+                .resize(256, 256)
                 .centerCrop()
                 .into(holder.thumbnail);
     }

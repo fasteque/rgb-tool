@@ -17,4 +17,8 @@
     <dimen name="rgb_text_size_medium">18sp</dimen>
     <dimen name="rgb_text_size_large">22sp</dimen>
 
-    </resources>
+    <dimen name="rgb_grid_view_horizontal_spacing">5dp</dimen>
+    <dimen name="rgb_grid_view_vertical_spacing">5dp</dimen>
+    <dimen name="rgb_grid_view_item_width">100dp</dimen>
+    <dimen name="rgb_grid_view_item_height">100dp</dimen>
+</resources>
