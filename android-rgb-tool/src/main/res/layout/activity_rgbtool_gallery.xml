@@ -9,12 +9,14 @@
         android:id="@+id/grid_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:numColumns="@integer/rgb_grid_view_columns"
+        android:columnWidth="@dimen/rgb_grid_view_item_width"
+        android:numColumns="auto_fit"
         android:horizontalSpacing="5dp"
         android:verticalSpacing="5dp"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="none"
-        android:listSelector="@android:color/transparent"
+        android:listSelector="@color/accent_color"
+        android:stretchMode="columnWidth"
         android:gravity="center" />
 
 </RelativeLayout>

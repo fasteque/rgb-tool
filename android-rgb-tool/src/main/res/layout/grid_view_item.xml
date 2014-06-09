@@ -5,9 +5,9 @@
               android:layout_height="wrap_content" >
     <ImageView
         android:id="@+id/thumbnail"
-        android:layout_width="@dimen/rgb_grid_view_item_width"
-        android:layout_height="@dimen/rgb_grid_view_item_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/robot"/>
+        android:scaleType="fitCenter" />
 </LinearLayout>

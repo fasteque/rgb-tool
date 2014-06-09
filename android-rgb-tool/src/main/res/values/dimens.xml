@@ -19,6 +19,5 @@
 
     <dimen name="rgb_grid_view_horizontal_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_vertical_spacing">5dp</dimen>
-    <dimen name="rgb_grid_view_item_width">100dp</dimen>
-    <dimen name="rgb_grid_view_item_height">100dp</dimen>
+    <dimen name="rgb_grid_view_item_width">80dp</dimen>
 </resources>
