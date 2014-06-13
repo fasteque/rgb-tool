@@ -9,10 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -98,8 +95,10 @@ public class RGBToolGalleryActivity extends Activity
     public class MultiChoiceModeListener implements
             GridView.MultiChoiceModeListener {
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            mode.setTitle("Select Items");
-            mode.setSubtitle("One item selected");
+            mode.setTitle(getString(R.string.rgbtool_gallery_context_menu_title));
+            mode.setSubtitle(getString(R.string.rgbtool_gallery_context_menu_subtitle));
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.rgbtool_gallery_context, menu);
             return true;
         }
 
@@ -108,7 +107,14 @@ public class RGBToolGalleryActivity extends Activity
         }
 
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            return true;
+            switch (item.getItemId()) {
+                case R.id.action_delete:
+                    // TODO
+                    mode.finish(); // Action picked, so close the CAB
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public void onDestroyActionMode(ActionMode mode) {
@@ -119,10 +125,10 @@ public class RGBToolGalleryActivity extends Activity
             int selectCount = mGridView.getCheckedItemCount();
             switch (selectCount) {
                 case 1:
-                    mode.setSubtitle("One item selected");
+                    mode.setSubtitle(getString(R.string.rgbtool_gallery_context_menu_subtitle));
                     break;
                 default:
-                    mode.setSubtitle("" + selectCount + " items selected");
+                    mode.setSubtitle(getString(R.string.rgbtool_gallery_context_menu_subtitle_more, selectCount));
                     break;
             }
         }

@@ -15,6 +15,7 @@
     <string name="action_color_list">Color list</string>
     <string name="action_print">Print color</string>
     <string name="action_share">Share color</string>
+    <string name="action_delete">Delete images</string>
     <string name="pick_color">Image from…</string>
     <string name="print_color_dialog_message_hint">Message</string>
     <string name="print_color_dialog_message_set">Set</string>
@@ -33,6 +34,11 @@
     <string name="print_error">Printing error</string>
     <string name="print_job_started">Printing started</string>
     <string name="print_job_canceled">Printing canceled</string>
+
+    <!--RGB Tool Gallery -->
+    <string name="rgbtool_gallery_context_menu_title">Select Items</string>
+    <string name="rgbtool_gallery_context_menu_subtitle">One item selected</string>
+    <string name="rgbtool_gallery_context_menu_subtitle_more">%1$d items selected</string>
 
     <!-- Generic items -->
     <string name="empty_string">""</string>
