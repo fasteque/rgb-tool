@@ -8,6 +8,7 @@ import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.PixelFormat;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -590,6 +591,17 @@ public class MainActivity extends Activity
 
     @Override
     public void onScalingComplete(String photoPath, boolean deleteFile) {
+        /**
+         * Tell the media scanner about the new file so that it is
+         * immediately available to the user.
+         */
+        MediaScannerConnection.scanFile(this,
+                new String[] { photoPath }, null,
+                new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                    }
+                });
+
         Intent colorPickerIntent = new Intent(this, ColorPickerActivity.class);
         colorPickerIntent.putExtra(UImage.EXTRA_JPEG_FILE_PATH, photoPath);
         colorPickerIntent.putExtra(UImage.EXTRA_DELETE_FILE, deleteFile);

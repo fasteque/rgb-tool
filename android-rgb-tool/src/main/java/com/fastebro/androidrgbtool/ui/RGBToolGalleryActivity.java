@@ -2,15 +2,18 @@ package com.fastebro.androidrgbtool.ui;
 
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.*;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import butterknife.ButterKnife;
@@ -18,6 +21,10 @@ import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.RGBToolImagesCursorAdapter;
 import com.fastebro.androidrgbtool.utils.UImage;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class RGBToolGalleryActivity extends Activity
@@ -109,7 +116,7 @@ public class RGBToolGalleryActivity extends Activity
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete:
-                    // TODO
+                    deleteSelectedItems();
                     mode.finish(); // Action picked, so close the CAB
                     return true;
                 default:
@@ -131,6 +138,30 @@ public class RGBToolGalleryActivity extends Activity
                     mode.setSubtitle(getString(R.string.rgbtool_gallery_context_menu_subtitle_more, selectCount));
                     break;
             }
+        }
+    }
+
+    private void deleteSelectedItems() {
+        SparseBooleanArray checked = mGridView.getCheckedItemPositions();
+        ArrayList<Integer> positions = new ArrayList<Integer>();
+
+        for (int i=0; i < checked.size(); i++) {
+            if (checked.valueAt(i)) {
+                positions.add(checked.keyAt(i));
+            }
+        }
+
+        Collections.sort(positions, Collections.reverseOrder());
+
+        for (int position : positions) {
+            Cursor cursor = (Cursor )mGridView.getItemAtPosition(position);
+            if(cursor != null) {
+                String photoPath = cursor.getString(cursor.getColumnIndex("_data"));
+                File  existingFile = new File(photoPath);
+                existingFile.delete();
+                getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{photoPath});
+            }
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
