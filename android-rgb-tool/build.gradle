@@ -43,6 +43,6 @@ android {
 dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
     compile 'com.squareup.picasso:picasso:2.3.2'
-    compile 'com.jakewharton:butterknife:5.0.1'
+    compile 'com.jakewharton:butterknife:5.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
