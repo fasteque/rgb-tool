@@ -35,6 +35,7 @@ import java.util.Date;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.fragments.ColorListDialogFragment;
 import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
+import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
 import com.fastebro.androidrgbtool.interfaces.PhotoScaling;
 import com.fastebro.androidrgbtool.print.RGBToolPrintDocumentAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
@@ -239,7 +240,8 @@ public class MainActivity extends Activity
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_camera:
-                ImagePickerDialogFragment dialogFragment = new ImagePickerDialogFragment();
+                SelectPictureDialogFragment dialogFragment =
+                        new SelectPictureDialogFragment();
                 dialogFragment.setCancelable(true);
                 dialogFragment.show(getFragmentManager(), null);
                 return true;
@@ -351,7 +353,7 @@ public class MainActivity extends Activity
     }
 
 
-    private void openDeviceGallery() {
+    public void openDeviceGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
@@ -359,7 +361,7 @@ public class MainActivity extends Activity
     }
 
 
-    private void openRGBToolGallery() {
+    public void openRGBToolGallery() {
         startActivity(new Intent(this, RGBToolGalleryActivity.class));
     }
 
@@ -490,7 +492,7 @@ public class MainActivity extends Activity
     }
 
 
-    private void dispatchTakePictureIntent() {
+    public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File f = null;
 
@@ -678,35 +680,5 @@ public class MainActivity extends Activity
         seekBar_O.setProgress((int) RGBOComponent);
 
         savePreferences();
-    }
-
-
-    @SuppressLint("ValidFragment")
-    private class ImagePickerDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-            builder.setTitle(R.string.pick_color)
-                    .setItems(R.array.pick_color_array, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-                                case 0:
-                                    openRGBToolGallery();
-                                    break;
-                                case 1:
-                                    openDeviceGallery();
-                                    break;
-                                case 2:
-                                    dispatchTakePictureIntent();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-
-            return builder.create();
-        }
     }
 }

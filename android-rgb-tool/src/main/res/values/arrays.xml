@@ -3,6 +3,6 @@
     <string-array name="pick_color_array">
         <item>RGB Tool gallery</item>
         <item>Device gallery</item>
-        <item>Camera</item>
+        <item>Take photo</item>
     </string-array>
 </resources>

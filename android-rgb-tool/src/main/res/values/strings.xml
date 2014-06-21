@@ -16,7 +16,7 @@
     <string name="action_print">Print color</string>
     <string name="action_share">Share color</string>
     <string name="action_delete">Delete images</string>
-    <string name="pick_color">Image from…</string>
+    <string name="pick_color">Select picture</string>
     <string name="print_color_dialog_message_hint">Message</string>
     <string name="print_color_dialog_message_set">Set</string>
     <string name="print_color_dialog_message_skip">Skip</string>
