@@ -22,7 +22,6 @@ public class ColorPickerActivity extends Activity {
     View.OnTouchListener imgSourceOnTouchListener;
     private RGBPanelData mRGBPanelDataLayout;
     private RelativeLayout mMainLayout;
-    private boolean isRGBPanelTop = false;
 
     private String mCurrentPath = null;
     private boolean mDeleteFile = false;
@@ -101,48 +100,28 @@ public class ColorPickerActivity extends Activity {
 
 
             if (imageY < mBitmap.getHeight() / 2) {
-                if (isRGBPanelTop) {
-                    isRGBPanelTop = false;
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                mRGBPanelDataLayout.setLayoutParams(params);
 
-                    mRGBPanelDataLayout.setVisibility(View.GONE);
+                mRGBPanelDataLayout.updateData(touchedRGB);
 
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                    params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                    mRGBPanelDataLayout.setLayoutParams(params);
-
-                    mRGBPanelDataLayout.updateData(touchedRGB);
-
+                if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
                     mRGBPanelDataLayout.setVisibility(View.VISIBLE);
-                } else {
-                    mRGBPanelDataLayout.updateData(touchedRGB);
-
-                    if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
-                        mRGBPanelDataLayout.setVisibility(View.VISIBLE);
-                    }
                 }
             } else {
-                if (!isRGBPanelTop) {
-                    isRGBPanelTop = true;
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                mRGBPanelDataLayout.setLayoutParams(params);
 
-                    mRGBPanelDataLayout.setVisibility(View.GONE);
+                mRGBPanelDataLayout.updateData(touchedRGB);
 
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                    params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                    mRGBPanelDataLayout.setLayoutParams(params);
-
-                    mRGBPanelDataLayout.updateData(touchedRGB);
-
+                if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
                     mRGBPanelDataLayout.setVisibility(View.VISIBLE);
-                } else {
-                    mRGBPanelDataLayout.updateData(touchedRGB);
-
-                    if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
-                        mRGBPanelDataLayout.setVisibility(View.VISIBLE);
-                    }
                 }
             }
         }
