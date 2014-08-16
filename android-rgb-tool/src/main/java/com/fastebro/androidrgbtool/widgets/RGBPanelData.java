@@ -94,7 +94,7 @@ public class RGBPanelData extends LinearLayout {
 
     public void setHEXValue(int touchedRGB) {
         if (mHEXValue != null) {
-            mHEXValue.setText("#" + Integer.toHexString(touchedRGB));
+            mHEXValue.setText(("#" + Integer.toHexString(touchedRGB)).toUpperCase());
         }
     }
 }
