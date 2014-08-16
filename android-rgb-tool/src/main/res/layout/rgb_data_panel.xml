@@ -37,6 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
             <TextView
@@ -51,6 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
             <TextView
@@ -65,6 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
             <TextView
@@ -79,6 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
         </TableRow>
@@ -104,6 +108,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
             <TextView
@@ -118,6 +123,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent"/>
 
             <TextView
@@ -132,6 +138,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="90"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
         </TableRow>
@@ -150,6 +157,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="120"
+                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
             <ImageButton
