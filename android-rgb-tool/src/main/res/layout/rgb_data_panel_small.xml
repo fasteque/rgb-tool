@@ -44,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                android:textIsSelectable="true"
                 style="@style/RGBPanelComponentLabel" />
 
     </LinearLayout>
@@ -66,7 +65,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                android:textIsSelectable="true"
                 style="@style/RGBPanelComponentLabel" />
 
     </LinearLayout>
@@ -88,7 +86,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
     </LinearLayout>

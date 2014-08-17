@@ -1,5 +1,7 @@
 package com.fastebro.androidrgbtool.widgets;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -48,6 +51,28 @@ public class RGBPanelData extends LinearLayout {
         setupPanel(context);
     }
 
+    private class ClipboardLongClickListener implements OnLongClickListener {
+        Context context;
+        CharSequence label;
+
+        public ClipboardLongClickListener(Context context, CharSequence label) {
+            this.context = context;
+            this.label = label;
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            CharSequence text = ((TextView)v).getText();
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText(label, text);
+            clipboard.setPrimaryClip(clip);
+
+            Toast.makeText(context,
+                    text + " " + context.getString(R.string.clipboard),
+                    Toast.LENGTH_SHORT).show();
+            return true;
+        }
+    }
 
     private void setupPanel(final Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,6 +84,13 @@ public class RGBPanelData extends LinearLayout {
                 setVisibility(GONE);
             }
         });
+
+        mRGBValue.setOnLongClickListener(new ClipboardLongClickListener(context,
+                context.getString(R.string.app_name)));
+        mHSBValue.setOnLongClickListener(new ClipboardLongClickListener(context,
+                context.getString(R.string.app_name)));
+        mHEXValue.setOnLongClickListener(new ClipboardLongClickListener(context,
+                context.getString(R.string.app_name)));
     }
 
 
