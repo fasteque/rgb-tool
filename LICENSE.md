@@ -1,18 +1,4 @@
-Android RGB Tool
-================
-
-Android RGB Tool is a simple and fast tool to get RGB channel values and hexadecimal value about a color.
-
-Application can be found at https://play.google.com/store/apps/details?id=com.fastebro.androidrgbtool.
-
-For any comment, feedback or if you would like to help, please write to android@fasteque.com.
-
-
-
-License
-================
-
-Copyright 2014 Daniele Altomare
+Copyright 2014 Daniele Alotomare
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
