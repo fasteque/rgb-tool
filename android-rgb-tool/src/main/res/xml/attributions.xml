@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_open_source_libs" >
+        <Preference android:title="@string/prefs_picasso" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://square.github.io/picasso/" />
+        </Preference>
+        <Preference android:title="@string/prefs_butter_knife" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://jakewharton.github.io/butterknife/" />
+        </Preference>
+        <Preference android:title="@string/prefs_photoview" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/chrisbanes/PhotoView" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

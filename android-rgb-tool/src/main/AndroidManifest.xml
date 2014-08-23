@@ -40,11 +40,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false" >
         </activity>
-
         <activity
             android:name=".ui.RGBToolGalleryActivity"
             android:exported="false"
-            android:label="@string/rgb_gallery_name">
+            android:label="@string/rgb_gallery_name" >
         </activity>
 
         <provider
@@ -53,6 +52,10 @@
             android:exported="false" >
         </provider>
 
+        <activity
+            android:name=".ui.AttributionsActivity"
+            android:label="@string/title_activity_attributions" >
+        </activity>
     </application>
 
 </manifest>

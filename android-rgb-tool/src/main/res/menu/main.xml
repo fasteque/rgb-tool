@@ -27,4 +27,9 @@
         android:showAsAction="ifRoom"
         android:orderInCategory="103"
         android:actionProviderClass="android.widget.ShareActionProvider" />
+
+    <item android:id="@+id/action_attributions"
+        android:title="@string/action_attributions"
+        android:orderInCategory="104"
+        android:showAsAction="never|withText" />
 </menu>

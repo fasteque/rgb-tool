@@ -251,6 +251,9 @@ public class MainActivity extends Activity
             case R.id.action_print:
                 showPrintColorDialog();
                 return true;
+            case R.id.action_attributions:
+                showAttributions();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -268,6 +271,11 @@ public class MainActivity extends Activity
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new PrintColorDialogFragment();
         dialog.show(getFragmentManager(), null);
+    }
+
+
+    private void showAttributions() {
+        startActivity(new Intent(this, AttributionsActivity.class));
     }
 
 
