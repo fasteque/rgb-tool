@@ -82,7 +82,6 @@ public class RGBToolContentProvider extends ContentProvider {
         try {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
         } catch (NullPointerException e) {
-            // TODO
         }
 
         return cursor;
@@ -91,8 +90,6 @@ public class RGBToolContentProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        // TODO
-
         return null;
     }
 
@@ -118,7 +115,6 @@ public class RGBToolContentProvider extends ContentProvider {
             try {
                 getContext().getContentResolver().notifyChange(uri, null);
             } catch (NullPointerException e) {
-                // TODO
             }
 
             return Uri.parse(BASE_PATH + "/" + id);
@@ -164,7 +160,6 @@ public class RGBToolContentProvider extends ContentProvider {
             try {
                 getContext().getContentResolver().notifyChange(uri, null);
             } catch (NullPointerException e) {
-                // TODO
             }
 
         }
@@ -214,7 +209,6 @@ public class RGBToolContentProvider extends ContentProvider {
             try {
                 getContext().getContentResolver().notifyChange(uri, null);
             } catch (NullPointerException e) {
-                // TODO
             }
 
         }
