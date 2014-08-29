@@ -628,10 +628,12 @@ public class MainActivity extends Activity
         RGB_B_COLOR = RGBBComponent;
         RGB_OPACITY = RGBOComponent;
 
-        mGLRender.R_COLOR = RGB_R_COLOR / 255.0f;
-        mGLRender.G_COLOR = RGB_G_COLOR / 255.0f;
-        mGLRender.B_COLOR = RGB_B_COLOR / 255.0f;
-        mGLRender.COLOR_OPACITY = RGB_OPACITY / 255.0f;
+        if(mGLRender != null) {
+            mGLRender.R_COLOR = RGB_R_COLOR / 255.0f;
+            mGLRender.G_COLOR = RGB_G_COLOR / 255.0f;
+            mGLRender.B_COLOR = RGB_B_COLOR / 255.0f;
+            mGLRender.COLOR_OPACITY = RGB_OPACITY / 255.0f;
+        }
     }
 
 
