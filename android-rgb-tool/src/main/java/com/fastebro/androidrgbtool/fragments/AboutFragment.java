@@ -5,13 +5,13 @@ import android.preference.PreferenceFragment;
 import com.fastebro.androidrgbtool.R;
 
 
-public class AttributionsFragment extends PreferenceFragment {
+public class AboutFragment extends PreferenceFragment {
 
-    public AttributionsFragment() {}
+    public AboutFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.attributions);
+        addPreferencesFromResource(R.xml.about);
     }
 }

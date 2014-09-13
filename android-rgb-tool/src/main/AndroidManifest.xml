@@ -53,8 +53,8 @@
         </provider>
 
         <activity
-            android:name=".ui.AttributionsActivity"
-            android:label="@string/title_activity_attributions" >
+            android:name=".ui.AboutActivity"
+            android:label="@string/title_activity_about" >
         </activity>
     </application>
 

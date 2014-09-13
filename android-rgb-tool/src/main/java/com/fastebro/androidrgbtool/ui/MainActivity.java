@@ -1,6 +1,5 @@
 package com.fastebro.androidrgbtool.ui;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.*;
 import android.content.*;
@@ -275,7 +274,7 @@ public class MainActivity extends Activity
 
 
     private void showAttributions() {
-        startActivity(new Intent(this, AttributionsActivity.class));
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
 

@@ -1,7 +1,9 @@
 package com.fastebro.androidrgbtool.test;
 
 import android.app.Activity;
-import com.fastebro.androidrgbtool.ui.AttributionsActivity;
+
+import com.fastebro.androidrgbtool.ui.AboutActivity;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -20,10 +22,10 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = "./src/main/AndroidManifest.xml", emulateSdk = 18)
-public class AttributionsActivityRobolectricTest {
+public class AboutActivityRobolectricTest {
     @Test
     public void testActivityInstance() throws Exception {
-        Activity activity = Robolectric.buildActivity(AttributionsActivity.class).create().get();
+        Activity activity = Robolectric.buildActivity(AboutActivity.class).create().get();
         assertTrue(activity != null);
     }
 }

@@ -2,12 +2,11 @@ package com.fastebro.androidrgbtool.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.fragments.AttributionsFragment;
 
-public class AttributionsActivity extends Activity {
+import com.fastebro.androidrgbtool.fragments.AboutFragment;
+
+public class AboutActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,7 @@ public class AttributionsActivity extends Activity {
         }
 
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new AttributionsFragment())
+                .replace(android.R.id.content, new AboutFragment())
                 .commit();
     }
 

@@ -48,7 +48,7 @@
     <string name="album_name">RGB-Tool</string>
     <string name="action_settings">Settings</string>
     <string name="clipboard">copied to clipboard</string>
-    <string name="title_activity_attributions">Attributions</string>
+    <string name="title_activity_about">About</string>
 
     <!-- Attributions -->
     <string name="pref_open_source_libs">Open Source Libraries</string>
