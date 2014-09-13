@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Checkable;
 import android.widget.RelativeLayout;
-import com.fastebro.androidrgbtool.R;
 
 /**
  * Created by danielealtomare on 13/06/14.

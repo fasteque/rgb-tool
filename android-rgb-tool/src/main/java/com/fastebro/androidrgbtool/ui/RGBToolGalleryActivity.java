@@ -155,6 +155,7 @@ public class RGBToolGalleryActivity extends Activity
             if(cursor != null) {
                 String photoPath = cursor.getString(cursor.getColumnIndex("_data"));
                 File  existingFile = new File(photoPath);
+                //noinspection ResultOfMethodCallIgnored
                 existingFile.delete();
                 getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{photoPath});
             }

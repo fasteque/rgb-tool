@@ -134,7 +134,7 @@ public class MainActivity extends Activity
         // OpenGL ES 2.0.
         final boolean supportsEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
 
-        if (supportsEs2 == true) {
+        if (supportsEs2) {
 
             mGLRender = new GLRender();
 
@@ -501,7 +501,7 @@ public class MainActivity extends Activity
 
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File f = null;
+        File f;
 
         mAlbumStorageDirFactory = new BaseAlbumDirFactory();
 
@@ -511,9 +511,6 @@ public class MainActivity extends Activity
 
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
         } catch (IOException e) {
-            e.printStackTrace();
-
-            f = null;
             mCurrentPhotoPath = null;
         }
 

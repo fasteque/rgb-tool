@@ -40,8 +40,7 @@
         android:layout_weight="65"
         android:layout_gravity="center" >
 
-        <include layout="@layout/rgb_data_panel"
-            android:layout_alignParentTop="true" />
+        <include layout="@layout/rgb_data_panel" />
 
         <TableLayout
             android:id="@+id/rgb_panel"

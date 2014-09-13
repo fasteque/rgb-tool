@@ -76,6 +76,7 @@ public class ColorPickerActivity extends Activity {
     @Override
     protected void onDestroy() {
         if (mDeleteFile) {
+            //noinspection ResultOfMethodCallIgnored
             new File(mCurrentPath).delete();
         }
 
