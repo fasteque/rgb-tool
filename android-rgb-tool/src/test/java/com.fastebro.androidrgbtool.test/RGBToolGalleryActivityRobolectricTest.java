@@ -24,8 +24,8 @@ import static org.junit.Assert.assertTrue;
 @Config(manifest = "./src/main/AndroidManifest.xml", emulateSdk = 18)
 public class RGBToolGalleryActivityRobolectricTest {
     @Test
-    public void testActivityInstance() throws Exception {
-        Activity activity = Robolectric.buildActivity(RGBToolGalleryActivity.class).create().get();
+    public void shouldInstantiateActivity() throws Exception {
+        Activity activity = Robolectric.setupActivity(RGBToolGalleryActivity.class);
         assertTrue(activity != null);
     }
 }

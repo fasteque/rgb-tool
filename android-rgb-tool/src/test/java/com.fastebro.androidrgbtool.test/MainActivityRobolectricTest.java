@@ -22,8 +22,8 @@ import static org.junit.Assert.assertTrue;
 @Config(manifest = "./src/main/AndroidManifest.xml", emulateSdk = 18)
 public class MainActivityRobolectricTest {
     @Test
-    public void testActivityInstance() throws Exception {
-        Activity activity = Robolectric.buildActivity(MainActivity.class).create().get();
+    public void shouldInstantiateActivity() throws Exception {
+        Activity activity = Robolectric.setupActivity(MainActivity.class);
         assertTrue(activity != null);
     }
 }
