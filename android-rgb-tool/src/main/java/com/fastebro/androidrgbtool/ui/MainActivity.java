@@ -226,8 +226,8 @@ public class MainActivity extends Activity
 
         item = menu.findItem(R.id.action_print);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            item.setVisible(true);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            item.setVisible(false);
         }
 
         return super.onCreateOptionsMenu(menu);
