@@ -250,8 +250,8 @@ public class MainActivity extends Activity
             case R.id.action_print:
                 showPrintColorDialog();
                 return true;
-            case R.id.action_attributions:
-                showAttributions();
+            case R.id.action_about:
+                showAboutFragment();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -273,7 +273,7 @@ public class MainActivity extends Activity
     }
 
 
-    private void showAttributions() {
+    private void showAboutFragment() {
         startActivity(new Intent(this, AboutActivity.class));
     }
 
