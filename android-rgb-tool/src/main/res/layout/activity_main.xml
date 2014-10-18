@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent" >
+    android:background="@color/light_silver" >
 
     <include layout="@layout/rgb_data_panel"/>
 
@@ -49,7 +49,8 @@
         android:layout_marginTop="@dimen/rgb_panel_margin_top"
         android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
         android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-        android:layout_marginRight="@dimen/rgb_panel_margin_right" >
+        android:layout_marginRight="@dimen/rgb_panel_margin_right"
+        android:elevation="1dp">
 
         <TableRow>
 

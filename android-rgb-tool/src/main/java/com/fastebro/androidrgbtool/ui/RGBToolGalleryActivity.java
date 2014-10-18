@@ -39,6 +39,10 @@ public class RGBToolGalleryActivity extends Activity
         setContentView(R.layout.activity_rgbtool_gallery);
         ButterKnife.inject(this);
 
+        if(getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         mAdapter = new RGBToolImagesCursorAdapter(this);
 
         mGridView.setAdapter(mAdapter);
@@ -49,6 +53,16 @@ public class RGBToolGalleryActivity extends Activity
         getLoaderManager().initLoader(RGBToolImagesQuery.QUERY_ID,
                 null,
                 this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

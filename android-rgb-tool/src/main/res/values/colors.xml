@@ -5,9 +5,16 @@
     <color name="black">#FF000000</color>
     <color name="black_overlay">#D8000000</color>
     <color name="silver">#FFC0C0C0</color>
-    <color name="dark_gray_2">#FF39393C</color>
+    <color name="dark_gray_2">#FF4a494C</color>
     <color name="dark_gray">#FF787878</color>
     <color name="light_silver">#FFDEDEDE</color>
     <color name="white_translucent">#88FFFFFF</color>
 
+    <!-- Material Theme colors -->
+    <!-- Main colors -->
+    <color name="primary">#03a9f4</color>
+    <color name="primary_dark">#0288d1</color>
+    <color name="accent">#81d4fa</color>
+    <color name="text_primary">#d9FFFFFF</color>
+    <color name="text_secondary">#03a9f4</color>
 </resources>

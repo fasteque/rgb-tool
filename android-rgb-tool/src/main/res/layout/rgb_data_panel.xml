@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/rgb_top_panel"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/rgb_panel_margin_top"
-              android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-              android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-              android:layout_marginRight="@dimen/rgb_panel_margin_right"
-              android:background="@drawable/card_background" >
+    android:id="@+id/rgb_top_panel"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/rgb_panel_margin_top"
+    android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
+    android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+    android:layout_marginRight="@dimen/rgb_panel_margin_right"
+    android:background="@drawable/card_background"
+    android:elevation="1dp">
 
     <TableLayout
         android:layout_width="match_parent"

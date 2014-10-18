@@ -111,7 +111,10 @@ public class MainActivity extends Activity
 
         super.onCreate(savedInstanceState);
 
-        getActionBar().setDisplayShowTitleEnabled(false);
+        if(getActionBar() != null) {
+            getActionBar().setDisplayShowTitleEnabled(false);
+            getActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         setContentView(R.layout.activity_main_bottom);
 
