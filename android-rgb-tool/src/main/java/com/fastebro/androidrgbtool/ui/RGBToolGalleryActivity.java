@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.transition.Fade;
 import android.util.SparseBooleanArray;
 import android.view.*;
 import android.widget.AdapterView;
@@ -53,12 +55,21 @@ public class RGBToolGalleryActivity extends Activity
         getLoaderManager().initLoader(RGBToolImagesQuery.QUERY_ID,
                 null,
                 this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Fade());
+            getWindow().setAllowEnterTransitionOverlap(true);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
-            finish();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAfterTransition();
+            } else {
+                finish();
+            }
             return true;
         } else {
             return super.onOptionsItemSelected(item);

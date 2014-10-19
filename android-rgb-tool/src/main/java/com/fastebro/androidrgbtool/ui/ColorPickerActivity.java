@@ -3,7 +3,9 @@ package com.fastebro.androidrgbtool.ui;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -70,6 +72,11 @@ public class ColorPickerActivity extends Activity {
 
         mMainLayout.addView(mRGBPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Fade());
+            getWindow().setAllowEnterTransitionOverlap(true);
+        }
     }
 
 
@@ -125,6 +132,15 @@ public class ColorPickerActivity extends Activity {
                     mRGBPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        } else {
+            finish();
         }
     }
 }

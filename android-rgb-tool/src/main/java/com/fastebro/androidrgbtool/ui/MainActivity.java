@@ -15,6 +15,7 @@ import android.opengl.GLSurfaceView;
 import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.*;
 import android.widget.ImageButton;
@@ -178,6 +179,11 @@ public class MainActivity extends Activity
         });
 
         refreshUI();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Explode());
+            getWindow().setAllowEnterTransitionOverlap(true);
+        }
     }
 
 
@@ -277,7 +283,12 @@ public class MainActivity extends Activity
 
 
     private void showAboutFragment() {
-        startActivity(new Intent(this, AboutActivity.class));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, AboutActivity.class), ActivityOptions
+                    .makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, AboutActivity.class));
+        }
     }
 
 
@@ -372,7 +383,12 @@ public class MainActivity extends Activity
 
 
     public void openRGBToolGallery() {
-        startActivity(new Intent(this, RGBToolGalleryActivity.class));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, RGBToolGalleryActivity.class), ActivityOptions
+                    .makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, RGBToolGalleryActivity.class));
+        }
     }
 
 
