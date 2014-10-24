@@ -1,8 +1,13 @@
 package com.fastebro.androidrgbtool.ui;
 
 import android.annotation.TargetApi;
-import android.app.*;
-import android.content.*;
+import android.app.ActivityManager;
+import android.app.ActivityOptions;
+import android.content.AsyncQueryHandler;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -15,14 +20,20 @@ import android.opengl.GLSurfaceView;
 import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.transition.Explode;
 import android.util.Log;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -45,7 +56,8 @@ import com.fastebro.androidrgbtool.tasks.PhotoScalingTask;
 import com.fastebro.androidrgbtool.utils.*;
 import com.fastebro.androidrgbtool.view.CustomGLSurfaceView;
 
-public class MainActivity extends Activity
+
+public class MainActivity extends ActionBarActivity
         implements PhotoScaling,
         PrintColorDialogFragment.PrintColorDialogListener,
         ColorListDialogFragment.ColorListDialogListener {
@@ -112,9 +124,8 @@ public class MainActivity extends Activity
 
         super.onCreate(savedInstanceState);
 
-        if(getActionBar() != null) {
-            getActionBar().setDisplayShowTitleEnabled(false);
-            getActionBar().setDisplayShowHomeEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
         setContentView(R.layout.activity_main_bottom);
@@ -139,7 +150,6 @@ public class MainActivity extends Activity
         final boolean supportsEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
 
         if (supportsEs2) {
-
             mGLRender = new GLRender();
 
             glSurfaceView = (CustomGLSurfaceView) findViewById(R.id.custom_gl_surface_view);
@@ -189,16 +199,13 @@ public class MainActivity extends Activity
 
     @Override
     protected void onPause() {
-
         super.onPause();
 
         if (isRendered) {
-
             glSurfaceView.onPause();
         }
 
         if (isFinishing()) {
-
             savePreferences();
         }
     }
@@ -206,11 +213,9 @@ public class MainActivity extends Activity
 
     @Override
     protected void onResume() {
-
         super.onResume();
 
         if (isRendered) {
-
             glSurfaceView.onResume();
         }
     }
@@ -218,7 +223,6 @@ public class MainActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.main, menu);
 
         // Check if the device has a camera.
@@ -230,7 +234,7 @@ public class MainActivity extends Activity
             item.setVisible(false);
 
         item = menu.findItem(R.id.action_share);
-        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedColor();
 
         item = menu.findItem(R.id.action_print);
@@ -251,7 +255,7 @@ public class MainActivity extends Activity
                 SelectPictureDialogFragment dialogFragment =
                         new SelectPictureDialogFragment();
                 dialogFragment.setCancelable(true);
-                dialogFragment.show(getFragmentManager(), null);
+                dialogFragment.show(getSupportFragmentManager(), null);
                 return true;
             case R.id.action_color_list:
                 showColorListDialog();
@@ -271,14 +275,14 @@ public class MainActivity extends Activity
     private void showColorListDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new ColorListDialogFragment();
-        dialog.show(getFragmentManager(), null);
+        dialog.show(getSupportFragmentManager(), null);
     }
 
 
     private void showPrintColorDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new PrintColorDialogFragment();
-        dialog.show(getFragmentManager(), null);
+        dialog.show(getSupportFragmentManager(), null);
     }
 
 

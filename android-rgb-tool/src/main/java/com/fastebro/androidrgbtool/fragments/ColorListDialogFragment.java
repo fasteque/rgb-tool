@@ -1,13 +1,11 @@
 package com.fastebro.androidrgbtool.fragments;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +23,9 @@ import com.fastebro.androidrgbtool.utils.UDatabase;
  */
 public class ColorListDialogFragment extends DialogFragment
         implements
-        LoaderManager.LoaderCallbacks,
         OnColorDeleteListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener,
+        android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
     private ColorListAdapter mAdapter;
 
@@ -80,13 +78,20 @@ public class ColorListDialogFragment extends DialogFragment
         listview.setAdapter(mAdapter);
 
         getDialog().setTitle(getString(R.string.action_color_list));
-        getLoaderManager().initLoader(0, null, this);
+        getActivity().getSupportLoaderManager().initLoader(0, null, this);
 
         view.findViewById(R.id.list_empty_progress).setVisibility(View.VISIBLE);
 
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        if(getActivity() != null) {
+            getActivity().getSupportLoaderManager().destroyLoader(0);
+        }
+        super.onDestroyView();
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,7 +113,7 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args) {
+    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // This is called when a new Loader needs to be created.  This
         // sample only has one Loader, so we don't care about the ID.
         // First, pick the base URI to use depending on whether we are
@@ -123,25 +128,25 @@ public class ColorListDialogFragment extends DialogFragment
                 ColorDataContract.ColorEntry._ID + " DESC");
     }
 
-
     @Override
-    public void onLoadFinished(Loader loader, Object data) {
-        getView().findViewById(R.id.list_empty_progress).setVisibility(View.GONE);
+    public void onLoadFinished(android.support.v4.content.Loader<Cursor> objectLoader, Cursor data) {
+        if(getView() != null) {
+            getView().findViewById(R.id.list_empty_progress).setVisibility(View.GONE);
 
-        if (((Cursor) data).getCount() <= 0) {
-            getView().findViewById(R.id.list_empty_text).setVisibility(View.VISIBLE);
-        } else {
-            getView().findViewById(R.id.list_empty_text).setVisibility(View.GONE);
+            if (data.getCount() <= 0) {
+                getView().findViewById(R.id.list_empty_text).setVisibility(View.VISIBLE);
+            } else {
+                getView().findViewById(R.id.list_empty_text).setVisibility(View.GONE);
+            }
+
+            // Swap the new cursor in. (The framework will take care of closing the
+            // old cursor once we return.)
+            mAdapter.swapCursor(data);
         }
-
-        // Swap the new cursor in.  (The framework will take care of closing the
-        // old cursor once we return.)
-        mAdapter.swapCursor((Cursor) data);
     }
 
-
     @Override
-    public void onLoaderReset(Loader loader) {
+    public void onLoaderReset(android.support.v4.content.Loader<Cursor> objectLoader) {
         // This is called when the last Cursor provided to onLoadFinished()
         // above is about to be closed.  We need to make sure we are no
         // longer using it.

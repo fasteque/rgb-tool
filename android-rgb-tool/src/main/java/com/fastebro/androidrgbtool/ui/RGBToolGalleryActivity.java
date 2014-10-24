@@ -1,6 +1,5 @@
 package com.fastebro.androidrgbtool.ui;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -10,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.transition.Fade;
 import android.util.SparseBooleanArray;
 import android.view.*;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class RGBToolGalleryActivity extends Activity
+public class RGBToolGalleryActivity extends ActionBarActivity
     implements LoaderManager.LoaderCallbacks<Cursor>,
         AdapterView.OnItemClickListener {
 
@@ -41,8 +41,8 @@ public class RGBToolGalleryActivity extends Activity
         setContentView(R.layout.activity_rgbtool_gallery);
         ButterKnife.inject(this);
 
-        if(getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         mAdapter = new RGBToolImagesCursorAdapter(this);

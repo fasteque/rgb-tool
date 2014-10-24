@@ -4,32 +4,32 @@
     tools:context="com.fastebro.androidrgbtool.ui.MainActivity" >
 
     <item android:id="@+id/action_camera"
-          android:title="@string/action_camera"
-          android:icon="@drawable/ic_menu_camera"
-          android:orderInCategory="100"
-          android:showAsAction="ifRoom" />
+        android:title="@string/action_camera"
+        android:icon="@drawable/ic_menu_camera"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_color_list"
         android:title="@string/action_color_list"
         android:icon="@drawable/ic_menu_color_list"
         android:orderInCategory="101"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_print"
         android:title="@string/action_print"
         android:icon="@drawable/ic_menu_print"
         android:orderInCategory="102"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_share"
         android:title="@string/action_share"
-        android:showAsAction="never|withText"
+        app:showAsAction="never|withText"
         android:orderInCategory="103"
-        android:actionProviderClass="android.widget.ShareActionProvider" />
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
 
     <item android:id="@+id/action_about"
         android:title="@string/action_about"
         android:orderInCategory="104"
-        android:showAsAction="never|withText" />
+        app:showAsAction="never|withText" />
 </menu>

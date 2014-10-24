@@ -1,10 +1,10 @@
 package com.fastebro.androidrgbtool.ui;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.transition.Fade;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +17,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 import java.io.File;
 
 
-public class ColorPickerActivity extends Activity {
+public class ColorPickerActivity extends ActionBarActivity {
     private ImageView mImageView;
     private PhotoViewAttacher mAttacher;
     private Bitmap mBitmap;
@@ -35,8 +35,8 @@ public class ColorPickerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
 
-        if (getActionBar() != null) {
-            getActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
         }
 
         mMainLayout = (RelativeLayout) findViewById(R.id.color_picker_main_layout);
