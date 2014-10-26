@@ -15,7 +15,7 @@
         android:verticalSpacing="5dp"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="none"
-        android:listSelector="@color/accent_color"
+        android:listSelector="@color/primary"
         android:stretchMode="columnWidth"
         android:gravity="center" />
 

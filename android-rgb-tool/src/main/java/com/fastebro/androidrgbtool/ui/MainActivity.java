@@ -57,7 +57,7 @@ import com.fastebro.androidrgbtool.utils.*;
 import com.fastebro.androidrgbtool.view.CustomGLSurfaceView;
 
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends BaseActivity
         implements PhotoScaling,
         PrintColorDialogFragment.PrintColorDialogListener,
         ColorListDialogFragment.ColorListDialogListener {

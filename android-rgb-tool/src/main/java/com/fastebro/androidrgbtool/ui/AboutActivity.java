@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.fastebro.androidrgbtool.fragments.AboutFragment;
 
-public class AboutActivity extends ActionBarActivity {
+public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

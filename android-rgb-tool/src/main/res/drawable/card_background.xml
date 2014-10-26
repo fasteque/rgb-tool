@@ -6,7 +6,7 @@
 
             <corners android:radius="1dp"/>
 
-            <solid android:color="@color/accent_color" />
+            <solid android:color="@color/primary" />
 
         </shape>
     </item>

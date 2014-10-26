@@ -17,7 +17,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 import java.io.File;
 
 
-public class ColorPickerActivity extends ActionBarActivity {
+public class ColorPickerActivity extends BaseActivity {
     private ImageView mImageView;
     private PhotoViewAttacher mAttacher;
     private Bitmap mBitmap;

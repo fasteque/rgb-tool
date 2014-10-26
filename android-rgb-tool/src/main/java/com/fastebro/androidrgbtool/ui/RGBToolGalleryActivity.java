@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class RGBToolGalleryActivity extends ActionBarActivity
+public class RGBToolGalleryActivity extends BaseActivity
     implements LoaderManager.LoaderCallbacks<Cursor>,
         AdapterView.OnItemClickListener {
 

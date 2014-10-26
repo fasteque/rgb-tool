@@ -1,7 +1,5 @@
 <resources>
 
-    <color name="accent_color">#FF33B5E5</color>
-    <color name="light_accent_color">#FFFFBB33</color>
     <color name="black">#FF000000</color>
     <color name="black_overlay">#D8000000</color>
     <color name="silver">#FFC0C0C0</color>
@@ -11,7 +9,6 @@
     <color name="white_translucent">#88FFFFFF</color>
 
     <!-- Material Theme colors -->
-    <!-- Main colors -->
     <color name="primary">#03a9f4</color>
     <color name="primary_dark">#0288d1</color>
     <color name="accent">#81d4fa</color>
