@@ -673,7 +673,7 @@ public class MainActivity extends ActionBarActivity
         editor.putFloat(UCommon.PREFS_G_COLOR, RGB_G_COLOR);
         editor.putFloat(UCommon.PREFS_B_COLOR, RGB_B_COLOR);
         editor.putFloat(UCommon.PREFS_OPACITY, RGB_OPACITY);
-        editor.commit();
+        editor.apply();
     }
 
 
