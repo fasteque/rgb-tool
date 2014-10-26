@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" >
+              android:layout_height="48dp" >
 
     <ImageView
         android:id="@+id/entry_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/rgb_panel_margin_left" />
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+        android:layout_marginStart="@dimen/rgb_panel_margin_left" />
 
     <TextView
         android:id="@+id/entry_title"
@@ -17,8 +19,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:gravity="center_vertical"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:paddingLeft="@dimen/rgb_panel_margin_left"
+        android:paddingStart="@dimen/rgb_panel_margin_left"
+        android:paddingRight="@dimen/rgb_panel_margin_left"
+        android:paddingEnd="@dimen/rgb_panel_margin_left"
         android:minHeight="?android:attr/listPreferredItemHeightSmall" />
 
 </LinearLayout>
