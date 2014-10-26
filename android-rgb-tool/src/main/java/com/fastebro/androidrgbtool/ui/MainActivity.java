@@ -415,7 +415,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     /**
-     * @return
+     * @return SeekBar listener.
      */
     protected OnSeekBarChangeListener getRGB() {
         return new OnSeekBarChangeListener() {
