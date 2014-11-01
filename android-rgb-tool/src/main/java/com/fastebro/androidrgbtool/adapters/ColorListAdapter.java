@@ -16,7 +16,7 @@ import com.fastebro.androidrgbtool.utils.UColor;
  * Created by daltomare on 17/04/14.
  */
 public class ColorListAdapter extends SimpleCursorAdapter {
-    private OnColorDeleteListener mOnColorClickListener = null;
+    private OnColorDeleteListener mOnColorDeleteListener = null;
 
 
     public ColorListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
@@ -24,8 +24,8 @@ public class ColorListAdapter extends SimpleCursorAdapter {
     }
 
 
-    public void setOnColorClickListener(OnColorDeleteListener listener) {
-        this.mOnColorClickListener = listener;
+    public void setOnColorDeleteListener(OnColorDeleteListener listener) {
+        this.mOnColorDeleteListener = listener;
     }
 
 
@@ -62,8 +62,8 @@ public class ColorListAdapter extends SimpleCursorAdapter {
         deleteColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnColorClickListener != null) {
-                    mOnColorClickListener.onColorClick(colorId);
+                if (mOnColorDeleteListener != null) {
+                    mOnColorDeleteListener.onColorDelete(colorId);
                 }
             }
         });

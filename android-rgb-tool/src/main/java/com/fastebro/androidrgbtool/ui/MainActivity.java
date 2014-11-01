@@ -455,7 +455,7 @@ public class MainActivity extends BaseActivity
     }
 
 
-    private void updateSaveColorButton() {
+    public void updateSaveColorButton() {
         if (UDatabase.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
                 RGB_B_COLOR, RGB_OPACITY)) {
             btn_SaveColor.setVisibility(View.INVISIBLE);

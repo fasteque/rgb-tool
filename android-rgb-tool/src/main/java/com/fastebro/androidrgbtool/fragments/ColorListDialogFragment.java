@@ -16,6 +16,7 @@ import com.fastebro.androidrgbtool.adapters.ColorListAdapter;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.interfaces.OnColorDeleteListener;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
+import com.fastebro.androidrgbtool.ui.MainActivity;
 import com.fastebro.androidrgbtool.utils.UDatabase;
 
 /**
@@ -71,7 +72,7 @@ public class ColorListDialogFragment extends DialogFragment
                 R.layout.color_list_row, null,
                 new String[]{ColorDataContract.ColorEntry.COLUMN_COLOR_HEX},
                 new int[]{R.id.hex_value}, 0);
-        mAdapter.setOnColorClickListener(this);
+        mAdapter.setOnColorDeleteListener(this);
 
         ListView listview = (ListView) view.findViewById(android.R.id.list);
         listview.setOnItemClickListener(this);
@@ -89,6 +90,8 @@ public class ColorListDialogFragment extends DialogFragment
     public void onDestroyView() {
         if(getActivity() != null) {
             getActivity().getSupportLoaderManager().destroyLoader(0);
+            // TODO: do it in a more elegant way!
+            ((MainActivity)getActivity()).updateSaveColorButton();
         }
         super.onDestroyView();
     }
@@ -155,7 +158,7 @@ public class ColorListDialogFragment extends DialogFragment
 
 
     @Override
-    public void onColorClick(int colorId) {
+    public void onColorDelete(int colorId) {
         // Defines selection criteria for the rows to delete.
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
         String[] mSelectionArgs = {String.valueOf(colorId)};
