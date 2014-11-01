@@ -9,11 +9,7 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="35"
-        android:layout_marginTop="@dimen/rgb_panel_margin_top"
-        android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-        android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-        android:layout_marginRight="@dimen/rgb_panel_margin_right" >
+        android:layout_weight="35" >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -50,10 +46,6 @@
             android:stretchColumns="1"
             android:background="@drawable/rgb_panel_background"
             android:padding="@dimen/rgb_panel_padding"
-            android:layout_marginTop="@dimen/rgb_panel_margin_top"
-            android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-            android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-            android:layout_marginRight="@dimen/rgb_panel_margin_right"
             android:layout_alignParentBottom="true" >
 
             <TableRow>

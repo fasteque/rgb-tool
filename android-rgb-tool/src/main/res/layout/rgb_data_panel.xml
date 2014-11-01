@@ -4,12 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/rgb_panel_margin_top"
-    android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-    android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-    android:layout_marginRight="@dimen/rgb_panel_margin_right"
-    android:background="@drawable/card_background"
-    android:elevation="1dp">
+    android:background="@android:color/white"
+    android:elevation="2dp">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -17,7 +13,8 @@
         android:padding="7dp"
         android:stretchColumns="0,1,2,3,4">
 
-        <TableRow>
+        <TableRow android:minHeight="36dp"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="0dp"
@@ -88,7 +85,8 @@
 
         </TableRow>
 
-        <TableRow>
+        <TableRow android:minHeight="36dp"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="0dp"
@@ -144,7 +142,8 @@
 
         </TableRow>
 
-        <TableRow>
+        <TableRow android:minHeight="36dp"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="0dp"
@@ -166,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:background="@null"
-                android:layout_gravity="right"
+                android:layout_gravity="end|center_vertical"
                 android:src="@drawable/btn_save_color" />
 
         </TableRow>
