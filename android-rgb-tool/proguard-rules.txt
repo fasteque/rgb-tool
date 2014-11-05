@@ -36,3 +36,7 @@
 
 ####### Picasso #######
 -dontwarn com.squareup.okhttp.**
+
+
+####### Android v7 Support Library #######
+-keep class android.support.v7.widget.ShareActionProvider { *; }
