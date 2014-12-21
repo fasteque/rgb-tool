@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.transition.Fade;
 import android.view.View;
 import android.widget.ImageView;
@@ -78,7 +77,6 @@ public class ColorPickerActivity extends BaseActivity {
             getWindow().setAllowEnterTransitionOverlap(true);
         }
     }
-
 
     @Override
     protected void onDestroy() {

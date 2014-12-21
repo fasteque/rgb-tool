@@ -195,7 +195,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -209,7 +208,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -218,7 +216,6 @@ public class MainActivity extends BaseActivity
             glSurfaceView.onResume();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -245,7 +242,6 @@ public class MainActivity extends BaseActivity
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
@@ -270,20 +266,17 @@ public class MainActivity extends BaseActivity
         }
     }
 
-
     private void showColorListDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new ColorListDialogFragment();
         dialog.show(getSupportFragmentManager(), null);
     }
 
-
     private void showPrintColorDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new PrintColorDialogFragment();
         dialog.show(getSupportFragmentManager(), null);
     }
-
 
     private void showAboutFragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -293,7 +286,6 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(this, AboutActivity.class));
         }
     }
-
 
     private void saveColor(float RGBRComponent,
                            float RGBGComponent,
@@ -332,7 +324,6 @@ public class MainActivity extends BaseActivity
         btn_SaveColor.setVisibility(View.INVISIBLE);
     }
 
-
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void printColor(String message) {
         // Get a PrintManager instance
@@ -355,7 +346,6 @@ public class MainActivity extends BaseActivity
         );
     }
 
-
     private void updateSharedColor() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -369,13 +359,11 @@ public class MainActivity extends BaseActivity
         setShareIntent(shareIntent);
     }
 
-
     private void setShareIntent(Intent shareIntent) {
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(shareIntent);
         }
     }
-
 
     public void openDeviceGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
@@ -383,7 +371,6 @@ public class MainActivity extends BaseActivity
 
         startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
     }
-
 
     public void openRGBToolGallery() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -393,7 +380,6 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(this, RGBToolGalleryActivity.class));
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -453,7 +439,6 @@ public class MainActivity extends BaseActivity
         };
     }
 
-
     public void updateSaveColorButton() {
         if (UDatabase.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
                 RGB_B_COLOR, RGB_OPACITY)) {
@@ -462,7 +447,6 @@ public class MainActivity extends BaseActivity
             btn_SaveColor.setVisibility(View.VISIBLE);
         }
     }
-
 
     private void refreshUI() {
         // Update OpenGL Context (glSurfaceView) and all RGB and hexadecimal values.
@@ -520,7 +504,6 @@ public class MainActivity extends BaseActivity
         // Log.v("COLOR_NAME", colorDataProvider.getColorNameByHex(hexValue));
     }
 
-
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File f;
@@ -539,14 +522,12 @@ public class MainActivity extends BaseActivity
         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
     }
 
-
     private File setUpPhotoFile() throws IOException {
         File f = createImageFile();
         mCurrentPhotoPath = f.getAbsolutePath();
 
         return f;
     }
-
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -560,12 +541,10 @@ public class MainActivity extends BaseActivity
         return image;
     }
 
-
     // Photo album for this application
     private String getAlbumName() {
         return getString(R.string.album_name);
     }
-
 
     private File getAlbumDir() {
         File storageDir = null;
@@ -584,19 +563,17 @@ public class MainActivity extends BaseActivity
             }
 
         } else {
-            Log.v(getString(R.string.app_name), "External storage is not mounted READ/WRITE.");
+            Log.d(getString(R.string.app_name), "External storage is not mounted READ/WRITE.");
         }
 
         return storageDir;
     }
-
 
     private void handlePhoto(boolean useTempFile) {
         if (mCurrentPhotoPath != null) {
             new PhotoScalingTask(this, mCurrentPhotoPath, useTempFile).execute();
         }
     }
-
 
     public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
@@ -615,7 +592,6 @@ public class MainActivity extends BaseActivity
             }
         }
     }
-
 
     @Override
     public void onScalingComplete(String photoPath, boolean deleteFile) {
@@ -636,7 +612,6 @@ public class MainActivity extends BaseActivity
         startActivity(colorPickerIntent);
     }
 
-
     private void updateRGBColor(float RGBRComponent,
                                 float RGBGComponent,
                                 float RGBBComponent,
@@ -654,7 +629,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-
     private void restorePreferences() {
         SharedPreferences settings = getSharedPreferences(UCommon.PREFS_NAME, 0);
 
@@ -663,7 +637,6 @@ public class MainActivity extends BaseActivity
                 settings.getFloat(UCommon.PREFS_B_COLOR, 0.0f),
                 settings.getFloat(UCommon.PREFS_OPACITY, 255.0f));
     }
-
 
     private void savePreferences() {
         SharedPreferences settings = getSharedPreferences(UCommon.PREFS_NAME, 0);
@@ -675,18 +648,15 @@ public class MainActivity extends BaseActivity
         editor.apply();
     }
 
-
     @Override
     public void onDialogPositiveClick(String message) {
         printColor(message);
     }
 
-
     @Override
     public void onDialogNegativeClick() {
         printColor(null);
     }
-
 
     @Override
     public void onColorClick(float RGBRComponent,
