@@ -9,5 +9,4 @@ public class UImage {
     public final static String JPEG_FILE_PREFIX = "IMG_";
     public final static String JPEG_FILE_SUFFIX = ".jpg";
     public static final int JPEG_FILE_IMAGE_MAX_SIZE = 1080;
-
 }

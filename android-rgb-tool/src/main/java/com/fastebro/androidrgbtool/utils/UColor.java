@@ -11,7 +11,6 @@ public class UColor {
         return String.format("%f", n).replaceAll("\\.0*$", "");
     }
 
-
     /**
      * @param n
      * @return
@@ -27,7 +26,6 @@ public class UColor {
         return sb.toString().toUpperCase();
     }
 
-
     /**
      * @param r
      * @param g
@@ -39,7 +37,6 @@ public class UColor {
         Color.RGBToHSV((int) r, (int) g, (int) b, hsb);
         return hsb;
     }
-
 
     /**
      * @param rgbRColor

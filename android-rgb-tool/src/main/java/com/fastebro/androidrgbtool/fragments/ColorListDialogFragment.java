@@ -30,13 +30,12 @@ public class ColorListDialogFragment extends DialogFragment
 
     private ColorListAdapter mAdapter;
 
-    public ColorListDialogFragment() {
-    }
+    public ColorListDialogFragment() { }
 
 
     /* The activity that creates an instance of this dialog fragment must
- * implement this interface in order to receive event callbacks.
- */
+     * implement this interface in order to receive event callbacks.
+     */
     public interface ColorListDialogListener {
         public void onColorClick(float RGBRComponent,
                                  float RGBGComponent,
@@ -62,7 +61,6 @@ public class ColorListDialogFragment extends DialogFragment
                     + " must implement ColorListDialogListener");
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

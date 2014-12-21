@@ -17,9 +17,7 @@ import com.fastebro.androidrgbtool.ui.MainActivity;
  */
 public class SelectPictureDialogFragment extends DialogFragment implements AdapterView.OnItemClickListener {
 
-    public SelectPictureDialogFragment() {
-    }
-
+    public SelectPictureDialogFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

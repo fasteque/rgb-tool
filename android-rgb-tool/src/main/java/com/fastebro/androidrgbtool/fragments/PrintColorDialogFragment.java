@@ -15,16 +15,13 @@ import com.fastebro.androidrgbtool.R;
  * Created by danielealtomare on 26/03/14.
  */
 public class PrintColorDialogFragment extends DialogFragment {
-    public PrintColorDialogFragment() {
-    }
-
+    public PrintColorDialogFragment() { }
 
     /* The activity that creates an instance of this dialog fragment must
      * implement this interface in order to receive event callbacks.
      */
     public interface PrintColorDialogListener {
         public void onDialogPositiveClick(String message);
-
         public void onDialogNegativeClick();
     }
 
@@ -46,7 +43,6 @@ public class PrintColorDialogFragment extends DialogFragment {
                     + " must implement PrintColorDialogListener");
         }
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

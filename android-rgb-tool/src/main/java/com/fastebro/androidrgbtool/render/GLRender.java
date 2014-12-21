@@ -48,5 +48,4 @@ public class GLRender implements Renderer {
         glClearColor(R_COLOR, G_COLOR, B_COLOR, COLOR_OPACITY);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
-
 }

@@ -24,7 +24,6 @@ public class UDatabase {
                     ColorDataContract.ColorEntry.COLUMN_COLOR_NAME
             };
 
-
     public static boolean findColor(Context context, float rValue,
                                     float gValue, float bValue, float aValue) {
         // Defines selection criteria for the rows to delete.

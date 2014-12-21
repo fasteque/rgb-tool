@@ -51,18 +51,15 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
         mRGBOpacity = rgbOpacity;
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
     }
 
-
     @Override
     public void onFinish() {
         super.onFinish();
     }
-
 
     @Override
     public void onLayout(PrintAttributes oldAttributes,
@@ -109,42 +106,30 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
 
     }
 
-
     @Override
     public void onWrite(PageRange[] pages,
                         ParcelFileDescriptor destination,
                         CancellationSignal cancellationSignal,
                         WriteResultCallback callback) {
-        // Iterate over each page of the document,
-        // check if it's in the output range.
-        for (int i = 0; i < 1; i++) {
-            // Check to see if this page is in the output range.
-//            if (containsPage(pageRanges, i))
-//            {
-            // If so, add it to writtenPagesArray. writtenPagesArray.size()
-            // is used to compute the next output page index.
-//                writtenPagesArray.append(writtenPagesArray.size(), i);
-            PdfDocument.Page page = mPdfDocument.startPage(i);
+        PdfDocument.Page page = mPdfDocument.startPage(0);
 
-            // check for cancellation
-            if (cancellationSignal.isCanceled()) {
-                Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
-                        Toast.LENGTH_SHORT).show();
+        // check for cancellation
+        if (cancellationSignal.isCanceled()) {
+            Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
+                    Toast.LENGTH_SHORT).show();
 
-                callback.onWriteCancelled();
-                mPdfDocument.close();
-                mPdfDocument = null;
+            callback.onWriteCancelled();
+            mPdfDocument.close();
+            mPdfDocument = null;
 
-                return;
-            }
-
-            // Draw page content for printing
-            drawPage(page);
-
-            // Rendering is complete, so page can be finalized.
-            mPdfDocument.finishPage(page);
+            return;
         }
-//        }
+
+        // Draw page content for printing
+        drawPage(page);
+
+        // Rendering is complete, so page can be finalized.
+        mPdfDocument.finishPage(page);
 
         // Write PDF document to file
         try {
@@ -161,8 +146,6 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
             mPdfDocument = null;
         }
 
-//        PageRange[] writtenPages = computeWrittenPages();
-
         // Signal the print framework the document is complete
         callback.onWriteFinished(pages);
     }
@@ -172,11 +155,9 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
         return 1;
     }
 
-
     private int getPrintItemCount() {
         return 1;
     }
-
 
     private void drawPage(PdfDocument.Page page) {
         Canvas canvas = page.getCanvas();
