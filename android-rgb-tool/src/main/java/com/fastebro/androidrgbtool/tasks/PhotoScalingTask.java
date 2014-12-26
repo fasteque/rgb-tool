@@ -12,6 +12,7 @@ import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.utils.UImage;
 
 import java.io.*;
+import java.lang.ref.WeakReference;
 
 import de.greenrobot.event.EventBus;
 
@@ -21,12 +22,12 @@ import de.greenrobot.event.EventBus;
 public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
     private String mPhotoPath;
     private boolean mUseTempFile;
-    private Context mContext;
+    private final WeakReference<Activity> activityWeakReference;
 
     public PhotoScalingTask(Activity activity, String photoPath, boolean useTempFile) {
         mPhotoPath = photoPath;
         mUseTempFile = useTempFile;
-        mContext = activity;
+        activityWeakReference = new WeakReference<Activity>(activity);
     }
 
     @Override
@@ -36,30 +37,36 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        // Resize the image
-        try {
-            if (mUseTempFile) {
-                copyFile(mPhotoPath);
+        Activity activity = activityWeakReference.get();
+        if(activity != null) {
+            // Resize the image
+            try {
+                if (mUseTempFile) {
+                    copyFile(mPhotoPath, activity.getApplicationContext());
+                }
+
+                savePrescaledBitmap(mPhotoPath);
+
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+
+                return false;
             }
-
-            savePrescaledBitmap(mPhotoPath);
-
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-
+        } else {
             return false;
         }
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
-        if (result) {
+        Activity activity = activityWeakReference.get();
+        if ((activity != null) && result) {
             EventBus.getDefault().post(new PhotoScaledEvent(mPhotoPath, mUseTempFile));
         }
     }
 
-    private void copyFile(String inputPath) {
+    private void copyFile(String inputPath, Context context) {
         InputStream in = null;
         OutputStream out = null;
         String filename;
@@ -67,7 +74,7 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
         try {
             filename = new File(inputPath).getName();
             in = new FileInputStream(inputPath);
-            out = new FileOutputStream(mContext.getFilesDir() + "/" + filename);
+            out = new FileOutputStream(context.getFilesDir() + "/" + filename);
 
             byte[] buffer = new byte[1024];
             int read;
@@ -82,7 +89,7 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
             out.close();
             out = null;
 
-            mPhotoPath = mContext.getFilesDir() + "/" + filename;
+            mPhotoPath = context.getFilesDir() + "/" + filename;
         } catch (FileNotFoundException e) {
 
         } catch (Exception e) {
