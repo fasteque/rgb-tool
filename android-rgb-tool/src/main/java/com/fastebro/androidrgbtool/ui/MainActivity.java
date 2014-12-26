@@ -43,10 +43,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
+import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.fragments.ColorListDialogFragment;
 import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
-import com.fastebro.androidrgbtool.interfaces.PhotoScaling;
+import com.fastebro.androidrgbtool.events.PhotoScaling;
 import com.fastebro.androidrgbtool.print.RGBToolPrintDocumentAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.render.GLRender;
@@ -56,10 +57,9 @@ import com.fastebro.androidrgbtool.utils.*;
 import com.fastebro.androidrgbtool.view.CustomGLSurfaceView;
 
 
-public class MainActivity extends BaseActivity
+public class MainActivity extends EventBaseActivity
         implements PhotoScaling,
-        PrintColorDialogFragment.PrintColorDialogListener,
-        ColorListDialogFragment.ColorListDialogListener {
+        PrintColorDialogFragment.PrintColorDialogListener {
     // Objects.
     @InjectView(R.id.seekBar_R)
     SeekBar seekBar_R;
@@ -658,24 +658,19 @@ public class MainActivity extends BaseActivity
         printColor(null);
     }
 
-    @Override
-    public void onColorClick(float RGBRComponent,
-                             float RGBGComponent,
-                             float RGBBComponent,
-                             float RGBOComponent,
-                             String colorName) {
-        updateRGBColor(RGBRComponent,
-                RGBGComponent,
-                RGBBComponent,
-                RGBOComponent);
+    public void onEvent(ColorSelectEvent event) {
+        updateRGBColor(event.RGBRComponent,
+                event.RGBGComponent,
+                event.RGBBComponent,
+                event.RGBOComponent);
 
         refreshUI();
 
         // Also update the seekbars.
-        seekBar_R.setProgress((int) RGBRComponent);
-        seekBar_G.setProgress((int) RGBGComponent);
-        seekBar_B.setProgress((int) RGBBComponent);
-        seekBar_O.setProgress((int) RGBOComponent);
+        seekBar_R.setProgress((int) event.RGBRComponent);
+        seekBar_G.setProgress((int) event.RGBGComponent);
+        seekBar_B.setProgress((int) event.RGBBComponent);
+        seekBar_O.setProgress((int) event.RGBOComponent);
 
         savePreferences();
     }

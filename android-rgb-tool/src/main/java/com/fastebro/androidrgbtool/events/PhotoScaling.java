@@ -1,4 +1,4 @@
-package com.fastebro.androidrgbtool.interfaces;
+package com.fastebro.androidrgbtool.events;
 
 /**
  * Created by danielealtomare on 5/22/13.

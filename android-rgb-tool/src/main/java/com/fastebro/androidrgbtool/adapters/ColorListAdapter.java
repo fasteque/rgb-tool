@@ -9,25 +9,19 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
-import com.fastebro.androidrgbtool.interfaces.OnColorDeleteListener;
+import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.utils.UColor;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by daltomare on 17/04/14.
  */
 public class ColorListAdapter extends SimpleCursorAdapter {
-    private OnColorDeleteListener mOnColorDeleteListener = null;
-
 
     public ColorListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
     }
-
-
-    public void setOnColorDeleteListener(OnColorDeleteListener listener) {
-        this.mOnColorDeleteListener = listener;
-    }
-
 
     @Override
     public void bindView(View view, Context context, final Cursor cursor) {
@@ -62,9 +56,7 @@ public class ColorListAdapter extends SimpleCursorAdapter {
         deleteColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOnColorDeleteListener != null) {
-                    mOnColorDeleteListener.onColorDelete(colorId);
-                }
+                EventBus.getDefault().post(new ColorDeleteEvent(colorId));
             }
         });
     }

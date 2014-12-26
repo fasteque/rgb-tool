@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,53 +13,26 @@ import android.widget.ListView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.ColorListAdapter;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
-import com.fastebro.androidrgbtool.interfaces.OnColorDeleteListener;
+import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
+import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.ui.MainActivity;
 import com.fastebro.androidrgbtool.utils.UDatabase;
 
+import de.greenrobot.event.EventBus;
+
+
 /**
  * Created by danielealtomare on 17/04/14.
  */
-public class ColorListDialogFragment extends DialogFragment
+public class ColorListDialogFragment extends EventBaseDialogFragment
         implements
-        OnColorDeleteListener,
         AdapterView.OnItemClickListener,
         android.support.v4.app.LoaderManager.LoaderCallbacks<Cursor> {
 
     private ColorListAdapter mAdapter;
 
     public ColorListDialogFragment() { }
-
-
-    /* The activity that creates an instance of this dialog fragment must
-     * implement this interface in order to receive event callbacks.
-     */
-    public interface ColorListDialogListener {
-        public void onColorClick(float RGBRComponent,
-                                 float RGBGComponent,
-                                 float RGBBComponent,
-                                 float RGBOComponent,
-                                 String colorName);
-    }
-
-    // Use this instance of the interface to deliver action events
-    private ColorListDialogListener mListener;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        // Verify that the host activity implements the callback interface
-        try {
-            // Instantiate the ColorListDialogListener so we can send events to the host
-            mListener = (ColorListDialogListener) activity;
-        } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString()
-                    + " must implement ColorListDialogListener");
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +42,6 @@ public class ColorListDialogFragment extends DialogFragment
                 R.layout.color_list_row, null,
                 new String[]{ColorDataContract.ColorEntry.COLUMN_COLOR_HEX},
                 new int[]{R.id.hex_value}, 0);
-        mAdapter.setOnColorDeleteListener(this);
 
         ListView listview = (ListView) view.findViewById(android.R.id.list);
         listview.setOnItemClickListener(this);
@@ -104,11 +75,9 @@ public class ColorListDialogFragment extends DialogFragment
             int rgbBValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B));
             int rgbAValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A));
 
-            if (mListener != null) {
-                mListener.onColorClick(rgbRValue,
-                        rgbGValue, rgbBValue, rgbAValue, null);
-                dismiss();
-            }
+            EventBus.getDefault().post(new ColorSelectEvent(rgbRValue,
+                    rgbGValue, rgbBValue, rgbAValue, null));
+            dismiss();
         }
     }
 
@@ -155,11 +124,9 @@ public class ColorListDialogFragment extends DialogFragment
     }
 
 
-    @Override
-    public void onColorDelete(int colorId) {
-        // Defines selection criteria for the rows to delete.
+    public void onEvent(ColorDeleteEvent event) {
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
-        String[] mSelectionArgs = {String.valueOf(colorId)};
+        String[] mSelectionArgs = {String.valueOf(event.colorId)};
 
         getActivity().getContentResolver().delete(
                 RGBToolContentProvider.CONTENT_URI,

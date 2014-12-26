@@ -72,6 +72,7 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.jakewharton:butterknife:6.0.0'
+    compile 'de.greenrobot:eventbus:2.4.0'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     androidTestCompile('junit:junit:4.11') {

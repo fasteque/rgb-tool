@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.AsyncTask;
-import com.fastebro.androidrgbtool.interfaces.PhotoScaling;
+import com.fastebro.androidrgbtool.events.PhotoScaling;
 import com.fastebro.androidrgbtool.utils.UImage;
 
 import java.io.*;

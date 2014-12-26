@@ -40,3 +40,7 @@
 
 ####### Android v7 Support Library #######
 -keep class android.support.v7.widget.ShareActionProvider { *; }
+
+
+####### Greenbot EventBus #######
+-keepclassmembers class ** { public void onEvent*(**); }
