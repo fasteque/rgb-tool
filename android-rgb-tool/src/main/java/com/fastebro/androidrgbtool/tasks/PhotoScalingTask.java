@@ -11,7 +11,13 @@ import android.os.AsyncTask;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.utils.UImage;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 
 import de.greenrobot.event.EventBus;
