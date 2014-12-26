@@ -45,6 +45,7 @@ import java.util.Date;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
+import com.fastebro.androidrgbtool.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.fragments.ColorListDialogFragment;
 import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
@@ -57,8 +58,7 @@ import com.fastebro.androidrgbtool.utils.*;
 import com.fastebro.androidrgbtool.view.CustomGLSurfaceView;
 
 
-public class MainActivity extends EventBaseActivity
-        implements PrintColorDialogFragment.PrintColorDialogListener {
+public class MainActivity extends EventBaseActivity {
     // Objects.
     @InjectView(R.id.seekBar_R)
     SeekBar seekBar_R;
@@ -628,16 +628,6 @@ public class MainActivity extends EventBaseActivity
         editor.apply();
     }
 
-    @Override
-    public void onDialogPositiveClick(String message) {
-        printColor(message);
-    }
-
-    @Override
-    public void onDialogNegativeClick() {
-        printColor(null);
-    }
-
     public void onEvent(ColorSelectEvent event) {
         updateRGBColor(event.RGBRComponent,
                 event.RGBGComponent,
@@ -671,5 +661,9 @@ public class MainActivity extends EventBaseActivity
         colorPickerIntent.putExtra(UImage.EXTRA_JPEG_FILE_PATH, event.photoPath);
         colorPickerIntent.putExtra(UImage.EXTRA_DELETE_FILE, event.deleteFile);
         startActivity(colorPickerIntent);
+    }
+
+    public void onEvent(PrintColorEvent event) {
+        printColor(event.message);
     }
 }
