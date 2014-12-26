@@ -7,17 +7,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.AsyncTask;
-import com.fastebro.androidrgbtool.events.PhotoScaling;
+
+import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.utils.UImage;
 
 import java.io.*;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 5/22/13.
  */
 public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
     private String mPhotoPath;
-    private PhotoScaling mPhotoScalingCallback;
     private boolean mUseTempFile;
     private Context mContext;
 
@@ -25,22 +27,12 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
         mPhotoPath = photoPath;
         mUseTempFile = useTempFile;
         mContext = activity;
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mPhotoScalingCallback = (PhotoScaling) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement PhotoScaling interface");
-        }
     }
-
 
     @Override
     protected void onCancelled(Boolean result) {
         super.onCancelled(result);
     }
-
 
     @Override
     protected Boolean doInBackground(Void... params) {
@@ -60,14 +52,12 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
-
     @Override
     protected void onPostExecute(Boolean result) {
         if (result) {
-            mPhotoScalingCallback.onScalingComplete(mPhotoPath, mUseTempFile);
+            EventBus.getDefault().post(new PhotoScaledEvent(mPhotoPath, mUseTempFile));
         }
     }
-
 
     private void copyFile(String inputPath) {
         InputStream in = null;
@@ -99,7 +89,6 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
 
         }
     }
-
 
     private void savePrescaledBitmap(String filename) throws IOException {
         File file = null;
