@@ -54,11 +54,6 @@ public class RGBToolGalleryActivity extends BaseActivity
         getLoaderManager().initLoader(RGBToolImagesQuery.QUERY_ID,
                 null,
                 this);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setExitTransition(new Fade());
-            getWindow().setAllowEnterTransitionOverlap(true);
-        }
     }
 
     @Override

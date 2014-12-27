@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/color_picker_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fastebro.androidrgbtool.ui.ImagePaletteActivity"
+    android:animateLayoutChanges="true" >
+
+    <GridView
+        android:id="@+id/palette_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="7dp"
+        android:numColumns="2"
+        android:verticalSpacing="7dp"
+        android:horizontalSpacing="7dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:verticalScrollbarPosition="right"
+        android:scrollbars="vertical">
+    </GridView>
+
+</RelativeLayout>

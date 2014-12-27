@@ -188,11 +188,6 @@ public class MainActivity extends EventBaseActivity {
         });
 
         refreshUI();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setExitTransition(new Explode());
-            getWindow().setAllowEnterTransitionOverlap(true);
-        }
     }
 
     @Override

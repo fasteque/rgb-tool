@@ -2,24 +2,36 @@ package com.fastebro.androidrgbtool.ui;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Fade;
 import android.view.MenuItem;
+import android.widget.GridView;
 
-import com.fastebro.androidrgbtool.fragments.AboutFragment;
+import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.adapters.ImagePaletteAdapter;
+import com.fastebro.androidrgbtool.model.PaletteSwatch;
 
-public class AboutActivity extends BaseActivity {
+import java.util.ArrayList;
+
+/**
+ * Created by danielealtomare on 27/12/14.
+ */
+public class ImagePaletteActivity extends BaseActivity {
+    private GridView paletteGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_image_palette);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new AboutFragment())
-                .commit();
+        if(getIntent().getParcelableArrayListExtra("TEST") != null) {
+            ArrayList<PaletteSwatch> swatches = getIntent().getParcelableArrayListExtra("TEST");
+
+            paletteGrid = (GridView) findViewById(R.id.palette_grid);
+            paletteGrid.setAdapter(new ImagePaletteAdapter(this, swatches));
+        }
     }
 
     @Override

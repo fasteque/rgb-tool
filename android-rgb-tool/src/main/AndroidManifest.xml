@@ -38,7 +38,8 @@
         <activity
             android:name=".ui.ColorPickerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false" >
+            android:exported="false"
+            android:label="@string/title_activity_color_picker" >
         </activity>
         <activity
             android:name=".ui.RGBToolGalleryActivity"
@@ -56,6 +57,11 @@
             android:name=".ui.AboutActivity"
             android:exported="false"
             android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name=".ui.ImagePaletteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_palette" >
         </activity>
     </application>
 

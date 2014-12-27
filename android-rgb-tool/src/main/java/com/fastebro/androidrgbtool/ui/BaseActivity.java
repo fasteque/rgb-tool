@@ -3,6 +3,7 @@ package com.fastebro.androidrgbtool.ui;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.transition.Fade;
 
 import com.fastebro.androidrgbtool.R;
 
@@ -16,6 +17,11 @@ public class BaseActivity extends ActionBarActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Fade());
+            getWindow().setAllowEnterTransitionOverlap(true);
         }
     }
 }

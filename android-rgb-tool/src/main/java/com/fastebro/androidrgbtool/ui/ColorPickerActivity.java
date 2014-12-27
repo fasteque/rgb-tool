@@ -1,19 +1,26 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
 import android.transition.Fade;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.utils.UImage;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class ColorPickerActivity extends BaseActivity {
@@ -34,8 +41,8 @@ public class ColorPickerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         mMainLayout = (RelativeLayout) findViewById(R.id.color_picker_main_layout);
@@ -71,11 +78,6 @@ public class ColorPickerActivity extends BaseActivity {
 
         mMainLayout.addView(mRGBPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setExitTransition(new Fade());
-            getWindow().setAllowEnterTransitionOverlap(true);
-        }
     }
 
     @Override
@@ -84,8 +86,83 @@ public class ColorPickerActivity extends BaseActivity {
             //noinspection ResultOfMethodCallIgnored
             new File(mCurrentPath).delete();
         }
-
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.color_picker, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAfterTransition();
+            } else {
+                finish();
+            }
+            return true;
+        } else if(item.getItemId() == R.id.action_palette) {
+            generatePalette();
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void generatePalette() {
+        if (mBitmap != null) {
+            Palette.generateAsync(mBitmap, new Palette.PaletteAsyncListener() {
+                @Override
+                public void onGenerated(Palette palette) {
+                    Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
+
+                    ArrayList<PaletteSwatch> swatches = new ArrayList<PaletteSwatch>();
+
+                    if(palette.getVibrantSwatch() != null) {
+                        swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
+                                PaletteSwatch.SwatchType.VIBRANT));
+                    }
+
+                    if(palette.getMutedSwatch() != null) {
+                        swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
+                                PaletteSwatch.SwatchType.MUTED));
+                    }
+
+                    if(palette.getLightVibrantSwatch() != null) {
+                        swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
+                                PaletteSwatch.SwatchType.LIGHT_VIBRANT));
+                    }
+
+                    if(palette.getLightMutedSwatch() != null) {
+                        swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
+                                PaletteSwatch.SwatchType.LIGHT_MUTED));
+                    }
+
+                    if(palette.getDarkVibrantSwatch() != null) {
+                        swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
+                                PaletteSwatch.SwatchType.DARK_VIBRANT));
+                    }
+
+                    if(palette.getDarkMutedSwatch() != null) {
+                        swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
+                                PaletteSwatch.SwatchType.DARK_MUTED));
+                    }
+
+                    intent.putParcelableArrayListExtra("TEST", swatches);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(intent,
+                                ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
+                    } else {
+                        startActivity(intent);
+                    }
+                }
+            });
+        }
     }
 
     private class PhotoViewTapListener
