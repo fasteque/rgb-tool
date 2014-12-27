@@ -46,6 +46,7 @@ import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.events.PrintColorEvent;
+import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.fragments.ColorListDialogFragment;
 import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
@@ -438,7 +439,7 @@ public class MainActivity extends EventBaseActivity {
         };
     }
 
-    public void updateSaveColorButton() {
+    private void updateSaveColorButton() {
         if (UDatabase.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
                 RGB_B_COLOR, RGB_OPACITY)) {
             btn_SaveColor.setVisibility(View.INVISIBLE);
@@ -665,5 +666,9 @@ public class MainActivity extends EventBaseActivity {
 
     public void onEvent(PrintColorEvent event) {
         printColor(event.message);
+    }
+
+    public void onEvent(UpdateSaveColorUIEvent event) {
+        updateSaveColorButton();
     }
 }

@@ -15,6 +15,7 @@ import com.fastebro.androidrgbtool.adapters.ColorListAdapter;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.events.ColorSelectEvent;
+import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.ui.MainActivity;
 import com.fastebro.androidrgbtool.utils.UDatabase;
@@ -59,8 +60,7 @@ public class ColorListDialogFragment extends EventBaseDialogFragment
     public void onDestroyView() {
         if(getActivity() != null) {
             getActivity().getSupportLoaderManager().destroyLoader(0);
-            // TODO: do it in a more elegant way!
-            ((MainActivity)getActivity()).updateSaveColorButton();
+            EventBus.getDefault().post(new UpdateSaveColorUIEvent());
         }
         super.onDestroyView();
     }
