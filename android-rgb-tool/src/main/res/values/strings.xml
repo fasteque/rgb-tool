@@ -55,5 +55,6 @@
     <string name="prefs_picasso">Picasso</string>
     <string name="prefs_butter_knife">Butter Knife</string>
     <string name="prefs_photoview">PhotoView</string>
+    <string name="prefs_eventbus">EventBus</string>
 
 </resources>

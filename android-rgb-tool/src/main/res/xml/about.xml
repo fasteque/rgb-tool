@@ -14,5 +14,9 @@
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/chrisbanes/PhotoView" />
         </Preference>
+        <Preference android:title="@string/prefs_eventbus" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/greenrobot/EventBus" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
