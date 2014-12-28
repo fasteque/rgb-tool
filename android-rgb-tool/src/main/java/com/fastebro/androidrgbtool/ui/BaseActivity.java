@@ -16,6 +16,10 @@ public class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if(getSupportActionBar() != null) {
+                getSupportActionBar().setElevation(0);
+            }
+
             getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
         }
 

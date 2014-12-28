@@ -152,7 +152,7 @@ public class ColorPickerActivity extends BaseActivity {
                                 PaletteSwatch.SwatchType.DARK_MUTED));
                     }
 
-                    intent.putParcelableArrayListExtra("TEST", swatches);
+                    intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         startActivity(intent,

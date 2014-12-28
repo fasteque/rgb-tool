@@ -3,6 +3,8 @@
     android:id="@+id/color_picker_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
     tools:context="com.fastebro.androidrgbtool.ui.ImagePaletteActivity"
     android:animateLayoutChanges="true" >
 
@@ -10,7 +12,6 @@
         android:id="@+id/palette_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="7dp"
         android:numColumns="2"
         android:verticalSpacing="7dp"
         android:horizontalSpacing="7dp"

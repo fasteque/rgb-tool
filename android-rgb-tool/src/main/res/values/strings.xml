@@ -60,4 +60,11 @@
     <string name="prefs_photoview">PhotoView</string>
     <string name="prefs_eventbus">EventBus</string>
 
+    <!-- Swatches -->
+    <string name="swatch_vibrant">Vibrant</string>
+    <string name="swatch_light_vibrant">Light vibrant</string>
+    <string name="swatch_dark_vibrant">Dark vibrant</string>
+    <string name="swatch_muted">Muted</string>
+    <string name="swatch_light_muted">Light muted</string>
+    <string name="swatch_dark_muted">Dark muted</string>
 </resources>

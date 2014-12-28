@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Created by danielealtomare on 27/12/14.
  */
 public class ImagePaletteActivity extends BaseActivity {
+    public static final String EXTRA_SWATCHES = "com.fastebro.androidrgbtool.EXTRA_SWATCHES";
     private GridView paletteGrid;
 
     @Override
@@ -26,8 +27,8 @@ public class ImagePaletteActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if(getIntent().getParcelableArrayListExtra("TEST") != null) {
-            ArrayList<PaletteSwatch> swatches = getIntent().getParcelableArrayListExtra("TEST");
+        if(getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES) != null) {
+            ArrayList<PaletteSwatch> swatches = getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES);
 
             paletteGrid = (GridView) findViewById(R.id.palette_grid);
             paletteGrid.setAdapter(new ImagePaletteAdapter(this, swatches));
