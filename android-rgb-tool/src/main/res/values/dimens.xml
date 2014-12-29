@@ -17,6 +17,8 @@
     <dimen name="rgb_text_size_medium">18sp</dimen>
     <dimen name="rgb_text_size_large">22sp</dimen>
 
+    <dimen name="rgb_select_picture_row_padding">7dp</dimen>
+
     <dimen name="rgb_grid_view_horizontal_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_vertical_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_item_width">80dp</dimen>

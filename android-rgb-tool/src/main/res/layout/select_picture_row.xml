@@ -13,8 +13,8 @@
             android:layout_height="24dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-            android:layout_marginStart="@dimen/rgb_panel_margin_left" />
+            android:layout_marginLeft="@dimen/rgb_select_picture_row_padding"
+            android:layout_marginStart="@dimen/rgb_select_picture_row_padding" />
 
         <TextView
             android:id="@+id/entry_title"
@@ -22,10 +22,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceListItemSmall"
             android:gravity="center_vertical"
-            android:paddingLeft="@dimen/rgb_panel_margin_left"
-            android:paddingStart="@dimen/rgb_panel_margin_left"
-            android:paddingRight="@dimen/rgb_panel_margin_left"
-            android:paddingEnd="@dimen/rgb_panel_margin_left"
+            android:paddingLeft="@dimen/rgb_select_picture_row_padding"
+            android:paddingRight="@dimen/rgb_select_picture_row_padding"
             android:minHeight="?android:attr/listPreferredItemHeightSmall" />
     </LinearLayout>
     <View

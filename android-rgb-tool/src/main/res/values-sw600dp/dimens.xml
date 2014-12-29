@@ -8,6 +8,8 @@
     <dimen name="rgb_panel_margin_right">35dp</dimen>
     <dimen name="rgb_panel_color_list_margin">2dp</dimen>
 
+    <dimen name="rgb_select_picture_row_padding">21dp</dimen>
+
     <dimen name="rgb_grid_view_horizontal_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_vertical_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_item_width">180dp</dimen>
