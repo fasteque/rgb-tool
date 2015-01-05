@@ -13,29 +13,29 @@ android {
         testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
     }
 
-//    if(project.hasProperty("RGBTool.signing.properties")
-//            && new File(project.property("RGBTool.signing.properties")).exists()) {
-//
-//        Properties props = new Properties()
-//        props.load(new FileInputStream(file(project.property("RGBTool.signing.properties"))))
-//
-//        signingConfigs {
-//            release {
-//                storeFile file(props['keystore'])
-//                storePassword props['keystore.password']
-//                keyAlias props['keyAlias']
-//                keyPassword props['keyPassword']
-//            }
-//        }
-//    }
-//
-//    buildTypes {
-//        release {
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-//            signingConfig signingConfigs.release
-//        }
-//    }
+    if(project.hasProperty("RGBTool.signing.properties")
+            && new File(project.property("RGBTool.signing.properties")).exists()) {
+
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("RGBTool.signing.properties"))))
+
+        signingConfigs {
+            release {
+                storeFile file(props['keystore'])
+                storePassword props['keystore.password']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
 
     lintOptions {
         disable 'InvalidPackage'
