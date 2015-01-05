@@ -1,4 +1,8 @@
 language: android
+
+script:
+  - ./gradlew assembleDebug
+
 branches:
   only:
     - master
