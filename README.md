@@ -12,7 +12,7 @@ For any comment, feedback or if you would like to help, please write to daniele.
 License
 ================
 
-Copyright 2014 Daniele Altomare
+Copyright 2014 - 2015 Daniele Altomare
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
