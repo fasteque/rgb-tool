@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import android.test.ActivityInstrumentationTestCase2;
@@ -14,10 +15,6 @@ import com.fastebro.androidrgbtool.ui.MainActivity;
 
 @LargeTest
 public class MainActivityEspressoTest extends ActivityInstrumentationTestCase2<MainActivity> {
-    public MainActivityEspressoTest(Class<MainActivity> activityClass) {
-        super(activityClass);
-    }
-
     public MainActivityEspressoTest() {
         super(MainActivity.class);
     }
@@ -26,12 +23,17 @@ public class MainActivityEspressoTest extends ActivityInstrumentationTestCase2<M
     public void setUp() throws Exception {
         super.setUp();
         getActivity();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
     }
 
-    @SuppressWarnings("unchecked")
     public void testClickActionBarItem() {
         onView(withId(R.id.action_camera))
                 .perform(click());
+        pressBack();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
 }
