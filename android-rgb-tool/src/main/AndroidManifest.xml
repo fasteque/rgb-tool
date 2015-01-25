@@ -8,7 +8,6 @@
         android:smallScreens="false"
         android:xlargeScreens="true" />
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Google Play check Application support to OpenGL ES 2.0 -->
