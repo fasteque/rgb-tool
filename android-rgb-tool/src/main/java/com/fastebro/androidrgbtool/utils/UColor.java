@@ -8,7 +8,7 @@ public class UColor {
      * @return
      */
     public static String getRGB(float n) {
-        return String.format("%f", n).replaceAll("\\.0*$", "");
+        return String.format("%.0f", n).replaceAll("\\.0*$", "");
     }
 
     /**
