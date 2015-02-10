@@ -1,29 +1,25 @@
 package com.fastebro.androidrgbtool.ui;
 
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.PixelFormat;
+import android.graphics.Color;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.opengl.GLSurfaceView;
 import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
-import android.transition.Explode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,14 +30,8 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
@@ -52,11 +42,20 @@ import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintDocumentAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
-import com.fastebro.androidrgbtool.render.GLRender;
-import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.tasks.PhotoScalingTask;
-import com.fastebro.androidrgbtool.utils.*;
-import com.fastebro.androidrgbtool.view.CustomGLSurfaceView;
+import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
+import com.fastebro.androidrgbtool.utils.UColor;
+import com.fastebro.androidrgbtool.utils.UCommon;
+import com.fastebro.androidrgbtool.utils.UDatabase;
+import com.fastebro.androidrgbtool.utils.UImage;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class MainActivity extends EventBaseActivity {
@@ -96,14 +95,11 @@ public class MainActivity extends EventBaseActivity {
     @InjectView(R.id.btn_save_color)
     ImageButton btn_SaveColor;
 
+    @InjectView(R.id.color_view)
+    View colorView;
+
     private String mCurrentPhotoPath;
     private BaseAlbumDirFactory mAlbumStorageDirFactory = null;
-
-    // Rendering
-    private GLSurfaceView glSurfaceView;
-    private GLRender mGLRender;
-
-    private boolean isRendered = false;
 
     private float RGB_R_COLOR = 0.0f;
     private float RGB_G_COLOR = 0.0f;
@@ -136,32 +132,8 @@ public class MainActivity extends EventBaseActivity {
                         ViewGroup.LayoutParams.MATCH_PARENT)
         );
 
-
-        // Check if the system supports OpenGL ES 2.0.
-        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
-
-        // Even though the latest emulator supports OpenGL ES 2.0,
-        // it has a bug where it doesn't set the reqGlEsVersion so
-        // the above check doesn't work. The below will detect if the
-        // app is running on an emulator, and assume that it supports
-        // OpenGL ES 2.0.
-        final boolean supportsEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
-
-        if (supportsEs2) {
-            mGLRender = new GLRender();
-
-            glSurfaceView = (CustomGLSurfaceView) findViewById(R.id.custom_gl_surface_view);
-            glSurfaceView.setEGLContextClientVersion(2);
-            glSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
-            glSurfaceView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-            glSurfaceView.setZOrderOnTop(true);
-            glSurfaceView.setRenderer(mGLRender);
-
-            isRendered = true;
-        }
-
         ButterKnife.inject(this);
+        colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         restorePreferences();
         seekBar_R.setProgress((int) RGB_R_COLOR);
@@ -194,21 +166,8 @@ public class MainActivity extends EventBaseActivity {
     protected void onPause() {
         super.onPause();
 
-        if (isRendered) {
-            glSurfaceView.onPause();
-        }
-
         if (isFinishing()) {
             savePreferences();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (isRendered) {
-            glSurfaceView.onResume();
         }
     }
 
@@ -411,22 +370,18 @@ public class MainActivity extends EventBaseActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (seekBar.equals(seekBar_O)) {
                     RGB_OPACITY = progress;
-                    mGLRender.COLOR_OPACITY = RGB_OPACITY / 255.0f;
                 }
 
                 if (seekBar.equals(seekBar_R)) {
                     RGB_R_COLOR = progress;
-                    mGLRender.R_COLOR = RGB_R_COLOR / 255.0f;
                 }
 
                 if (seekBar.equals(seekBar_G)) {
                     RGB_G_COLOR = progress;
-                    mGLRender.G_COLOR = RGB_G_COLOR / 255.0f;
                 }
 
                 if (seekBar.equals(seekBar_B)) {
                     RGB_B_COLOR = progress;
-                    mGLRender.B_COLOR = RGB_B_COLOR / 255.0f;
                 }
 
                 refreshUI();
@@ -444,14 +399,15 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void refreshUI() {
-        // Update OpenGL Context (glSurfaceView) and all RGB and hexadecimal values.
-        glSurfaceView.requestRender();
         updateRGBField();
         updateHSBField();
         updateHexadecimalField();
         updateColorName();
         updateSharedColor();
         updateSaveColorButton();
+
+        colorView.setBackgroundColor(Color.argb((int)RGB_OPACITY, (int)RGB_R_COLOR, (int)RGB_G_COLOR,
+                (int)RGB_B_COLOR));
     }
 
     /**
@@ -459,7 +415,7 @@ public class MainActivity extends EventBaseActivity {
      *
      */
     protected void updateRGBField() {
-        // RGB channel: R,G,B,OPACITY.
+        // RGB channel: R, G, B, OPACITY.
         textView_RGB_R.setText(UColor.getRGB(RGB_R_COLOR));
         textView_RGB_G.setText(UColor.getRGB(RGB_G_COLOR));
         textView_RGB_B.setText(UColor.getRGB(RGB_B_COLOR));
@@ -496,7 +452,7 @@ public class MainActivity extends EventBaseActivity {
      * Update color name by color hex value.
      */
     protected void updateColorName() {
-        // Log.v("COLOR_NAME", colorDataProvider.getColorNameByHex(hexValue));
+
     }
 
     public void dispatchTakePictureIntent() {
@@ -596,13 +552,6 @@ public class MainActivity extends EventBaseActivity {
         RGB_G_COLOR = RGBGComponent;
         RGB_B_COLOR = RGBBComponent;
         RGB_OPACITY = RGBOComponent;
-
-        if(mGLRender != null) {
-            mGLRender.R_COLOR = RGB_R_COLOR / 255.0f;
-            mGLRender.G_COLOR = RGB_G_COLOR / 255.0f;
-            mGLRender.B_COLOR = RGB_B_COLOR / 255.0f;
-            mGLRender.COLOR_OPACITY = RGB_OPACITY / 255.0f;
-        }
     }
 
     private void restorePreferences() {
@@ -632,7 +581,7 @@ public class MainActivity extends EventBaseActivity {
 
         refreshUI();
 
-        // Also update the seekbars.
+        // Also update the seek bars.
         seekBar_R.setProgress((int) event.RGBRComponent);
         seekBar_G.setProgress((int) event.RGBGComponent);
         seekBar_B.setProgress((int) event.RGBBComponent);

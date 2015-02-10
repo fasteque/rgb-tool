@@ -15,7 +15,7 @@ public class RecyclerViewLinearLayoutManager extends LinearLayoutManager {
         super(context, orientation, reverseLayout);
     }
 
-    private int[] mMeasuredDimension = new int[2];
+    private int[] measuredDimension = new int[2];
 
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
@@ -30,17 +30,17 @@ public class RecyclerViewLinearLayoutManager extends LinearLayoutManager {
             measureScrapChild(recycler, i,
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
-                    mMeasuredDimension);
+                    measuredDimension);
 
             if (getOrientation() == HORIZONTAL) {
-                width = width + mMeasuredDimension[0];
+                width = width + measuredDimension[0];
                 if (i == 0) {
-                    height = mMeasuredDimension[1];
+                    height = measuredDimension[1];
                 }
             } else {
-                height = height + mMeasuredDimension[1];
+                height = height + measuredDimension[1];
                 if (i == 0) {
-                    width = mMeasuredDimension[0];
+                    width = measuredDimension[0];
                 }
             }
         }

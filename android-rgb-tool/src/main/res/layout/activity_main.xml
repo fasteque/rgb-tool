@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rgb_top_panel"
-        android:layout_above="@+id/rgb_bottom_panel">
+        android:layout_above="@+id/rgb_bottom_panel"
+        android:background="@android:color/white">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,11 +25,10 @@
             android:adjustViewBounds="true"
             android:scaleType="centerInside" />
 
-        <com.fastebro.androidrgbtool.view.CustomGLSurfaceView
-            android:id="@+id/custom_gl_surface_view"
+        <View
+            android:id="@+id/color_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent" />
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

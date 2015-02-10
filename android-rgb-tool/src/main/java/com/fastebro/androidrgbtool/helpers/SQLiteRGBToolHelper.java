@@ -35,7 +35,6 @@ public class SQLiteRGBToolHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "rgbtool.db";
     private static final int DATABASE_VERSION = 1;
 
-
     public SQLiteRGBToolHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

@@ -26,13 +26,13 @@ import de.greenrobot.event.EventBus;
  * Created by danielealtomare on 5/22/13.
  */
 public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
-    private String mPhotoPath;
-    private boolean mUseTempFile;
+    private String photoPath;
+    private boolean useTempFile;
     private final WeakReference<Activity> activityWeakReference;
 
     public PhotoScalingTask(Activity activity, String photoPath, boolean useTempFile) {
-        mPhotoPath = photoPath;
-        mUseTempFile = useTempFile;
+        this.photoPath = photoPath;
+        this.useTempFile = useTempFile;
         activityWeakReference = new WeakReference<Activity>(activity);
     }
 
@@ -47,11 +47,11 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
         if(activity != null) {
             // Resize the image
             try {
-                if (mUseTempFile) {
-                    copyFile(mPhotoPath, activity.getApplicationContext());
+                if (useTempFile) {
+                    copyFile(photoPath, activity.getApplicationContext());
                 }
 
-                savePrescaledBitmap(mPhotoPath);
+                savePrescaledBitmap(photoPath);
 
                 return true;
             } catch (IOException e) {
@@ -68,7 +68,7 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean result) {
         Activity activity = activityWeakReference.get();
         if ((activity != null) && result) {
-            EventBus.getDefault().post(new PhotoScaledEvent(mPhotoPath, mUseTempFile));
+            EventBus.getDefault().post(new PhotoScaledEvent(photoPath, useTempFile));
         }
     }
 
@@ -95,7 +95,7 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
             out.close();
             out = null;
 
-            mPhotoPath = context.getFilesDir() + "/" + filename;
+            photoPath = context.getFilesDir() + "/" + filename;
         } catch (FileNotFoundException e) {
 
         } catch (Exception e) {

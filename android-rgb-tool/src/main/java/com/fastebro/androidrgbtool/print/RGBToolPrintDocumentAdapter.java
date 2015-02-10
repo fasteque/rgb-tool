@@ -27,15 +27,14 @@ import java.io.IOException;
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
-    private Context mContext;
-    private String mMessage;
-    private float mRGBRColor;
-    private float mRGBGColor;
-    private float mRGBBColor;
-    private float mRGBOpacity;
+    private Context context;
+    private String message;
+    private float RGBRColor;
+    private float RGBGColor;
+    private float RGBBColor;
+    private float RGBOpacity;
 
-    private PrintedPdfDocument mPdfDocument;
-
+    private PrintedPdfDocument pdfDocument;
 
     public RGBToolPrintDocumentAdapter(Context context,
                                        String message,
@@ -43,12 +42,12 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
                                        float rgbGColor,
                                        float rgbBColor,
                                        float rgbOpacity) {
-        mContext = context;
-        mMessage = message;
-        mRGBRColor = rgbRColor;
-        mRGBGColor = rgbGColor;
-        mRGBBColor = rgbBColor;
-        mRGBOpacity = rgbOpacity;
+        this.context = context;
+        this.message = message;
+        RGBRColor = rgbRColor;
+        RGBGColor = rgbGColor;
+        RGBBColor = rgbBColor;
+        RGBOpacity = rgbOpacity;
     }
 
     @Override
@@ -67,11 +66,11 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
                          CancellationSignal cancellationSignal,
                          LayoutResultCallback callback, Bundle extras) {
         // Create a new PdfDocument with the requested page attributes
-        mPdfDocument = new PrintedPdfDocument(mContext, newAttributes);
+        pdfDocument = new PrintedPdfDocument(context, newAttributes);
 
         // Respond to cancellation request
         if (cancellationSignal.isCanceled()) {
-            Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
+            Toast.makeText(context, context.getString(R.string.print_job_canceled),
                     Toast.LENGTH_SHORT).show();
 
             callback.onLayoutCancelled();
@@ -87,10 +86,10 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
             PrintDocumentInfo info = new PrintDocumentInfo.Builder(
                     "rgbtool_" +
                             String.format("%s%s%s%s",
-                                    UColor.RGBToHex(mRGBOpacity),
-                                    UColor.RGBToHex(mRGBRColor),
-                                    UColor.RGBToHex(mRGBGColor),
-                                    UColor.RGBToHex(mRGBBColor)) +
+                                    UColor.RGBToHex(RGBOpacity),
+                                    UColor.RGBToHex(RGBRColor),
+                                    UColor.RGBToHex(RGBGColor),
+                                    UColor.RGBToHex(RGBBColor)) +
                             ".pdf"
             )
                     .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
@@ -111,16 +110,16 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
                         ParcelFileDescriptor destination,
                         CancellationSignal cancellationSignal,
                         WriteResultCallback callback) {
-        PdfDocument.Page page = mPdfDocument.startPage(0);
+        PdfDocument.Page page = pdfDocument.startPage(0);
 
         // check for cancellation
         if (cancellationSignal.isCanceled()) {
-            Toast.makeText(mContext, mContext.getString(R.string.print_job_canceled),
+            Toast.makeText(context, context.getString(R.string.print_job_canceled),
                     Toast.LENGTH_SHORT).show();
 
             callback.onWriteCancelled();
-            mPdfDocument.close();
-            mPdfDocument = null;
+            pdfDocument.close();
+            pdfDocument = null;
 
             return;
         }
@@ -129,21 +128,21 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
         drawPage(page);
 
         // Rendering is complete, so page can be finalized.
-        mPdfDocument.finishPage(page);
+        pdfDocument.finishPage(page);
 
         // Write PDF document to file
         try {
-            mPdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
+            pdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
         } catch (IOException e) {
-            Toast.makeText(mContext, mContext.getString(R.string.print_error),
+            Toast.makeText(context, context.getString(R.string.print_error),
                     Toast.LENGTH_SHORT).show();
 
             callback.onWriteFailed(e.toString());
 
             return;
         } finally {
-            mPdfDocument.close();
-            mPdfDocument = null;
+            pdfDocument.close();
+            pdfDocument = null;
         }
 
         // Signal the print framework the document is complete
@@ -170,21 +169,21 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setTextSize(20);
-        canvas.drawText(mContext.getString(R.string.app_name), leftMargin, titleBaseLine, paint);
+        canvas.drawText(context.getString(R.string.app_name), leftMargin, titleBaseLine, paint);
 
         // Color description summary.
         paint.setTextSize(14);
-        token.append("R: " + UColor.getRGB(mRGBRColor));
-        token.append("  G: " + UColor.getRGB(mRGBGColor));
-        token.append("  B: " + UColor.getRGB(mRGBBColor));
+        token.append("R: " + UColor.getRGB(RGBRColor));
+        token.append("  G: " + UColor.getRGB(RGBGColor));
+        token.append("  B: " + UColor.getRGB(RGBBColor));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 25, paint);
 
         token = new StringBuilder();
-        token.append("Opacity: " + UColor.getRGB(mRGBOpacity));
+        token.append("Opacity: " + UColor.getRGB(RGBOpacity));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 50, paint);
 
         token = new StringBuilder();
-        float[] hsb = UColor.RGBToHSB(mRGBRColor, mRGBGColor, mRGBBColor);
+        float[] hsb = UColor.RGBToHSB(RGBRColor, RGBGColor, RGBBColor);
         token.append("H: " + String.format("%.0f", hsb[0]));
         token.append("  S: " + String.format("%.0f%%", (hsb[1] * 100.0f)));
         token.append("  B: " + String.format("%.0f%%", (hsb[2] * 100.0f)));
@@ -192,21 +191,21 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
 
         token = new StringBuilder();
         token.append("HEX - " + String.format("#%s%s%s%s",
-                UColor.RGBToHex(mRGBOpacity),
-                UColor.RGBToHex(mRGBRColor),
-                UColor.RGBToHex(mRGBGColor),
-                UColor.RGBToHex(mRGBBColor)));
+                UColor.RGBToHex(RGBOpacity),
+                UColor.RGBToHex(RGBRColor),
+                UColor.RGBToHex(RGBGColor),
+                UColor.RGBToHex(RGBBColor)));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 100, paint);
 
-        paint.setColor(Color.argb((int) mRGBOpacity, (int) mRGBRColor,
-                (int) mRGBGColor, (int) mRGBBColor));
+        paint.setColor(Color.argb((int) RGBOpacity, (int) RGBRColor,
+                (int) RGBGColor, (int) RGBBColor));
         canvas.drawRect(leftMargin, titleBaseLine + 125, 126, 269, paint);
 
         // User message.
-        if (mMessage != null) {
+        if (message != null) {
             paint.setColor(Color.BLACK);
             paint.setTextSize(11);
-            canvas.drawText(mMessage, leftMargin, 294, paint);
+            canvas.drawText(message, leftMargin, 294, paint);
         }
     }
 }
