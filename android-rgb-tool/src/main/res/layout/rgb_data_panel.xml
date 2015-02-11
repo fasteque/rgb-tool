@@ -4,8 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:elevation="2dp">
+    android:background="@android:color/white">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -160,13 +159,13 @@
                 android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
 
-            <ImageButton
-                android:id="@+id/btn_save_color"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:background="@null"
-                android:layout_gravity="end|center_vertical"
-                android:src="@drawable/btn_save_color" />
+            <!--<ImageButton-->
+                <!--android:id="@+id/btn_save_color"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:layout_gravity="end|center_vertical"-->
+                <!--android:src="@drawable/btn_save_color" />-->
 
         </TableRow>
 

@@ -9,9 +9,15 @@
     <color name="white_translucent">#88FFFFFF</color>
 
     <!-- Material Theme colors -->
-    <color name="primary">#03a9f4</color>
-    <color name="primary_dark">#0288d1</color>
-    <color name="accent">#81d4fa</color>
-    <color name="text_primary">#d9FFFFFF</color>
-    <color name="text_secondary">#03a9f4</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#FF5252</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <color name="fab_color_pressed">#007787</color>
+    <color name="fab_color_shadow">#44000000</color>
 </resources>

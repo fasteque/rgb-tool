@@ -22,4 +22,8 @@
     <dimen name="rgb_grid_view_horizontal_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_vertical_spacing">5dp</dimen>
     <dimen name="rgb_grid_view_item_width">80dp</dimen>
+
+    <dimen name="btn_fab_size">56dp</dimen>
+    <dimen name="btn_fab_margins">28dp</dimen>
+    <dimen name="btn_fab_elevation">8dp</dimen>
 </resources>

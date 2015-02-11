@@ -7,6 +7,7 @@
     <include layout="@layout/rgb_data_panel"/>
 
     <RelativeLayout
+        android:id="@+id/color_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rgb_top_panel"
@@ -32,7 +33,17 @@
 
     </RelativeLayout>
 
-    <!-- Layout to display color name -->
+    <ImageButton
+        android:id="@+id/btn_save_color"
+        android:layout_height="@dimen/btn_fab_size"
+        android:layout_width="@dimen/btn_fab_size"
+        android:layout_marginBottom="-28dp"
+        android:layout_marginRight="@dimen/btn_fab_margins"
+        android:layout_alignBottom="@id/rgb_top_panel"
+        android:layout_alignParentRight="true"
+        android:elevation="@dimen/btn_fab_elevation"
+        android:src="@drawable/ic_add_white"
+        android:background="@drawable/btn_fab_default" />
 
     <TableLayout
         android:id="@+id/rgb_bottom_panel"
@@ -41,8 +52,7 @@
         android:stretchColumns="1"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rgb_panel_background"
-        android:padding="@dimen/rgb_panel_padding"
-        android:elevation="2dp">
+        android:padding="@dimen/rgb_panel_padding" >
 
         <TableRow>
 
