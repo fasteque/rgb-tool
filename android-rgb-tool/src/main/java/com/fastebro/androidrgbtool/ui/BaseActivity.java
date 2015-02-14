@@ -22,9 +22,6 @@ public class BaseActivity extends ActionBarActivity {
             }
 
             getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setEnterTransition(new Explode());
             getWindow().setExitTransition(new Fade());
             getWindow().setAllowEnterTransitionOverlap(true);
