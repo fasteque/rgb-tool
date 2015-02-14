@@ -30,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
@@ -322,6 +323,7 @@ public class MainActivity extends EventBaseActivity {
     public void openDeviceGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
 
         startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
     }
@@ -523,6 +525,8 @@ public class MainActivity extends EventBaseActivity {
     private void handlePhoto(boolean useTempFile) {
         if (mCurrentPhotoPath != null) {
             new PhotoScalingTask(this, mCurrentPhotoPath, useTempFile).execute();
+        } else {
+            Toast.makeText(this, getString(R.string.error_open_gallery_image), Toast.LENGTH_SHORT).show();
         }
     }
 
