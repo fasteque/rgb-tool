@@ -34,21 +34,10 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="65"
-        android:layout_gravity="center" >
+        android:layout_gravity="center"
+        android:background="@android:color/white">
 
         <include layout="@layout/rgb_data_panel" />
-
-        <ImageButton
-            android:id="@+id/btn_save_color"
-            android:layout_height="@dimen/btn_fab_size"
-            android:layout_width="@dimen/btn_fab_size"
-            android:layout_marginBottom="-28dp"
-            android:layout_marginRight="@dimen/btn_fab_margins"
-            android:layout_alignBottom="@id/rgb_top_panel"
-            android:layout_alignParentRight="true"
-            android:elevation="@dimen/btn_fab_elevation"
-            android:src="@drawable/ic_add_white"
-            android:background="@drawable/btn_fab_default" />
 
         <TableLayout
             android:id="@+id/rgb_panel"
@@ -128,6 +117,18 @@
             </TableRow>
 
         </TableLayout>
+
+        <ImageButton
+            android:id="@+id/btn_save_color"
+            android:layout_height="@dimen/btn_fab_size"
+            android:layout_width="@dimen/btn_fab_size"
+            android:layout_marginBottom="14dp"
+            android:layout_marginRight="@dimen/btn_fab_margins"
+            android:layout_above="@id/rgb_panel"
+            android:layout_alignParentRight="true"
+            android:elevation="@dimen/btn_fab_elevation"
+            android:src="@drawable/ic_add_white"
+            android:background="@drawable/btn_fab_default" />
 
     </RelativeLayout>
 
