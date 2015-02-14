@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:background="@android:color/transparent"
-                android:orientation="horizontal">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_silver"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+    <include layout="@layout/rgb_data_panel"/>
 
     <RelativeLayout
-        android:layout_width="0dp"
+        android:id="@+id/color_container"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="35" >
+        android:layout_below="@+id/rgb_top_panel"
+        android:layout_above="@+id/rgb_bottom_panel"
+        android:background="@android:color/white">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -30,108 +35,95 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="65"
-        android:layout_gravity="center" >
+    <ImageButton
+        android:id="@+id/btn_save_color"
+        android:layout_height="@dimen/btn_fab_size"
+        android:layout_width="@dimen/btn_fab_size"
+        android:layout_marginBottom="-28dp"
+        android:layout_marginRight="@dimen/btn_fab_margins"
+        android:layout_alignBottom="@id/rgb_top_panel"
+        android:layout_alignParentRight="true"
+        android:elevation="@dimen/btn_fab_elevation"
+        android:src="@drawable/ic_add_white"
+        android:background="@drawable/btn_fab_default" />
 
-        <include layout="@layout/rgb_data_panel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"/>
+    <TableLayout
+        android:id="@+id/rgb_bottom_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rgb_panel_background"
+        android:padding="@dimen/rgb_panel_padding" >
 
-        <ImageButton
-            android:id="@+id/btn_save_color"
-            android:layout_height="@dimen/btn_fab_size"
-            android:layout_width="@dimen/btn_fab_size"
-            android:layout_marginBottom="-28dp"
-            android:layout_marginRight="@dimen/btn_fab_margins"
-            android:layout_alignBottom="@id/rgb_top_panel"
-            android:layout_alignParentRight="true"
-            android:elevation="@dimen/btn_fab_elevation"
-            android:src="@drawable/ic_add_white"
-            android:background="@drawable/btn_fab_default" />
+        <TableRow>
 
-        <TableLayout
-            android:id="@+id/rgb_panel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1"
-            android:background="@drawable/rgb_panel_background"
-            android:padding="@dimen/rgb_panel_padding"
-            android:layout_alignParentBottom="true" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/RGBOBar"
+                android:text="@string/color_red" />
 
-            <TableRow>
+            <SeekBar
+                android:id="@+id/seekBar_R"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:max="255"/>
+        </TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/RGBOBar"
-                    android:text="@string/color_red" />
+        <TableRow>
 
-                <SeekBar
-                    android:id="@+id/seekBar_R"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingLeft="20dp"
-                    android:max="255" />
-            </TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/RGBOBar"
+                android:text="@string/color_green" />
 
-            <TableRow>
+            <SeekBar
+                android:id="@+id/seekBar_G"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:max="255"/>
+        </TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/RGBOBar"
-                    android:text="@string/color_green" />
+        <TableRow>
 
-                <SeekBar
-                    android:id="@+id/seekBar_G"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingLeft="20dp"
-                    android:max="255" />
-            </TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/RGBOBar"
+                android:text="@string/color_blue" />
 
-            <TableRow>
+            <SeekBar
+                android:id="@+id/seekBar_B"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:max="255"/>
+        </TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/RGBOBar"
-                    android:text="@string/color_blue" />
+        <TableRow>
 
-                <SeekBar
-                    android:id="@+id/seekBar_B"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingLeft="20dp"
-                    android:max="255" />
-            </TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/RGBOBar"
+                android:text="@string/color_opacity" />
 
-            <TableRow>
+            <SeekBar
+                android:id="@+id/seekBar_O"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:max="255"/>
+        </TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/RGBOBar"
-                    android:text="@string/color_opacity" />
+    </TableLayout>
 
-                <SeekBar
-                    android:id="@+id/seekBar_O"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingLeft="20dp"
-                    android:max="255" />
-            </TableRow>
-
-        </TableLayout>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

@@ -102,7 +102,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="20dp"
-                android:max="255" />
+                android:max="255"/>
         </TableRow>
 
         <TableRow>
