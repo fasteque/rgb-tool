@@ -213,7 +213,7 @@ public class MainActivity extends EventBaseActivity {
                 showPrintColorDialog();
                 return true;
             case R.id.action_about:
-                showAboutFragment();
+                showAbout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -221,8 +221,12 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void showColorList() {
-        Intent colorListIntent = new Intent(this, ColorListActivity.class);
-        startActivity(colorListIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, ColorListActivity.class), ActivityOptions
+                    .makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(new Intent(this, ColorListActivity.class));
+        }
     }
 
     private void showPrintColorDialog() {
@@ -231,7 +235,7 @@ public class MainActivity extends EventBaseActivity {
         dialog.show(getSupportFragmentManager(), null);
     }
 
-    private void showAboutFragment() {
+    private void showAbout() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             startActivity(new Intent(this, AboutActivity.class), ActivityOptions
                     .makeSceneTransitionAnimation(this).toBundle());
