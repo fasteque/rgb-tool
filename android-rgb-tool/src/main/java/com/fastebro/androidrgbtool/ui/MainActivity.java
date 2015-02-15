@@ -38,7 +38,6 @@ import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
-import com.fastebro.androidrgbtool.fragments.ColorListDialogFragment;
 import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintDocumentAdapter;
@@ -208,7 +207,7 @@ public class MainActivity extends EventBaseActivity {
                 dialogFragment.show(getSupportFragmentManager(), null);
                 return true;
             case R.id.action_color_list:
-                showColorListDialog();
+                showColorList();
                 return true;
             case R.id.action_print:
                 showPrintColorDialog();
@@ -221,10 +220,9 @@ public class MainActivity extends EventBaseActivity {
         }
     }
 
-    private void showColorListDialog() {
-        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new ColorListDialogFragment();
-        dialog.show(getSupportFragmentManager(), null);
+    private void showColorList() {
+        Intent colorListIntent = new Intent(this, ColorListActivity.class);
+        startActivity(colorListIntent);
     }
 
     private void showPrintColorDialog() {

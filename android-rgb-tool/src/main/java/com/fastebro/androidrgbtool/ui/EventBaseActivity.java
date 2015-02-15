@@ -1,5 +1,7 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.os.Bundle;
+
 import de.greenrobot.event.EventBus;
 
 /**
@@ -7,14 +9,14 @@ import de.greenrobot.event.EventBus;
  */
 public class EventBaseActivity extends BaseActivity {
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

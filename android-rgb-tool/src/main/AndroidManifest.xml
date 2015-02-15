@@ -45,6 +45,11 @@
             android:exported="false"
             android:label="@string/rgb_gallery_name" >
         </activity>
+        <activity
+            android:name=".ui.ColorListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_color_list" >
+        </activity>
 
         <provider
             android:name=".provider.RGBToolContentProvider"
