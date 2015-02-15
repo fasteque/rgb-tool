@@ -9,9 +9,8 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/rgb_panel_color_list_margin"
         android:scrollbars="none"
-        android:dividerHeight="3dp"
+        android:dividerHeight="1dp"
         android:divider="@color/light_silver"
-        android:drawSelectorOnTop="false"
         android:cacheColorHint="@color/accent" />
 
     <include layout="@layout/empty_layout" />

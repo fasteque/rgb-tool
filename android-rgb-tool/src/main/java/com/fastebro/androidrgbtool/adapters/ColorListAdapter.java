@@ -11,6 +11,7 @@ import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.utils.UColor;
+import com.fastebro.androidrgbtool.view.CircleView;
 
 import de.greenrobot.event.EventBus;
 
@@ -27,7 +28,7 @@ public class ColorListAdapter extends SimpleCursorAdapter {
     public void bindView(View view, Context context, final Cursor cursor) {
         super.bindView(view, context, cursor);
 
-        View color = view.findViewById(R.id.rgb_panel_color);
+        CircleView color = (CircleView) view.findViewById(R.id.rgb_panel_color);
         TextView rgbValue = (TextView) view.findViewById(R.id.rgb_value);
         TextView hsbValue = (TextView) view.findViewById(R.id.hsb_value);
         ImageButton deleteColor = (ImageButton) view.findViewById(R.id.btn_delete_color);
@@ -51,7 +52,8 @@ public class ColorListAdapter extends SimpleCursorAdapter {
         hsbValue.append(", " + String.format("%.0f%%", (hsb[1] * 100.0f)));
         hsbValue.append(", " + String.format("%.0f%%", (hsb[2] * 100.0f)) + ")");
 
-        color.setBackgroundColor(Color.argb(rgbAValue, rgbRValue, rgbGValue, rgbBValue));
+        color.setFillColor(Color.argb(rgbAValue, rgbRValue, rgbGValue, rgbBValue));
+        color.setStrokeColor(Color.argb(rgbAValue, rgbRValue, rgbGValue, rgbBValue));
 
         deleteColor.setOnClickListener(new View.OnClickListener() {
             @Override

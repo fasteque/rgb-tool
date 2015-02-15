@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_background"
-    android:descendantFocusability="blocksDescendants" >
+    android:background="@android:color/white"
+    android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
         android:orientation="vertical"
-        android:layout_width="48dp"
+        android:layout_width="56dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="@dimen/rgb_panel_margin_top"
-        android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-        android:layout_marginLeft="@dimen/rgb_panel_color_list_margin"
-        android:layout_marginRight="@dimen/rgb_panel_color_list_margin" >
+        android:layout_marginBottom="@dimen/rgb_panel_margin_top">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/robot"
             android:layout_marginTop="@dimen/rgb_panel_margin_top"
             android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
@@ -27,10 +28,15 @@
             android:adjustViewBounds="true"
             android:scaleType="centerInside" />
 
-        <View
+        <com.fastebro.androidrgbtool.view.CircleView
             android:id="@+id/rgb_panel_color"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            app:circleRadius="28dp"
+            app:strokeWidth="0dp"
+            app:circleGap="0dp"/>
 
     </RelativeLayout>
 
@@ -42,7 +48,7 @@
         android:layout_marginTop="@dimen/rgb_panel_margin_top"
         android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
         android:layout_marginLeft="@dimen/rgb_panel_color_list_margin"
-        android:layout_marginRight="@dimen/rgb_panel_color_list_margin" >
+        android:layout_marginRight="16dp" >
 
 
         <LinearLayout

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircleView">
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="strokeColor" format="color|reference"/>
+        <attr name="fillColor" format="color|reference"/>
+        <attr name="circleRadius" format="dimension"/>
+        <attr name="circleGap" format="dimension"/>
+    </declare-styleable>
+
+</resources>
