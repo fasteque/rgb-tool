@@ -10,8 +10,7 @@
         android:layout_margin="@dimen/rgb_panel_color_list_margin"
         android:scrollbars="none"
         android:dividerHeight="1dp"
-        android:divider="@color/light_silver"
-        android:cacheColorHint="@color/accent" />
+        android:divider="@color/light_silver"/>
 
     <include layout="@layout/empty_layout" />
 </RelativeLayout>

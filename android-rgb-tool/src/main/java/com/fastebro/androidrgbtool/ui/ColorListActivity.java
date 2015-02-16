@@ -46,6 +46,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
 
         ListView listview = (ListView) findViewById(android.R.id.list);
         listview.setOnItemClickListener(this);
+        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listview.setAdapter(adapter);
 
         getSupportLoaderManager().initLoader(0, null, this);
