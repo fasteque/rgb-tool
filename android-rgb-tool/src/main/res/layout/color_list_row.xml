@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
-    android:background="@drawable/color_list_background">
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:orientation="vertical"
@@ -53,8 +53,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="2dp"
+            android:layout_height="28dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <TextView
@@ -74,8 +74,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="2dp"
+            android:layout_height="28dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <TextView
@@ -95,8 +95,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="2dp" >
+            android:layout_height="28dp" >
 
             <TextView
                 android:id="@+id/hex_text"
@@ -119,11 +118,12 @@
                 android:id="@+id/btn_delete_color"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:background="@null"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:src="@drawable/btn_delete_color" />
+                android:src="@drawable/btn_more" />
 
         </RelativeLayout>
 

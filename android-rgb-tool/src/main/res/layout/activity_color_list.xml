@@ -6,11 +6,13 @@
 
     <ListView android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/rgb_panel_color_list_margin"
         android:scrollbars="none"
         android:dividerHeight="1dp"
-        android:divider="@color/light_silver"/>
+        android:divider="@color/light_silver"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/color_list_background"/>
 
     <include layout="@layout/empty_layout" />
 </RelativeLayout>
