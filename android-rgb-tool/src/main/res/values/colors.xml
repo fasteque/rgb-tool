@@ -20,4 +20,5 @@
 
     <color name="fab_color_pressed">#FB6D6D</color>
     <color name="fab_color_shadow">#44000000</color>
+    <color name="transparent_accent">#99FF5252</color>
 </resources>
