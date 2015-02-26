@@ -9,8 +9,5 @@ android:
     - extra-android-m2repository
     - android-21
 
-notifications:
-  email: false
-
 script:
   - ./gradlew clean assembleDebug
