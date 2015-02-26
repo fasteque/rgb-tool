@@ -1,4 +1,4 @@
-Android RGB Tool
+Android RGB Tool [![Build Status](https://travis-ci.org/fasteque/rgb-tool.svg?branch=master)](https://travis-ci.org/fasteque/rgb-tool)
 ================
 
 Android RGB Tool is a simple and fast tool to get RGB channel and HEX values about a color.
