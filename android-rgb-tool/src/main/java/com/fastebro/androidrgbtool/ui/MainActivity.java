@@ -98,8 +98,8 @@ public class MainActivity extends EventBaseActivity {
     @InjectView(R.id.color_view)
     View colorView;
 
-    private String mCurrentPhotoPath;
-    private BaseAlbumDirFactory mAlbumStorageDirFactory = null;
+    private String currentPhotoPath;
+    private BaseAlbumDirFactory albumStorageDirFactory = null;
 
     private float RGB_R_COLOR = 0.0f;
     private float RGB_G_COLOR = 0.0f;
@@ -111,7 +111,7 @@ public class MainActivity extends EventBaseActivity {
 
     protected String hexValue;
 
-    private ShareActionProvider mShareActionProvider;
+    private ShareActionProvider shareActionProvider;
 
 
     @Override
@@ -184,7 +184,7 @@ public class MainActivity extends EventBaseActivity {
             item.setVisible(false);
 
         item = menu.findItem(R.id.action_share);
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedColor();
 
         item = menu.findItem(R.id.action_print);
@@ -317,8 +317,8 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(shareIntent);
         }
     }
 
@@ -344,7 +344,7 @@ public class MainActivity extends EventBaseActivity {
         if (requestCode == REQUEST_OPEN_GALLERY) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                    mCurrentPhotoPath = getRealPathFromURI(this, data.getData());
+                    currentPhotoPath = getRealPathFromURI(this, data.getData());
                     handlePhoto(true);
                 }
             }
@@ -463,15 +463,15 @@ public class MainActivity extends EventBaseActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File f;
 
-        mAlbumStorageDirFactory = new BaseAlbumDirFactory();
+        albumStorageDirFactory = new BaseAlbumDirFactory();
 
         try {
             f = setUpPhotoFile();
-            mCurrentPhotoPath = f.getAbsolutePath();
+            currentPhotoPath = f.getAbsolutePath();
 
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
         } catch (IOException e) {
-            mCurrentPhotoPath = null;
+            currentPhotoPath = null;
         }
 
         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -479,7 +479,7 @@ public class MainActivity extends EventBaseActivity {
 
     private File setUpPhotoFile() throws IOException {
         File f = createImageFile();
-        mCurrentPhotoPath = f.getAbsolutePath();
+        currentPhotoPath = f.getAbsolutePath();
 
         return f;
     }
@@ -491,7 +491,7 @@ public class MainActivity extends EventBaseActivity {
         String imageFileName = UImage.JPEG_FILE_PREFIX + timeStamp + "_";
 
         File image = File.createTempFile(imageFileName, UImage.JPEG_FILE_SUFFIX, getAlbumDir());
-        mCurrentPhotoPath = image.getAbsolutePath();
+        currentPhotoPath = image.getAbsolutePath();
 
         return image;
     }
@@ -505,7 +505,7 @@ public class MainActivity extends EventBaseActivity {
         File storageDir = null;
 
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            storageDir = mAlbumStorageDirFactory.getAlbumStorageDir(getAlbumName());
+            storageDir = albumStorageDirFactory.getAlbumStorageDir(getAlbumName());
 
             if (storageDir != null) {
                 if (!storageDir.mkdirs()) {
@@ -525,8 +525,8 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void handlePhoto(boolean useTempFile) {
-        if (mCurrentPhotoPath != null) {
-            new PhotoScalingTask(this, mCurrentPhotoPath, useTempFile).execute();
+        if (currentPhotoPath != null) {
+            new PhotoScalingTask(this, currentPhotoPath, useTempFile).execute();
         } else {
             Toast.makeText(this, getString(R.string.error_open_gallery_image), Toast.LENGTH_SHORT).show();
         }
