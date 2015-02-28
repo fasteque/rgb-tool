@@ -5,6 +5,8 @@ import android.content.Context;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
 
+import java.util.ArrayList;
+
 /**
  * Created by danielealtomare on 28/12/14.
  */
@@ -26,5 +28,27 @@ public class UPalette {
             default:
                 return "";
         }
+    }
+
+    public static String getPaletteMessage(Context context, String filename, ArrayList<PaletteSwatch> swatches) {
+        StringBuilder message = new StringBuilder();
+
+        message.append("RGB Tool - Image Palette");
+        message.append(System.getProperty("line.separator"));
+
+        if(!"".equals(filename)) {
+            message.append("File: " + filename);
+            message.append(System.getProperty("line.separator"));
+        }
+
+        for(PaletteSwatch swatch : swatches) {
+            message.append(UPalette.getSwatchDescription(context, swatch.getType()));
+            message.append(": ");
+            message.append("HEX - ");
+            message.append("#" + Integer.toHexString(swatch.getRgb()).toUpperCase());
+            message.append(System.getProperty("line.separator"));
+        }
+
+        return message.toString();
     }
 }

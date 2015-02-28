@@ -4,10 +4,10 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
-import android.transition.Fade;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,15 +24,15 @@ import java.util.ArrayList;
 
 
 public class ColorPickerActivity extends BaseActivity {
-    private ImageView mImageView;
-    private PhotoViewAttacher mAttacher;
-    private Bitmap mBitmap;
+    private ImageView imageView;
+    private PhotoViewAttacher attacher;
+    private Bitmap bitmap;
     View.OnTouchListener imgSourceOnTouchListener;
-    private RGBPanelData mRGBPanelDataLayout;
-    private RelativeLayout mMainLayout;
+    private RGBPanelData rgbPanelDataLayout;
+    private RelativeLayout mainLayout;
 
-    private String mCurrentPath = null;
-    private boolean mDeleteFile = false;
+    private String currentPath = null;
+    private boolean deleteFile = false;
     private final static float PHOTO_SCALING_FACTOR = 3.0f;
 
 
@@ -45,46 +45,46 @@ public class ColorPickerActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        mMainLayout = (RelativeLayout) findViewById(R.id.color_picker_main_layout);
+        mainLayout = (RelativeLayout) findViewById(R.id.color_picker_main_layout);
 
-        mRGBPanelDataLayout = new RGBPanelData(this);
-        mRGBPanelDataLayout.setVisibility(View.GONE);
+        rgbPanelDataLayout = new RGBPanelData(this);
+        rgbPanelDataLayout.setVisibility(View.GONE);
 
         if (getIntent() != null) {
             // get the path of the image and set it.
             Bundle bundle = getIntent().getExtras();
 
             if (bundle != null) {
-                mCurrentPath = bundle.getString(UImage.EXTRA_JPEG_FILE_PATH);
-                mDeleteFile = bundle.getBoolean(UImage.EXTRA_DELETE_FILE);
+                currentPath = bundle.getString(UImage.EXTRA_JPEG_FILE_PATH);
+                deleteFile = bundle.getBoolean(UImage.EXTRA_DELETE_FILE);
             }
 
-            if (mCurrentPath != null) {
-                mImageView = (ImageView) findViewById(R.id.iv_photo);
+            if (currentPath != null) {
+                imageView = (ImageView) findViewById(R.id.iv_photo);
 
                 try {
-                    mBitmap = BitmapFactory.decodeFile(mCurrentPath);
-                    mImageView.setImageBitmap(mBitmap);
-                    mImageView.setOnTouchListener(imgSourceOnTouchListener);
-                    mAttacher = new PhotoViewAttacher(mImageView);
-                    mAttacher.setMaximumScale(mAttacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
-                    mAttacher.setOnViewTapListener(new PhotoViewTapListener());
-                    mAttacher.setOnPhotoTapListener(new PhotoViewTapListener());
+                    bitmap = BitmapFactory.decodeFile(currentPath);
+                    imageView.setImageBitmap(bitmap);
+                    imageView.setOnTouchListener(imgSourceOnTouchListener);
+                    attacher = new PhotoViewAttacher(imageView);
+                    attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
+                    attacher.setOnViewTapListener(new PhotoViewTapListener());
+                    attacher.setOnPhotoTapListener(new PhotoViewTapListener());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        mMainLayout.addView(mRGBPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+        mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
     }
 
     @Override
     protected void onDestroy() {
-        if (mDeleteFile) {
+        if (deleteFile) {
             //noinspection ResultOfMethodCallIgnored
-            new File(mCurrentPath).delete();
+            new File(currentPath).delete();
         }
         super.onDestroy();
     }
@@ -114,8 +114,8 @@ public class ColorPickerActivity extends BaseActivity {
     }
 
     private void generatePalette() {
-        if (mBitmap != null) {
-            Palette.generateAsync(mBitmap, new Palette.PaletteAsyncListener() {
+        if (bitmap != null) {
+            Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                 @Override
                 public void onGenerated(Palette palette) {
                     Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
@@ -153,6 +153,7 @@ public class ColorPickerActivity extends BaseActivity {
                     }
 
                     intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
+                    intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         startActivity(intent,
@@ -176,35 +177,35 @@ public class ColorPickerActivity extends BaseActivity {
         @Override
         public void onPhotoTap(View view, float x, float y) {
             // x and y represent the percentage of the Drawable where the user clicked.
-            int imageX = (int) (x * mBitmap.getWidth());
-            int imageY = (int) (y * mBitmap.getHeight());
+            int imageX = (int) (x * bitmap.getWidth());
+            int imageY = (int) (y * bitmap.getHeight());
 
-            int touchedRGB = mBitmap.getPixel(imageX, imageY);
+            int touchedRGB = bitmap.getPixel(imageX, imageY);
 
 
-            if (imageY < mBitmap.getHeight() / 2) {
+            if (imageY < bitmap.getHeight() / 2) {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
                 params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                mRGBPanelDataLayout.setLayoutParams(params);
+                rgbPanelDataLayout.setLayoutParams(params);
 
-                mRGBPanelDataLayout.updateData(touchedRGB);
+                rgbPanelDataLayout.updateData(touchedRGB);
 
-                if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
-                    mRGBPanelDataLayout.setVisibility(View.VISIBLE);
+                if (rgbPanelDataLayout.getVisibility() == View.GONE) {
+                    rgbPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             } else {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
                 params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                mRGBPanelDataLayout.setLayoutParams(params);
+                rgbPanelDataLayout.setLayoutParams(params);
 
-                mRGBPanelDataLayout.updateData(touchedRGB);
+                rgbPanelDataLayout.updateData(touchedRGB);
 
-                if (mRGBPanelDataLayout.getVisibility() == View.GONE) {
-                    mRGBPanelDataLayout.setVisibility(View.VISIBLE);
+                if (rgbPanelDataLayout.getVisibility() == View.GONE) {
+                    rgbPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             }
         }
