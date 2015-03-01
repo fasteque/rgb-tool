@@ -38,9 +38,9 @@ import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
-import com.fastebro.androidrgbtool.fragments.PrintColorDialogFragment;
+import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
-import com.fastebro.androidrgbtool.print.RGBToolPrintDocumentAdapter;
+import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.tasks.PhotoScalingTask;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
@@ -230,8 +230,7 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void showPrintColorDialog() {
-        // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new PrintColorDialogFragment();
+        DialogFragment dialog = PrintJobDialogFragment.newInstance(PrintJobDialogFragment.PRINT_COLOR_JOB);
         dialog.show(getSupportFragmentManager(), null);
     }
 
@@ -292,7 +291,7 @@ public class MainActivity extends EventBaseActivity {
         // Start a print job, passing in a PrintDocumentAdapter implementation
         // to handle the generation of a print document
         printManager.print(jobName,
-                new RGBToolPrintDocumentAdapter(
+                new RGBToolPrintColorAdapter(
                         this,
                         message,
                         RGB_R_COLOR,

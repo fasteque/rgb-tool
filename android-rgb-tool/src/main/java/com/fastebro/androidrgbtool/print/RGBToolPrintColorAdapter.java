@@ -26,7 +26,7 @@ import java.io.IOException;
  * Created by danielealtomare on 25/03/14.
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
-public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
+public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
     private Context context;
     private String message;
     private float RGBRColor;
@@ -36,12 +36,12 @@ public class RGBToolPrintDocumentAdapter extends PrintDocumentAdapter {
 
     private PrintedPdfDocument pdfDocument;
 
-    public RGBToolPrintDocumentAdapter(Context context,
-                                       String message,
-                                       float rgbRColor,
-                                       float rgbGColor,
-                                       float rgbBColor,
-                                       float rgbOpacity) {
+    public RGBToolPrintColorAdapter(Context context,
+                                    String message,
+                                    float rgbRColor,
+                                    float rgbGColor,
+                                    float rgbBColor,
+                                    float rgbOpacity) {
         this.context = context;
         this.message = message;
         RGBRColor = rgbRColor;

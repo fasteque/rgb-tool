@@ -14,6 +14,7 @@
     <string name="action_camera">Color from image</string>
     <string name="action_color_list">Color list</string>
     <string name="action_print">Print color</string>
+    <string name="action_print_palette">Print palette</string>
     <string name="action_generic_share">Share</string>
     <string name="action_share">Share color</string>
     <string name="action_share_palette">Share palette</string>

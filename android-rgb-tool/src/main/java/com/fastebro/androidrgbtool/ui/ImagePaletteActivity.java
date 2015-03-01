@@ -1,8 +1,12 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.print.PrintManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
@@ -11,7 +15,10 @@ import android.widget.GridView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.ImagePaletteAdapter;
+import com.fastebro.androidrgbtool.events.PrintPaletteEvent;
+import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
+import com.fastebro.androidrgbtool.print.RGBToolPrintPaletteAdapter;
 import com.fastebro.androidrgbtool.utils.UPalette;
 
 import java.util.ArrayList;
@@ -19,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by danielealtomare on 27/12/14.
  */
-public class ImagePaletteActivity extends BaseActivity {
+public class ImagePaletteActivity extends EventBaseActivity {
 
     public static final String EXTRA_SWATCHES = "com.fastebro.androidrgbtool.EXTRA_SWATCHES";
     public static final String FILENAME = "com.fastebro.androidrgbtool.EXTRA_FILENAME";
@@ -35,15 +42,15 @@ public class ImagePaletteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_palette);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if(getIntent().getExtras().getString(FILENAME) != null) {
+        if (getIntent().getExtras().getString(FILENAME) != null) {
             filename = getIntent().getStringExtra(FILENAME);
         }
 
-        if(getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES) != null) {
+        if (getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES) != null) {
             swatches = getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES);
 
             paletteGrid = (GridView) findViewById(R.id.palette_grid);
@@ -59,17 +66,26 @@ public class ImagePaletteActivity extends BaseActivity {
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedPalette();
 
+        item = menu.findItem(R.id.action_print);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            item.setVisible(false);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 finishAfterTransition();
             } else {
                 finish();
             }
+            return true;
+        } else if (item.getItemId() == R.id.action_print) {
+            showPrintPaletteDialog();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -88,5 +104,33 @@ public class ImagePaletteActivity extends BaseActivity {
         if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(shareIntent);
         }
+    }
+
+    private void showPrintPaletteDialog() {
+        DialogFragment dialog = PrintJobDialogFragment.newInstance(PrintJobDialogFragment.PRINT_PALETTE_JOB);
+        dialog.show(getSupportFragmentManager(), null);
+    }
+
+    public void onEvent(PrintPaletteEvent event) {
+        printColor(event.message);
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void printColor(String message) {
+        // Get a PrintManager instance
+        PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+
+        // Set job name, which will be displayed in the print queue
+        String jobName = getString(R.string.app_name) + " Document";
+
+        // Start a print job, passing in a PrintDocumentAdapter implementation
+        // to handle the generation of a print document
+        printManager.print(jobName,
+                new RGBToolPrintPaletteAdapter(
+                        this,
+                        message,
+                        filename,
+                        swatches),
+                null);
     }
 }
