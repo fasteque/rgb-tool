@@ -37,8 +37,10 @@ import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.events.PrintColorEvent;
+import com.fastebro.androidrgbtool.events.RGBAInsertionEvent;
 import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
+import com.fastebro.androidrgbtool.fragments.RgbaInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
@@ -159,6 +161,7 @@ public class MainActivity extends EventBaseActivity {
             }
         });
 
+        setRGBAValuesClickListener();
         refreshUI();
     }
 
@@ -219,6 +222,28 @@ public class MainActivity extends EventBaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void setRGBAValuesClickListener() {
+        textView_RGB_R.setOnClickListener(RGBAClickListener);
+        textView_RGB_G.setOnClickListener(RGBAClickListener);
+        textView_RGB_B.setOnClickListener(RGBAClickListener);
+        textView_RGB_O.setOnClickListener(RGBAClickListener);
+    }
+
+    private View.OnClickListener RGBAClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            short[] rgbaValues = new short[]{
+                    (short) RGB_R_COLOR,
+                    (short) RGB_G_COLOR,
+                    (short) RGB_B_COLOR,
+                    (short) RGB_OPACITY
+            };
+
+            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
+            fragment.show(getSupportFragmentManager(), null);
+        }
+    };
 
     private void showColorList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -409,8 +434,8 @@ public class MainActivity extends EventBaseActivity {
         updateSharedColor();
         updateSaveColorButton();
 
-        colorView.setBackgroundColor(Color.argb((int)RGB_OPACITY, (int)RGB_R_COLOR, (int)RGB_G_COLOR,
-                (int)RGB_B_COLOR));
+        colorView.setBackgroundColor(Color.argb((int) RGB_OPACITY, (int) RGB_R_COLOR, (int) RGB_G_COLOR,
+                (int) RGB_B_COLOR));
     }
 
     /**
@@ -601,7 +626,7 @@ public class MainActivity extends EventBaseActivity {
          * immediately available to the user.
          */
         MediaScannerConnection.scanFile(this,
-                new String[] { event.photoPath }, null,
+                new String[]{event.photoPath}, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
                     }
@@ -619,5 +644,18 @@ public class MainActivity extends EventBaseActivity {
 
     public void onEvent(UpdateSaveColorUIEvent event) {
         updateSaveColorButton();
+    }
+
+    public void onEvent(RGBAInsertionEvent event) {
+        RGB_R_COLOR = event.rgbaValues[0];
+        RGB_G_COLOR = event.rgbaValues[1];
+        RGB_B_COLOR = event.rgbaValues[2];
+        RGB_OPACITY = event.rgbaValues[3];
+        seekBar_R.setProgress(event.rgbaValues[0]);
+        seekBar_G.setProgress(event.rgbaValues[1]);
+        seekBar_B.setProgress(event.rgbaValues[2]);
+        seekBar_O.setProgress(event.rgbaValues[3]);
+        refreshUI();
+        savePreferences();
     }
 }

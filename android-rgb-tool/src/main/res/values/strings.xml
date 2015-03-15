@@ -26,6 +26,7 @@
     <string name="print_color_dialog_message_hint">Message</string>
     <string name="print_color_dialog_message_set">Set</string>
     <string name="print_color_dialog_message_skip">Skip</string>
+    <string name="rgba_insertion_dialog_title">Set values</string>
 
     <!-- UColor items -->
     <string name="color_red">R</string>
