@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.graphics.Palette;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,6 +86,8 @@ public class ColorPickerActivity extends BaseActivity {
         if (deleteFile) {
             //noinspection ResultOfMethodCallIgnored
             new File(currentPath).delete();
+            getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    MediaStore.Images.Media.DATA + "=?", new String[]{currentPath});
         }
         super.onDestroy();
     }

@@ -88,12 +88,8 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
                 out.write(buffer, 0, read);
             }
             in.close();
-            in = null;
-
-            // write the output file (You have now copied the file)
             out.flush();
             out.close();
-            out = null;
 
             photoPath = context.getFilesDir() + "/" + filename;
         } catch (FileNotFoundException e) {
