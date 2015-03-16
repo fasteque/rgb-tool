@@ -147,7 +147,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="20"
+                android:layout_weight="15"
                 style="@style/RGBPanelLabel"
                 android:text="@string/color_hexadecimal_label" />
 
@@ -158,14 +158,6 @@
                 android:layout_weight="120"
                 android:textIsSelectable="true"
                 style="@style/RGBPanelComponent" />
-
-            <!--<ImageButton-->
-                <!--android:id="@+id/btn_save_color"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:background="@null"-->
-                <!--android:layout_gravity="end|center_vertical"-->
-                <!--android:src="@drawable/btn_save_color" />-->
 
         </TableRow>
 
