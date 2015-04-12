@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
+import com.fastebro.androidrgbtool.events.ColorShareEvent;
 import com.fastebro.androidrgbtool.utils.UColor;
 import com.fastebro.androidrgbtool.view.CircleView;
 
@@ -90,6 +91,9 @@ public class ColorListAdapter extends SimpleCursorAdapter {
                     case R.id.menu_remove:
                         // Remove the item from the adapter
                         EventBus.getDefault().post(new ColorDeleteEvent(colorId));
+                        return true;
+                    case R.id.menu_share:
+                        EventBus.getDefault().post(new ColorShareEvent(colorId));
                         return true;
                 }
                 return false;

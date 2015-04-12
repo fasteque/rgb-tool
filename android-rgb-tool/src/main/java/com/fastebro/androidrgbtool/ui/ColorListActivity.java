@@ -1,5 +1,6 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -17,8 +18,10 @@ import com.fastebro.androidrgbtool.adapters.ColorListAdapter;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.events.ColorSelectEvent;
+import com.fastebro.androidrgbtool.events.ColorShareEvent;
 import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
+import com.fastebro.androidrgbtool.utils.UColor;
 import com.fastebro.androidrgbtool.utils.UDatabase;
 
 import de.greenrobot.event.EventBus;
@@ -143,5 +146,41 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
                 RGBToolContentProvider.CONTENT_URI,
                 mSelectionClause,
                 mSelectionArgs);
+    }
+
+    public void onEvent(ColorShareEvent event) {
+        String[] projection = { ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
+                ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
+                ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,
+                ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A
+        };
+        String selectionClause = ColorDataContract.ColorEntry._ID + "=?";
+        String[] selectionArgs = { String.valueOf(event.colorId) };
+
+        Cursor cursor = getContentResolver().query(RGBToolContentProvider.CONTENT_URI,
+                projection,
+                selectionClause,
+                selectionArgs,
+                null);
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+            int rgbRValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R));
+            int rgbGValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G));
+            int rgbBValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B));
+            int rgbAValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A));
+            cursor.close();
+
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    UColor.getColorMessage(rgbRValue,
+                            rgbGValue,
+                            rgbBValue,
+                            rgbAValue)
+            );
+            shareIntent.setType("text/plain");
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.action_share)));
+        }
     }
 }

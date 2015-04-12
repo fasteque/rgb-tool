@@ -4,4 +4,8 @@
         android:id="@+id/menu_remove"
         android:title="@string/action_generic_delete" />
 
+    <item
+        android:id="@+id/menu_share"
+        android:title="@string/action_generic_share" />
+
 </menu>
