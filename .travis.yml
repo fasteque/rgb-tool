@@ -4,10 +4,10 @@ jdk: openjdk7
 
 android:
   components:
-    - build-tools-22.0.0
+    - build-tools-22.0.1
     - extra-android-support
     - extra-android-m2repository
-    - android-21
+    - android-22
 
 script:
   - ./gradlew clean assembleDebug
