@@ -87,6 +87,11 @@ public class RgbaInsertionFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
+                                pickerR.clearFocus();
+                                pickerG.clearFocus();
+                                pickerB.clearFocus();
+                                pickerA.clearFocus();
+
                                 short[] rgbaValues = new short[]{
                                         (short) pickerR.getValue(),
                                         (short) pickerG.getValue(),
