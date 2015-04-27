@@ -118,7 +118,8 @@ public class ColorPickerActivity extends BaseActivity {
 
     private void generatePalette() {
         if (bitmap != null) {
-            Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+            Palette.Builder paletteBuilder = Palette.from(bitmap);
+            paletteBuilder.generate(new Palette.PaletteAsyncListener() {
                 @Override
                 public void onGenerated(Palette palette) {
                     Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
