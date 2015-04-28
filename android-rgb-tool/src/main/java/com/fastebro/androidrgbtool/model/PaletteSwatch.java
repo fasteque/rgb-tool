@@ -3,34 +3,15 @@ package com.fastebro.androidrgbtool.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fastebro.androidrgbtool.model.entities.Swatch;
+
 /**
  * Created by danielealtomare on 27/12/14.
  */
-public class PaletteSwatch implements Parcelable {
-    public enum SwatchType { NONE, VIBRANT, LIGHT_VIBRANT, DARK_VIBRANT,
-        MUTED, LIGHT_MUTED, DARK_MUTED; }
-
-    private int rgb;
-    private SwatchType type;
+public class PaletteSwatch extends Swatch implements Parcelable {
 
     public PaletteSwatch(int rgb, SwatchType type) {
         this.rgb = rgb;
-        this.type = type;
-    }
-
-    public int getRgb() {
-        return rgb;
-    }
-
-    public void setRgb(int rgb) {
-        this.rgb = rgb;
-    }
-
-    public SwatchType getType() {
-        return type;
-    }
-
-    public void setType(SwatchType type) {
         this.type = type;
     }
 
@@ -44,7 +25,6 @@ public class PaletteSwatch implements Parcelable {
         dest.writeInt(rgb);
         dest.writeInt(type.ordinal());
     }
-
     public static final Parcelable.Creator<PaletteSwatch> CREATOR
             = new Parcelable.Creator<PaletteSwatch>() {
         public PaletteSwatch createFromParcel(Parcel in) {

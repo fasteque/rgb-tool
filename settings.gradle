@@ -1,1 +1,1 @@
-include ':android-rgb-tool'
+include ':android-rgb-tool', ':model'
