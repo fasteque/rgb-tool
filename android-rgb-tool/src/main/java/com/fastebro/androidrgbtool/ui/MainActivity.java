@@ -34,11 +34,11 @@ import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
-import com.fastebro.androidrgbtool.events.ColorSelectEvent;
-import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
-import com.fastebro.androidrgbtool.events.PrintColorEvent;
-import com.fastebro.androidrgbtool.events.RGBAInsertionEvent;
-import com.fastebro.androidrgbtool.events.UpdateSaveColorUIEvent;
+import com.fastebro.android.rgbtool.model.events.ColorSelectEvent;
+import com.fastebro.android.rgbtool.model.events.PhotoScaledEvent;
+import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
+import com.fastebro.android.rgbtool.model.events.RGBAInsertionEvent;
+import com.fastebro.android.rgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.fragments.RgbaInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;

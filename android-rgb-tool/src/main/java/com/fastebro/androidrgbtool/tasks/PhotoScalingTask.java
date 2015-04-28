@@ -8,7 +8,7 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.AsyncTask;
 
-import com.fastebro.androidrgbtool.events.PhotoScaledEvent;
+import com.fastebro.android.rgbtool.model.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.utils.UImage;
 
 import java.io.File;

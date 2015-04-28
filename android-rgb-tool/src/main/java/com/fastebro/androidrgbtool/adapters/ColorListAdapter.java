@@ -11,8 +11,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
-import com.fastebro.androidrgbtool.events.ColorDeleteEvent;
-import com.fastebro.androidrgbtool.events.ColorShareEvent;
+import com.fastebro.android.rgbtool.model.events.ColorDeleteEvent;
+import com.fastebro.android.rgbtool.model.events.ColorShareEvent;
 import com.fastebro.androidrgbtool.utils.UColor;
 import com.fastebro.androidrgbtool.view.CircleView;
 

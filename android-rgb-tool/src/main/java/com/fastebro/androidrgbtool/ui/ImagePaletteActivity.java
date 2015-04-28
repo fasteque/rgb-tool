@@ -15,7 +15,7 @@ import android.widget.GridView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.ImagePaletteAdapter;
-import com.fastebro.androidrgbtool.events.PrintPaletteEvent;
+import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
 import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.print.RGBToolPrintPaletteAdapter;

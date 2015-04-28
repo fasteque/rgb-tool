@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.events.PrintColorEvent;
-import com.fastebro.androidrgbtool.events.PrintPaletteEvent;
+import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
+import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
 
 import de.greenrobot.event.EventBus;
 
