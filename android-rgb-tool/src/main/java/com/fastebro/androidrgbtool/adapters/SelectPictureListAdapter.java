@@ -1,11 +1,9 @@
 package com.fastebro.androidrgbtool.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
@@ -75,11 +73,11 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
 
         @Override
         public void onClick(View v) {
-            listener.onClick(v, getPosition(), false);
+            listener.onClick(v, getLayoutPosition(), false);
         }
     }
 
     public interface ItemClickListener {
-        public void onClick(View v, int position, boolean isLongClick);
+        void onClick(View v, int position, boolean isLongClick);
     }
 }
