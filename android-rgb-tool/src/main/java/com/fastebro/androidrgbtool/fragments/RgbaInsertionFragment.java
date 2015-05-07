@@ -31,11 +31,9 @@ public class RgbaInsertionFragment extends DialogFragment {
     @InjectView(R.id.numberPickerA)
     NumberPicker pickerA;
 
-
     private short[] rgbaValues;
 
     public RgbaInsertionFragment() { }
-
 
     public static RgbaInsertionFragment newInstance(short[] rgbaValues) {
         RgbaInsertionFragment fragment = new RgbaInsertionFragment();

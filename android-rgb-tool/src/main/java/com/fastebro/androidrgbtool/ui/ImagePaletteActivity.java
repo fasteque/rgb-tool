@@ -23,17 +23,21 @@ import com.fastebro.androidrgbtool.utils.UPalette;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by danielealtomare on 27/12/14.
  */
 public class ImagePaletteActivity extends EventBaseActivity {
+    @InjectView(R.id.palette_grid)
+    GridView paletteGrid;
 
     public static final String EXTRA_SWATCHES = "com.fastebro.androidrgbtool.EXTRA_SWATCHES";
     public static final String FILENAME = "com.fastebro.androidrgbtool.EXTRA_FILENAME";
 
     private String filename;
     private ArrayList<PaletteSwatch> swatches;
-    private GridView paletteGrid;
     private ShareActionProvider shareActionProvider;
 
 
@@ -41,6 +45,8 @@ public class ImagePaletteActivity extends EventBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_palette);
+
+        ButterKnife.inject(this);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -52,8 +58,6 @@ public class ImagePaletteActivity extends EventBaseActivity {
 
         if (getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES) != null) {
             swatches = getIntent().getParcelableArrayListExtra(EXTRA_SWATCHES);
-
-            paletteGrid = (GridView) findViewById(R.id.palette_grid);
             paletteGrid.setAdapter(new ImagePaletteAdapter(this, swatches));
         }
     }

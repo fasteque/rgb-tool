@@ -16,11 +16,16 @@ import com.fastebro.androidrgbtool.adapters.SelectPictureListAdapter;
 import com.fastebro.androidrgbtool.managers.RecyclerViewLinearLayoutManager;
 import com.fastebro.androidrgbtool.ui.MainActivity;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by danielealtomare on 21/06/14.
  */
 public class SelectPictureDialogFragment extends DialogFragment implements SelectPictureListAdapter.ItemClickListener {
-    private RecyclerView recyclerView;
+    @InjectView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     private SelectPictureListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -30,10 +35,10 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_select_picture, container);
+        ButterKnife.inject(this, view);
 
         adapter = new SelectPictureListAdapter(getResources().getStringArray(R.array.pick_color_array), this);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         layoutManager = new RecyclerViewLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -69,5 +74,11 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 }

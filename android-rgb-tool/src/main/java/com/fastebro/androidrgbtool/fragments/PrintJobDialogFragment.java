@@ -12,19 +12,23 @@ import com.fastebro.androidrgbtool.R;
 import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 26/03/14.
  */
 public class PrintJobDialogFragment extends DialogFragment {
+    @InjectView(R.id.message)
+    EditText message;
+
     public static String ARG_JOB_TYPE = "JOB_TYPE";
     public static final int PRINT_COLOR_JOB = 0;
     public static final int PRINT_PALETTE_JOB = 1;
 
     public PrintJobDialogFragment() { }
 
-    private EditText message;
     private int jobType;
 
     public static PrintJobDialogFragment newInstance(int jobType) {
@@ -51,8 +55,7 @@ public class PrintJobDialogFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_print_color, null);
-
-        message = (EditText) view.findViewById(R.id.message);
+        ButterKnife.inject(this, view);
 
         String title;
         if (jobType == PRINT_COLOR_JOB) {
@@ -92,5 +95,11 @@ public class PrintJobDialogFragment extends DialogFragment {
                 );
 
         return builder.create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 }

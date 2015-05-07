@@ -18,6 +18,9 @@ import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.utils.UImage;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 import java.io.File;
@@ -25,12 +28,16 @@ import java.util.ArrayList;
 
 
 public class ColorPickerActivity extends BaseActivity {
-    private ImageView imageView;
+    @InjectView(R.id.color_picker_main_layout)
+    RelativeLayout mainLayout;
+
+    @InjectView(R.id.iv_photo)
+    ImageView imageView;
+
     private PhotoViewAttacher attacher;
     private Bitmap bitmap;
     View.OnTouchListener imgSourceOnTouchListener;
     private RGBPanelData rgbPanelDataLayout;
-    private RelativeLayout mainLayout;
 
     private String currentPath = null;
     private boolean deleteFile = false;
@@ -42,11 +49,11 @@ public class ColorPickerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
 
+        ButterKnife.inject(this);
+
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        mainLayout = (RelativeLayout) findViewById(R.id.color_picker_main_layout);
 
         rgbPanelDataLayout = new RGBPanelData(this);
         rgbPanelDataLayout.setVisibility(View.GONE);
@@ -61,8 +68,6 @@ public class ColorPickerActivity extends BaseActivity {
             }
 
             if (currentPath != null) {
-                imageView = (ImageView) findViewById(R.id.iv_photo);
-
                 try {
                     bitmap = BitmapFactory.decodeFile(currentPath);
                     imageView.setImageBitmap(bitmap);

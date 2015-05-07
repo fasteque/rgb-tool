@@ -11,6 +11,7 @@ import android.support.v4.content.Loader;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.fastebro.androidrgbtool.R;
@@ -24,12 +25,19 @@ import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.utils.UColor;
 import com.fastebro.androidrgbtool.utils.UDatabase;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 15/02/15.
  */
 public class ColorListActivity extends EventBaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+    @InjectView(android.R.id.list)
+    ListView listView;
+
+    @InjectView(R.id.list_empty_progress)
+    LinearLayout progressBar;
 
     private ColorListAdapter adapter;
 
@@ -37,6 +45,8 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_list);
+
+        ButterKnife.inject(this);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -47,14 +57,13 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
                 new String[]{ColorDataContract.ColorEntry.COLUMN_COLOR_HEX},
                 new int[]{R.id.hex_value}, 0);
 
-        ListView listview = (ListView) findViewById(android.R.id.list);
-        listview.setOnItemClickListener(this);
-        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        listview.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setAdapter(adapter);
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        findViewById(R.id.list_empty_progress).setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -117,12 +126,12 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        findViewById(R.id.list_empty_progress).setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
 
         if (data.getCount() <= 0) {
-            findViewById(R.id.list_empty_text).setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
         } else {
-            findViewById(R.id.list_empty_text).setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
         }
 
         // Swap the new cursor in. (The framework will take care of closing the

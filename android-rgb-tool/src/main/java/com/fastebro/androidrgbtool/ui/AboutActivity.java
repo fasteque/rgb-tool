@@ -2,7 +2,6 @@ package com.fastebro.androidrgbtool.ui;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Fade;
 import android.view.MenuItem;
 
 import com.fastebro.androidrgbtool.fragments.AboutFragment;

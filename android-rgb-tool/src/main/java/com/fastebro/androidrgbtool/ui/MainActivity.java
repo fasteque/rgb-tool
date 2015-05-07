@@ -118,7 +118,6 @@ public class MainActivity extends EventBaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         if(getSupportActionBar() != null) {
