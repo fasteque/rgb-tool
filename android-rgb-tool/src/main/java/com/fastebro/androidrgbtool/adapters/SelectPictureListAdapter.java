@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by danielealtomare on 21/06/14.
  */
@@ -58,16 +61,15 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
     }
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        protected ImageView icon;
-        protected TextView title;
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @InjectView(R.id.entry_icon) ImageView icon;
+        @InjectView(R.id.entry_title) TextView title;
         protected ItemClickListener listener;
 
         public ViewHolder(View v, ItemClickListener listener) {
             super(v);
+            ButterKnife.inject(this, v);
             this.listener = listener;
-            icon = (ImageView) v.findViewById(R.id.entry_icon);
-            title = (TextView) v.findViewById(R.id.entry_title);
             v.setOnClickListener(this);
         }
 
