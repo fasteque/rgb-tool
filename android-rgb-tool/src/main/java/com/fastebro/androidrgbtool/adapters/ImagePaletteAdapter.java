@@ -13,6 +13,9 @@ import com.fastebro.androidrgbtool.utils.UPalette;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by danielealtomare on 27/12/14.
  */
@@ -48,10 +51,7 @@ public class ImagePaletteAdapter extends BaseAdapter {
 
         if(convertView == null) {
             convertView = inflater.inflate(R.layout.palette_grid_view_item, null);
-            holder = new ViewHolder();
-            holder.color = convertView.findViewById(R.id.palette_item_color);
-            holder.rgb = (TextView) convertView.findViewById(R.id.palette_item_rgb);
-            holder.type = (TextView) convertView.findViewById(R.id.palette_item_type);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -64,9 +64,13 @@ public class ImagePaletteAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolder {
-        View color;
-        TextView rgb;
-        TextView type;
+    static class ViewHolder {
+        @InjectView(R.id.palette_item_color) View color;
+        @InjectView(R.id.palette_item_rgb) TextView rgb;
+        @InjectView(R.id.palette_item_type) TextView type;
+
+        public ViewHolder(View view) {
+            ButterKnife.inject(this, view);
+        }
     }
 }
