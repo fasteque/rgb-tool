@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.ColorListAdapter;
@@ -38,6 +39,9 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
 
     @InjectView(R.id.list_empty_progress)
     LinearLayout progressBar;
+
+    @InjectView(R.id.list_empty_text)
+    TextView emptyListMessage;
 
     private ColorListAdapter adapter;
 
@@ -129,9 +133,9 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         progressBar.setVisibility(View.GONE);
 
         if (data.getCount() <= 0) {
-            progressBar.setVisibility(View.VISIBLE);
+            emptyListMessage.setVisibility(View.VISIBLE);
         } else {
-            progressBar.setVisibility(View.GONE);
+            emptyListMessage.setVisibility(View.GONE);
         }
 
         // Swap the new cursor in. (The framework will take care of closing the
