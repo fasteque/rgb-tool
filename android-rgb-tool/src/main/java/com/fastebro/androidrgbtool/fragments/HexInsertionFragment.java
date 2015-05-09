@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
+import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 
 import butterknife.ButterKnife;
@@ -65,7 +65,7 @@ public class HexInsertionFragment extends DialogFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 if(checkHexValue(newHexValue.getText().toString())) {
-                                    EventBus.getDefault().post(new PrintPaletteEvent(newHexValue.getText().toString()));
+                                    EventBus.getDefault().post(new UpdateHexValueEvent(newHexValue.getText().toString()));
                                     HexInsertionFragment.this.getDialog().cancel();
                                 } else {
                                     Toast.makeText(getActivity(), getString(R.string.hex_insertion_not_valid_error),
