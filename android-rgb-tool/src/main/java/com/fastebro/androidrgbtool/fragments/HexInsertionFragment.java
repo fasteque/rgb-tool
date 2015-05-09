@@ -8,8 +8,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
 import com.fastebro.androidrgbtool.R;
 
@@ -64,8 +64,13 @@ public class HexInsertionFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                EventBus.getDefault().post(new PrintPaletteEvent(newHexValue.getText().toString()));
-                                HexInsertionFragment.this.getDialog().cancel();
+                                if(checkHexValue(newHexValue.getText().toString())) {
+                                    EventBus.getDefault().post(new PrintPaletteEvent(newHexValue.getText().toString()));
+                                    HexInsertionFragment.this.getDialog().cancel();
+                                } else {
+                                    Toast.makeText(getActivity(), getString(R.string.hex_insertion_not_valid_error),
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                 )
@@ -87,5 +92,18 @@ public class HexInsertionFragment extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    private boolean checkHexValue(String hexValue) {
+        if("".equals(hexValue) || hexValue.length() != 6) {
+            return false;
+        } else {
+            try {
+                Integer.parseInt(hexValue, 16);
+                return true;
+            } catch (NumberFormatException ex) {
+                return false;
+            }
+        }
     }
 }

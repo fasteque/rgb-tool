@@ -81,4 +81,5 @@
     <!-- HEX insertion value -->
     <string name="hex_insertion_title">HEX value</string>
     <string name="hex_insertion_message_hint">6 digit HEX color</string>
+    <string name="hex_insertion_not_valid_error">Error: not a valid HEX value!</string>
 </resources>
