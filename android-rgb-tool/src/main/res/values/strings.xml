@@ -10,6 +10,11 @@
     <string name="color_hexadecimal_label">HEX</string>
     <string name="color_list_empty">No colors</string>
 
+    <!-- Common actions -->
+    <string name="action_common_set">Set</string>
+    <string name="action_common_cancel">Cancel</string>
+    <string name="action_common_skip">Skip</string>
+
     <!-- MainActivity action items -->
     <string name="action_camera">Color from image</string>
     <string name="action_color_list">Color list</string>
@@ -24,8 +29,6 @@
     <string name="action_palette">Image palette</string>
     <string name="pick_color">Select picture</string>
     <string name="print_color_dialog_message_hint">Message</string>
-    <string name="print_color_dialog_message_set">Set</string>
-    <string name="print_color_dialog_message_skip">Skip</string>
     <string name="rgba_insertion_dialog_title">Set values</string>
 
     <!-- UColor items -->
@@ -74,4 +77,8 @@
     <string name="swatch_muted">Muted</string>
     <string name="swatch_light_muted">Light muted</string>
     <string name="swatch_dark_muted">Dark muted</string>
+
+    <!-- HEX insertion value -->
+    <string name="hex_insertion_title">HEX value</string>
+    <string name="hex_insertion_message_hint">6 digit HEX color</string>
 </resources>
