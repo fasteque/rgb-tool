@@ -32,6 +32,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.android.rgbtool.model.events.ColorSelectEvent;
@@ -227,16 +228,14 @@ public class MainActivity extends EventBaseActivity {
         textView_RGB_G.setOnClickListener(RGBAClickListener);
         textView_RGB_B.setOnClickListener(RGBAClickListener);
         textView_RGB_O.setOnClickListener(RGBAClickListener);
-/*
         textView_Hexadecimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HexInsertionFragment fragment =
-                        HexInsertionFragment.newInstance(textView_Hexadecimal.getText().toString());
+                        HexInsertionFragment.newInstance(textView_Hexadecimal.getText().toString().substring(3));
                 fragment.show(getSupportFragmentManager(), null);
             }
         });
-*/
     }
 
     private View.OnClickListener RGBAClickListener = new View.OnClickListener() {
@@ -664,6 +663,18 @@ public class MainActivity extends EventBaseActivity {
         seekBar_G.setProgress(event.rgbaValues[1]);
         seekBar_B.setProgress(event.rgbaValues[2]);
         seekBar_O.setProgress(event.rgbaValues[3]);
+        refreshUI();
+        savePreferences();
+    }
+
+    public void onEvent(UpdateHexValueEvent event) {
+        int[] rgb = UColor.hexToRGB(event.hexValue);
+        RGB_R_COLOR = rgb[0];
+        RGB_G_COLOR = rgb[1];
+        RGB_B_COLOR = rgb[2];
+        seekBar_R.setProgress(rgb[0]);
+        seekBar_G.setProgress(rgb[1]);
+        seekBar_B.setProgress(rgb[2]);
         refreshUI();
         savePreferences();
     }
