@@ -79,4 +79,22 @@ public class UColor {
 
         return message.toString();
     }
+
+    /**
+     *
+     * @param hexValue
+     * @return
+     */
+    public static int[] hexToRGB(String hexValue) {
+        int[] rgb = new int[3];
+
+        if(!"".equals(hexValue)) {
+            int rgbValue = Color.parseColor("#" + hexValue);
+            rgb[0] = (rgbValue & 0xFF0000) >> 16;
+            rgb[1] = (rgbValue & 0xFF00) >> 8;
+            rgb[2] = (rgbValue & 0xFF);
+        }
+
+        return rgb;
+    }
 }
