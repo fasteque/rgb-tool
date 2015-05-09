@@ -78,6 +78,7 @@ public class HexInsertionFragment extends DialogFragment {
                 );
 
         newHexValue.setText(hexValue);
+        newHexValue.setSelection(newHexValue.getText().length());
 
         return builder.create();
     }
