@@ -8,9 +8,10 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import com.fastebro.androidrgbtool.R;
+
 import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
+import com.fastebro.androidrgbtool.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,22 +20,20 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by danielealtomare on 26/03/14.
  */
-public class PrintJobDialogFragment extends DialogFragment {
-    @InjectView(R.id.message)
-    EditText message;
+public class HexInsertionFragment extends DialogFragment {
+    @InjectView(R.id.new_hex_value)
+    EditText newHexValue;
 
-    public static String ARG_JOB_TYPE = "JOB_TYPE";
-    public static final int PRINT_COLOR_JOB = 0;
-    public static final int PRINT_PALETTE_JOB = 1;
+    public static String ARG_HEX_VALUE = "HEX_VALUE";
 
-    public PrintJobDialogFragment() { }
+    public HexInsertionFragment() { }
 
-    private int jobType;
+    private String hexValue;
 
-    public static PrintJobDialogFragment newInstance(int jobType) {
-        PrintJobDialogFragment fragment = new PrintJobDialogFragment();
+    public static HexInsertionFragment newInstance(String hexValue) {
+        HexInsertionFragment fragment = new HexInsertionFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_JOB_TYPE, jobType);
+        args.putString(ARG_HEX_VALUE, hexValue);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,7 +43,7 @@ public class PrintJobDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            jobType = getArguments().getInt(ARG_JOB_TYPE, 0);
+            hexValue = getArguments().getString(ARG_HEX_VALUE, "000000");
         }
     }
 
@@ -54,45 +53,31 @@ public class PrintJobDialogFragment extends DialogFragment {
 
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_print_color, null);
+        View view = inflater.inflate(R.layout.dialog_hex_insertion, null);
         ButterKnife.inject(this, view);
-
-        String title;
-        if (jobType == PRINT_COLOR_JOB) {
-            title = getString(R.string.action_print);
-        } else {
-            title = getString(R.string.action_print_palette);
-        }
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(view)
-                .setTitle(title)
+                .setTitle(getString(R.string.hex_insertion_title))
                 .setPositiveButton(getString(R.string.action_common_set),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                if (jobType == PRINT_COLOR_JOB) {
-                                    EventBus.getDefault().post(new PrintColorEvent(message.getText().toString()));
-                                } else {
-                                    EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
-                                }
-                                PrintJobDialogFragment.this.getDialog().cancel();
+                                EventBus.getDefault().post(new PrintPaletteEvent(newHexValue.getText().toString()));
+                                HexInsertionFragment.this.getDialog().cancel();
                             }
                         }
                 )
-                .setNegativeButton(getString(R.string.action_common_skip),
+                .setNegativeButton(getString(R.string.action_common_cancel),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                if (jobType == PRINT_COLOR_JOB) {
-                                    EventBus.getDefault().post(new PrintColorEvent(null));
-                                } else {
-                                    EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
-                                }
-                                PrintJobDialogFragment.this.getDialog().cancel();
+                                HexInsertionFragment.this.getDialog().cancel();
                             }
                         }
                 );
+
+        newHexValue.setText(hexValue);
 
         return builder.create();
     }

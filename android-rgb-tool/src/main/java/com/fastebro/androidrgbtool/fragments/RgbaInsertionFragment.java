@@ -81,7 +81,7 @@ public class RgbaInsertionFragment extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(view)
                 .setTitle(getString(R.string.rgba_insertion_dialog_title))
-                .setPositiveButton(getString(R.string.print_color_dialog_message_set),
+                .setPositiveButton(getString(R.string.action_common_set),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {

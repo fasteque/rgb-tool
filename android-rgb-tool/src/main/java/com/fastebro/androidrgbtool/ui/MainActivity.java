@@ -39,6 +39,7 @@ import com.fastebro.android.rgbtool.model.events.PhotoScaledEvent;
 import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.RGBAInsertionEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateSaveColorUIEvent;
+import com.fastebro.androidrgbtool.fragments.HexInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.fragments.RgbaInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
@@ -61,7 +62,6 @@ import butterknife.InjectView;
 
 
 public class MainActivity extends EventBaseActivity {
-    // Objects.
     @InjectView(R.id.seekBar_R)
     SeekBar seekBar_R;
     @InjectView(R.id.seekBar_G)
@@ -89,7 +89,7 @@ public class MainActivity extends EventBaseActivity {
     @InjectView(R.id.textView_HSB_B)
     TextView textView_HSB_B;
 
-    // Hexadecimal and real color name.
+    // Hexadecimal color value.
     @InjectView(R.id.textView_Hexadecimal)
     TextView textView_Hexadecimal;
 
@@ -160,7 +160,7 @@ public class MainActivity extends EventBaseActivity {
             }
         });
 
-        setRGBAValuesClickListener();
+        setColorValuesClickListener();
         refreshUI();
     }
 
@@ -222,11 +222,21 @@ public class MainActivity extends EventBaseActivity {
         }
     }
 
-    private void setRGBAValuesClickListener() {
+    private void setColorValuesClickListener() {
         textView_RGB_R.setOnClickListener(RGBAClickListener);
         textView_RGB_G.setOnClickListener(RGBAClickListener);
         textView_RGB_B.setOnClickListener(RGBAClickListener);
         textView_RGB_O.setOnClickListener(RGBAClickListener);
+/*
+        textView_Hexadecimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HexInsertionFragment fragment =
+                        HexInsertionFragment.newInstance(textView_Hexadecimal.getText().toString());
+                fragment.show(getSupportFragmentManager(), null);
+            }
+        });
+*/
     }
 
     private View.OnClickListener RGBAClickListener = new View.OnClickListener() {

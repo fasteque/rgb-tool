@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" >
+
+    <EditText
+        android:id="@+id/new_hex_value"
+        android:inputType="textNoSuggestions"
+        android:digits="0,1,2,3,4,5,6,7,8,9,abcdef,ABCDEF"
+        android:maxLength="6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:hint="@string/hex_insertion_message_hint"
+        android:lines="2"
+        android:maxLines="2"/>
+
+</LinearLayout>
