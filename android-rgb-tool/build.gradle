@@ -55,6 +55,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'io.reactivex:rxandroid:0.24.0'
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compile project(':model')
 
