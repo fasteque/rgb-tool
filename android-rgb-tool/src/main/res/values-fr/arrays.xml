@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pick_color_array">
+        <item>Galerie outil RVB</item>
+        <item>Galerie de l\'appareil</item>
+        <item>Prendre photo</item>
+    </string-array>
+</resources>
