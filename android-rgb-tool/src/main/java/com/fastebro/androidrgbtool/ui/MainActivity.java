@@ -663,7 +663,7 @@ public class MainActivity extends EventBaseActivity {
          * Tell the media scanner about the new file so that it is
          * immediately available to the user.
          */
-        MediaScannerConnection.scanFile(this,
+        MediaScannerConnection.scanFile(getApplicationContext(),
                 new String[]{event.photoPath}, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
