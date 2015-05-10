@@ -20,7 +20,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,9 +43,10 @@ import com.fastebro.androidrgbtool.fragments.HexInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.fragments.RgbaInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
+import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
-import com.fastebro.androidrgbtool.tasks.PhotoScalingTask;
+import com.fastebro.androidrgbtool.tasks.PictureScalingManager;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
 import com.fastebro.androidrgbtool.utils.UColor;
 import com.fastebro.androidrgbtool.utils.UCommon;
@@ -60,6 +60,12 @@ import java.util.Date;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import de.greenrobot.event.EventBus;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends EventBaseActivity {
@@ -115,6 +121,8 @@ public class MainActivity extends EventBaseActivity {
     protected String hexValue;
 
     private ShareActionProvider shareActionProvider;
+
+    private Subscription scalePictureSubscription;
 
 
     @Override
@@ -538,27 +546,49 @@ public class MainActivity extends EventBaseActivity {
 
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             storageDir = albumStorageDirFactory.getAlbumStorageDir(getAlbumName());
-
             if (storageDir != null) {
                 if (!storageDir.mkdirs()) {
                     if (!storageDir.exists()) {
-                        Log.d(getString(R.string.app_name), "failed to create directory");
-
                         return null;
                     }
                 }
             }
 
-        } else {
-            Log.d(getString(R.string.app_name), "External storage is not mounted READ/WRITE.");
         }
 
         return storageDir;
     }
 
     private void handlePhoto(boolean useTempFile) {
+        String destinationPath;
+
         if (currentPhotoPath != null) {
-            new PhotoScalingTask(this, currentPhotoPath, useTempFile).execute();
+            if(useTempFile) {
+                destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
+            } else {
+                destinationPath = currentPhotoPath;
+            }
+
+            scalePictureSubscription = AppObservable.bindActivity(this,
+                    PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath))
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<ScaledPicture>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(ScaledPicture scaledPicture) {
+                            EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(), scaledPicture.isTempFile()));
+                        }
+                    });
         } else {
             Toast.makeText(this, getString(R.string.error_open_gallery_image), Toast.LENGTH_SHORT).show();
         }

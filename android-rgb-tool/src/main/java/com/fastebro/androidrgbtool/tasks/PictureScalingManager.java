@@ -1,14 +1,11 @@
 package com.fastebro.androidrgbtool.tasks;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.os.AsyncTask;
 
-import com.fastebro.android.rgbtool.model.events.PhotoScaledEvent;
+import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
 import com.fastebro.androidrgbtool.utils.UImage;
 
 import java.io.File;
@@ -18,71 +15,45 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.ref.WeakReference;
 
-import de.greenrobot.event.EventBus;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
- * Created by danielealtomare on 5/22/13.
+ * Created by danielealtomare on 5/10/15.
  */
-public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
-    private String photoPath;
-    private boolean useTempFile;
-    private final WeakReference<Activity> activityWeakReference;
+public class PictureScalingManager {
+    public static Observable<ScaledPicture> scalePictureObservable(final String sourcePath, final String destinationPath) {
+        return Observable.create(new Observable.OnSubscribe<ScaledPicture>() {
+            @Override
+            public void call(Subscriber<? super ScaledPicture> subscriber) {
+                try {
+                    boolean useTempFile = !sourcePath.equals(destinationPath);
 
-    public PhotoScalingTask(Activity activity, String photoPath, boolean useTempFile) {
-        this.photoPath = photoPath;
-        this.useTempFile = useTempFile;
-        activityWeakReference = new WeakReference<Activity>(activity);
-    }
+                    if (useTempFile) {
+                        copyFile(sourcePath, destinationPath);
+                    }
+                    savePrescaledBitmap(destinationPath);
 
-    @Override
-    protected void onCancelled(Boolean result) {
-        super.onCancelled(result);
-    }
-
-    @Override
-    protected Boolean doInBackground(Void... params) {
-        Activity activity = activityWeakReference.get();
-        if(activity != null) {
-            // Resize the image
-            try {
-                if (useTempFile) {
-                    copyFile(photoPath, activity.getApplicationContext());
+                    ScaledPicture scaledPicture = new ScaledPicture(destinationPath, useTempFile);
+                    subscriber.onNext(scaledPicture);
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    subscriber.onError(e);
                 }
-
-                savePrescaledBitmap(photoPath);
-
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-
-                return false;
             }
-        } else {
-            return false;
-        }
+        });
     }
 
-    @Override
-    protected void onPostExecute(Boolean result) {
-        Activity activity = activityWeakReference.get();
-        if ((activity != null) && result) {
-            EventBus.getDefault().post(new PhotoScaledEvent(photoPath, useTempFile));
-        }
-    }
-
-    private void copyFile(String inputPath, Context context) {
+    private static void copyFile(String inputPath, String destinationPath) {
         InputStream in = null;
         OutputStream out = null;
-        String filename;
 
         try {
-            filename = new File(inputPath).getName();
             in = new FileInputStream(inputPath);
-            out = new FileOutputStream(context.getFilesDir() + "/" + filename);
+            out = new FileOutputStream(destinationPath);
 
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
             int read;
             while ((read = in.read(buffer)) != -1) {
                 out.write(buffer, 0, read);
@@ -90,8 +61,6 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
             in.close();
             out.flush();
             out.close();
-
-            photoPath = context.getFilesDir() + "/" + filename;
         } catch (FileNotFoundException e) {
 
         } catch (Exception e) {
@@ -99,7 +68,7 @@ public class PhotoScalingTask extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
-    private void savePrescaledBitmap(String filename) throws IOException {
+    private static void savePrescaledBitmap(String filename) throws IOException {
         File file = null;
         FileInputStream fis;
 
