@@ -3,7 +3,6 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">RGB Tool Gallery</string>
-    <string name="rgb_tool_channel_title">RGB channel values</string>
     <string name="argb_label">ARGB</string>
     <string name="rgb_label">RGB</string>
     <string name="hsb_label">HSB</string>
@@ -42,7 +41,6 @@
 
     <!-- Print -->
     <string name="print_error">Printing error</string>
-    <string name="print_job_started">Printing started</string>
     <string name="print_job_canceled">Printing canceled</string>
 
     <!-- RGB Tool Gallery -->
@@ -51,11 +49,8 @@
     <string name="rgbtool_gallery_context_menu_subtitle_more">%1$d items selected</string>
 
     <!-- Generic items -->
-    <string name="empty_string">""</string>
-    <string name="not_found_string">not found</string>
     <string name="loading">Loading…</string>
     <string name="album_name">RGB-Tool</string>
-    <string name="action_settings">Settings</string>
     <string name="clipboard">copied to clipboard</string>
     <string name="title_activity_color_picker">Color Picker</string>
     <string name="title_activity_color_list">Your colors</string>

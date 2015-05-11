@@ -3,7 +3,6 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">Galerie outil RVB</string>
-    <string name="rgb_tool_channel_title">Valeurs canal RVB</string>
     <string name="argb_label">ARVB</string>
     <string name="rgb_label">RVB</string>
     <string name="hsb_label">TSL</string>
@@ -42,7 +41,6 @@
 
     <!-- Print -->
     <string name="print_error">Erreur d\'impression</string>
-    <string name="print_job_started">Impression commencé</string>
     <string name="print_job_canceled">Impression annulé</string>
 
     <!-- RGB Tool Gallery -->
@@ -51,11 +49,8 @@
     <string name="rgbtool_gallery_context_menu_subtitle_more">%1$d éléments sélectionnés</string>
 
     <!-- Generic items -->
-    <string name="empty_string">""</string>
-    <string name="not_found_string">non trouvé</string>
     <string name="loading">Chargement…</string>
     <string name="album_name">Outil RVB</string>
-    <string name="action_settings">Paramètres</string>
     <string name="clipboard">copié dans le presse-papiers</string>
     <string name="title_activity_color_picker">Choisir une couleur</string>
     <string name="title_activity_color_list">Vos couleurs</string>
