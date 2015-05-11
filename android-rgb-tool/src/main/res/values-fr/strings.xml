@@ -3,8 +3,8 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">Galerie outil RVB</string>
-    <string name="rgb_tool_channel_title">Valeurs de canal RVB</string>
-    <string name="argb_label">RVBA</string>
+    <string name="rgb_tool_channel_title">Valeurs canal RVB</string>
+    <string name="argb_label">ARVB</string>
     <string name="rgb_label">RVB</string>
     <string name="hsb_label">TSL</string>
     <string name="color_hexadecimal_label">HEX</string>
@@ -71,12 +71,12 @@
     <string name="prefs_eventbus">EventBus</string>
 
     <!-- Swatches -->
-    <string name="swatch_vibrant">Vibrant</string>
-    <string name="swatch_light_vibrant">Light vibrant</string>
-    <string name="swatch_dark_vibrant">Dark vibrant</string>
-    <string name="swatch_muted">Muted</string>
-    <string name="swatch_light_muted">Light muted</string>
-    <string name="swatch_dark_muted">Dark muted</string>
+    <string name="swatch_vibrant">Accentué</string>
+    <string name="swatch_light_vibrant">Clair accentué</string>
+    <string name="swatch_dark_vibrant">Sombre accentué</string>
+    <string name="swatch_muted">Atténué</string>
+    <string name="swatch_light_muted">Clair atténué</string>
+    <string name="swatch_dark_muted">Sombre atténué</string>
 
     <!-- HEX insertion value -->
     <string name="hex_insertion_title">Valeur HEX</string>
