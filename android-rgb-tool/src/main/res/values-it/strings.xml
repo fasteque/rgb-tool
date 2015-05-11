@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RGB Tool</string>
+    <string name="rgb_gallery_name">Galleria RGB Tool</string>
+    <string name="argb_label">ARGB</string>
+    <string name="rgb_label">RGB</string>
+    <string name="hsb_label">HSB</string>
+    <string name="color_hexadecimal_label">HEX</string>
+    <string name="color_list_empty">Nessun colore</string>
+
+    <!-- Common actions -->
+    <string name="action_common_set">Imposta</string>
+    <string name="action_common_cancel">Cancella</string>
+    <string name="action_common_skip">Avanti</string>
+
+    <!-- MainActivity action items -->
+    <string name="action_camera">Colore da immagine</string>
+    <string name="action_color_list">Lista colori</string>
+    <string name="action_print">Stampa colore</string>
+    <string name="action_print_palette">Stampa palette</string>
+    <string name="action_generic_share">Condividi</string>
+    <string name="action_share">Condivi colore</string>
+    <string name="action_share_palette">Condividi palette</string>
+    <string name="action_generic_delete">Cancella</string>
+    <string name="action_delete">Cancella immagini</string>
+    <string name="action_about">Info</string>
+    <string name="action_palette">Palette immagine</string>
+    <string name="pick_color">Seleziona immagine</string>
+    <string name="print_color_dialog_message_hint">Messaggio</string>
+    <string name="rgba_insertion_dialog_title">Imposta valori</string>
+
+    <!-- UColor items -->
+    <string name="color_red">R</string>
+    <string name="color_green">G</string>
+    <string name="color_blue">B</string>
+    <string name="color_opacity">O</string>
+    <string name="color_hue">H</string>
+    <string name="color_saturation">S</string>
+    <string name="color_brightness">B</string>
+
+    <!-- Print -->
+    <string name="print_error">Errore stampa</string>
+    <string name="print_job_canceled">Stampa cancellata</string>
+
+    <!-- RGB Tool Gallery -->
+    <string name="rgbtool_gallery_context_menu_title">Seleziona immagini</string>
+    <string name="rgbtool_gallery_context_menu_subtitle">Un\'immagine selezionata</string>
+    <string name="rgbtool_gallery_context_menu_subtitle_more">%1$d immagini selezionate</string>
+
+    <!-- Generic items -->
+    <string name="loading">Caricamento…</string>
+    <string name="album_name">RGB-Tool</string>
+    <string name="clipboard">copiato</string>
+    <string name="title_activity_color_picker">Color Picker</string>
+    <string name="title_activity_color_list">I tuoi colori</string>
+    <string name="title_activity_about">Info</string>
+    <string name="title_activity_palette">Palette</string>
+    <string name="error_open_gallery_image">Errore: l\'immagine potrebbe non essere nella memoria locale</string>
+
+    <!-- Attributions -->
+    <string name="pref_open_source_libs">Librerie Open Source</string>
+    <string name="prefs_picasso">Picasso</string>
+    <string name="prefs_butter_knife">Butter Knife</string>
+    <string name="prefs_photoview">PhotoView</string>
+    <string name="prefs_eventbus">EventBus</string>
+
+    <!-- Swatches -->
+    <string name="swatch_vibrant">Acceso</string>
+    <string name="swatch_light_vibrant">Acceso chiaro</string>
+    <string name="swatch_dark_vibrant">Acceso scuro</string>
+    <string name="swatch_muted">Tenue</string>
+    <string name="swatch_light_muted">Tenue chiaro</string>
+    <string name="swatch_dark_muted">Tenue scuro</string>
+
+    <!-- HEX insertion value -->
+    <string name="hex_insertion_title">Valore HEX</string>
+    <string name="hex_insertion_message_hint">HEX (6 cifre)</string>
+    <string name="hex_insertion_not_valid_error">Errore: valore HEX non valido!</string>
+</resources>
