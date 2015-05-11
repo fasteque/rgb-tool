@@ -3,6 +3,6 @@
     <string-array name="pick_color_array">
         <item>Galerie outil RVB</item>
         <item>Galerie de l\'appareil</item>
-        <item>Prendre photo</item>
+        <item>Prendre une photo</item>
     </string-array>
 </resources>
