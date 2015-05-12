@@ -18,5 +18,9 @@
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/greenrobot/EventBus" />
         </Preference>
+        <Preference android:title="@string/prefs_rxandroid" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/ReactiveX/RxAndroid" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

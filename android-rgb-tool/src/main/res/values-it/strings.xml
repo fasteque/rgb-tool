@@ -64,6 +64,7 @@
     <string name="prefs_butter_knife">Butter Knife</string>
     <string name="prefs_photoview">PhotoView</string>
     <string name="prefs_eventbus">EventBus</string>
+    <string name="prefs_rxandroid">RxAndroid</string>
 
     <!-- Swatches -->
     <string name="swatch_vibrant">Acceso</string>
