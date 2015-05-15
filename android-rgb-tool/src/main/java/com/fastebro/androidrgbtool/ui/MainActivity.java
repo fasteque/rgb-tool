@@ -174,12 +174,9 @@ public class MainActivity extends EventBaseActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (isFinishing()) {
-            savePreferences();
-        }
+    protected void onStop() {
+        super.onStop();
+        savePreferences();
     }
 
     @Override
