@@ -10,8 +10,8 @@ import android.util.AttributeSet;
  * Created by danielealtomare on 16/05/15.
  */
 public class AutoGridRecyclerView extends RecyclerView {
-    private GridLayoutManager mLayoutManager;
-    private int mColumnWidth = -1;
+    private GridLayoutManager layoutManager;
+    private int columnWidth = -1;
 
 
     public AutoGridRecyclerView(Context context) {
@@ -37,12 +37,12 @@ public class AutoGridRecyclerView extends RecyclerView {
             int[] attrsArray = { android.R.attr.columnWidth };
 
             TypedArray array = context.obtainStyledAttributes(attrs, attrsArray);
-            mColumnWidth = array.getDimensionPixelSize(0, -1);
+            columnWidth = array.getDimensionPixelSize(0, -1);
             array.recycle();
         }
 
-        mLayoutManager = new GridLayoutManager(getContext(), 2);
-        setLayoutManager(mLayoutManager);
+        layoutManager = new GridLayoutManager(getContext(), 2);
+        setLayoutManager(layoutManager);
     }
 
 
@@ -50,9 +50,9 @@ public class AutoGridRecyclerView extends RecyclerView {
     protected void onMeasure(int widthSpec, int heightSpec) {
         super.onMeasure(widthSpec, heightSpec);
 
-        if (mColumnWidth > 0) {
-            int spanCount = Math.max(1, getMeasuredWidth() / mColumnWidth);
-            mLayoutManager.setSpanCount(spanCount);
+        if (columnWidth > 0) {
+            int spanCount = Math.max(1, getMeasuredWidth() / columnWidth);
+            layoutManager.setSpanCount(spanCount);
         }
     }
 }
