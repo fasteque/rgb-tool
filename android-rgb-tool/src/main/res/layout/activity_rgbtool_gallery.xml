@@ -3,19 +3,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".ui.RGBToolGalleryActivity"
-                android:background="@color/dark_gray_2" >
+                android:background="@color/white" >
 
     <GridView
         android:id="@+id/grid_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:columnWidth="@dimen/rgb_grid_view_item_width"
-        android:numColumns="auto_fit"
-        android:horizontalSpacing="5dp"
-        android:verticalSpacing="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:numColumns="@integer/rgb_grid_view_columns_number"
+        android:horizontalSpacing="@dimen/rgb_grid_view_horizontal_spacing"
+        android:verticalSpacing="@dimen/rgb_grid_view_vertical_spacing"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="none"
-        android:listSelector="@color/primary"
+        android:listSelector="@color/accent"
         android:stretchMode="columnWidth"
         android:gravity="center" />
 
