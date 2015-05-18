@@ -165,6 +165,7 @@ public class ColorPickerActivity extends BaseActivity {
                     intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        //noinspection unchecked
                         startActivity(intent,
                                 ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
                     } else {

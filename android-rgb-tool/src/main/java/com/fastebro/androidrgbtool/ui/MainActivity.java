@@ -260,6 +260,7 @@ public class MainActivity extends EventBaseActivity {
 
     private void showColorList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //noinspection unchecked
             startActivity(new Intent(this, ColorListActivity.class), ActivityOptions
                     .makeSceneTransitionAnimation(this).toBundle());
         } else {
@@ -274,6 +275,7 @@ public class MainActivity extends EventBaseActivity {
 
     private void showAbout() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //noinspection unchecked
             startActivity(new Intent(this, AboutActivity.class), ActivityOptions
                     .makeSceneTransitionAnimation(this).toBundle());
         } else {
@@ -369,6 +371,7 @@ public class MainActivity extends EventBaseActivity {
 
     public void openRGBToolGallery() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //noinspection unchecked
             startActivity(new Intent(this, RGBToolGalleryActivity.class), ActivityOptions
                     .makeSceneTransitionAnimation(this).toBundle());
         } else {

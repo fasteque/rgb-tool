@@ -2,7 +2,7 @@ package com.fastebro.androidrgbtool.model.entities;
 
 public class Swatch {
     public enum SwatchType { NONE, VIBRANT, LIGHT_VIBRANT, DARK_VIBRANT,
-        MUTED, LIGHT_MUTED, DARK_MUTED; }
+        MUTED, LIGHT_MUTED, DARK_MUTED }
 
     protected int rgb;
     protected SwatchType type;
