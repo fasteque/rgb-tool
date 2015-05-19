@@ -51,16 +51,6 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onFinish() {
-        super.onFinish();
-    }
-
-    @Override
     public void onLayout(PrintAttributes oldAttributes,
                          PrintAttributes newAttributes,
                          CancellationSignal cancellationSignal,
