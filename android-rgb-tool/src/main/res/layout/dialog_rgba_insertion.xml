@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="R" />
+            android:text="@string/color_red" />
 
         <NumberPicker
             android:id="@+id/numberPickerR"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="G" />
+            android:text="@string/color_green" />
 
         <NumberPicker
             android:id="@+id/numberPickerG"
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="B" />
+            android:text="@string/color_blue" />
 
         <NumberPicker
             android:id="@+id/numberPickerB"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="O" />
+            android:text="@string/color_opacity" />
 
         <NumberPicker
             android:id="@+id/numberPickerA"
