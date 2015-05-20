@@ -28,6 +28,7 @@ import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 27/12/14.
+ * Project: rgb-tool
  */
 public class ImagePaletteActivity extends EventBaseActivity {
     @InjectView(R.id.palette_grid)

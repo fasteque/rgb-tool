@@ -8,6 +8,7 @@ import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by danielealtomare on 08/05/15.
+ * Project: rgb-tool
  */
 public class RGBToolApplication extends Application {
 

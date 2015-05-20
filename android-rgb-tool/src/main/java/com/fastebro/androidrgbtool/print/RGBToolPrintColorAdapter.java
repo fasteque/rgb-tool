@@ -24,6 +24,7 @@ import java.io.IOException;
 
 /**
  * Created by danielealtomare on 25/03/14.
+ * Project: rgb-tool
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {

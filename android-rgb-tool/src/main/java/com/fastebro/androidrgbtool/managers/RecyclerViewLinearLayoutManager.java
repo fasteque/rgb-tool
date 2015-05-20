@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by danielealtomare on 23/12/14.
+ * Project: rgb-tool
  */
 public class RecyclerViewLinearLayoutManager extends LinearLayoutManager {
 

@@ -4,6 +4,7 @@ import android.provider.BaseColumns;
 
 /**
  * Created by daltomare on 02/04/14.
+ * Project: rgb-tool
  */
 public final class ColorDataContract {
     // To prevent someone from accidentally instantiating the contract class.

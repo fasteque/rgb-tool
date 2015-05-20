@@ -21,6 +21,7 @@ import rx.Subscriber;
 
 /**
  * Created by danielealtomare on 5/10/15.
+ * Project: rgb-tool
  */
 public class PictureScalingManager {
     public static Observable<ScaledPicture> scalePictureObservable(final String sourcePath, final String destinationPath) {

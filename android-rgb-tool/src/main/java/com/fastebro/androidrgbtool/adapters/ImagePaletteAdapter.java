@@ -18,6 +18,7 @@ import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 27/12/14.
+ * Project: rgb-tool
  */
 public class ImagePaletteAdapter extends BaseAdapter {
     private Context context;

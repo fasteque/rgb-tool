@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 /**
  * Created by danielealtomare on 01/03/15.
+ * Project: rgb-tool
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {

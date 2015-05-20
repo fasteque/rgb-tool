@@ -2,6 +2,7 @@ package com.fastebro.android.rgbtool.model.events;
 
 /**
  * Created by danielealtomare on 17/05/14.
+ * Project: rgb-tool
  */
 public class ColorShareEvent {
     public final int colorId;

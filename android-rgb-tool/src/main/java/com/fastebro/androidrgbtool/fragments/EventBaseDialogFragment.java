@@ -6,6 +6,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 26/12/14.
+ * Project: rgb-tool
  */
 public class EventBaseDialogFragment extends DialogFragment {
     @Override

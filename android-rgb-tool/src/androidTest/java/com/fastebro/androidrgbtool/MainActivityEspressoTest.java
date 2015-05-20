@@ -7,6 +7,7 @@ import com.fastebro.androidrgbtool.ui.MainActivity;
 
 /**
  * Created by danielealtomare on 23/01/15.
+ * Project: rgb-tool
  */
 
 @LargeTest

@@ -18,6 +18,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 26/03/14.
+ * Project: rgb-tool
  */
 public class PrintJobDialogFragment extends DialogFragment {
     @InjectView(R.id.message)

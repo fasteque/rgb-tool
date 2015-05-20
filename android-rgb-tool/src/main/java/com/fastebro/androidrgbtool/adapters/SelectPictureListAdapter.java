@@ -13,6 +13,7 @@ import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 21/06/14.
+ * Project: rgb-tool
  */
 public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPictureListAdapter.ViewHolder> {
     private String[] entries;

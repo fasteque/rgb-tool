@@ -18,6 +18,7 @@ import java.util.HashSet;
 
 /**
  * Created by danielealtomare on 04/02/14.
+ * Project: rgb-tool
  */
 public class RGBToolContentProvider extends ContentProvider {
     private SQLiteRGBToolHelper database;

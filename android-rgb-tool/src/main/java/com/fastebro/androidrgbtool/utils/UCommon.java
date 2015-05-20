@@ -2,6 +2,7 @@ package com.fastebro.androidrgbtool.utils;
 
 /**
  * Created by daltomare on 13/03/14.
+ * Project: rgb-tool
  */
 public class UCommon {
     public static final String PREFS_NAME = "RGBToolFile";

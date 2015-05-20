@@ -32,6 +32,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 15/02/15.
+ * Project: rgb-tool
  */
 public class ColorListActivity extends EventBaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
     @InjectView(android.R.id.list)

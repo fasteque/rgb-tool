@@ -7,6 +7,7 @@ import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 
 /**
  * Created by danielealtomare on 17/05/14.
+ * Project: rgb-tool
  */
 public class UDatabase {
     public static final String[] COLORS_SUMMARY_PROJECTION = new String[]

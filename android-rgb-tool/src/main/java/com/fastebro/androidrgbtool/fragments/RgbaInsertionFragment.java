@@ -18,6 +18,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 26/03/14.
+ * Project: rgb-tool
  */
 public class RgbaInsertionFragment extends DialogFragment {
     public static final String ARG_RGBA_VALUES = "RGBA_VALUES";

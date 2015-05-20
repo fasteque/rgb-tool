@@ -2,6 +2,7 @@ package com.fastebro.androidrgbtool.utils;
 
 /**
  * Created by danielealtomare on 03/03/14.
+ * Project: rgb-tool
  */
 public class UImage {
     public final static String EXTRA_JPEG_FILE_PATH = "com.fastebro.androidrgbtool.extra.jpeg.file.path";

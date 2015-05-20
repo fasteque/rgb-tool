@@ -1,8 +1,5 @@
 package com.fastebro.androidrgbtool.view;
 
-/**
- * Created by danielealtomare on 15/02/15.
- */
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -13,10 +10,11 @@ import android.view.View;
 import com.fastebro.androidrgbtool.R;
 
 /**
- * Created by Shahab on 3/20/14.
+ * Created by danielealtomare on 15/02/15.
+ * Project: rgb-tool
  */
-public class CircleView extends View
-{
+
+public class CircleView extends View {
 
     private int circleRadius = 20;
     private int strokeColor;
@@ -76,15 +74,14 @@ public class CircleView extends View
         int w = this.getWidth();
         int h = this.getHeight();
 
-        int ox = w/2;
-        int oy = h/2;
+        int ox = w / 2;
+        int oy = h / 2;
 
         canvas.drawCircle(ox, oy, circleRadius, getStroke());
         canvas.drawCircle(ox, oy, circleRadius - circleGap, getFill());
     }
 
-    private Paint getStroke()
-    {
+    private Paint getStroke() {
         Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
         p.setStrokeWidth(strokeWidth);
         p.setColor(strokeColor);
@@ -92,23 +89,12 @@ public class CircleView extends View
         return p;
     }
 
-    private Paint getFill()
-    {
+    private Paint getFill() {
         Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
         p.setColor(fillColor);
         p.setStyle(Paint.Style.FILL);
         return p;
     }
-
-//    @Override
-//    protected int hGetMaximumHeight() {
-//        return circleRadius * 2 + strokeWidth;
-//    }
-//
-//    @Override
-//    protected int hGetMaximumWidth() {
-//        return circleRadius * 2 + strokeWidth;
-//    }
 
     public int getCircleRadius() {
         return circleRadius;

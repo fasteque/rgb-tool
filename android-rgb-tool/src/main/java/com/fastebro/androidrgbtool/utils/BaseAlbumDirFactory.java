@@ -6,6 +6,7 @@ import java.io.File;
 
 /**
  * Created by danielealtomare on 05/03/14.
+ * Project: rgb-tool
  */
 public class BaseAlbumDirFactory extends AlbumStorageDirFactory {
     @Override

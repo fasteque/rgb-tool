@@ -20,6 +20,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by daltomare on 17/04/14.
+ * Project: rgb-tool
  */
 public class ColorListAdapter extends SimpleCursorAdapter {
 

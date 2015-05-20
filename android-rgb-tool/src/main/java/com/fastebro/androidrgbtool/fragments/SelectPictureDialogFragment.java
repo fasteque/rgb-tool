@@ -19,6 +19,7 @@ import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 21/06/14.
+ * Project: rgb-tool
  */
 public class SelectPictureDialogFragment extends DialogFragment implements SelectPictureListAdapter.ItemClickListener {
     @InjectView(R.id.recyclerView)

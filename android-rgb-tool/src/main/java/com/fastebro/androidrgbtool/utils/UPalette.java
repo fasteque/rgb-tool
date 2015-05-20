@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Created by danielealtomare on 28/12/14.
+ * Project: rgb-tool
  */
 public class UPalette {
     public static String getSwatchDescription(Context context, PaletteSwatch.SwatchType type) {

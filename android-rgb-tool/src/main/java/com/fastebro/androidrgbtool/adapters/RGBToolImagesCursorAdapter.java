@@ -17,6 +17,7 @@ import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 09/06/14.
+ * Project: rgb-tool
  */
 public class RGBToolImagesCursorAdapter extends CursorAdapter {
     private final LayoutInflater inflater;

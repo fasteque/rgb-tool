@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 /**
  * Created by danielealtomare on 13/06/14.
+ * Project: rgb-tool
  */
 public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
     private static final int[] STATE_CHECKABLE = {android.R.attr.state_pressed};

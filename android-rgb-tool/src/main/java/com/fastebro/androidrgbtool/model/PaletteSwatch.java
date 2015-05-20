@@ -7,6 +7,7 @@ import com.fastebro.androidrgbtool.model.entities.Swatch;
 
 /**
  * Created by danielealtomare on 27/12/14.
+ * Project: rgb-tool
  */
 public class PaletteSwatch extends Swatch implements Parcelable {
 

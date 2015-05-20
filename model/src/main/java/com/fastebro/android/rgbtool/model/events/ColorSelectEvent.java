@@ -2,6 +2,7 @@ package com.fastebro.android.rgbtool.model.events;
 
 /**
  * Created by danielealtomare on 26/12/14.
+ * Project: rgb-tool
  */
 public class ColorSelectEvent {
     public final float RGBRComponent;

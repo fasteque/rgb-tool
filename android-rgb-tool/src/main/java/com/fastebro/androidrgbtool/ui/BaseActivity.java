@@ -10,6 +10,7 @@ import com.fastebro.androidrgbtool.R;
 
 /**
  * Created by danielealtomare on 26/10/14.
+ * Project: rgb-tool
  */
 public class BaseActivity extends AppCompatActivity {
     @Override
