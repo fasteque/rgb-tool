@@ -62,8 +62,6 @@ public class PictureScalingManager {
             in.close();
             out.flush();
             out.close();
-        } catch (FileNotFoundException e) {
-
         } catch (Exception e) {
 
         }
