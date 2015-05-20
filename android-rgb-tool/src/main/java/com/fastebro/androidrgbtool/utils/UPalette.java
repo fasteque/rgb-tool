@@ -38,7 +38,8 @@ public class UPalette {
         message.append(System.getProperty("line.separator"));
 
         if(!"".equals(filename)) {
-            message.append("File: " + filename);
+            message.append("File: ");
+            message.append(filename);
             message.append(System.getProperty("line.separator"));
         }
 
@@ -46,7 +47,8 @@ public class UPalette {
             message.append(UPalette.getSwatchDescription(context, swatch.getType()));
             message.append(": ");
             message.append("HEX - ");
-            message.append("#" + Integer.toHexString(swatch.getRgb()).toUpperCase());
+            message.append("#");
+            message.append(Integer.toHexString(swatch.getRgb()).toUpperCase());
             message.append(System.getProperty("line.separator"));
         }
 
