@@ -23,7 +23,7 @@ public class PrintJobDialogFragment extends DialogFragment {
     @InjectView(R.id.message)
     EditText message;
 
-    public static String ARG_JOB_TYPE = "JOB_TYPE";
+    public static final String ARG_JOB_TYPE = "JOB_TYPE";
     public static final int PRINT_COLOR_JOB = 0;
     public static final int PRINT_PALETTE_JOB = 1;
 

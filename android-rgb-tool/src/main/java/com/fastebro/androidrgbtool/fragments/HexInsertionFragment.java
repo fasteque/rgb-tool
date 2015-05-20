@@ -24,7 +24,7 @@ public class HexInsertionFragment extends DialogFragment {
     @InjectView(R.id.new_hex_value)
     EditText newHexValue;
 
-    public static String ARG_HEX_VALUE = "HEX_VALUE";
+    public static final String ARG_HEX_VALUE = "HEX_VALUE";
 
     public HexInsertionFragment() { }
 
