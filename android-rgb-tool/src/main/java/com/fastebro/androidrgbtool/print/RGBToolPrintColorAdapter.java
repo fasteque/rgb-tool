@@ -164,24 +164,32 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
 
         // Color description summary.
         paint.setTextSize(14);
-        token.append("R: " + UColor.getRGB(RGBRColor));
-        token.append("  G: " + UColor.getRGB(RGBGColor));
-        token.append("  B: " + UColor.getRGB(RGBBColor));
+        token.append("R: ");
+        token.append(UColor.getRGB(RGBRColor));
+        token.append("  G: ");
+        token.append(UColor.getRGB(RGBGColor));
+        token.append("  B: ");
+        token.append(UColor.getRGB(RGBBColor));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 25, paint);
 
         token = new StringBuilder();
-        token.append("Opacity: " + UColor.getRGB(RGBOpacity));
+        token.append("Opacity: ");
+        token.append(UColor.getRGB(RGBOpacity));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 50, paint);
 
         token = new StringBuilder();
         float[] hsb = UColor.RGBToHSB(RGBRColor, RGBGColor, RGBBColor);
-        token.append("H: " + String.format("%.0f", hsb[0]));
-        token.append("  S: " + String.format("%.0f%%", (hsb[1] * 100.0f)));
-        token.append("  B: " + String.format("%.0f%%", (hsb[2] * 100.0f)));
+        token.append("H: ");
+        token.append(String.format("%.0f", hsb[0]));
+        token.append("  S: ");
+        token.append(String.format("%.0f%%", (hsb[1] * 100.0f)));
+        token.append("  B: ");
+        token.append(String.format("%.0f%%", (hsb[2] * 100.0f)));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 75, paint);
 
         token = new StringBuilder();
-        token.append("HEX - " + String.format("#%s%s%s%s",
+        token.append("HEX - ");
+        token.append(String.format("#%s%s%s%s",
                 UColor.RGBToHex(RGBOpacity),
                 UColor.RGBToHex(RGBRColor),
                 UColor.RGBToHex(RGBGColor),
