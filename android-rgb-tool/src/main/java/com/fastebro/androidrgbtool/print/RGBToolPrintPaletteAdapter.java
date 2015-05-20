@@ -160,11 +160,13 @@ public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
         for(int i = 0; i < swatches.size(); i++) {
             paint.setColor(Color.BLACK);
             token = new StringBuilder();
-            token.append("Type: " + UPalette.getSwatchDescription(context, swatches.get(i).getType()));
+            token.append("Type: ");
+            token.append(UPalette.getSwatchDescription(context, swatches.get(i).getType()));
             canvas.drawText(token.toString(), leftMargin, titleBaseLine + (50 + (i * 100)), paint);
 
             token = new StringBuilder();
-            token.append("HEX: " + Integer.toHexString(swatches.get(i).getRgb()).toUpperCase());
+            token.append("HEX: ");
+            token.append(Integer.toHexString(swatches.get(i).getRgb()).toUpperCase());
             canvas.drawText(token.toString(), leftMargin, titleBaseLine + (75 + (i * 100)), paint);
 
             paint.setColor(swatches.get(i).getRgb());
