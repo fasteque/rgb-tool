@@ -47,8 +47,8 @@ public class PictureScalingManager {
     }
 
     private static void copyFile(String inputPath, String destinationPath) {
-        InputStream in = null;
-        OutputStream out = null;
+        InputStream in;
+        OutputStream out;
 
         try {
             in = new FileInputStream(inputPath);
@@ -68,7 +68,7 @@ public class PictureScalingManager {
     }
 
     private static void savePrescaledBitmap(String filename) throws IOException {
-        File file = null;
+        File file;
         FileInputStream fis;
 
         BitmapFactory.Options opts;
@@ -149,10 +149,9 @@ public class PictureScalingManager {
                 bmp.getHeight(), matrix, true);
 
         // Compress image
-        OutputStream outStream = null;
         File scaledImageFile = new File(filename);
 
-        outStream = new FileOutputStream(scaledImageFile);
+        OutputStream outStream = new FileOutputStream(scaledImageFile);
         rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outStream);
         outStream.flush();
         outStream.close();
