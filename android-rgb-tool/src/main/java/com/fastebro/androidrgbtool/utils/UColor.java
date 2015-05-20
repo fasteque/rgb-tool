@@ -55,22 +55,30 @@ public class UColor {
         message.append(System.getProperty("line.separator"));
 
         message.append("RGB - ");
-        message.append("R: " + UColor.getRGB(rgbRColor));
-        message.append("  G: " + UColor.getRGB(rgbGColor));
-        message.append("  B: " + UColor.getRGB(rgbBColor));
+        message.append("R: ");
+        message.append(UColor.getRGB(rgbRColor));
+        message.append("  G: ");
+        message.append(UColor.getRGB(rgbGColor));
+        message.append("  B: ");
+        message.append(UColor.getRGB(rgbBColor));
         message.append(System.getProperty("line.separator"));
 
-        message.append("Opacity: " + UColor.getRGB(rgbOpacity));
+        message.append("Opacity: ");
+        message.append(UColor.getRGB(rgbOpacity));
         message.append(System.getProperty("line.separator"));
 
         message.append("HSB - ");
         float[] hsb = UColor.RGBToHSB(rgbRColor, rgbGColor, rgbBColor);
-        message.append("H: " + String.format("%.0f", hsb[0]));
-        message.append("  S: " + String.format("%.0f%%", (hsb[1] * 100.0f)));
-        message.append("  B: " + String.format("%.0f%%", (hsb[2] * 100.0f)));
+        message.append("H: ");
+        message.append(String.format("%.0f", hsb[0]));
+        message.append("  S: ");
+        message.append(String.format("%.0f%%", (hsb[1] * 100.0f)));
+        message.append("  B: ");
+        message.append(String.format("%.0f%%", (hsb[2] * 100.0f)));
         message.append(System.getProperty("line.separator"));
 
-        message.append("HEX - " + String.format("#%s%s%s%s",
+        message.append("HEX - ");
+        message.append(String.format("#%s%s%s%s",
                 UColor.RGBToHex(rgbOpacity),
                 UColor.RGBToHex(rgbRColor),
                 UColor.RGBToHex(rgbGColor),
