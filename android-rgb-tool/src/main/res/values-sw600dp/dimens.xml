@@ -1,6 +1,5 @@
 <resources>
     <dimen name="activity_horizontal_margin">64dp</dimen>
-    <dimen name="button_margin">42dp</dimen>
 
     <dimen name="rgb_panel_margin_top">5dp</dimen>
     <dimen name="rgb_panel_margin_bottom">5dp</dimen>
