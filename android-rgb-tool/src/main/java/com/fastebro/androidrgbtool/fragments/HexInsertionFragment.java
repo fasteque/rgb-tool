@@ -100,6 +100,7 @@ public class HexInsertionFragment extends DialogFragment {
             return false;
         } else {
             try {
+                //noinspection ResultOfMethodCallIgnored
                 Integer.parseInt(hexValue, 16);
                 return true;
             } catch (NumberFormatException ex) {
