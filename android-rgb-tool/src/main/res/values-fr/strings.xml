@@ -65,6 +65,7 @@
     <string name="prefs_photoview">PhotoView</string>
     <string name="prefs_eventbus">EventBus</string>
     <string name="prefs_rxandroid">RxAndroid</string>
+    <string name="prefs_leak_canary">LeakCanary</string>
 
     <!-- Swatches -->
     <string name="swatch_vibrant">Accentué</string>

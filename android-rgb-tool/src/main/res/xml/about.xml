@@ -22,5 +22,9 @@
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/ReactiveX/RxAndroid" />
         </Preference>
+        <Preference android:title="@string/prefs_leak_canary" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/square/leakcanary" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
