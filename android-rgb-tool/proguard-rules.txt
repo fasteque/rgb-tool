@@ -48,3 +48,7 @@
 
 ####### RxAndroid #######
 -dontwarn rx.internal.util.unsafe.**
+
+######## LeakCanary #######
+-keep class org.eclipse.mat.** { *; }
+-keep class com.squareup.leakcanary.** { *; }
