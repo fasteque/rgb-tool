@@ -6,11 +6,10 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
-import com.fastebro.androidrgbtool.utils.UImage;
+import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,10 +86,10 @@ public class PictureScalingManager {
         // Find the correct scale value. It should be a power of 2
         resizeScale = 1;
 
-        if (opts.outHeight > UImage.JPEG_FILE_IMAGE_MAX_SIZE ||
-                opts.outWidth > UImage.JPEG_FILE_IMAGE_MAX_SIZE) {
+        if (opts.outHeight > ImageUtils.JPEG_FILE_IMAGE_MAX_SIZE ||
+                opts.outWidth > ImageUtils.JPEG_FILE_IMAGE_MAX_SIZE) {
             resizeScale = (int) Math.pow(2, (int) Math.round(
-                    Math.log(UImage.JPEG_FILE_IMAGE_MAX_SIZE /
+                    Math.log(ImageUtils.JPEG_FILE_IMAGE_MAX_SIZE /
                             (double) Math.max(opts.outHeight, opts.outWidth))
                             / Math.log(0.5)
             ));

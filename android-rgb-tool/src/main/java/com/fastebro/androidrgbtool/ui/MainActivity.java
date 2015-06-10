@@ -48,10 +48,10 @@ import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.tasks.PictureScalingManager;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
-import com.fastebro.androidrgbtool.utils.UColor;
-import com.fastebro.androidrgbtool.utils.UCommon;
-import com.fastebro.androidrgbtool.utils.UDatabase;
-import com.fastebro.androidrgbtool.utils.UImage;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
+import com.fastebro.androidrgbtool.utils.CommonUtils;
+import com.fastebro.androidrgbtool.utils.DatabaseUtils;
+import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -292,17 +292,17 @@ public class MainActivity extends EventBaseActivity {
                 new AsyncQueryHandler(getContentResolver()) {
                 };
 
-        float[] hsb = UColor.RGBToHSB(RGBRComponent,
+        float[] hsb = ColorUtils.RGBToHSB(RGBRComponent,
                 RGBGComponent,
                 RGBBComponent);
 
         ContentValues values = new ContentValues();
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_NAME, colorName);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HEX, String.format("#%s%s%s%s",
-                UColor.RGBToHex(RGB_OPACITY),
-                UColor.RGBToHex(RGB_R_COLOR),
-                UColor.RGBToHex(RGB_G_COLOR),
-                UColor.RGBToHex(RGB_B_COLOR)));
+                ColorUtils.RGBToHex(RGB_OPACITY),
+                ColorUtils.RGBToHex(RGB_R_COLOR),
+                ColorUtils.RGBToHex(RGB_G_COLOR),
+                ColorUtils.RGBToHex(RGB_B_COLOR)));
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R, (int) RGBRComponent);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G, (int) RGBGComponent);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B, (int) RGBBComponent);
@@ -346,7 +346,7 @@ public class MainActivity extends EventBaseActivity {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT,
-                UColor.getColorMessage(RGB_R_COLOR,
+                ColorUtils.getColorMessage(RGB_R_COLOR,
                         RGB_G_COLOR,
                         RGB_B_COLOR,
                         RGB_OPACITY)
@@ -434,7 +434,7 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void updateSaveColorButton() {
-        if (UDatabase.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
+        if (DatabaseUtils.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
                 RGB_B_COLOR, RGB_OPACITY)) {
             btn_SaveColor.setVisibility(View.INVISIBLE);
         } else {
@@ -460,10 +460,10 @@ public class MainActivity extends EventBaseActivity {
      */
     protected void updateRGBField() {
         // RGB channel: R, G, B, OPACITY.
-        textView_RGB_R.setText(UColor.getRGB(RGB_R_COLOR));
-        textView_RGB_G.setText(UColor.getRGB(RGB_G_COLOR));
-        textView_RGB_B.setText(UColor.getRGB(RGB_B_COLOR));
-        textView_RGB_O.setText(UColor.getRGB(RGB_OPACITY));
+        textView_RGB_R.setText(ColorUtils.getRGB(RGB_R_COLOR));
+        textView_RGB_G.setText(ColorUtils.getRGB(RGB_G_COLOR));
+        textView_RGB_B.setText(ColorUtils.getRGB(RGB_B_COLOR));
+        textView_RGB_O.setText(ColorUtils.getRGB(RGB_OPACITY));
     }
 
     /**
@@ -471,7 +471,7 @@ public class MainActivity extends EventBaseActivity {
      */
     protected void updateHSBField() {
         // Get float array with 3 values for HSB-HSV.
-        float[] hsb = UColor.RGBToHSB(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR);
+        float[] hsb = ColorUtils.RGBToHSB(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR);
 
         // Set HSB-HSV single channel value.
         textView_HSB_H.setText(String.format("%.0f", hsb[0]));
@@ -484,10 +484,10 @@ public class MainActivity extends EventBaseActivity {
      */
     protected void updateHexadecimalField() {
         hexValue = String.format("#%s%s%s%s",
-                UColor.RGBToHex(RGB_OPACITY),
-                UColor.RGBToHex(RGB_R_COLOR),
-                UColor.RGBToHex(RGB_G_COLOR),
-                UColor.RGBToHex(RGB_B_COLOR));
+                ColorUtils.RGBToHex(RGB_OPACITY),
+                ColorUtils.RGBToHex(RGB_R_COLOR),
+                ColorUtils.RGBToHex(RGB_G_COLOR),
+                ColorUtils.RGBToHex(RGB_B_COLOR));
 
         textView_Hexadecimal.setText(hexValue);
     }
@@ -528,9 +528,9 @@ public class MainActivity extends EventBaseActivity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        String imageFileName = UImage.JPEG_FILE_PREFIX + timeStamp + "_";
+        String imageFileName = ImageUtils.JPEG_FILE_PREFIX + timeStamp + "_";
 
-        File image = File.createTempFile(imageFileName, UImage.JPEG_FILE_SUFFIX, getAlbumDir());
+        File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX, getAlbumDir());
         currentPhotoPath = image.getAbsolutePath();
 
         return image;
@@ -623,21 +623,21 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void restorePreferences() {
-        SharedPreferences settings = getSharedPreferences(UCommon.PREFS_NAME, 0);
+        SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
 
-        updateRGBColor(settings.getFloat(UCommon.PREFS_R_COLOR, 0.0f),
-                settings.getFloat(UCommon.PREFS_G_COLOR, 0.0f),
-                settings.getFloat(UCommon.PREFS_B_COLOR, 0.0f),
-                settings.getFloat(UCommon.PREFS_OPACITY, 255.0f));
+        updateRGBColor(settings.getFloat(CommonUtils.PREFS_R_COLOR, 0.0f),
+                settings.getFloat(CommonUtils.PREFS_G_COLOR, 0.0f),
+                settings.getFloat(CommonUtils.PREFS_B_COLOR, 0.0f),
+                settings.getFloat(CommonUtils.PREFS_OPACITY, 255.0f));
     }
 
     private void savePreferences() {
-        SharedPreferences settings = getSharedPreferences(UCommon.PREFS_NAME, 0);
+        SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putFloat(UCommon.PREFS_R_COLOR, RGB_R_COLOR);
-        editor.putFloat(UCommon.PREFS_G_COLOR, RGB_G_COLOR);
-        editor.putFloat(UCommon.PREFS_B_COLOR, RGB_B_COLOR);
-        editor.putFloat(UCommon.PREFS_OPACITY, RGB_OPACITY);
+        editor.putFloat(CommonUtils.PREFS_R_COLOR, RGB_R_COLOR);
+        editor.putFloat(CommonUtils.PREFS_G_COLOR, RGB_G_COLOR);
+        editor.putFloat(CommonUtils.PREFS_B_COLOR, RGB_B_COLOR);
+        editor.putFloat(CommonUtils.PREFS_OPACITY, RGB_OPACITY);
         editor.apply();
     }
 
@@ -671,8 +671,8 @@ public class MainActivity extends EventBaseActivity {
                 });
 
         Intent colorPickerIntent = new Intent(this, ColorPickerActivity.class);
-        colorPickerIntent.putExtra(UImage.EXTRA_JPEG_FILE_PATH, event.photoPath);
-        colorPickerIntent.putExtra(UImage.EXTRA_DELETE_FILE, event.deleteFile);
+        colorPickerIntent.putExtra(ImageUtils.EXTRA_JPEG_FILE_PATH, event.photoPath);
+        colorPickerIntent.putExtra(ImageUtils.EXTRA_DELETE_FILE, event.deleteFile);
         startActivity(colorPickerIntent);
     }
 
@@ -698,7 +698,7 @@ public class MainActivity extends EventBaseActivity {
     }
 
     public void onEvent(UpdateHexValueEvent event) {
-        int[] rgb = UColor.hexToRGB(event.hexValue);
+        int[] rgb = ColorUtils.hexToRGB(event.hexValue);
         RGB_R_COLOR = rgb[0];
         RGB_G_COLOR = rgb[1];
         RGB_B_COLOR = rgb[2];

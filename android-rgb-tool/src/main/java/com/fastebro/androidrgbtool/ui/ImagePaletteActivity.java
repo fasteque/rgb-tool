@@ -19,7 +19,7 @@ import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
 import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.print.RGBToolPrintPaletteAdapter;
-import com.fastebro.androidrgbtool.utils.UPalette;
+import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.util.ArrayList;
 
@@ -100,7 +100,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
     private void updateSharedPalette() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, UPalette.getPaletteMessage(this, filename, swatches));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, PaletteUtils.getPaletteMessage(this, filename, swatches));
         shareIntent.setType("text/plain");
         setShareIntent(shareIntent);
     }

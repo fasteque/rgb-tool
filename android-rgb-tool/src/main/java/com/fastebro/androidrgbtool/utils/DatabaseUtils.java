@@ -9,7 +9,7 @@ import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
  * Created by danielealtomare on 17/05/14.
  * Project: rgb-tool
  */
-public class UDatabase {
+public class DatabaseUtils {
     public static final String[] COLORS_SUMMARY_PROJECTION = new String[]
             {
                     ColorDataContract.ColorEntry._ID,
@@ -39,7 +39,7 @@ public class UDatabase {
 
         Cursor cursor = context.getContentResolver().query(
                 RGBToolContentProvider.CONTENT_URI,
-                UDatabase.COLORS_SUMMARY_PROJECTION,
+                DatabaseUtils.COLORS_SUMMARY_PROJECTION,
                 mSelectionClause,
                 mSelectionArgs,
                 null);

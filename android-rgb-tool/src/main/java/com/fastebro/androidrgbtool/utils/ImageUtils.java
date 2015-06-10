@@ -4,7 +4,7 @@ package com.fastebro.androidrgbtool.utils;
  * Created by danielealtomare on 03/03/14.
  * Project: rgb-tool
  */
-public class UImage {
+public class ImageUtils {
     public final static String EXTRA_JPEG_FILE_PATH = "com.fastebro.androidrgbtool.extra.jpeg.file.path";
     public final static String EXTRA_DELETE_FILE = "com.fastebro.androidrgbtool.extra.delete.file";
     public final static String JPEG_FILE_PREFIX = "IMG_";

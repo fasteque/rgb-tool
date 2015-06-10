@@ -23,8 +23,8 @@ import com.fastebro.android.rgbtool.model.events.ColorSelectEvent;
 import com.fastebro.android.rgbtool.model.events.ColorShareEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
-import com.fastebro.androidrgbtool.utils.UColor;
-import com.fastebro.androidrgbtool.utils.UDatabase;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
+import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -125,7 +125,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         // creating a Cursor for the data being displayed.
         String select = "((" + ColorDataContract.ColorEntry.COLUMN_COLOR_HEX + " NOTNULL))";
         return new CursorLoader(this, baseUri,
-                UDatabase.COLORS_SUMMARY_PROJECTION, select, null,
+                DatabaseUtils.COLORS_SUMMARY_PROJECTION, select, null,
                 ColorDataContract.ColorEntry._ID + " DESC");
     }
 
@@ -188,7 +188,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_TEXT,
-                    UColor.getColorMessage(rgbRValue,
+                    ColorUtils.getColorMessage(rgbRValue,
                             rgbGValue,
                             rgbBValue,
                             rgbAValue)

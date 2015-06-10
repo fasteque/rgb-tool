@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
-import com.fastebro.androidrgbtool.utils.UPalette;
+import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -161,7 +161,7 @@ public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
             paint.setColor(Color.BLACK);
             token = new StringBuilder();
             token.append("Type: ");
-            token.append(UPalette.getSwatchDescription(context, swatches.get(i).getType()));
+            token.append(PaletteUtils.getSwatchDescription(context, swatches.get(i).getType()));
             canvas.drawText(token.toString(), leftMargin, titleBaseLine + (50 + (i * 100)), paint);
 
             token = new StringBuilder();

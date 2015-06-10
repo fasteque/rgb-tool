@@ -13,7 +13,7 @@ import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.android.rgbtool.model.events.ColorDeleteEvent;
 import com.fastebro.android.rgbtool.model.events.ColorShareEvent;
-import com.fastebro.androidrgbtool.utils.UColor;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.view.CircleView;
 
 import de.greenrobot.event.EventBus;
@@ -49,7 +49,7 @@ public class ColorListAdapter extends SimpleCursorAdapter {
                 rgbRValue + ", " + rgbGValue + ", " +
                 rgbBValue + ")");
 
-        hsb = UColor.RGBToHSB(rgbRValue, rgbGValue, rgbBValue);
+        hsb = ColorUtils.RGBToHSB(rgbRValue, rgbGValue, rgbBValue);
 
         hsbValue.setText("");
         hsbValue.append("(" + String.format("%.0f", hsb[0]));

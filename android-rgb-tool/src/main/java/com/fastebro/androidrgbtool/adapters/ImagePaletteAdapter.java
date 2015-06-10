@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
-import com.fastebro.androidrgbtool.utils.UPalette;
+import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,7 @@ public class ImagePaletteAdapter extends BaseAdapter {
 
         holder.color.setBackgroundColor(swatches.get(position).getRgb());
         holder.rgb.setText("#" + Integer.toHexString(swatches.get(position).getRgb()).toUpperCase());
-        holder.type.setText(UPalette.getSwatchDescription(context, swatches.get(position).getType()));
+        holder.type.setText(PaletteUtils.getSwatchDescription(context, swatches.get(position).getType()));
 
         return convertView;
     }

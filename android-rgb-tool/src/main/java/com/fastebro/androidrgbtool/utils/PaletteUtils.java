@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by danielealtomare on 28/12/14.
  * Project: rgb-tool
  */
-public class UPalette {
+public class PaletteUtils {
     public static String getSwatchDescription(Context context, PaletteSwatch.SwatchType type) {
         switch (type) {
             case VIBRANT:
@@ -44,7 +44,7 @@ public class UPalette {
         }
 
         for(PaletteSwatch swatch : swatches) {
-            message.append(UPalette.getSwatchDescription(context, swatch.getType()));
+            message.append(PaletteUtils.getSwatchDescription(context, swatch.getType()));
             message.append(": ");
             message.append("HEX - ");
             message.append("#");

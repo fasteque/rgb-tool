@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.RGBToolImagesCursorAdapter;
-import com.fastebro.androidrgbtool.utils.UImage;
+import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -102,8 +102,8 @@ public class RGBToolGalleryActivity extends BaseActivity
 
             if(!"".equals(photoPath)) {
                 Intent colorPickerIntent = new Intent(this, ColorPickerActivity.class);
-                colorPickerIntent.putExtra(UImage.EXTRA_JPEG_FILE_PATH, photoPath);
-                colorPickerIntent.putExtra(UImage.EXTRA_DELETE_FILE, false);
+                colorPickerIntent.putExtra(ImageUtils.EXTRA_JPEG_FILE_PATH, photoPath);
+                colorPickerIntent.putExtra(ImageUtils.EXTRA_DELETE_FILE, false);
                 startActivity(colorPickerIntent);
             }
         }

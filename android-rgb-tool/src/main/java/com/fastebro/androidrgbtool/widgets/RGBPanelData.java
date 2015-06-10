@@ -14,7 +14,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.utils.UColor;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class RGBPanelData extends LinearLayout {
 
@@ -99,7 +99,7 @@ public class RGBPanelData extends LinearLayout {
         red = (touchedRGB >> 16) & 0xFF;
         green = (touchedRGB >> 8) & 0xFF;
         blue = touchedRGB & 0xFF;
-        hsb = UColor.RGBToHSB(red, green, blue);
+        hsb = ColorUtils.RGBToHSB(red, green, blue);
 
         setRGBValue();
         setHSBValue();

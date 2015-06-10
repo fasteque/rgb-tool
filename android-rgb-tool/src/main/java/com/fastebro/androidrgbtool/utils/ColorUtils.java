@@ -2,7 +2,7 @@ package com.fastebro.androidrgbtool.utils;
 
 import android.graphics.Color;
 
-public class UColor {
+public class ColorUtils {
     /**
      * @param n
      * @return
@@ -56,19 +56,19 @@ public class UColor {
 
         message.append("RGB - ");
         message.append("R: ");
-        message.append(UColor.getRGB(rgbRColor));
+        message.append(ColorUtils.getRGB(rgbRColor));
         message.append("  G: ");
-        message.append(UColor.getRGB(rgbGColor));
+        message.append(ColorUtils.getRGB(rgbGColor));
         message.append("  B: ");
-        message.append(UColor.getRGB(rgbBColor));
+        message.append(ColorUtils.getRGB(rgbBColor));
         message.append(System.getProperty("line.separator"));
 
         message.append("Opacity: ");
-        message.append(UColor.getRGB(rgbOpacity));
+        message.append(ColorUtils.getRGB(rgbOpacity));
         message.append(System.getProperty("line.separator"));
 
         message.append("HSB - ");
-        float[] hsb = UColor.RGBToHSB(rgbRColor, rgbGColor, rgbBColor);
+        float[] hsb = ColorUtils.RGBToHSB(rgbRColor, rgbGColor, rgbBColor);
         message.append("H: ");
         message.append(String.format("%.0f", hsb[0]));
         message.append("  S: ");
@@ -79,10 +79,10 @@ public class UColor {
 
         message.append("HEX - ");
         message.append(String.format("#%s%s%s%s",
-                UColor.RGBToHex(rgbOpacity),
-                UColor.RGBToHex(rgbRColor),
-                UColor.RGBToHex(rgbGColor),
-                UColor.RGBToHex(rgbBColor)));
+                ColorUtils.RGBToHex(rgbOpacity),
+                ColorUtils.RGBToHex(rgbRColor),
+                ColorUtils.RGBToHex(rgbGColor),
+                ColorUtils.RGBToHex(rgbBColor)));
         message.append(System.getProperty("line.separator"));
 
         return message.toString();

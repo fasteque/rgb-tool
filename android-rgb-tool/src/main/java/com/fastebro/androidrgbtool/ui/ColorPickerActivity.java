@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
-import com.fastebro.androidrgbtool.utils.UImage;
+import com.fastebro.androidrgbtool.utils.ImageUtils;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
 
 import butterknife.ButterKnife;
@@ -63,8 +63,8 @@ public class ColorPickerActivity extends BaseActivity {
             Bundle bundle = getIntent().getExtras();
 
             if (bundle != null) {
-                currentPath = bundle.getString(UImage.EXTRA_JPEG_FILE_PATH);
-                deleteFile = bundle.getBoolean(UImage.EXTRA_DELETE_FILE);
+                currentPath = bundle.getString(ImageUtils.EXTRA_JPEG_FILE_PATH);
+                deleteFile = bundle.getBoolean(ImageUtils.EXTRA_DELETE_FILE);
             }
 
             if (currentPath != null) {

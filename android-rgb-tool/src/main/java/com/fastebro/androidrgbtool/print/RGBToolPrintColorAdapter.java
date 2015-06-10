@@ -17,7 +17,7 @@ import android.print.PrintDocumentInfo;
 import android.print.pdf.PrintedPdfDocument;
 import android.widget.Toast;
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.utils.UColor;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -77,10 +77,10 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
             PrintDocumentInfo info = new PrintDocumentInfo.Builder(
                     "rgbtool_" +
                             String.format("%s%s%s%s",
-                                    UColor.RGBToHex(RGBOpacity),
-                                    UColor.RGBToHex(RGBRColor),
-                                    UColor.RGBToHex(RGBGColor),
-                                    UColor.RGBToHex(RGBBColor)) +
+                                    ColorUtils.RGBToHex(RGBOpacity),
+                                    ColorUtils.RGBToHex(RGBRColor),
+                                    ColorUtils.RGBToHex(RGBGColor),
+                                    ColorUtils.RGBToHex(RGBBColor)) +
                             ".pdf"
             )
                     .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
@@ -165,20 +165,20 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
         // Color description summary.
         paint.setTextSize(14);
         token.append("R: ");
-        token.append(UColor.getRGB(RGBRColor));
+        token.append(ColorUtils.getRGB(RGBRColor));
         token.append("  G: ");
-        token.append(UColor.getRGB(RGBGColor));
+        token.append(ColorUtils.getRGB(RGBGColor));
         token.append("  B: ");
-        token.append(UColor.getRGB(RGBBColor));
+        token.append(ColorUtils.getRGB(RGBBColor));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 25, paint);
 
         token = new StringBuilder();
         token.append("Opacity: ");
-        token.append(UColor.getRGB(RGBOpacity));
+        token.append(ColorUtils.getRGB(RGBOpacity));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 50, paint);
 
         token = new StringBuilder();
-        float[] hsb = UColor.RGBToHSB(RGBRColor, RGBGColor, RGBBColor);
+        float[] hsb = ColorUtils.RGBToHSB(RGBRColor, RGBGColor, RGBBColor);
         token.append("H: ");
         token.append(String.format("%.0f", hsb[0]));
         token.append("  S: ");
@@ -190,10 +190,10 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
         token = new StringBuilder();
         token.append("HEX - ");
         token.append(String.format("#%s%s%s%s",
-                UColor.RGBToHex(RGBOpacity),
-                UColor.RGBToHex(RGBRColor),
-                UColor.RGBToHex(RGBGColor),
-                UColor.RGBToHex(RGBBColor)));
+                ColorUtils.RGBToHex(RGBOpacity),
+                ColorUtils.RGBToHex(RGBRColor),
+                ColorUtils.RGBToHex(RGBGColor),
+                ColorUtils.RGBToHex(RGBBColor)));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 100, paint);
 
         paint.setColor(Color.argb((int) RGBOpacity, (int) RGBRColor,
