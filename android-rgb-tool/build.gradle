@@ -12,7 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    if(project.hasProperty("RGBTool.signing.properties")
+    if (project.hasProperty("RGBTool.signing.properties")
             && new File(project.property("RGBTool.signing.properties")).exists()) {
 
         Properties props = new Properties()
