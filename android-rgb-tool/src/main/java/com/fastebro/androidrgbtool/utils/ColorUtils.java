@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.utils;
 
 import android.graphics.Color;
+import android.support.annotation.FloatRange;
 
 public class ColorUtils {
     /**
@@ -32,7 +33,9 @@ public class ColorUtils {
      * @param b
      * @return
      */
-    public static float[] RGBToHSB(float r, float g, float b) {
+    public static float[] RGBToHSB(@FloatRange(from=0.0, to=255.0) float r,
+                                   @FloatRange(from=0.0, to=255.0) float g,
+                                   @FloatRange(from=0.0, to=255.0) float b) {
         float[] hsb = new float[3];
         Color.RGBToHSV((int) r, (int) g, (int) b, hsb);
         return hsb;
@@ -45,10 +48,10 @@ public class ColorUtils {
      * @param rgbOpacity
      * @return
      */
-    public static String getColorMessage(float rgbRColor,
-                                         float rgbGColor,
-                                         float rgbBColor,
-                                         float rgbOpacity) {
+    public static String getColorMessage(@FloatRange(from=0.0, to=255.0) float rgbRColor,
+                                         @FloatRange(from=0.0, to=255.0) float rgbGColor,
+                                         @FloatRange(from=0.0, to=255.0) float rgbBColor,
+                                         @FloatRange(from=0.0, to=255.0) float rgbOpacity) {
         StringBuilder message = new StringBuilder();
 
         message.append("RGB Tool");
