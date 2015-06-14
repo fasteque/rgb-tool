@@ -1,10 +1,12 @@
 package com.fastebro.androidrgbtool.tasks;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresPermission;
 
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
@@ -24,6 +26,8 @@ import rx.Subscriber;
  * Project: rgb-tool
  */
 public class PictureScalingManager {
+
+    @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     public static Observable<ScaledPicture> scalePictureObservable(@NonNull final String sourcePath,
                                                                    @NonNull final String destinationPath) {
         return Observable.create(new Observable.OnSubscribe<ScaledPicture>() {
