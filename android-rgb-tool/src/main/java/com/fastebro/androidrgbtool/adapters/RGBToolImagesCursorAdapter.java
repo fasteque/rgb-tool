@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import butterknife.InjectView;
 public class RGBToolImagesCursorAdapter extends CursorAdapter {
     private final LayoutInflater inflater;
 
-    public RGBToolImagesCursorAdapter(Context context) {
+    public RGBToolImagesCursorAdapter(@NonNull Context context) {
         super(context, null, 0);
         inflater = LayoutInflater.from(context);
     }

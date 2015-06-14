@@ -1,5 +1,6 @@
 package com.fastebro.androidrgbtool.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
     private String[] entries;
     private ItemClickListener listener;
 
-    public SelectPictureListAdapter(String[] entries, ItemClickListener listener) {
+    public SelectPictureListAdapter(@NonNull String[] entries, @NonNull ItemClickListener listener) {
         this.entries = entries;
         this.listener = listener;
     }

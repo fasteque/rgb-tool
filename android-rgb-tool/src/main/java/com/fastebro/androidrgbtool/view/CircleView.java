@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -22,19 +23,19 @@ public class CircleView extends View {
     private int fillColor;
     private int circleGap = 20;
 
-    public CircleView(Context context) {
+    public CircleView(@NonNull Context context) {
         super(context);
 
         init();
     }
 
-    public CircleView(Context context, AttributeSet attrs) {
+    public CircleView(@NonNull Context context, @NonNull AttributeSet attrs) {
         this(context, attrs, 0);
 
         init();
     }
 
-    public CircleView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircleView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         TypedArray aTypedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleView, defStyleAttr, 0);
@@ -50,7 +51,7 @@ public class CircleView extends View {
         init();
     }
 
-    public CircleView(Context context, int strokeColor, int strokeWidth, int fillColor, int circleRadius, int circleGap) {
+    public CircleView(@NonNull Context context, int strokeColor, int strokeWidth, int fillColor, int circleRadius, int circleGap) {
         super(context);
         this.strokeColor = strokeColor;
         this.strokeWidth = strokeWidth;

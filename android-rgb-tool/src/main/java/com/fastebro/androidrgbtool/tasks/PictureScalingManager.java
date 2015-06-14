@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.support.annotation.NonNull;
 
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
@@ -23,7 +24,8 @@ import rx.Subscriber;
  * Project: rgb-tool
  */
 public class PictureScalingManager {
-    public static Observable<ScaledPicture> scalePictureObservable(final String sourcePath, final String destinationPath) {
+    public static Observable<ScaledPicture> scalePictureObservable(@NonNull final String sourcePath,
+                                                                   @NonNull final String destinationPath) {
         return Observable.create(new Observable.OnSubscribe<ScaledPicture>() {
             @Override
             public void call(Subscriber<? super ScaledPicture> subscriber) {

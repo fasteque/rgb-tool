@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * Project: rgb-tool
  */
 public class PaletteUtils {
-    public static String getSwatchDescription(Context context, PaletteSwatch.SwatchType type) {
+    public static String getSwatchDescription(@NonNull Context context, PaletteSwatch.SwatchType type) {
         switch (type) {
             case VIBRANT:
                 return context.getString(R.string.swatch_vibrant);
@@ -31,7 +32,7 @@ public class PaletteUtils {
         }
     }
 
-    public static String getPaletteMessage(Context context, String filename, ArrayList<PaletteSwatch> swatches) {
+    public static String getPaletteMessage(@NonNull Context context, String filename, ArrayList<PaletteSwatch> swatches) {
         StringBuilder message = new StringBuilder();
 
         message.append("RGB Tool - Image Palette");

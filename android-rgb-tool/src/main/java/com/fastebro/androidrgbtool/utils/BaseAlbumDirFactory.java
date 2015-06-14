@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.utils;
 
 import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 
@@ -10,7 +11,7 @@ import java.io.File;
  */
 public class BaseAlbumDirFactory extends AlbumStorageDirFactory {
     @Override
-    public File getAlbumStorageDir(String albumName) {
+    public File getAlbumStorageDir(@NonNull String albumName) {
         return new File(Environment.getExternalStorageDirectory() + "/" + albumName);
     }
 }

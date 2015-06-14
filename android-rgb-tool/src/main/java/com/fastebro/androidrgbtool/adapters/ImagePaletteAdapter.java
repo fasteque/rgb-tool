@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class ImagePaletteAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<PaletteSwatch> swatches;
 
-    public ImagePaletteAdapter(Context context, ArrayList<PaletteSwatch> swatches) {
+    public ImagePaletteAdapter(@NonNull Context context, @NonNull ArrayList<PaletteSwatch> swatches) {
         this.context = context;
         this.swatches = swatches;
     }

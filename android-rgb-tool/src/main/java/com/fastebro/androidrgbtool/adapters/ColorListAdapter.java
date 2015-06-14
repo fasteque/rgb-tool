@@ -3,6 +3,7 @@ package com.fastebro.androidrgbtool.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,7 @@ import de.greenrobot.event.EventBus;
  */
 public class ColorListAdapter extends SimpleCursorAdapter {
 
-    public ColorListAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    public ColorListAdapter(@NonNull Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);
     }
 

@@ -2,6 +2,7 @@ package com.fastebro.androidrgbtool;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -14,7 +15,7 @@ public class RGBToolApplication extends Application {
 
     private RefWatcher refWatcher;
 
-    public static RefWatcher getRefWatcher(Context context) {
+    public static RefWatcher getRefWatcher(@NonNull Context context) {
         RGBToolApplication application = (RGBToolApplication) context.getApplicationContext();
         return application.refWatcher;
     }

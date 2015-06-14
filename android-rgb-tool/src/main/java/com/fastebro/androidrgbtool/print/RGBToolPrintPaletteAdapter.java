@@ -15,6 +15,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.pdf.PrintedPdfDocument;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
@@ -38,7 +39,7 @@ public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
 
     private PrintedPdfDocument pdfDocument;
 
-    public RGBToolPrintPaletteAdapter(Context context,
+    public RGBToolPrintPaletteAdapter(@NonNull Context context,
                                       String message,
                                       String filename,
                                       ArrayList<PaletteSwatch> swatches) {

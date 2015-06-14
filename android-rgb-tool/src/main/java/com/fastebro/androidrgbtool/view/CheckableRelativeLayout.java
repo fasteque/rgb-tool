@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.view;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.Checkable;
 import android.widget.RelativeLayout;
@@ -13,15 +14,15 @@ public class CheckableRelativeLayout extends RelativeLayout implements Checkable
     private static final int[] STATE_CHECKABLE = {android.R.attr.state_pressed};
     boolean checked = false;
 
-    public CheckableRelativeLayout(Context context) {
+    public CheckableRelativeLayout(@NonNull Context context) {
         super(context);
     }
 
-    public CheckableRelativeLayout(Context context, AttributeSet attrs) {
+    public CheckableRelativeLayout(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CheckableRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
+    public CheckableRelativeLayout(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

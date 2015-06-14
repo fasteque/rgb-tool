@@ -2,6 +2,8 @@ package com.fastebro.androidrgbtool.utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
+
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 
@@ -25,7 +27,7 @@ public class DatabaseUtils {
                     ColorDataContract.ColorEntry.COLUMN_COLOR_NAME
             };
 
-    public static boolean findColor(Context context, float rValue,
+    public static boolean findColor(@NonNull Context context, float rValue,
                                     float gValue, float bValue, float aValue) {
         // Defines selection criteria for the rows to delete.
         String mSelectionClause = ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R + "=? AND " +

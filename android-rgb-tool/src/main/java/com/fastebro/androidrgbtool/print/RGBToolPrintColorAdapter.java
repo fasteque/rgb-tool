@@ -15,6 +15,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.pdf.PrintedPdfDocument;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
@@ -37,7 +38,7 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
 
     private PrintedPdfDocument pdfDocument;
 
-    public RGBToolPrintColorAdapter(Context context,
+    public RGBToolPrintColorAdapter(@NonNull Context context,
                                     String message,
                                     float rgbRColor,
                                     float rgbGColor,

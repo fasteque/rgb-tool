@@ -3,6 +3,8 @@ package com.fastebro.androidrgbtool.helpers;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
 
 public class SQLiteRGBToolHelper extends SQLiteOpenHelper {
@@ -35,7 +37,7 @@ public class SQLiteRGBToolHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "rgbtool.db";
     private static final int DATABASE_VERSION = 1;
 
-    public SQLiteRGBToolHelper(Context context) {
+    public SQLiteRGBToolHelper(@NonNull Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

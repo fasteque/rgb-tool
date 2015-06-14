@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.managers;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.view.ViewGroup;
  */
 public class RecyclerViewLinearLayoutManager extends LinearLayoutManager {
 
-    public RecyclerViewLinearLayoutManager(Context context, int orientation, boolean reverseLayout)    {
+    public RecyclerViewLinearLayoutManager(@NonNull Context context, int orientation, boolean reverseLayout)    {
         super(context, orientation, reverseLayout);
     }
 

@@ -1,5 +1,7 @@
 package com.fastebro.androidrgbtool.utils;
 
+import android.support.annotation.NonNull;
+
 import java.io.File;
 
 /**
@@ -7,5 +9,5 @@ import java.io.File;
  * Project: rgb-tool
  */
 abstract class AlbumStorageDirFactory {
-    public abstract File getAlbumStorageDir(String albumName);
+    public abstract File getAlbumStorageDir(@NonNull String albumName);
 }

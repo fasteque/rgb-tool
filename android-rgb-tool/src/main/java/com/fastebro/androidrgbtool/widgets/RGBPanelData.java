@@ -3,6 +3,7 @@ package com.fastebro.androidrgbtool.widgets;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,19 +35,19 @@ public class RGBPanelData extends LinearLayout {
     float[] hsb;
 
 
-    public RGBPanelData(Context context) {
+    public RGBPanelData(@NonNull Context context) {
         super(context);
         setupPanel(context);
     }
 
 
-    public RGBPanelData(Context context, AttributeSet attrs) {
+    public RGBPanelData(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
         setupPanel(context);
     }
 
 
-    public RGBPanelData(Context context, AttributeSet attrs, int defStyle) {
+    public RGBPanelData(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setupPanel(context);
     }
