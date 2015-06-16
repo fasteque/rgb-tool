@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
@@ -29,7 +30,6 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
@@ -362,8 +362,9 @@ public class MainActivity extends EventBaseActivity {
     }
 
     public void openDeviceGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.setType("image/*");
         galleryIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
 
         startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
@@ -384,7 +385,7 @@ public class MainActivity extends EventBaseActivity {
         if (requestCode == REQUEST_OPEN_GALLERY) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                    currentPhotoPath = getRealPathFromURI(this, data.getData());
+                    currentPhotoPath = getRealPathFromURI(data.getData());
                     handlePhoto(true);
                 }
             }
@@ -590,26 +591,25 @@ public class MainActivity extends EventBaseActivity {
                         }
                     });
         } else {
-            Toast.makeText(this, getString(R.string.error_open_gallery_image), Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    public String getRealPathFromURI(Context context, Uri contentUri) {
-        Cursor cursor = null;
+    public String getRealPathFromURI(Uri contentUri) {
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
+        cursor.close();
 
-        try {
-            String[] proj = {MediaStore.Images.Media.DATA};
-            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+        cursor = getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
 
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-
-            return cursor.getString(column_index);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
+        return path;
     }
 
     private void updateRGBColor(float RGBRComponent,
