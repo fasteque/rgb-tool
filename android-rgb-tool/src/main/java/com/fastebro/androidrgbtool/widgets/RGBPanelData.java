@@ -4,13 +4,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -68,9 +68,7 @@ public class RGBPanelData extends LinearLayout {
             ClipData clip = ClipData.newPlainText(label, text);
             clipboard.setPrimaryClip(clip);
 
-            Toast.makeText(context,
-                    text + " " + context.getString(R.string.clipboard),
-                    Toast.LENGTH_SHORT).show();
+            Snackbar.make(v, text + " " + context.getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
             return true;
         }
     }
