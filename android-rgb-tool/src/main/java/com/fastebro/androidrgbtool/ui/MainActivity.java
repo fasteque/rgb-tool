@@ -31,6 +31,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.fastebro.android.rgbtool.model.events.ErrorMessageEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.contracts.ColorDataContract;
@@ -587,11 +588,13 @@ public class MainActivity extends EventBaseActivity {
 
                         @Override
                         public void onNext(ScaledPicture scaledPicture) {
-                            EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(), scaledPicture.isTempFile()));
+                            EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
+                                    scaledPicture.isTempFile()));
                         }
                     });
         } else {
-            Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content),
+                    getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -707,5 +710,9 @@ public class MainActivity extends EventBaseActivity {
         seekBar_B.setProgress(rgb[2]);
         refreshUI();
         savePreferences();
+    }
+
+    public void onEvent(ErrorMessageEvent event) {
+        Snackbar.make(findViewById(android.R.id.content), event.message, Snackbar.LENGTH_SHORT).show();
     }
 }

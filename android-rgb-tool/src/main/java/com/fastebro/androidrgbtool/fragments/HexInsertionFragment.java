@@ -8,8 +8,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.fastebro.android.rgbtool.model.events.ErrorMessageEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 
@@ -66,12 +66,13 @@ public class HexInsertionFragment extends DialogFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 if(checkHexValue(newHexValue.getText().toString())) {
-                                    EventBus.getDefault().post(new UpdateHexValueEvent(newHexValue.getText().toString()));
-                                    HexInsertionFragment.this.getDialog().cancel();
+                                    EventBus.getDefault().post(
+                                            new UpdateHexValueEvent(newHexValue.getText().toString()));
                                 } else {
-                                    Toast.makeText(getActivity(), getString(R.string.hex_insertion_not_valid_error),
-                                            Toast.LENGTH_SHORT).show();
+                                    EventBus.getDefault().post(
+                                            new ErrorMessageEvent(getString(R.string.hex_insertion_not_valid_error)));
                                 }
+                                HexInsertionFragment.this.getDialog().cancel();
                             }
                         }
                 )
