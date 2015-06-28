@@ -8,14 +8,13 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 #
 
+# Application specific
 -keepattributes *Annotation*
 
-
-####### Apache Commons-IO #######
+# Apache Commons-IO
 -keep class org.apache.commons.io.**
 
-
-####### ButterKnife #######
+# ButterKnife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
 -keep class **$$ViewInjector { *; }
@@ -28,27 +27,27 @@
     @butterknife.* <methods>;
 }
 
-
-####### PhotoView #######
+# PhotoView
 -keep class uk.co.senab.photoview.** { *; }
 -keep interface uk.co.senab.photoview.** { *; }
 
-
-####### Picasso #######
+# Picasso
 -dontwarn com.squareup.okhttp.**
 
-
-####### Android v7 Support Library #######
+# Android v7 Support Library
 -keep class android.support.v7.widget.ShareActionProvider { *; }
 
-
-####### Greenbot EventBus #######
+# Greenbot EventBus
 -keepclassmembers class ** { public void onEvent*(**); }
 
-
-####### RxAndroid #######
+# RxAndroid
 -dontwarn rx.internal.util.unsafe.**
 
-######## LeakCanary #######
+# LeakCanary
 -keep class org.eclipse.mat.** { *; }
 -keep class com.squareup.leakcanary.** { *; }
+
+# Android Support Design Library
+-dontwarn android.support.design.**
+-keep class android.support.design.** { *; }
+-keep interface android.support.design.** { *; }
