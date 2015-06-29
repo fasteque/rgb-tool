@@ -14,7 +14,6 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
@@ -114,7 +113,7 @@ public class MainActivity extends EventBaseActivity {
     private float RGB_R_COLOR = 0.0f;
     private float RGB_G_COLOR = 0.0f;
     private float RGB_B_COLOR = 0.0f;
-    private float RGB_OPACITY = 255.0f;   // Default value.
+    private float RGB_OPACITY = 255.0f;
 
     private static final int REQUEST_OPEN_GALLERY = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
@@ -130,7 +129,7 @@ public class MainActivity extends EventBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
@@ -139,8 +138,7 @@ public class MainActivity extends EventBaseActivity {
         // Import main layout (with SeekBar sliders).
         LayoutInflater inflater = getLayoutInflater();
         addContentView(inflater.inflate(R.layout.activity_main, null),
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT)
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         );
 
         ButterKnife.inject(this);
@@ -162,11 +160,7 @@ public class MainActivity extends EventBaseActivity {
         btn_SaveColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveColor(RGB_R_COLOR,
-                        RGB_G_COLOR,
-                        RGB_B_COLOR,
-                        RGB_OPACITY,
-                        "");
+                saveColor(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR, RGB_OPACITY, "");
             }
         });
 
@@ -187,10 +181,11 @@ public class MainActivity extends EventBaseActivity {
         // Check if the device has a camera.
         MenuItem item = menu.findItem(R.id.action_camera);
 
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA))
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             item.setVisible(true);
-        else
+        } else {
             item.setVisible(false);
+        }
 
         item = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
@@ -210,8 +205,7 @@ public class MainActivity extends EventBaseActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_camera:
-                SelectPictureDialogFragment dialogFragment =
-                        new SelectPictureDialogFragment();
+                SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
                 dialogFragment.setCancelable(true);
                 dialogFragment.show(getSupportFragmentManager(), null);
                 return true;
@@ -247,11 +241,8 @@ public class MainActivity extends EventBaseActivity {
     private View.OnClickListener RGBAClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            short[] rgbaValues = new short[]{
-                    (short) RGB_R_COLOR,
-                    (short) RGB_G_COLOR,
-                    (short) RGB_B_COLOR,
-                    (short) RGB_OPACITY
+            short[] rgbaValues = new short[]{(short) RGB_R_COLOR, (short) RGB_G_COLOR, (short) RGB_B_COLOR, (short)
+                    RGB_OPACITY
             };
 
             RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
@@ -284,18 +275,11 @@ public class MainActivity extends EventBaseActivity {
         }
     }
 
-    private void saveColor(float RGBRComponent,
-                           float RGBGComponent,
-                           float RGBBComponent,
-                           float RGBOComponent,
-                           String colorName) {
-        AsyncQueryHandler handler =
-                new AsyncQueryHandler(getContentResolver()) {
-                };
+    private void saveColor(float RGBRComponent, float RGBGComponent, float RGBBComponent, float RGBOComponent, String
+            colorName) {
+        AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) { };
 
-        float[] hsb = ColorUtils.RGBToHSB(RGBRComponent,
-                RGBGComponent,
-                RGBBComponent);
+        float[] hsb = ColorUtils.RGBToHSB(RGBRComponent, RGBGComponent, RGBBComponent);
 
         ContentValues values = new ContentValues();
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_NAME, colorName);
@@ -330,28 +314,15 @@ public class MainActivity extends EventBaseActivity {
         String jobName = getString(R.string.app_name) + " Document";
 
         // Start a print job, passing in a PrintDocumentAdapter implementation
-        // to handle the generation of a print document
-        printManager.print(jobName,
-                new RGBToolPrintColorAdapter(
-                        this,
-                        message,
-                        RGB_R_COLOR,
-                        RGB_G_COLOR,
-                        RGB_B_COLOR,
-                        RGB_OPACITY),
-                null
-        );
+        printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, RGB_R_COLOR, RGB_G_COLOR,
+                RGB_B_COLOR, RGB_OPACITY), null);
     }
 
     private void updateSharedColor() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                ColorUtils.getColorMessage(RGB_R_COLOR,
-                        RGB_G_COLOR,
-                        RGB_B_COLOR,
-                        RGB_OPACITY)
-        );
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getColorMessage(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR,
+                RGB_OPACITY));
         shareIntent.setType("text/plain");
         setShareIntent(shareIntent);
     }
@@ -456,10 +427,6 @@ public class MainActivity extends EventBaseActivity {
                 (int) RGB_B_COLOR));
     }
 
-    /**
-     *
-     *
-     */
     protected void updateRGBField() {
         // RGB channel: R, G, B, OPACITY.
         textView_RGB_R.setText(ColorUtils.getRGB(RGB_R_COLOR));
@@ -485,11 +452,8 @@ public class MainActivity extends EventBaseActivity {
      * Update hex field.
      */
     protected void updateHexadecimalField() {
-        hexValue = String.format("#%s%s%s%s",
-                ColorUtils.RGBToHex(RGB_OPACITY),
-                ColorUtils.RGBToHex(RGB_R_COLOR),
-                ColorUtils.RGBToHex(RGB_G_COLOR),
-                ColorUtils.RGBToHex(RGB_B_COLOR));
+        hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
+                ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
 
         textView_Hexadecimal.setText(hexValue);
     }
@@ -532,40 +496,18 @@ public class MainActivity extends EventBaseActivity {
 
         String imageFileName = ImageUtils.JPEG_FILE_PREFIX + timeStamp + "_";
 
-        File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX, getAlbumDir());
+        File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX,
+                albumStorageDirFactory.getAlbumStorageDir(getString(R.string.album_name)));
         currentPhotoPath = image.getAbsolutePath();
 
         return image;
-    }
-
-    // Photo album for this application
-    private String getAlbumName() {
-        return getString(R.string.album_name);
-    }
-
-    private File getAlbumDir() {
-        File storageDir = null;
-
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            storageDir = albumStorageDirFactory.getAlbumStorageDir(getAlbumName());
-            if (storageDir != null) {
-                if (!storageDir.mkdirs()) {
-                    if (!storageDir.exists()) {
-                        return null;
-                    }
-                }
-            }
-
-        }
-
-        return storageDir;
     }
 
     private void handlePhoto(boolean useTempFile) {
         String destinationPath;
 
         if (currentPhotoPath != null) {
-            if(useTempFile) {
+            if (useTempFile) {
                 destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
             } else {
                 destinationPath = currentPhotoPath;
@@ -602,7 +544,7 @@ public class MainActivity extends EventBaseActivity {
         Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
         cursor.moveToFirst();
         String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
         cursor.close();
 
         cursor = getContentResolver().query(
@@ -615,10 +557,7 @@ public class MainActivity extends EventBaseActivity {
         return path;
     }
 
-    private void updateRGBColor(float RGBRComponent,
-                                float RGBGComponent,
-                                float RGBBComponent,
-                                float RGBOComponent) {
+    private void updateRGBColor(float RGBRComponent, float RGBGComponent, float RGBBComponent, float RGBOComponent) {
         RGB_R_COLOR = RGBRComponent;
         RGB_G_COLOR = RGBGComponent;
         RGB_B_COLOR = RGBBComponent;

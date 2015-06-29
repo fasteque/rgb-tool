@@ -12,6 +12,19 @@ import java.io.File;
 public class BaseAlbumDirFactory extends AlbumStorageDirFactory {
     @Override
     public File getAlbumStorageDir(@NonNull String albumName) {
-        return new File(Environment.getExternalStorageDirectory() + "/" + albumName);
+        File storageDir = null;
+
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            storageDir = getAlbumStorageDir(albumName);
+            if (storageDir != null) {
+                if (!storageDir.mkdirs()) {
+                    if (!storageDir.exists()) {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        return storageDir;
     }
 }
