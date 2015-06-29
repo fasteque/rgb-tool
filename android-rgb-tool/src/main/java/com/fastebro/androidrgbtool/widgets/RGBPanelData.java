@@ -12,20 +12,20 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class RGBPanelData extends LinearLayout {
 
-    @InjectView(R.id.rgb_value)
+    @Bind(R.id.rgb_value)
     TextView mRGBValue;
-    @InjectView(R.id.hsb_value)
+    @Bind(R.id.hsb_value)
     TextView mHSBValue;
-    @InjectView(R.id.hex_value)
+    @Bind(R.id.hex_value)
     TextView mHEXValue;
-    @InjectView(R.id.btn_dismiss_panel)
+    @Bind(R.id.btn_dismiss_panel)
     ImageButton mDismissPanelButton;
 
     int alpha;
@@ -76,7 +76,7 @@ public class RGBPanelData extends LinearLayout {
     private void setupPanel(final Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.rgb_data_panel_small, this);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         mDismissPanelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

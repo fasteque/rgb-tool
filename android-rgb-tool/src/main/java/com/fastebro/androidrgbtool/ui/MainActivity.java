@@ -58,8 +58,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 import rx.Observer;
 import rx.Subscription;
@@ -69,42 +69,42 @@ import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends EventBaseActivity {
-    @InjectView(R.id.seekBar_R)
+    @Bind(R.id.seekBar_R)
     SeekBar seekBar_R;
-    @InjectView(R.id.seekBar_G)
+    @Bind(R.id.seekBar_G)
     SeekBar seekBar_G;
-    @InjectView(R.id.seekBar_B)
+    @Bind(R.id.seekBar_B)
     SeekBar seekBar_B;
-    @InjectView(R.id.seekBar_O)
+    @Bind(R.id.seekBar_O)
     SeekBar seekBar_O;
 
     // RGB channel: R,G,B.
-    @InjectView(R.id.textView_RGB_R)
+    @Bind(R.id.textView_RGB_R)
     TextView textView_RGB_R;
-    @InjectView(R.id.textView_RGB_G)
+    @Bind(R.id.textView_RGB_G)
     TextView textView_RGB_G;
-    @InjectView(R.id.textView_RGB_B)
+    @Bind(R.id.textView_RGB_B)
     TextView textView_RGB_B;
-    @InjectView(R.id.textView_RGB_O)
+    @Bind(R.id.textView_RGB_O)
     TextView textView_RGB_O;
 
     // HSB: Hue, Saturation, Brightness.
-    @InjectView(R.id.textView_HSB_H)
+    @Bind(R.id.textView_HSB_H)
     TextView textView_HSB_H;
-    @InjectView(R.id.textView_HSB_S)
+    @Bind(R.id.textView_HSB_S)
     TextView textView_HSB_S;
-    @InjectView(R.id.textView_HSB_B)
+    @Bind(R.id.textView_HSB_B)
     TextView textView_HSB_B;
 
     // Hexadecimal color value.
-    @InjectView(R.id.textView_Hexadecimal)
+    @Bind(R.id.textView_Hexadecimal)
     TextView textView_Hexadecimal;
 
     // Save color button.
-    @InjectView(R.id.btn_save_color)
+    @Bind(R.id.btn_save_color)
     ImageButton btn_SaveColor;
 
-    @InjectView(R.id.color_view)
+    @Bind(R.id.color_view)
     View colorView;
 
     private String currentPhotoPath;
@@ -141,7 +141,7 @@ public class MainActivity extends EventBaseActivity {
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         );
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         restorePreferences();

@@ -14,8 +14,8 @@ import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 27/12/14.
@@ -67,12 +67,12 @@ public class ImagePaletteAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        @InjectView(R.id.palette_item_color) View color;
-        @InjectView(R.id.palette_item_rgb) TextView rgb;
-        @InjectView(R.id.palette_item_type) TextView type;
+        @Bind(R.id.palette_item_color) View color;
+        @Bind(R.id.palette_item_rgb) TextView rgb;
+        @Bind(R.id.palette_item_type) TextView type;
 
         public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 }

@@ -23,15 +23,15 @@ import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 27/12/14.
  * Project: rgb-tool
  */
 public class ImagePaletteActivity extends EventBaseActivity {
-    @InjectView(R.id.palette_grid)
+    @Bind(R.id.palette_grid)
     GridView paletteGrid;
 
     public static final String EXTRA_SWATCHES = "com.fastebro.androidrgbtool.EXTRA_SWATCHES";
@@ -47,7 +47,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_palette);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -13,8 +13,9 @@ import android.util.SparseBooleanArray;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.GridView;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.adapters.RGBToolImagesCursorAdapter;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
@@ -28,7 +29,7 @@ public class RGBToolGalleryActivity extends BaseActivity
     implements LoaderManager.LoaderCallbacks<Cursor>,
         AdapterView.OnItemClickListener {
 
-    @InjectView(R.id.grid_view)
+    @Bind(R.id.grid_view)
     GridView mGridView;
 
     RGBToolImagesCursorAdapter mAdapter;
@@ -37,7 +38,7 @@ public class RGBToolGalleryActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rgbtool_gallery);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

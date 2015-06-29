@@ -12,8 +12,8 @@ import android.widget.NumberPicker;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.android.rgbtool.model.events.RGBAInsertionEvent;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -23,13 +23,13 @@ import de.greenrobot.event.EventBus;
 public class RgbaInsertionFragment extends DialogFragment {
     public static final String ARG_RGBA_VALUES = "RGBA_VALUES";
 
-    @InjectView(R.id.numberPickerR)
+    @Bind(R.id.numberPickerR)
     NumberPicker pickerR;
-    @InjectView(R.id.numberPickerG)
+    @Bind(R.id.numberPickerG)
     NumberPicker pickerG;
-    @InjectView(R.id.numberPickerB)
+    @Bind(R.id.numberPickerB)
     NumberPicker pickerB;
-    @InjectView(R.id.numberPickerA)
+    @Bind(R.id.numberPickerA)
     NumberPicker pickerA;
 
     private short[] rgbaValues;
@@ -51,7 +51,7 @@ public class RgbaInsertionFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_rgba_insertion, null);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         pickerR.setMinValue(0);
         pickerR.setMaxValue(255);
@@ -110,6 +110,6 @@ public class RgbaInsertionFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 }

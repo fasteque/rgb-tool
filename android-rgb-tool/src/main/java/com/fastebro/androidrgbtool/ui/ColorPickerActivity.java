@@ -19,8 +19,8 @@ import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 import java.io.File;
@@ -28,10 +28,10 @@ import java.util.ArrayList;
 
 
 public class ColorPickerActivity extends BaseActivity {
-    @InjectView(R.id.color_picker_main_layout)
+    @Bind(R.id.color_picker_main_layout)
     RelativeLayout mainLayout;
 
-    @InjectView(R.id.iv_photo)
+    @Bind(R.id.iv_photo)
     ImageView imageView;
 
     private PhotoViewAttacher attacher;
@@ -49,7 +49,7 @@ public class ColorPickerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

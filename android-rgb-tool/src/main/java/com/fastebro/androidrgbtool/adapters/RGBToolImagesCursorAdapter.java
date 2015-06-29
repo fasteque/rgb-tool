@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import com.fastebro.androidrgbtool.R;
 import com.squareup.picasso.Picasso;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 09/06/14.
@@ -58,10 +58,10 @@ public class RGBToolImagesCursorAdapter extends CursorAdapter {
     }
 
     static class ViewHolder {
-        @InjectView(R.id.thumbnail) ImageView thumbnail;
+        @Bind(R.id.thumbnail) ImageView thumbnail;
 
         public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 }

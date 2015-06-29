@@ -26,8 +26,8 @@ import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -35,13 +35,13 @@ import de.greenrobot.event.EventBus;
  * Project: rgb-tool
  */
 public class ColorListActivity extends EventBaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
-    @InjectView(android.R.id.list)
+    @Bind(android.R.id.list)
     ListView listView;
 
-    @InjectView(R.id.list_empty_progress)
+    @Bind(R.id.list_empty_progress)
     LinearLayout progressBar;
 
-    @InjectView(R.id.list_empty_text)
+    @Bind(R.id.list_empty_text)
     TextView emptyListMessage;
 
     private ColorListAdapter adapter;
@@ -51,7 +51,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_list);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -14,15 +14,15 @@ import com.fastebro.androidrgbtool.adapters.SelectPictureListAdapter;
 import com.fastebro.androidrgbtool.managers.RecyclerViewLinearLayoutManager;
 import com.fastebro.androidrgbtool.ui.MainActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by danielealtomare on 21/06/14.
  * Project: rgb-tool
  */
 public class SelectPictureDialogFragment extends DialogFragment implements SelectPictureListAdapter.ItemClickListener {
-    @InjectView(R.id.recyclerView)
+    @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
     private SelectPictureListAdapter adapter;
@@ -34,7 +34,7 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_select_picture, container);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         adapter = new SelectPictureListAdapter(getResources().getStringArray(R.array.pick_color_array), this);
 
@@ -78,6 +78,6 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 }
