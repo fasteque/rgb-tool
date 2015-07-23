@@ -520,12 +520,12 @@ public class MainActivity extends EventBaseActivity {
                     .subscribe(new Observer<ScaledPicture>() {
                         @Override
                         public void onCompleted() {
-
+                            // Nothing to do.
                         }
 
                         @Override
                         public void onError(Throwable e) {
-
+                            // Nothing to do.
                         }
 
                         @Override
