@@ -14,6 +14,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
@@ -496,11 +497,31 @@ public class MainActivity extends EventBaseActivity {
 
         String imageFileName = ImageUtils.JPEG_FILE_PREFIX + timeStamp + "_";
 
-        File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX,
-                albumStorageDirFactory.getAlbumStorageDir(getString(R.string.album_name)));
+        File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX, getAlbumDir());
         currentPhotoPath = image.getAbsolutePath();
 
         return image;
+    }
+
+    // Photo album for this application
+    private String getAlbumName() {
+        return getString(R.string.album_name);
+    }
+
+    private File getAlbumDir() {
+        File storageDir = null;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            storageDir = albumStorageDirFactory.getAlbumStorageDir(getAlbumName());
+            if (storageDir != null) {
+                if (!storageDir.mkdirs()) {
+                    if (!storageDir.exists()) {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        return storageDir;
     }
 
     private void handlePhoto(boolean useTempFile) {
