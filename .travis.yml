@@ -5,8 +5,8 @@ jdk: openjdk7
 android:
   components:
     - tools
-    - platform-tools-preview
-    - build-tools-23.0.0-preview
+    - platform-tools
+    - build-tools-23.0.0
     - extra-android-support
     - extra-android-m2repository
     - android-22
