@@ -9,7 +9,7 @@ android:
     - build-tools-23.0.0
     - extra-android-support
     - extra-android-m2repository
-    - android-22
+    - android-23
 
 script:
   - ./gradlew clean assembleDebug
