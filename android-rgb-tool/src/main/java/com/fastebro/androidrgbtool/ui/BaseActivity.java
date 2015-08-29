@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
                 getSupportActionBar().setElevation(0);
             }
 
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark, getTheme()));
             getWindow().setEnterTransition(new Explode());
             getWindow().setExitTransition(new Fade());
             getWindow().setAllowEnterTransitionOverlap(true);
