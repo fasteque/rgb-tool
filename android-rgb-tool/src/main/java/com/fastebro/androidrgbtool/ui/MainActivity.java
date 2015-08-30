@@ -1,5 +1,6 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.AsyncQueryHandler;
@@ -18,6 +19,7 @@ import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
@@ -118,6 +120,9 @@ public class MainActivity extends EventBaseActivity {
 
     private static final int REQUEST_OPEN_GALLERY = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+
+    private boolean isWriteExternalStoragePermissionGranted;
 
     protected String hexValue;
 
@@ -170,6 +175,14 @@ public class MainActivity extends EventBaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Check for required permission.
+        checkPermissions();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         savePreferences();
@@ -182,7 +195,8 @@ public class MainActivity extends EventBaseActivity {
         // Check if the device has a camera.
         MenuItem item = menu.findItem(R.id.action_camera);
 
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+        if (isWriteExternalStoragePermissionGranted && getPackageManager().hasSystemFeature(PackageManager
+                .FEATURE_CAMERA)) {
             item.setVisible(true);
         } else {
             item.setVisible(false);
@@ -221,6 +235,44 @@ public class MainActivity extends EventBaseActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void checkPermissions() {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
+                .PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                Snackbar.make(findViewById(android.R.id.content), getString(R.string.rationale_external_storage),
+                        Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), new View
+                        .OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Request the permission
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                    }
+                }).show();
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                isWriteExternalStoragePermissionGranted = true;
+            } else {
+                isWriteExternalStoragePermissionGranted = false;
+            }
+            // We need to refresh the Toolbar.
+            supportInvalidateOptionsMenu();
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
