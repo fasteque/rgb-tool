@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
@@ -239,7 +240,7 @@ public class MainActivity extends EventBaseActivity {
     }
 
     private void checkPermissions() {
-        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
                 .PERMISSION_GRANTED) {
             // Should we show an explanation?
             if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -250,7 +251,7 @@ public class MainActivity extends EventBaseActivity {
                     public void onClick(View view) {
                         // Request the permission
                         ActivityCompat.requestPermissions(MainActivity.this,
-                                new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
                     }
                 }).show();
@@ -575,7 +576,8 @@ public class MainActivity extends EventBaseActivity {
     private void handlePhoto(boolean useTempFile) {
         String destinationPath;
 
-        if (currentPhotoPath != null) {
+        if (currentPhotoPath != null && (ContextCompat.checkSelfPermission(this, Manifest.permission
+                .WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             if (useTempFile) {
                 destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
             } else {
