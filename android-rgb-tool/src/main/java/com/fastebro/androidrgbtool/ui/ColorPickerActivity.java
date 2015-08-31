@@ -129,7 +129,7 @@ public class ColorPickerActivity extends BaseActivity {
                 public void onGenerated(Palette palette) {
                     Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
 
-                    ArrayList<PaletteSwatch> swatches = new ArrayList<PaletteSwatch>();
+                    ArrayList<PaletteSwatch> swatches = new ArrayList<>();
 
                     if(palette.getVibrantSwatch() != null) {
                         swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),

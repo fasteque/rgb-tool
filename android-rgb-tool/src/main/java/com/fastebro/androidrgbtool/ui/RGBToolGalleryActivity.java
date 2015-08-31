@@ -159,7 +159,7 @@ public class RGBToolGalleryActivity extends BaseActivity
 
     private void deleteSelectedItems() {
         SparseBooleanArray checked = mGridView.getCheckedItemPositions();
-        ArrayList<Integer> positions = new ArrayList<Integer>();
+        ArrayList<Integer> positions = new ArrayList<>();
 
         for (int i=0; i < checked.size(); i++) {
             if (checked.valueAt(i)) {

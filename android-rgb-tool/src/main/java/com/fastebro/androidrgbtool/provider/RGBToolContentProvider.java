@@ -235,8 +235,8 @@ public class RGBToolContentProvider extends ContentProvider {
                 };
 
         if (projection != null) {
-            HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));
-            HashSet<String> availableColumns = new HashSet<String>(Arrays.asList(available));
+            HashSet<String> requestedColumns = new HashSet<>(Arrays.asList(projection));
+            HashSet<String> availableColumns = new HashSet<>(Arrays.asList(available));
 
             // check if all columns which are requested are available
             if (!availableColumns.containsAll(requestedColumns)) {
