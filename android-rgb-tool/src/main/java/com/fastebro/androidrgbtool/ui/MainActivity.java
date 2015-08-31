@@ -264,11 +264,7 @@ public class MainActivity extends EventBaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                isWriteExternalStoragePermissionGranted = true;
-            } else {
-                isWriteExternalStoragePermissionGranted = false;
-            }
+            isWriteExternalStoragePermissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
             // We need to refresh the Toolbar.
             supportInvalidateOptionsMenu();
         } else {
