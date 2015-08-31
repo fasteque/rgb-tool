@@ -39,6 +39,6 @@ public class PaletteSwatch extends Swatch implements Parcelable {
 
     private PaletteSwatch(Parcel in) {
         rgb = in.readInt();
-        type = SwatchType.values()[in.readInt()];   // FIXME
+        type = SwatchType.values()[in.readInt()];
     }
 }
