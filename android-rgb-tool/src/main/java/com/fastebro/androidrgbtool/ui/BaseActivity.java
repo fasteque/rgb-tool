@@ -1,5 +1,6 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.fastebro.androidrgbtool.R;
  * Project: rgb-tool
  */
 public class BaseActivity extends AppCompatActivity {
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,11 @@ public class BaseActivity extends AppCompatActivity {
                 getSupportActionBar().setElevation(0);
             }
 
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark, getTheme()));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark, getTheme()));
+            } else {
+                getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
+            }
             getWindow().setEnterTransition(new Explode());
             getWindow().setExitTransition(new Fade());
             getWindow().setAllowEnterTransitionOverlap(true);
