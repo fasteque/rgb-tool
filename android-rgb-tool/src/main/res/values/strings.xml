@@ -82,4 +82,6 @@
 
     <!-- Permissions -->
     <string name="rationale_external_storage">Storage access is required to save and open photos</string>
+    <string name="permissions_not_granted">Permission was not granted.</string>
+    <string name="permissions_granted">Storage ermission has been granted. You can now use the feature.</string>
 </resources>
