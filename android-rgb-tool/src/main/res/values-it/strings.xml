@@ -81,5 +81,9 @@
     <string name="hex_insertion_not_valid_error">Errore: valore HEX non valido!</string>
 
     <!-- Permissions -->
-    <string name="rationale_external_storage">È necessario il permesso di archiviazione per salvare e aprire foto</string>
+    <string name="rationale_external_storage">È necessario il permesso di archiviazione per salvare e aprire foto
+        .</string>
+    <string name="permissions_not_granted">Il permesso non è stato concesso.</string>
+    <string name="permissions_granted">Il permesso di archiviazione è stato concesso. È ora possibile
+        utilizzare la funzionalità.</string>
 </resources>
