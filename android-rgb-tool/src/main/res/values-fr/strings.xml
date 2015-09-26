@@ -82,5 +82,7 @@
 
     <!-- Permissions -->
     <string name="rationale_external_storage">L\'accès de stockage est nécessaire pour enregistrer et ouvrir des
-        photos</string>
+        photos.</string>
+    <string name="permissions_not_granted">Permission n\'a pas été accordée.</string>
+    <string name="permissions_granted">L\'accès de stockage a été accordée. Vous pouvez maintenant utiliser la fonction.</string>
 </resources>
