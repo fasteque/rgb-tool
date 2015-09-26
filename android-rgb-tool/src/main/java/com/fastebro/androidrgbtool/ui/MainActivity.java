@@ -72,7 +72,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class MainActivity extends EventBaseActivity {
+public class MainActivity extends EventBaseActivity  implements ActivityCompat.OnRequestPermissionsResultCallback {
     @Bind(R.id.seekBar_R)
     SeekBar seekBar_R;
     @Bind(R.id.seekBar_G)
@@ -122,8 +122,6 @@ public class MainActivity extends EventBaseActivity {
     private static final int REQUEST_OPEN_GALLERY = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-
-    private boolean isWriteExternalStoragePermissionGranted;
 
     protected String hexValue;
 
@@ -176,14 +174,6 @@ public class MainActivity extends EventBaseActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Check for required permission.
-        checkPermissions();
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         savePreferences();
@@ -196,8 +186,7 @@ public class MainActivity extends EventBaseActivity {
         // Check if the device has a camera.
         MenuItem item = menu.findItem(R.id.action_camera);
 
-        if (isWriteExternalStoragePermissionGranted && getPackageManager().hasSystemFeature(PackageManager
-                .FEATURE_CAMERA)) {
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             item.setVisible(true);
         } else {
             item.setVisible(false);
@@ -221,9 +210,7 @@ public class MainActivity extends EventBaseActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_camera:
-                SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
-                dialogFragment.setCancelable(true);
-                dialogFragment.show(getSupportFragmentManager(), null);
+                checkWriteExternalStoragePermissions();
                 return true;
             case R.id.action_color_list:
                 showColorList();
@@ -239,11 +226,11 @@ public class MainActivity extends EventBaseActivity {
         }
     }
 
-    private void checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
+    private void checkWriteExternalStoragePermissions() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
                 .PERMISSION_GRANTED) {
             // Should we show an explanation?
-            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Snackbar.make(findViewById(android.R.id.content), getString(R.string.rationale_external_storage),
                         Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), new View
                         .OnClickListener() {
@@ -259,15 +246,27 @@ public class MainActivity extends EventBaseActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
+        } else {
+            showSelectPictureDialog();
         }
+    }
+
+    private void showSelectPictureDialog() {
+        SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
+        dialogFragment.setCancelable(true);
+        dialogFragment.show(getSupportFragmentManager(), null);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            isWriteExternalStoragePermissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-            // We need to refresh the Toolbar.
-            supportInvalidateOptionsMenu();
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Snackbar.make(findViewById(android.R.id.content), R.string.permissions_granted, Snackbar
+                        .LENGTH_SHORT).show();
+            } else {
+                Snackbar.make(findViewById(android.R.id.content), R.string.permissions_not_granted, Snackbar
+                        .LENGTH_SHORT).show();
+            }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
