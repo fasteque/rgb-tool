@@ -22,5 +22,5 @@
 
     <dimen name="btn_fab_size">56dp</dimen>
     <dimen name="btn_fab_margins">28dp</dimen>
-    <dimen name="btn_fab_elevation">8dp</dimen>
+    <dimen name="btn_fab_elevation">10dp</dimen>
 </resources>
