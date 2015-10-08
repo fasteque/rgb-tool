@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
+    <item android:drawable="@color/primary_dark"/>
+    <item>
+        <bitmap
+            android:src="@drawable/product_logo"
+            android:gravity="center"/>
+    </item>
+</layer-list>
