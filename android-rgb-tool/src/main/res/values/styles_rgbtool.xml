@@ -10,4 +10,8 @@
         <!-- ActionBar contextual mode -->
         <item name="actionModeBackground">@color/primary_light</item>
     </style>
+
+    <style name="Theme.Rgbtool.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
 </resources>
