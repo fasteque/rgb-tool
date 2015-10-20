@@ -132,9 +132,8 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         setTheme(R.style.Theme_Rgbtool);
+        super.onCreate(savedInstanceState);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
