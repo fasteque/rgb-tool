@@ -84,4 +84,5 @@
     <string name="rationale_external_storage">Storage access is required to save and open photos.</string>
     <string name="permissions_not_granted">Permission was not granted.</string>
     <string name="permissions_granted">Storage permission has been granted. You can now use the feature.</string>
+    <string name="title_activity_color_details">ColorDetailsActivity</string>
 </resources>

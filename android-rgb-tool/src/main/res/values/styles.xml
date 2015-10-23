@@ -23,4 +23,13 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <style name="Theme.Rgbtool.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Rgbtool.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="Theme.Rgbtool.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
 </resources>
