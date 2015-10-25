@@ -80,6 +80,10 @@
     <string name="hex_insertion_message_hint">HEX (6 cifre)</string>
     <string name="hex_insertion_not_valid_error">Errore: valore HEX non valido!</string>
 
+    <!-- Color details -->
+    <string name="color_details_as_text_title">Testo</string>
+    <string name="color_details_as_background_title">Sfondo</string>
+
     <!-- Permissions -->
     <string name="rationale_external_storage">È necessario il permesso di archiviazione per salvare e aprire foto
         .</string>

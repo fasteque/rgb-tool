@@ -21,7 +21,6 @@ public class ColorSampleFragment extends Fragment {
 
 
     public ColorSampleFragment() {
-        // Required empty public constructor
     }
 
     /**
