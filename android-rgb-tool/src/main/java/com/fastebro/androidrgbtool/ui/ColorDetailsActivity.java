@@ -13,11 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-
 import com.fastebro.androidrgbtool.R;
 
-public class ColorDetailsActivity extends AppCompatActivity {
+public class ColorDetailsActivity extends BaseActivity {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
