@@ -71,7 +71,6 @@
         </activity>
         <activity
             android:name=".ui.ColorDetailsActivity"
-            android:label="@string/title_activity_color_details"
             android:theme="@style/Theme.Rgbtool.NoActionBar">
         </activity>
     </application>
