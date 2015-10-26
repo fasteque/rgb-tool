@@ -14,8 +14,10 @@ import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
 
 public class ColorDetailsActivity extends BaseActivity {
 
+    protected static final String INTENT_EXTRA_RGB_COLOR = "com.fastebro.androidrgbtool.extra.RGB_COLOR";
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
+    private short[] rgbaValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class ColorDetailsActivity extends BaseActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        rgbaValues = getIntent().getShortArrayExtra(INTENT_EXTRA_RGB_COLOR);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -54,9 +58,9 @@ public class ColorDetailsActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return getString(R.string.color_details_as_text_title);
                 case 1:
-                    return "SECTION 2";
+                    return getString(R.string.color_details_as_background_title);
             }
             return null;
         }
