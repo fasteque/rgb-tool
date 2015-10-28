@@ -45,8 +45,7 @@ public class ColorDetailsActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // TODO: used the static method to get a new instance.
-            return new ColorSampleFragment();
+            return ColorSampleFragment.newInstance(rgbaValues);
         }
 
         @Override
