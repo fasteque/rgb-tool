@@ -1,18 +1,32 @@
 package com.fastebro.androidrgbtool.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ColorSampleFragment extends Fragment {
 
     private static final String ARG_RGB_COLOR = "arg_rgb_color";
     private short[] rgbaValues;
+
+    @Bind(R.id.firstColorSampleBackground)
+    CardView firstColorSampleBackground;
+    @Bind(R.id.firstColorSampleText)
+    TextView firstColorSampleText;
+
+    @Bind(R.id.secondColorSampleBackground)
+    CardView secondColorSampleBackground;
+    @Bind(R.id.secondColorSampleText)
+    TextView secondColorSampleText;
 
 
     public ColorSampleFragment() {
@@ -43,6 +57,14 @@ public class ColorSampleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_color_sample, container, false);
+        View view = inflater.inflate(R.layout.fragment_color_sample, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }
