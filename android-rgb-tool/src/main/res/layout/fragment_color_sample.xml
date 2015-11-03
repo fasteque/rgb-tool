@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/firstColorSample"
         android:layout_width="match_parent"
-        app:layout_heightPercent="30%">
+        app:layout_heightPercent="35%">
 
         <android.support.v7.widget.CardView
             android:id="@+id/firstColorSampleBackground"
@@ -17,14 +17,39 @@
             app:cardElevation="2dp"
             app:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/firstColorSampleText"
+            <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="@string/color_details_text_sample"
-                android:textSize="@dimen/rgb_text_size_large"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/firstColorSampleTextItalic"
+                    android:layout_width="match_parent"
+                    android:text="@string/color_details_text_sample"
+                    android:textSize="@dimen/rgb_text_size_color_sample"
+                    android:textStyle="italic"
+                    app:layout_heightPercent="33%"/>
+
+                <TextView
+                    android:id="@+id/firstColorSampleTextNormal"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/firstColorSampleTextItalic"
+                    android:text="@string/color_details_text_sample"
+                    android:textSize="@dimen/rgb_text_size_color_sample"
+                    android:textStyle="normal"
+                    app:layout_heightPercent="33%"/>
+
+                <TextView
+                    android:id="@+id/firstColorSampleTextBold"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/firstColorSampleTextNormal"
+                    android:text="@string/color_details_text_sample"
+                    android:textSize="@dimen/rgb_text_size_color_sample"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="33%"/>
+
+            </android.support.percent.PercentRelativeLayout>
 
         </android.support.v7.widget.CardView>
     </LinearLayout>
@@ -33,7 +58,7 @@
         android:id="@+id/secondColorSample"
         android:layout_width="match_parent"
         android:layout_below="@id/firstColorSample"
-        app:layout_heightPercent="30%">
+        app:layout_heightPercent="35%">
 
         <android.support.v7.widget.CardView
             android:id="@+id/secondColorSampleBackground"
@@ -44,15 +69,42 @@
             app:cardElevation="2dp"
             app:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/secondColorSampleText"
+            <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="@string/color_details_text_sample"
-                android:textSize="@dimen/rgb_text_size_large"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_horizontal_margin">
 
+                <TextView
+                    android:id="@+id/secondColorSampleTextItalic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/color_details_text_sample"
+                    android:textSize="@dimen/rgb_text_size_color_sample"
+                    android:textStyle="italic"
+                    app:layout_heightPercent="33%"/>
+
+                <TextView
+                    android:id="@+id/secondColorSampleTextNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/secondColorSampleTextItalic"
+                    android:text="@string/color_details_text_sample"
+                    android:textSize="@dimen/rgb_text_size_color_sample"
+                    android:textStyle="normal"
+                    app:layout_heightPercent="33%"/>
+
+                <TextView
+                    android:id="@+id/secondColorSampleTextBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/secondColorSampleTextNormal"
+                    android:text="@string/color_details_text_sample"
+                    android:textSize="@dimen/rgb_text_size_color_sample"
+                    android:textStyle="bold"
+                    app:layout_heightPercent="33%"/>
+
+            </android.support.percent.PercentRelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
