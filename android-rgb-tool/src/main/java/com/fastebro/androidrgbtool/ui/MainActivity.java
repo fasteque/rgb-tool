@@ -325,6 +325,17 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         }
     }
 
+    private void showColorDetails() {
+        Intent colorDetailsIntent =  new Intent(MainActivity.this, ColorDetailsActivity.class);
+        short[] argbValues = new short[4];
+        argbValues[0] = (short) RGB_OPACITY;
+        argbValues[1] = (short) RGB_R_COLOR;
+        argbValues[2] = (short) RGB_G_COLOR;
+        argbValues[3] = (short) RGB_B_COLOR;
+        colorDetailsIntent.putExtra(ColorDetailsActivity.INTENT_EXTRA_RGB_COLOR, argbValues);
+        startActivity(colorDetailsIntent);
+    }
+
     private void saveColor(float RGBRComponent, float RGBGComponent, float RGBBComponent, float RGBOComponent, String
             colorName) {
         AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) { };
