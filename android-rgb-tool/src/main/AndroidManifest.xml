@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.fastebro.androidrgbtool"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.fastebro.androidrgbtool"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <supports-screens
         android:largeScreens="true"
@@ -28,7 +29,9 @@
         android:theme="@style/Theme.Rgbtool">
         <activity
             android:name=".ui.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Rgbtool.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -40,17 +43,42 @@
             android:name=".ui.ColorPickerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
-            android:label="@string/title_activity_color_picker">
+            android:label="@string/title_activity_color_picker"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.RGBToolGalleryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
-            android:label="@string/rgb_gallery_name">
+            android:label="@string/rgb_gallery_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.ColorListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
-            android:label="@string/title_activity_color_list">
+            android:label="@string/title_activity_color_list"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.AboutActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.ImagePaletteActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_palette"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.ColorDetailsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Rgbtool.NoActionBar">
         </activity>
 
         <provider
@@ -58,21 +86,6 @@
             android:authorities="com.fastebro.androidrgbtool.rgbtoolprovider"
             android:exported="false">
         </provider>
-
-        <activity
-            android:name=".ui.AboutActivity"
-            android:exported="false"
-            android:label="@string/title_activity_about">
-        </activity>
-        <activity
-            android:name=".ui.ImagePaletteActivity"
-            android:exported="false"
-            android:label="@string/title_activity_palette">
-        </activity>
-        <activity
-            android:name=".ui.ColorDetailsActivity"
-            android:theme="@style/Theme.Rgbtool.NoActionBar">
-        </activity>
     </application>
 
 </manifest>
