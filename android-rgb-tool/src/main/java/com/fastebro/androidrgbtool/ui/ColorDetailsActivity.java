@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class ColorDetailsActivity extends BaseActivity {
 
@@ -35,6 +36,12 @@ public class ColorDetailsActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         argbValues = getIntent().getShortArrayExtra(INTENT_EXTRA_RGB_COLOR);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(String.format("#%s%s%s%s", ColorUtils.RGBToHex(argbValues[0]), ColorUtils
+                            .RGBToHex(argbValues[1]), ColorUtils.RGBToHex(argbValues[2]),
+                    ColorUtils.RGBToHex(argbValues[3])));
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
