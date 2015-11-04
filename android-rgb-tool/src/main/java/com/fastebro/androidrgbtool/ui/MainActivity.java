@@ -108,6 +108,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     @Bind(R.id.btn_save_color)
     ImageButton btn_SaveColor;
 
+    // Color details.
+    @Bind(R.id.btn_color_details)
+    ImageButton btn_ColorDetails;
+
     @Bind(R.id.color_view)
     View colorView;
 
@@ -167,6 +171,13 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
             @Override
             public void onClick(View v) {
                 saveColor(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR, RGB_OPACITY, "");
+            }
+        });
+
+        btn_ColorDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showColorDetails();
             }
         });
 

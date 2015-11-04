@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_silver" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/light_silver">
 
     <include layout="@layout/rgb_data_panel"/>
 
@@ -10,116 +10,128 @@
         android:id="@+id/color_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rgb_top_panel"
         android:layout_above="@+id/rgb_bottom_panel"
+        android:layout_below="@+id/rgb_top_panel"
         android:background="@android:color/white">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/robot"
-            android:layout_marginTop="@dimen/rgb_panel_margin_top"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
             android:layout_marginLeft="@dimen/rgb_panel_margin_left"
             android:layout_marginRight="@dimen/rgb_panel_margin_right"
-            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/rgb_panel_margin_top"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            android:src="@drawable/robot"/>
 
         <View
             android:id="@+id/color_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
     <ImageButton
-        android:id="@+id/btn_save_color"
-        android:layout_height="@dimen/btn_fab_size"
+        android:id="@+id/btn_color_details"
         android:layout_width="@dimen/btn_fab_size"
-        android:layout_marginBottom="-28dp"
-        android:layout_marginRight="@dimen/btn_fab_margins"
+        android:layout_height="@dimen/btn_fab_size"
         android:layout_alignBottom="@id/rgb_top_panel"
         android:layout_alignParentRight="true"
+        android:layout_marginBottom="-28dp"
+        android:layout_marginRight="@dimen/btn_fab_margins"
+        android:background="@drawable/btn_fab_default"
         android:elevation="@dimen/btn_fab_elevation"
-        android:src="@drawable/ic_add_white"
-        android:background="@drawable/btn_fab_default" />
+        android:src="@drawable/ic_details_white"/>
+
+    <ImageButton
+        android:id="@+id/btn_save_color"
+        android:layout_width="@dimen/btn_fab_size"
+        android:layout_height="@dimen/btn_fab_size"
+        android:layout_alignTop="@+id/btn_color_details"
+        android:layout_marginRight="@dimen/btn_fab_margins"
+        android:layout_toLeftOf="@+id/btn_color_details"
+        android:layout_toStartOf="@+id/btn_color_details"
+        android:background="@drawable/btn_fab_default"
+        android:elevation="@dimen/btn_fab_elevation"
+        android:src="@drawable/ic_add_white"/>
 
     <TableLayout
         android:id="@+id/rgb_bottom_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="1"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rgb_panel_background"
-        android:padding="@dimen/rgb_panel_padding" >
+        android:padding="@dimen/rgb_panel_padding"
+        android:stretchColumns="1">
 
         <TableRow>
 
             <TextView
+                style="@style/RGBOBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/RGBOBar"
-                android:text="@string/color_red" />
+                android:text="@string/color_red"/>
 
             <SeekBar
                 android:id="@+id/seekBar_R"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="20dp"
-                android:max="255" />
+                android:max="255"
+                android:paddingLeft="20dp"/>
         </TableRow>
 
         <TableRow>
 
             <TextView
+                style="@style/RGBOBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/RGBOBar"
-                android:text="@string/color_green" />
+                android:text="@string/color_green"/>
 
             <SeekBar
                 android:id="@+id/seekBar_G"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="20dp"
-                android:max="255" />
+                android:max="255"
+                android:paddingLeft="20dp"/>
         </TableRow>
 
         <TableRow>
 
             <TextView
+                style="@style/RGBOBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/RGBOBar"
-                android:text="@string/color_blue" />
+                android:text="@string/color_blue"/>
 
             <SeekBar
                 android:id="@+id/seekBar_B"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="20dp"
-                android:max="255"/>
+                android:max="255"
+                android:paddingLeft="20dp"/>
         </TableRow>
 
         <TableRow>
 
             <TextView
+                style="@style/RGBOBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/RGBOBar"
-                android:text="@string/color_opacity" />
+                android:text="@string/color_opacity"/>
 
             <SeekBar
                 android:id="@+id/seekBar_O"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingLeft="20dp"
-                android:max="255" />
+                android:max="255"
+                android:paddingLeft="20dp"/>
         </TableRow>
 
     </TableLayout>
