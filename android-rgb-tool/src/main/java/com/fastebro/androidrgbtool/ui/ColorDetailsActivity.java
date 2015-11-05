@@ -16,8 +16,6 @@ import com.fastebro.androidrgbtool.utils.ColorUtils;
 public class ColorDetailsActivity extends BaseActivity {
 
     protected static final String INTENT_EXTRA_RGB_COLOR = "com.fastebro.androidrgbtool.extra.RGB_COLOR";
-    private SectionsPagerAdapter sectionsPagerAdapter;
-    private ViewPager viewPager;
     private short[] argbValues;
 
     @Override
@@ -28,8 +26,8 @@ public class ColorDetailsActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.container);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
