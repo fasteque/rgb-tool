@@ -2,6 +2,7 @@ package com.fastebro.androidrgbtool.utils;
 
 import android.graphics.Color;
 import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 
 public class ColorUtils {
     /**
@@ -107,5 +108,44 @@ public class ColorUtils {
         }
 
         return rgb;
+    }
+
+    /**
+     *
+     * @param rgbRColor
+     * @param rgbGColor
+     * @param rgbBColor
+     * @return
+     */
+    public static int getComplementaryColor(@IntRange(from = 0, to = 255) short rgbRColor,
+                                            @IntRange(from = 0, to = 255) short rgbGColor,
+                                            @IntRange(from = 0, to = 255) short rgbBColor) {
+        float[] hsv = new float[3];
+        Color.RGBToHSV(rgbRColor, rgbGColor, rgbBColor, hsv);
+        hsv[0] = (hsv[0] + 180) % 360;
+
+        return Color.HSVToColor(hsv);
+    }
+
+    /**
+     *
+     * @param rgbRColor
+     * @param rgbGColor
+     * @param rgbBColor
+     * @return
+     */
+    public static int getContrastColor(@IntRange(from = 0, to = 255) short rgbRColor,
+                                       @IntRange(from = 0, to = 255) short rgbGColor,
+                                       @IntRange(from = 0, to = 255) short rgbBColor) {
+        float[] hsv = new float[3];
+        Color.RGBToHSV(rgbRColor, rgbGColor, rgbBColor, hsv);
+        if (hsv[2] < 0.5) {
+            hsv[2] = 0.7f;
+        } else {
+            hsv[2] = 0.3f;
+        }
+        hsv[1] = hsv[1] * 0.2f;
+
+        return Color.HSVToColor(hsv);
     }
 }
