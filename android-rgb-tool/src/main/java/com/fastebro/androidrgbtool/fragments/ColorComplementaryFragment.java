@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 public class ColorComplementaryFragment extends Fragment {
 
     private static final String ARG_RGB_COLOR = "arg_rgb_color";
-    private static final String ARG_IS_TEXT = "arg_is_text";
     private short[] argbValues;
     private boolean isText;
 
@@ -43,11 +42,10 @@ public class ColorComplementaryFragment extends Fragment {
      * @param rgbaValues
      * @return A new instance of fragment ColorSampleFragment.
      */
-    public static ColorComplementaryFragment newInstance(short[] rgbaValues, boolean isText) {
+    public static ColorComplementaryFragment newInstance(short[] rgbaValues) {
         ColorComplementaryFragment fragment = new ColorComplementaryFragment();
         Bundle args = new Bundle();
         args.putShortArray(ARG_RGB_COLOR, rgbaValues);
-        args.putBoolean(ARG_IS_TEXT, isText);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +55,6 @@ public class ColorComplementaryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             argbValues = getArguments().getShortArray(ARG_RGB_COLOR);
-            isText = getArguments().getBoolean(ARG_IS_TEXT);
         }
     }
 
