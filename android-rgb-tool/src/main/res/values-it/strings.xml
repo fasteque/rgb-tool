@@ -83,6 +83,7 @@
     <!-- Color details -->
     <string name="color_details_as_text_title">Testo</string>
     <string name="color_details_as_background_title">Sfondo</string>
+    <string name="color_details_complementary">Complementare</string>
 
     <!-- Permissions -->
     <string name="rationale_external_storage">È necessario il permesso di archiviazione per salvare e aprire foto
