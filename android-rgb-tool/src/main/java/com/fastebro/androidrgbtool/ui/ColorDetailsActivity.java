@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.fragments.ColorComplementaryFragment;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
@@ -55,13 +56,15 @@ public class ColorDetailsActivity extends BaseActivity {
                     return ColorSampleFragment.newInstance(argbValues, true);
                 case 1:
                     return ColorSampleFragment.newInstance(argbValues, false);
+                case 2:
+                    return ColorComplementaryFragment.newInstance(argbValues);
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -71,6 +74,8 @@ public class ColorDetailsActivity extends BaseActivity {
                     return getString(R.string.color_details_as_text_title);
                 case 1:
                     return getString(R.string.color_details_as_background_title);
+                case 2:
+                    return getString(R.string.color_details_complementary);
             }
             return null;
         }
