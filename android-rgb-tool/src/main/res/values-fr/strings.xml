@@ -84,6 +84,7 @@
     <string name="color_details_as_text_title">Texte</string>
     <string name="color_details_as_background_title">Fond</string>
     <string name="color_details_complementary">Complémentaire</string>
+    <string name="color_details_contrast">Contrastante</string>
 
     <!-- Permissions -->
     <string name="rationale_external_storage">L\'accès de stockage est nécessaire pour enregistrer et ouvrir des
