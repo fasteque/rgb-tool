@@ -75,7 +75,7 @@ public class ColorDetailsActivity extends BaseActivity {
                 case 1:
                     return getString(R.string.color_details_as_background_title);
                 case 2:
-                    return getString(R.string.color_details_complementary);
+                    return getString(R.string.color_details_colors_title);
             }
             return null;
         }
