@@ -83,9 +83,10 @@
     <!-- Color details -->
     <string name="color_details_as_text_title">Text</string>
     <string name="color_details_as_background_title">Background</string>
+    <string name="color_details_colors_title">Colors</string>
     <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
-    <string name="color_details_complementary">Complementary</string>
-    <string name="color_details_contrast">Contrast</string>
+    <string name="color_details_complementary">Complementary: #%s</string>
+    <string name="color_details_contrast">Contrast: #%s</string>
 
     <!-- Permissions -->
     <string name="rationale_external_storage">Storage access is required to save and open photos.</string>
