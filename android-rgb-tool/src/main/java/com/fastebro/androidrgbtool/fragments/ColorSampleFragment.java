@@ -44,13 +44,6 @@ public class ColorSampleFragment extends Fragment {
     public ColorSampleFragment() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameter.
-     *
-     * @param rgbaValues
-     * @return A new instance of fragment ColorSampleFragment.
-     */
     public static ColorSampleFragment newInstance(short[] rgbaValues, boolean isText) {
         ColorSampleFragment fragment = new ColorSampleFragment();
         Bundle args = new Bundle();
