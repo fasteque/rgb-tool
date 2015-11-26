@@ -59,7 +59,7 @@
     <string name="error_open_gallery_image">Erreur : l\'image peut ne pas être dans le stockage local</string>
 
     <!-- Attributions -->
-    <string name="pref_open_source_libs">Librairies Open Source</string>
+    <string name="pref_open_source_libs">Bibliothèques Open Source</string>
     <string name="prefs_picasso">Picasso</string>
     <string name="prefs_butter_knife">Butter Knife</string>
     <string name="prefs_photoview">PhotoView</string>
@@ -88,8 +88,7 @@
     <string name="color_details_contrast">Contrastante - #%s</string>
 
     <!-- Permissions -->
-    <string name="rationale_external_storage">L\'accès de stockage est nécessaire pour enregistrer et ouvrir des
-        photos.</string>
-    <string name="permissions_not_granted">Permission n\'a pas été accordée.</string>
-    <string name="permissions_granted">L\'accès de stockage a été accordée. Vous pouvez maintenant utiliser la fonction.</string>
+    <string name="rationale_external_storage">L\'accès au stockage est nécessaire pour enregistrer et ouvrir des photos.</string>
+    <string name="permissions_not_granted">Autorisation non accordée.</string>
+    <string name="permissions_granted">L\'accès au stockage a été accordée. Vous pouvez maintenant utiliser la fonction.</string>
 </resources>
