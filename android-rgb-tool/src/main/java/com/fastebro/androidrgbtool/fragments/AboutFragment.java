@@ -12,7 +12,7 @@ import com.fastebro.androidrgbtool.R;
 
 public class AboutFragment extends PreferenceFragment {
 
-    OnPreferenceSelectedListener onPreferenceSelectedListener;
+    private OnPreferenceSelectedListener onPreferenceSelectedListener;
 
     public interface OnPreferenceSelectedListener {
         void onPreferenceWithUriSelected(Uri uri);
