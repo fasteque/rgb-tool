@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RGB Tool</string>
+    <string name="rgb_gallery_name">Галерея RGB Tool</string>
+    <string name="argb_label">ARGB</string>
+    <string name="rgb_label">RGB</string>
+    <string name="hsb_label">HSB</string>
+    <string name="color_hexadecimal_label">HEX</string>
+    <string name="color_list_empty">Нет цветов</string>
+
+    <!-- Common actions -->
+    <string name="action_common_set">OK</string>
+    <string name="action_common_cancel">Отмена</string>
+    <string name="action_common_skip">Пропуск</string>
+
+    <!-- MainActivity action items -->
+    <string name="action_camera">Цвет из изображения</string>
+    <string name="action_color_list">Список цветов</string>
+    <string name="action_print">Печать цвета</string>
+    <string name="action_print_palette">Печать палитры</string>
+    <string name="action_generic_share">Поделиться</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_share_palette">Поделиться палитрой</string>
+    <string name="action_generic_delete">Удалить</string>
+    <string name="action_delete">Удалить изображения</string>
+    <string name="action_about">О программе</string>
+    <string name="action_palette">Палитра изображения</string>
+    <string name="pick_color">Выбрать картинку</string>
+    <string name="print_color_dialog_message_hint">Сообщения</string>
+    <string name="rgba_insertion_dialog_title">Применить</string>
+
+    <!-- UColor items -->
+    <string name="color_red">R</string>
+    <string name="color_green">G</string>
+    <string name="color_blue">B</string>
+    <string name="color_opacity">O</string>
+    <string name="color_hue">H</string>
+    <string name="color_saturation">S</string>
+    <string name="color_brightness">B</string>
+
+    <!-- Print -->
+    <string name="print_error">Ошибка печати</string>
+    <string name="print_job_canceled">Не удалось распечатать</string>
+
+    <!-- RGB Tool Gallery -->
+    <string name="rgbtool_gallery_context_menu_title">Выбрать файлы</string>
+    <string name="rgbtool_gallery_context_menu_subtitle">Выбрано 1 изображение</string>
+    <string name="rgbtool_gallery_context_menu_subtitle_more">Выбрано %1$d изображений</string>
+
+    <!-- Generic items -->
+    <string name="loading">Загрузка&#8230;</string>
+    <string name="album_name">RGB-Tool</string>
+    <string name="clipboard">скопировано в буфер обмена</string>
+    <string name="title_activity_color_picker">Определение цвета</string>
+    <string name="title_activity_color_list">Ваши цвета</string>
+    <string name="title_activity_about">О программе</string>
+    <string name="title_activity_palette">Палитра</string>
+    <string name="error_open_gallery_image">Ошибка: файл должен находиться на устройстве!</string>
+
+    <!-- Attributions -->
+    <string name="pref_open_source_libs">Open Source библиотеки</string>
+    <string name="prefs_picasso">Picasso</string>
+    <string name="prefs_butter_knife">Butter Knife</string>
+    <string name="prefs_photoview">PhotoView</string>
+    <string name="prefs_eventbus">EventBus</string>
+    <string name="prefs_rxandroid">RxAndroid</string>
+    <string name="prefs_leak_canary">LeakCanary</string>
+
+    <!-- Swatches -->
+    <string name="swatch_vibrant">Яркий</string>
+    <string name="swatch_light_vibrant">Светлый</string>
+    <string name="swatch_dark_vibrant">Тёмный</string>
+    <string name="swatch_muted">Приглушенный</string>
+    <string name="swatch_light_muted">Стветлый приглушенный</string>
+    <string name="swatch_dark_muted">Тёмный приглушенный</string>
+
+    <!-- HEX insertion value -->
+    <string name="hex_insertion_title">Значение HEX</string>
+    <string name="hex_insertion_message_hint">6-ти значный HEX код</string>
+    <string name="hex_insertion_not_valid_error">Ошибка: неверное значение!</string>
+
+    <!-- Color details -->
+    <string name="color_details_as_text_title">Текст</string>
+    <string name="color_details_as_background_title">Фон</string>
+    <string name="color_details_colors_title">Цвета</string>
+    <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
+    <string name="color_details_complementary">Дополнительно - #%s</string>
+    <string name="color_details_contrast">Постоянная - #%s</string>
+
+    <!-- Permissions -->
+    <string name="rationale_external_storage">Доступ к Sdcard требуется для сохранения данных и возможности использовать галерею.</string>
+    <string name="permissions_not_granted">Разрешение не получено</string>
+    <string name="permissions_granted">Разрешение получено. Теперь вы можете использовать эту функцию.</string>
+</resources>
