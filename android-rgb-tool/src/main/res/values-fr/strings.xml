@@ -49,7 +49,7 @@
     <string name="rgbtool_gallery_context_menu_subtitle_more">%1$d éléments sélectionnés</string>
 
     <!-- Generic items -->
-    <string name="loading">Chargement…</string>
+    <string name="loading">Chargement&#8230;</string>
     <string name="album_name">Outil RVB</string>
     <string name="clipboard">copié dans le presse-papiers</string>
     <string name="title_activity_color_picker">Choisir une couleur</string>

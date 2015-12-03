@@ -49,7 +49,7 @@
     <string name="rgbtool_gallery_context_menu_subtitle_more">%1$d immagini selezionate</string>
 
     <!-- Generic items -->
-    <string name="loading">Caricamento…</string>
+    <string name="loading">Caricamento&#8230;</string>
     <string name="album_name">RGB-Tool</string>
     <string name="clipboard">copiato</string>
     <string name="title_activity_color_picker">Color Picker</string>
