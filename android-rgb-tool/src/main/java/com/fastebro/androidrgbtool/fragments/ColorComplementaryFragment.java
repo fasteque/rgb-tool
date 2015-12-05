@@ -1,9 +1,16 @@
 package com.fastebro.androidrgbtool.fragments;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -29,6 +36,8 @@ public class ColorComplementaryFragment extends Fragment {
     @Bind(R.id.contrastColorText)
     TextView contrastColorText;
 
+    private ShareActionProvider shareActionProvider;
+
 
     public ColorComplementaryFragment() {
     }
@@ -53,6 +62,7 @@ public class ColorComplementaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_color_complementary, container, false);
         ButterKnife.bind(this, view);
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -74,5 +84,48 @@ public class ColorComplementaryFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.complementary_color, menu);
+
+        MenuItem item = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        updateSharedColor();
+
+        item = menu.findItem(R.id.action_print);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            item.setVisible(false);
+        }
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_print:
+                // TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void updateSharedColor() {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        // TODO: set text to share.
+        shareIntent.setType("text/plain");
+        setShareIntent(shareIntent);
+    }
+
+    private void setShareIntent(Intent shareIntent) {
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(shareIntent);
+        }
     }
 }
