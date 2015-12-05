@@ -219,7 +219,6 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_camera:
                 checkWriteExternalStoragePermissions();
