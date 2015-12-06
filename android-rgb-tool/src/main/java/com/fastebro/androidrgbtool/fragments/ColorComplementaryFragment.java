@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,8 @@ public class ColorComplementaryFragment extends Fragment {
     TextView contrastColorText;
 
     private ShareActionProvider shareActionProvider;
+    private int complementaryColor;
+    private int contrastColor;
 
 
     public ColorComplementaryFragment() {
@@ -68,16 +71,18 @@ public class ColorComplementaryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        int complementaryColor = ColorUtils.getComplementaryColor(argbValues[1], argbValues[2], argbValues[3]);
+        complementaryColor = ColorUtils.getComplementaryColor(argbValues[1], argbValues[2], argbValues[3]);
         complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
                 (complementaryColor)));
 
-        int contrastColor = ColorUtils.getContrastColor(argbValues[1], argbValues[2], argbValues[3]);
+        contrastColor = ColorUtils.getContrastColor(argbValues[1], argbValues[2], argbValues[3]);
         contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
                 (contrastColor)));
 
         complementaryColorBackground.setCardBackgroundColor(complementaryColor);
         contrastColorBackground.setCardBackgroundColor(contrastColor);
+
+        updateSharedColor();
     }
 
     @Override
@@ -118,7 +123,22 @@ public class ColorComplementaryFragment extends Fragment {
     private void updateSharedColor() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        // TODO: set text to share.
+
+        short[] argbComplementaryColorValues = new short[4];
+        argbValues[0] = (short) 255;
+        argbValues[1] = (short) Color.red(complementaryColor);
+        argbValues[2] = (short) Color.blue(complementaryColor);
+        argbValues[3] = (short) Color.green(complementaryColor);
+
+        short[] argbContrastColorValues = new short[4];
+        argbValues[0] = (short) 255;
+        argbValues[1] = (short) Color.red(contrastColor);
+        argbValues[2] = (short) Color.blue(contrastColor);
+        argbValues[3] = (short) Color.green(contrastColor);
+
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getComplementaryColorMessage(argbValues,
+                argbComplementaryColorValues,
+                argbContrastColorValues));
         shareIntent.setType("text/plain");
         setShareIntent(shareIntent);
     }
