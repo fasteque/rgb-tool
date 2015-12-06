@@ -92,6 +92,40 @@ public class ColorUtils {
         return message.toString();
     }
 
+    public static String getComplementaryColorMessage(short[] argbColorValues, short[] argbComplementaryColorValues,
+                                                      short[] argbContrastColorValues) {
+        StringBuilder message = new StringBuilder();
+
+        message.append("RGB Tool");
+        message.append(System.getProperty("line.separator"));
+
+        message.append("Color - ");
+        message.append(String.format("#%s%s%s%s",
+                ColorUtils.RGBToHex(argbColorValues[0]),
+                ColorUtils.RGBToHex(argbColorValues[1]),
+                ColorUtils.RGBToHex(argbColorValues[2]),
+                ColorUtils.RGBToHex(argbColorValues[3])));
+        message.append(System.getProperty("line.separator"));
+
+        // Opacity is fixed as FF.
+        message.append("Complementary - ");
+        message.append(String.format("#FF%s%s%s",
+                ColorUtils.RGBToHex(argbComplementaryColorValues[1]),
+                ColorUtils.RGBToHex(argbComplementaryColorValues[2]),
+                ColorUtils.RGBToHex(argbComplementaryColorValues[3])));
+        message.append(System.getProperty("line.separator"));
+
+        // Opacity is fixed as FF.
+        message.append("Contrast - ");
+        message.append(String.format("#FF%s%s%s",
+                ColorUtils.RGBToHex(argbContrastColorValues[1]),
+                ColorUtils.RGBToHex(argbContrastColorValues[2]),
+                ColorUtils.RGBToHex(argbContrastColorValues[3])));
+        message.append(System.getProperty("line.separator"));
+
+        return message.toString();
+    }
+
     /**
      *
      * @param hexValue
