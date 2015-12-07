@@ -20,7 +20,6 @@ import android.print.PrintManager;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
@@ -44,7 +43,6 @@ import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.RGBAInsertionEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.fragments.HexInsertionFragment;
-import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.fragments.RgbaInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
@@ -318,11 +316,6 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         } else {
             startActivity(new Intent(this, ColorListActivity.class));
         }
-    }
-
-    private void showPrintColorDialog() {
-        DialogFragment dialog = PrintJobDialogFragment.newInstance(PrintJobDialogFragment.PRINT_COLOR_JOB);
-        dialog.show(getSupportFragmentManager(), null);
     }
 
     private void showAbout() {
