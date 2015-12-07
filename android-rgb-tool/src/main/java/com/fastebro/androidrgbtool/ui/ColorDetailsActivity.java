@@ -43,6 +43,10 @@ public class ColorDetailsActivity extends EventBaseActivity {
         }
     }
 
+    public void printColor() {
+        showPrintColorDialog();
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {

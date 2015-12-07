@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.ui.ColorDetailsActivity;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import butterknife.Bind;
@@ -113,7 +114,7 @@ public class ColorComplementaryFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_print:
-                // TODO
+                ((ColorDetailsActivity)getActivity()).printColor();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
