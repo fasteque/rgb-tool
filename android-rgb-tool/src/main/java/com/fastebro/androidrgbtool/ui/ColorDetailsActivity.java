@@ -14,7 +14,7 @@ import com.fastebro.androidrgbtool.fragments.ColorComplementaryFragment;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
-public class ColorDetailsActivity extends BaseActivity {
+public class ColorDetailsActivity extends EventBaseActivity {
 
     protected static final String INTENT_EXTRA_RGB_COLOR = "com.fastebro.androidrgbtool.extra.RGB_COLOR";
     private short[] argbValues;
