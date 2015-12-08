@@ -1,5 +1,9 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.os.Build;
+import android.print.PrintManager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 
@@ -9,9 +13,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
+import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.fragments.ColorComplementaryFragment;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
+import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class ColorDetailsActivity extends EventBaseActivity {
@@ -43,8 +49,24 @@ public class ColorDetailsActivity extends EventBaseActivity {
         }
     }
 
-    public void printColor() {
+    public void printColors() {
         showPrintColorDialog();
+    }
+
+    public void onEvent(PrintColorEvent event) {
+        startPrintJob(event.message);
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void startPrintJob(String message) {
+        // Get a PrintManager instance
+        PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+
+        // Set job name, which will be displayed in the print queue
+        String jobName = getString(R.string.app_name) + " Document";
+
+        // Start a print job, passing in a PrintDocumentAdapter implementation
+        // TODO: implement custom PrintDocumentAdapter.##68:
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
