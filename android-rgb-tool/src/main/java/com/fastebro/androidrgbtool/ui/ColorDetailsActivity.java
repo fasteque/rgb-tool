@@ -66,7 +66,7 @@ public class ColorDetailsActivity extends EventBaseActivity {
         String jobName = getString(R.string.app_name) + " Document";
 
         // Start a print job, passing in a PrintDocumentAdapter implementation
-        // TODO: implement custom PrintDocumentAdapter.##68:
+        // TODO: implement custom PrintDocumentAdapter.
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
