@@ -126,16 +126,16 @@ public class ColorComplementaryFragment extends Fragment {
         shareIntent.setAction(Intent.ACTION_SEND);
 
         short[] argbComplementaryColorValues = new short[4];
-        argbValues[0] = (short) 255;
-        argbValues[1] = (short) Color.red(complementaryColor);
-        argbValues[2] = (short) Color.blue(complementaryColor);
-        argbValues[3] = (short) Color.green(complementaryColor);
+        argbComplementaryColorValues[0] = (short) 255;
+        argbComplementaryColorValues[1] = (short) Color.red(complementaryColor);
+        argbComplementaryColorValues[2] = (short) Color.blue(complementaryColor);
+        argbComplementaryColorValues[3] = (short) Color.green(complementaryColor);
 
         short[] argbContrastColorValues = new short[4];
-        argbValues[0] = (short) 255;
-        argbValues[1] = (short) Color.red(contrastColor);
-        argbValues[2] = (short) Color.blue(contrastColor);
-        argbValues[3] = (short) Color.green(contrastColor);
+        argbContrastColorValues[0] = (short) 255;
+        argbContrastColorValues[1] = (short) Color.red(contrastColor);
+        argbContrastColorValues[2] = (short) Color.blue(contrastColor);
+        argbContrastColorValues[3] = (short) Color.green(contrastColor);
 
         shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getComplementaryColorMessage(argbValues,
                 argbComplementaryColorValues,
