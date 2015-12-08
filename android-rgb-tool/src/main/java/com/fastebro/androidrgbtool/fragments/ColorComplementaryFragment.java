@@ -114,7 +114,7 @@ public class ColorComplementaryFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_print:
-                ((ColorDetailsActivity)getActivity()).printColor();
+                ((ColorDetailsActivity)getActivity()).printColors();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
