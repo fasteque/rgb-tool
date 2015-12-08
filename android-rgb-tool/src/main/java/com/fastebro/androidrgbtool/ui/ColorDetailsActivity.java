@@ -17,7 +17,6 @@ import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.fragments.ColorComplementaryFragment;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
-import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class ColorDetailsActivity extends EventBaseActivity {
