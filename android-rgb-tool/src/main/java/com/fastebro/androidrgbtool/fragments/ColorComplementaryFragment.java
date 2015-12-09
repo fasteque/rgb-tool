@@ -39,8 +39,6 @@ public class ColorComplementaryFragment extends Fragment {
     TextView contrastColorText;
 
     private ShareActionProvider shareActionProvider;
-    private int complementaryColor;
-    private int contrastColor;
 
 
     public ColorComplementaryFragment() {
@@ -72,16 +70,21 @@ public class ColorComplementaryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        complementaryColor = ColorUtils.getComplementaryColor(argbValues[1], argbValues[2], argbValues[3]);
+        ((ColorDetailsActivity) getActivity()).setComplementaryColor(ColorUtils.getComplementaryColor(argbValues[1],
+                argbValues[2],
+                argbValues[3]));
         complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
-                (complementaryColor)));
+                (((ColorDetailsActivity) getActivity()).getComplementaryColor())));
 
-        contrastColor = ColorUtils.getContrastColor(argbValues[1], argbValues[2], argbValues[3]);
+        ((ColorDetailsActivity) getActivity()).setContrastColor(ColorUtils.getContrastColor(argbValues[1],
+                argbValues[2],
+                argbValues[3]));
         contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
-                (contrastColor)));
+                (((ColorDetailsActivity) getActivity()).getContrastColor())));
 
-        complementaryColorBackground.setCardBackgroundColor(complementaryColor);
-        contrastColorBackground.setCardBackgroundColor(contrastColor);
+        complementaryColorBackground.setCardBackgroundColor(((ColorDetailsActivity) getActivity())
+                .getComplementaryColor());
+        contrastColorBackground.setCardBackgroundColor(((ColorDetailsActivity) getActivity()).getContrastColor());
 
         updateSharedColor();
     }
@@ -127,15 +130,18 @@ public class ColorComplementaryFragment extends Fragment {
 
         short[] argbComplementaryColorValues = new short[4];
         argbComplementaryColorValues[0] = (short) 255;
-        argbComplementaryColorValues[1] = (short) Color.red(complementaryColor);
-        argbComplementaryColorValues[2] = (short) Color.blue(complementaryColor);
-        argbComplementaryColorValues[3] = (short) Color.green(complementaryColor);
+        argbComplementaryColorValues[1] = (short) Color.red(((ColorDetailsActivity) getActivity())
+                .getComplementaryColor());
+        argbComplementaryColorValues[2] = (short) Color.blue(((ColorDetailsActivity) getActivity())
+                .getComplementaryColor());
+        argbComplementaryColorValues[3] = (short) Color.green(((ColorDetailsActivity) getActivity())
+                .getComplementaryColor());
 
         short[] argbContrastColorValues = new short[4];
         argbContrastColorValues[0] = (short) 255;
-        argbContrastColorValues[1] = (short) Color.red(contrastColor);
-        argbContrastColorValues[2] = (short) Color.blue(contrastColor);
-        argbContrastColorValues[3] = (short) Color.green(contrastColor);
+        argbContrastColorValues[1] = (short) Color.red(((ColorDetailsActivity) getActivity()).getContrastColor());
+        argbContrastColorValues[2] = (short) Color.blue(((ColorDetailsActivity) getActivity()).getContrastColor());
+        argbContrastColorValues[3] = (short) Color.green(((ColorDetailsActivity) getActivity()).getContrastColor());
 
         shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getComplementaryColorMessage(argbValues,
                 argbComplementaryColorValues,
