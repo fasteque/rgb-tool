@@ -375,7 +375,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
 
         // Set job name, which will be displayed in the print queue
-        String jobName = getString(R.string.app_name) + " Document";
+        String jobName = getString(R.string.app_name) + "_Color";
 
         // Start a print job, passing in a PrintDocumentAdapter implementation
         printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, RGB_R_COLOR, RGB_G_COLOR,

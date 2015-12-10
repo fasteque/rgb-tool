@@ -126,7 +126,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
 
         // Set job name, which will be displayed in the print queue
-        String jobName = getString(R.string.app_name) + " Document";
+        String jobName = getString(R.string.app_name) + "_Color_Palette";
 
         // Start a print job, passing in a PrintDocumentAdapter implementation
         // to handle the generation of a print document

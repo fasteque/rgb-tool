@@ -17,6 +17,8 @@ import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.fragments.ColorComplementaryFragment;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
+import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
+import com.fastebro.androidrgbtool.print.RGBToolPrintColorDetailsAdapter;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class ColorDetailsActivity extends EventBaseActivity {
@@ -64,10 +66,7 @@ public class ColorDetailsActivity extends EventBaseActivity {
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
 
         // Set job name, which will be displayed in the print queue
-        String jobName = getString(R.string.app_name) + " Document";
-
-        // Start a print job, passing in a PrintDocumentAdapter implementation
-        // TODO: implement custom PrintDocumentAdapter.
+        String jobName = getString(R.string.app_name) + "_Color_Details";
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
