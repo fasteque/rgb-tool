@@ -35,7 +35,6 @@ import java.util.ArrayList;
 public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
     private Context context;
     private String message;
-    private String filename;
     private int color;
     private int complementaryColor;
     private int contrastColor;
@@ -44,13 +43,11 @@ public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
 
     public RGBToolPrintColorDetailsAdapter(@NonNull Context context,
                                            String message,
-                                           String filename,
                                            int color,
                                            int complementaryColor,
                                            int contrastColor) {
         this.context = context;
         this.message = message;
-        this.filename = filename;
         this.color = color;
         this.complementaryColor = complementaryColor;
         this.contrastColor = contrastColor;
@@ -80,7 +77,7 @@ public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
         if (pages > 0) {
             // Return print information to print framework
             PrintDocumentInfo info = new PrintDocumentInfo.Builder(
-                    "rgbtool_" + filename + "_colors.pdf")
+                    "rgbtool_" + ColorUtils.RGBToHex(color) + "_color_details.pdf")
                     .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
                     .setPageCount(pages)
                     .build();
@@ -91,7 +88,6 @@ public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
             // Otherwise report an error to the print framework
             callback.onLayoutFailed("Page count calculation failed.");
         }
-
     }
 
     @Override

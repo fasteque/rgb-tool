@@ -2,6 +2,7 @@ package com.fastebro.androidrgbtool.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.print.PrintManager;
 import android.support.design.widget.TabLayout;
@@ -67,6 +68,12 @@ public class ColorDetailsActivity extends EventBaseActivity {
 
         // Set job name, which will be displayed in the print queue
         String jobName = getString(R.string.app_name) + "_Color_Details";
+
+        // Start a print job, passing in a PrintDocumentAdapter implementation
+        int color = Color.argb(argbValues[0], argbValues[1], argbValues[2], argbValues[3]);
+
+        printManager.print(jobName, new RGBToolPrintColorDetailsAdapter(this, message, color, complementaryColor,
+                contrastColor), null);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
