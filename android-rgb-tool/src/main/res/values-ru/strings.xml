@@ -85,6 +85,7 @@
     <string name="color_details_as_background_title">Фон</string>
     <string name="color_details_colors_title">Цвета</string>
     <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
+    <string name="color_details_color">Цвет - #%s</string>
     <string name="color_details_complementary">Дополнительно - #%s</string>
     <string name="color_details_contrast">Постоянная - #%s</string>
 
