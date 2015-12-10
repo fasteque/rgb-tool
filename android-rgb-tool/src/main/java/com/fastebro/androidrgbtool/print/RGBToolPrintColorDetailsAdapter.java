@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.PaletteSwatch;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.io.FileOutputStream;
@@ -159,25 +160,28 @@ public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
         paint.setTextSize(20);
         canvas.drawText(context.getString(R.string.app_name), leftMargin, titleBaseLine, paint);
 
-        // FIXME: set correct text!!!
-
         // Color
         paint.setTextSize(16);
-        canvas.drawText(context.getString(R.string.color_details_complementary), leftMargin, titleBaseLine + 25, paint);
+        canvas.drawText(context.getString(R.string.color_details_color, ColorUtils.RGBToHex(color)), leftMargin,
+                titleBaseLine + 25,
+                paint);
 
         paint.setColor(color);
         canvas.drawRect(leftMargin, titleBaseLine + 90, 126, titleBaseLine + 90 + 30, paint);
 
         // Complementary
         paint.setTextSize(16);
-        canvas.drawText(context.getString(R.string.color_details_complementary), leftMargin, titleBaseLine + 25, paint);
+        canvas.drawText(context.getString(R.string.color_details_complementary, ColorUtils.RGBToHex(complementaryColor)), leftMargin,
+                titleBaseLine + 25,
+                paint);
 
         paint.setColor(complementaryColor);
         canvas.drawRect(leftMargin, titleBaseLine + 190, 126, titleBaseLine + 190 + 30, paint);
 
         // Contrast
         paint.setTextSize(16);
-        canvas.drawText(context.getString(R.string.color_details_contrast), leftMargin, titleBaseLine + 25, paint);
+        canvas.drawText(context.getString(R.string.color_details_contrast, ColorUtils.RGBToHex(contrastColor)), leftMargin,
+                titleBaseLine + 25, paint);
 
         paint.setColor(contrastColor);
         canvas.drawRect(leftMargin, titleBaseLine + 280, 126, titleBaseLine + 280 + 30, paint);
