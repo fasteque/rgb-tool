@@ -5,16 +5,16 @@ package com.fastebro.android.rgbtool.model.events;
  * Project: rgb-tool
  */
 public class ColorSelectEvent {
-    public final float RGBRComponent;
-    public final float RGBGComponent;
-    public final float RGBBComponent;
-    public final float RGBOComponent;
+    public final int RGBRComponent;
+    public final int RGBGComponent;
+    public final int RGBBComponent;
+    public final int RGBOComponent;
     public final String colorName;
 
-    public ColorSelectEvent(float RGBRComponent,
-                            float RGBGComponent,
-                            float RGBBComponent,
-                            float RGBOComponent,
+    public ColorSelectEvent(int RGBRComponent,
+                            int RGBGComponent,
+                            int RGBBComponent,
+                            int RGBOComponent,
                             String colorName) {
         this.RGBRComponent = RGBRComponent;
         this.RGBGComponent = RGBGComponent;

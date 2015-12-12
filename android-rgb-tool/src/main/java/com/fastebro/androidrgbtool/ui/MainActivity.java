@@ -116,10 +116,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     private String currentPhotoPath;
     private BaseAlbumDirFactory albumStorageDirFactory = null;
 
-    private float RGB_R_COLOR = 0.0f;
-    private float RGB_G_COLOR = 0.0f;
-    private float RGB_B_COLOR = 0.0f;
-    private float RGB_OPACITY = 255.0f;
+    private int RGB_R_COLOR = 0;
+    private int RGB_G_COLOR = 0;
+    private int RGB_B_COLOR = 0;
+    private int RGB_OPACITY = 255;
 
     private static final int REQUEST_OPEN_GALLERY = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
@@ -339,7 +339,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         startActivity(colorDetailsIntent);
     }
 
-    private void saveColor(float RGBRComponent, float RGBGComponent, float RGBBComponent, float RGBOComponent, String
+    private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
             colorName) {
         AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) { };
 
@@ -352,10 +352,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
                 ColorUtils.RGBToHex(RGB_R_COLOR),
                 ColorUtils.RGBToHex(RGB_G_COLOR),
                 ColorUtils.RGBToHex(RGB_B_COLOR)));
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R, (int) RGBRComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G, (int) RGBGComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B, (int) RGBBComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A, (int) RGBOComponent);
+        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R, RGBRComponent);
+        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G, RGBGComponent);
+        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B, RGBBComponent);
+        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A, RGBOComponent);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_H, (int) hsb[0]);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S, (int) hsb[1] * 100);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B, (int) hsb[2] * 100);
@@ -471,8 +471,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     }
 
     private void updateSaveColorButton() {
-        if (DatabaseUtils.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR,
-                RGB_B_COLOR, RGB_OPACITY)) {
+        if (DatabaseUtils.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR, RGB_OPACITY)) {
             btn_SaveColor.setVisibility(View.INVISIBLE);
         } else {
             btn_SaveColor.setVisibility(View.VISIBLE);
@@ -487,8 +486,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         updateSharedColor();
         updateSaveColorButton();
 
-        colorView.setBackgroundColor(Color.argb((int) RGB_OPACITY, (int) RGB_R_COLOR, (int) RGB_G_COLOR,
-                (int) RGB_B_COLOR));
+        colorView.setBackgroundColor(Color.argb(RGB_OPACITY, RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR));
     }
 
     protected void updateRGBField() {
@@ -642,7 +640,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         return path;
     }
 
-    private void updateRGBColor(float RGBRComponent, float RGBGComponent, float RGBBComponent, float RGBOComponent) {
+    private void updateRGBColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent) {
         RGB_R_COLOR = RGBRComponent;
         RGB_G_COLOR = RGBGComponent;
         RGB_B_COLOR = RGBBComponent;
@@ -652,10 +650,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     private void restorePreferences() {
         SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
 
-        updateRGBColor(settings.getFloat(CommonUtils.PREFS_R_COLOR, 0.0f),
-                settings.getFloat(CommonUtils.PREFS_G_COLOR, 0.0f),
-                settings.getFloat(CommonUtils.PREFS_B_COLOR, 0.0f),
-                settings.getFloat(CommonUtils.PREFS_OPACITY, 255.0f));
+        updateRGBColor(settings.getInt(CommonUtils.PREFS_R_COLOR, 0),
+                settings.getInt(CommonUtils.PREFS_G_COLOR, 0),
+                settings.getInt(CommonUtils.PREFS_B_COLOR, 0),
+                settings.getInt(CommonUtils.PREFS_OPACITY, 255));
     }
 
     private void savePreferences() {
@@ -677,10 +675,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         refreshUI();
 
         // Also update the seek bars.
-        seekBar_R.setProgress((int) event.RGBRComponent);
-        seekBar_G.setProgress((int) event.RGBGComponent);
-        seekBar_B.setProgress((int) event.RGBBComponent);
-        seekBar_O.setProgress((int) event.RGBOComponent);
+        seekBar_R.setProgress(event.RGBRComponent);
+        seekBar_G.setProgress(event.RGBGComponent);
+        seekBar_B.setProgress(event.RGBBComponent);
+        seekBar_O.setProgress(event.RGBOComponent);
 
         savePreferences();
     }

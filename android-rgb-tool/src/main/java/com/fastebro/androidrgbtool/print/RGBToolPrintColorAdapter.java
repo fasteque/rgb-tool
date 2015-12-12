@@ -31,25 +31,25 @@ import java.io.IOException;
 public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
     private Context context;
     private String message;
-    private float RGBRColor;
-    private float RGBGColor;
-    private float RGBBColor;
-    private float RGBOpacity;
+    private int RGBRColor;
+    private int RGBGColor;
+    private int RGBBColor;
+    private int RGBOpacity;
 
     private PrintedPdfDocument pdfDocument;
 
     public RGBToolPrintColorAdapter(@NonNull Context context,
                                     String message,
-                                    float rgbRColor,
-                                    float rgbGColor,
-                                    float rgbBColor,
-                                    float rgbOpacity) {
+                                    int rgbRColor,
+                                    int rgbGColor,
+                                    int rgbBColor,
+                                    int rgbOpacity) {
         this.context = context;
         this.message = message;
-        RGBRColor = rgbRColor;
-        RGBGColor = rgbGColor;
-        RGBBColor = rgbBColor;
-        RGBOpacity = rgbOpacity;
+        this.RGBRColor = rgbRColor;
+        this.RGBGColor = rgbGColor;
+        this.RGBBColor = rgbBColor;
+        this.RGBOpacity = rgbOpacity;
     }
 
     @Override
@@ -197,8 +197,7 @@ public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
                 ColorUtils.RGBToHex(RGBBColor)));
         canvas.drawText(token.toString(), leftMargin, titleBaseLine + 100, paint);
 
-        paint.setColor(Color.argb((int) RGBOpacity, (int) RGBRColor,
-                (int) RGBGColor, (int) RGBBColor));
+        paint.setColor(Color.argb(RGBOpacity, RGBRColor, RGBGColor, RGBBColor));
         canvas.drawRect(leftMargin, titleBaseLine + 125, 126, 269, paint);
 
         // User message.

@@ -1,25 +1,17 @@
 package com.fastebro.androidrgbtool.utils;
 
 import android.graphics.Color;
-import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 
 public class ColorUtils {
-    /**
-     * @param n
-     * @return
-     */
+
     public static String getRGB(float n) {
         return String.format("%.0f", n).replaceAll("\\.0*$", "");
     }
 
-    /**
-     * @param n
-     * @return
-     */
-    public static String RGBToHex(float n) {
+    public static String RGBToHex(int n) {
         StringBuffer sb = new StringBuffer();
-        sb.append(Integer.toHexString((int) n));
+        sb.append(Integer.toHexString(n));
         // Add '0' character at first index if the string length < 2.
         if (sb.length() < 2) {
             sb.insert(0, '0');
@@ -28,31 +20,18 @@ public class ColorUtils {
         return sb.toString().toUpperCase();
     }
 
-    /**
-     * @param r
-     * @param g
-     * @param b
-     * @return
-     */
-    public static float[] RGBToHSB(@FloatRange(from=0.0, to=255.0) float r,
-                                   @FloatRange(from=0.0, to=255.0) float g,
-                                   @FloatRange(from=0.0, to=255.0) float b) {
+    public static float[] RGBToHSB(@IntRange(from=0, to=255) int r,
+                                   @IntRange(from=0, to=255) int g,
+                                   @IntRange(from=0, to=255) int b) {
         float[] hsb = new float[3];
-        Color.RGBToHSV((int) r, (int) g, (int) b, hsb);
+        Color.RGBToHSV(r, g, b, hsb);
         return hsb;
     }
 
-    /**
-     * @param rgbRColor
-     * @param rgbGColor
-     * @param rgbBColor
-     * @param rgbOpacity
-     * @return
-     */
-    public static String getColorMessage(@FloatRange(from=0.0, to=255.0) float rgbRColor,
-                                         @FloatRange(from=0.0, to=255.0) float rgbGColor,
-                                         @FloatRange(from=0.0, to=255.0) float rgbBColor,
-                                         @FloatRange(from=0.0, to=255.0) float rgbOpacity) {
+    public static String getColorMessage(@IntRange(from=0, to=255) int rgbRColor,
+                                         @IntRange(from=0, to=255) int rgbGColor,
+                                         @IntRange(from=0, to=255) int rgbBColor,
+                                         @IntRange(from=0, to=255) int rgbOpacity) {
         StringBuilder message = new StringBuilder();
 
         message.append("RGB Tool");
@@ -126,11 +105,6 @@ public class ColorUtils {
         return message.toString();
     }
 
-    /**
-     *
-     * @param hexValue
-     * @return
-     */
     public static int[] hexToRGB(String hexValue) {
         int[] rgb = new int[3];
 
@@ -144,13 +118,6 @@ public class ColorUtils {
         return rgb;
     }
 
-    /**
-     *
-     * @param rgbRColor
-     * @param rgbGColor
-     * @param rgbBColor
-     * @return
-     */
     public static int getComplementaryColor(@IntRange(from = 0, to = 255) short rgbRColor,
                                             @IntRange(from = 0, to = 255) short rgbGColor,
                                             @IntRange(from = 0, to = 255) short rgbBColor) {
@@ -161,13 +128,6 @@ public class ColorUtils {
         return Color.HSVToColor(hsv);
     }
 
-    /**
-     *
-     * @param rgbRColor
-     * @param rgbGColor
-     * @param rgbBColor
-     * @return
-     */
     public static int getContrastColor(@IntRange(from = 0, to = 255) short rgbRColor,
                                        @IntRange(from = 0, to = 255) short rgbGColor,
                                        @IntRange(from = 0, to = 255) short rgbBColor) {

@@ -46,7 +46,8 @@ public class RGBToolImagesCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         int imageID = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media._ID));
-        Uri imageUri = Uri.withAppendedPath(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, Integer.toString(imageID));
+        Uri imageUri = Uri.withAppendedPath(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, Integer.toString
+                (imageID));
 
         ViewHolder holder = (ViewHolder) view.getTag();
 
