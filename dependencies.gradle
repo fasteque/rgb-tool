@@ -1,0 +1,58 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    // Android
+    androidBuildToolsVersion = "23.0.2"
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+
+    androidSupportLibraryVersion = '23.1.1'
+    rxAndroidVersion = '0.25.0'
+    butterKnifeVersion = '7.0.1'
+    picassoVersion = '2.5.2'
+    photoViewVersion = '1.2.4'
+    eventBusVersion = '2.4.0'
+    leakCanaryVersion = '1.3.1'
+    jUnitVersion = '4.12'
+    espressoCoreVersion = '2.1'
+    testRunnerVersion = '0.2'
+
+
+    appDependencies = [
+            appCompat:          "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
+            design:             "com.android.support:design:${androidSupportLibraryVersion}",
+            recyclerView:       "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
+            cardView:           "com.android.support:cardview-v7:${androidSupportLibraryVersion}",
+            customTabs:         "com.android.support:customtabs:${androidSupportLibraryVersion}",
+            palette:            "com.android.support:palette-v7:${androidSupportLibraryVersion}",
+            percent:            "com.android.support:percent:${androidSupportLibraryVersion}",
+            butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
+            picasso:            "com.squareup.picasso:picasso:${picassoVersion}",
+            rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
+            photoView:          "com.commit451:PhotoView:${photoViewVersion}",
+            eventBus:           "de.greenrobot:eventbus:${eventBusVersion}",
+    ]
+
+    appDebugDependencies = [
+            leakCanary:         "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    ]
+
+    appReleaseDependencies = [
+            leakCanaryNoOp:     "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+    ]
+
+    appTestDependencies = [
+            jUnit:              "junit:junit:${jUnitVersion}"
+    ]
+
+    appAndroidTestDependencies = [
+            espressoCore:       "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            testRunner:         "com.android.support.test:runner:${testRunnerVersion}",
+            supportAnnotation:  "com.android.support:support-annotations:${androidSupportLibraryVersion}"
+    ]
+}
