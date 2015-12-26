@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode 12
         versionName "1.4.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -47,30 +49,37 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:cardview-v7:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.android.support:palette-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:customtabs:23.1.1'
-    compile 'com.android.support:percent:23.1.1'
-    compile 'com.commit451:PhotoView:1.2.4'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'io.reactivex:rxandroid:0.25.0'
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    def appDependencies = globalConfiguration.appDependencies
+    def appDebugDependencies = globalConfiguration.appDebugDependencies
+    def appReleaseDependencies = globalConfiguration.appReleaseDependencies
+    def appTestDependencies = globalConfiguration.appTestDependencies
+    def appAndroidTestDependencies = globalConfiguration.appAndroidTestDependencies
+
+    compile appDependencies.appCompat
+    compile appDependencies.cardView
+    compile appDependencies.recyclerView
+    compile appDependencies.palette
+    compile appDependencies.design
+    compile appDependencies.customTabs
+    compile appDependencies.percent
+    compile appDependencies.photoView
+    compile appDependencies.picasso
+    compile appDependencies.butterKnife
+    compile appDependencies.eventBus
+    compile appDependencies.rxAndroid
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compile project(':model')
 
     // Memory leak detection
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+    debugCompile appDebugDependencies.leakCanary
+    releaseCompile appReleaseDependencies.leakCanaryNoOp
 
     // Unit testing dependencies
-    testCompile 'junit:junit:4.12'
+    testCompile appTestDependencies.jUnit
 
     // Testing-only dependencies
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
-    androidTestCompile 'com.android.support.test:runner:0.2'
-    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile appAndroidTestDependencies.espressoCore
+    androidTestCompile appAndroidTestDependencies.testRunner
+    androidTestCompile appAndroidTestDependencies.supportAnnotation
 }
