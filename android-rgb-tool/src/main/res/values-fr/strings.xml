@@ -84,6 +84,7 @@
     <string name="color_details_as_text_title">Texte</string>
     <string name="color_details_as_background_title">Fond</string>
     <string name="color_details_colors_title">Couleurs</string>
+    <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
     <string name="color_details_color">Couleur - #%s</string>
     <string name="color_details_complementary">Complémentaire - #%s</string>
     <string name="color_details_contrast">Contrastante - #%s</string>
