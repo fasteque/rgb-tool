@@ -148,45 +148,51 @@ public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
         StringBuilder token;
 
         // units are in points (1/72 of an inch)
-        int titleBaseLine = 72;
+        int itemYCoordinate = 72;
         int leftMargin = 54;
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setTextSize(20);
-        canvas.drawText(context.getString(R.string.app_name), leftMargin, titleBaseLine, paint);
+        canvas.drawText(context.getString(R.string.app_name), leftMargin, itemYCoordinate, paint);
 
+        itemYCoordinate += 25;
         // Color
         paint.setTextSize(16);
-        canvas.drawText(context.getString(R.string.color_details_color, ColorUtils.RGBToHex(color)), leftMargin,
-                titleBaseLine + 25,
-                paint);
+        canvas.drawText(context.getString(R.string.color_details_color, ColorUtils.RGBToHex(color)), leftMargin, itemYCoordinate, paint);
 
         paint.setColor(color);
-        canvas.drawRect(leftMargin, titleBaseLine + 90, 126, titleBaseLine + 90 + 30, paint);
+        canvas.drawRect(leftMargin, itemYCoordinate + 20, leftMargin + 50, itemYCoordinate + 70, paint);
 
+        itemYCoordinate += 110;
         // Complementary
+        paint.setColor(Color.BLACK);
         paint.setTextSize(16);
-        canvas.drawText(context.getString(R.string.color_details_complementary, ColorUtils.RGBToHex(complementaryColor)), leftMargin,
-                titleBaseLine + 25,
+        canvas.drawText(context.getString(R.string.color_details_complementary, ColorUtils.RGBToHex
+                (complementaryColor)), leftMargin,
+                itemYCoordinate,
                 paint);
 
         paint.setColor(complementaryColor);
-        canvas.drawRect(leftMargin, titleBaseLine + 190, 126, titleBaseLine + 190 + 30, paint);
+        canvas.drawRect(leftMargin, itemYCoordinate + 20, leftMargin + 50, itemYCoordinate + 70, paint);
 
+        itemYCoordinate += 110;
         // Contrast
+        paint.setColor(Color.BLACK);
         paint.setTextSize(16);
-        canvas.drawText(context.getString(R.string.color_details_contrast, ColorUtils.RGBToHex(contrastColor)), leftMargin,
-                titleBaseLine + 25, paint);
+        canvas.drawText(context.getString(R.string.color_details_contrast, ColorUtils.RGBToHex(contrastColor)),
+                leftMargin,
+                itemYCoordinate, paint);
 
         paint.setColor(contrastColor);
-        canvas.drawRect(leftMargin, titleBaseLine + 280, 126, titleBaseLine + 280 + 30, paint);
+        canvas.drawRect(leftMargin, itemYCoordinate + 20, leftMargin + 50, itemYCoordinate + 70, paint);
 
         // User message.
         if (message != null) {
+            itemYCoordinate += 110;
             paint.setColor(Color.BLACK);
             paint.setTextSize(10);
-            canvas.drawText(message, leftMargin, titleBaseLine + 360, paint);
+            canvas.drawText(message, leftMargin, itemYCoordinate, paint);
         }
     }
 }
