@@ -43,6 +43,7 @@ import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.RGBAInsertionEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.fragments.HexInsertionFragment;
+import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.fragments.RgbaInsertionFragment;
 import com.fastebro.androidrgbtool.fragments.SelectPictureDialogFragment;
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
@@ -225,7 +226,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
                 showColorList();
                 return true;
             case R.id.action_print:
-                showPrintColorDialog();
+                showPrintColorDialog(PrintJobDialogFragment.PRINT_COLOR_JOB);
                 return true;
             case R.id.action_about:
                 showAbout();

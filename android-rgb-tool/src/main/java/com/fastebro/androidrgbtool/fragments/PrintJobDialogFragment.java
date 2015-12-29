@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
+import com.fastebro.android.rgbtool.model.events.PrintColorDetailsEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
 import com.fastebro.android.rgbtool.model.events.PrintPaletteEvent;
@@ -27,12 +30,17 @@ public class PrintJobDialogFragment extends DialogFragment {
     public static final String ARG_JOB_TYPE = "JOB_TYPE";
     public static final int PRINT_COLOR_JOB = 0;
     public static final int PRINT_PALETTE_JOB = 1;
+    public static final int PRINT_COLOR_DETAILS_JOB = 2;
 
     public PrintJobDialogFragment() { }
 
     private int jobType;
 
-    public static PrintJobDialogFragment newInstance(int jobType) {
+    @IntDef({PRINT_COLOR_JOB, PRINT_PALETTE_JOB, PRINT_COLOR_DETAILS_JOB})
+    public @interface JobType {
+    }
+
+    public static PrintJobDialogFragment newInstance(@JobType int jobType) {
         PrintJobDialogFragment fragment = new PrintJobDialogFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_JOB_TYPE, jobType);
@@ -75,6 +83,9 @@ public class PrintJobDialogFragment extends DialogFragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 if (jobType == PRINT_COLOR_JOB) {
                                     EventBus.getDefault().post(new PrintColorEvent(message.getText().toString()));
+                                } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
+                                    EventBus.getDefault().post(new PrintColorDetailsEvent(message.getText().toString
+                                            ()));
                                 } else {
                                     EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
                                 }
@@ -87,6 +98,8 @@ public class PrintJobDialogFragment extends DialogFragment {
                             public void onClick(DialogInterface dialog, int id) {
                                 if (jobType == PRINT_COLOR_JOB) {
                                     EventBus.getDefault().post(new PrintColorEvent(null));
+                                } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
+                                    EventBus.getDefault().post(new PrintColorDetailsEvent(null));
                                 } else {
                                     EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
                                 }

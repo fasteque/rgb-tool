@@ -14,11 +14,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
-import com.fastebro.android.rgbtool.model.events.PrintColorEvent;
+import com.fastebro.android.rgbtool.model.events.PrintColorDetailsEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.fragments.ColorComplementaryFragment;
 import com.fastebro.androidrgbtool.fragments.ColorSampleFragment;
-import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
+import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorDetailsAdapter;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
@@ -54,10 +54,10 @@ public class ColorDetailsActivity extends EventBaseActivity {
     }
 
     public void printColors() {
-        showPrintColorDialog();
+        showPrintColorDialog(PrintJobDialogFragment.PRINT_COLOR_DETAILS_JOB);
     }
 
-    public void onEvent(PrintColorEvent event) {
+    public void onEvent(PrintColorDetailsEvent event) {
         startPrintJob(event.message);
     }
 

@@ -37,8 +37,8 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void showPrintColorDialog() {
-        DialogFragment dialog = PrintJobDialogFragment.newInstance(PrintJobDialogFragment.PRINT_COLOR_JOB);
+    protected void showPrintColorDialog(int jobType) {
+        DialogFragment dialog = PrintJobDialogFragment.newInstance(jobType);
         dialog.show(getSupportFragmentManager(), null);
     }
 }
