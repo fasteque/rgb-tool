@@ -659,10 +659,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     private void savePreferences() {
         SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putFloat(CommonUtils.PREFS_R_COLOR, RGB_R_COLOR);
-        editor.putFloat(CommonUtils.PREFS_G_COLOR, RGB_G_COLOR);
-        editor.putFloat(CommonUtils.PREFS_B_COLOR, RGB_B_COLOR);
-        editor.putFloat(CommonUtils.PREFS_OPACITY, RGB_OPACITY);
+        editor.putInt(CommonUtils.PREFS_R_COLOR, RGB_R_COLOR);
+        editor.putInt(CommonUtils.PREFS_G_COLOR, RGB_G_COLOR);
+        editor.putInt(CommonUtils.PREFS_B_COLOR, RGB_B_COLOR);
+        editor.putInt(CommonUtils.PREFS_OPACITY, RGB_OPACITY);
         editor.apply();
     }
 
