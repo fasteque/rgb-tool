@@ -19,13 +19,10 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
-import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by danielealtomare on 01/03/15.
