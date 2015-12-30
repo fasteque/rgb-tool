@@ -483,7 +483,6 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         updateRGBField();
         updateHSBField();
         updateHexadecimalField();
-        updateColorName();
         updateSharedColor();
         updateSaveColorButton();
 
@@ -519,13 +518,6 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
                 ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
 
         textView_Hexadecimal.setText(hexValue);
-    }
-
-    /**
-     * Update color name by color hex value.
-     */
-    protected void updateColorName() {
-
     }
 
     public void dispatchTakePictureIntent() {
