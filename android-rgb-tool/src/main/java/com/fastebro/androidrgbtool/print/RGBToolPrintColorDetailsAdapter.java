@@ -142,7 +142,6 @@ public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
 
     private void drawPage(PdfDocument.Page page) {
         Canvas canvas = page.getCanvas();
-        StringBuilder token;
 
         // units are in points (1/72 of an inch)
         int itemYCoordinate = 72;
