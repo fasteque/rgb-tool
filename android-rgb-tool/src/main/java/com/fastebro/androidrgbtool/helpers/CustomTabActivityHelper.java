@@ -123,11 +123,8 @@ public class CustomTabActivityHelper {
         }
 
         CustomTabsSession session = getSession();
-        if (session == null) {
-            return false;
-        }
+        return session != null && session.mayLaunchUrl(uri, extras, otherLikelyBundles);
 
-        return session.mayLaunchUrl(uri, extras, otherLikelyBundles);
     }
 
     /**
