@@ -15,7 +15,7 @@ import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
  * Created by danielealtomare on 26/10/14.
  * Project: rgb-tool
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
