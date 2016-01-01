@@ -5,7 +5,4 @@ package com.fastebro.android.rgbtool.model.events;
  * Project: rgb-tool
  */
 public class UpdateSaveColorUIEvent {
-    public void UpdateSaveColorUIEvent() {
-
-    }
 }
