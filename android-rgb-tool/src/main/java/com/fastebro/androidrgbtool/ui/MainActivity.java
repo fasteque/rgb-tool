@@ -154,10 +154,10 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         restorePreferences();
-        seekBar_R.setProgress((int) RGB_R_COLOR);
-        seekBar_G.setProgress((int) RGB_G_COLOR);
-        seekBar_B.setProgress((int) RGB_B_COLOR);
-        seekBar_O.setProgress((int) RGB_OPACITY);
+        seekBar_R.setProgress(RGB_R_COLOR);
+        seekBar_G.setProgress(RGB_G_COLOR);
+        seekBar_B.setProgress(RGB_B_COLOR);
+        seekBar_O.setProgress(RGB_OPACITY);
 
         // Setting-up SeekBars listeners.
         seekBar_R.setOnSeekBarChangeListener(getRGB());
