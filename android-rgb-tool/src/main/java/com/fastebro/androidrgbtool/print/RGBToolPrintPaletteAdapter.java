@@ -132,10 +132,12 @@ public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
     }
 
 
+    @SuppressWarnings("SameReturnValue")
     private int computePageCount(PrintAttributes printAttributes) {
         return 1;
     }
 
+    @SuppressWarnings("SameReturnValue")
     private int getPrintItemCount() {
         return 1;
     }
