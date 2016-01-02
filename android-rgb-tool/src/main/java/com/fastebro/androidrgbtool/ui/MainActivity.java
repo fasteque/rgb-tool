@@ -126,7 +126,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
-    protected String hexValue;
+    private String hexValue;
 
     private ShareActionProvider shareActionProvider;
 
@@ -438,7 +438,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     /**
      * @return SeekBar listener.
      */
-    protected OnSeekBarChangeListener getRGB() {
+    private OnSeekBarChangeListener getRGB() {
         return new OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -489,7 +489,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         colorView.setBackgroundColor(Color.argb(RGB_OPACITY, RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR));
     }
 
-    protected void updateRGBField() {
+    private void updateRGBField() {
         // RGB channel: R, G, B, OPACITY.
         textView_RGB_R.setText(ColorUtils.getRGB(RGB_R_COLOR));
         textView_RGB_G.setText(ColorUtils.getRGB(RGB_G_COLOR));
@@ -500,7 +500,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     /**
      * Update HSB values.
      */
-    protected void updateHSBField() {
+    private void updateHSBField() {
         // Get float array with 3 values for HSB-HSV.
         float[] hsb = ColorUtils.RGBToHSB(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR);
 
@@ -513,7 +513,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     /**
      * Update hex field.
      */
-    protected void updateHexadecimalField() {
+    private void updateHexadecimalField() {
         hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
                 ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
 
@@ -616,7 +616,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         }
     }
 
-    public String getRealPathFromURI(Uri contentUri) {
+    private String getRealPathFromURI(Uri contentUri) {
         Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
         cursor.moveToFirst();
         String document_id = cursor.getString(0);
