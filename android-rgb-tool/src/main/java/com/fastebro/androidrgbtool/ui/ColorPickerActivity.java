@@ -36,7 +36,7 @@ public class ColorPickerActivity extends BaseActivity {
 
     private PhotoViewAttacher attacher;
     private Bitmap bitmap;
-    View.OnTouchListener imgSourceOnTouchListener;
+    private View.OnTouchListener imgSourceOnTouchListener;
     private RGBPanelData rgbPanelDataLayout;
 
     private String currentPath = null;

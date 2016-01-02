@@ -64,7 +64,7 @@ public class CustomTabActivityHelper {
      *
      * @return a CustomTabsSession
      */
-    public CustomTabsSession getSession() {
+    private CustomTabsSession getSession() {
         if (client == null) {
             customTabsSession = null;
         } else if (customTabsSession == null) {

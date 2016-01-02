@@ -66,7 +66,7 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.entry_icon) ImageView icon;
         @Bind(R.id.entry_title) TextView title;
-        protected ItemClickListener listener;
+        ItemClickListener listener;
 
         public ViewHolder(View v, ItemClickListener listener) {
             super(v);

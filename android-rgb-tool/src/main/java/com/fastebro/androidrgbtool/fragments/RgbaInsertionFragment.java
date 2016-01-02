@@ -21,7 +21,7 @@ import de.greenrobot.event.EventBus;
  * Project: rgb-tool
  */
 public class RgbaInsertionFragment extends DialogFragment {
-    public static final String ARG_RGBA_VALUES = "RGBA_VALUES";
+    private static final String ARG_RGBA_VALUES = "RGBA_VALUES";
 
     @Bind(R.id.numberPickerR)
     NumberPicker pickerR;

@@ -17,12 +17,12 @@ import java.util.List;
  * Created by danielealtomare on 04/10/15.
  * Project: rgb-tool
  */
-public class CustomTabsHelper {
+class CustomTabsHelper {
     private static final String TAG = "CustomTabsHelper";
-    static final String STABLE_PACKAGE = "com.android.chrome";
-    static final String BETA_PACKAGE = "com.chrome.beta";
-    static final String DEV_PACKAGE = "com.chrome.dev";
-    static final String LOCAL_PACKAGE = "com.google.android.apps.chrome";
+    private static final String STABLE_PACKAGE = "com.android.chrome";
+    private static final String BETA_PACKAGE = "com.chrome.beta";
+    private static final String DEV_PACKAGE = "com.chrome.dev";
+    private static final String LOCAL_PACKAGE = "com.google.android.apps.chrome";
     private static final String EXTRA_CUSTOM_TABS_KEEP_ALIVE =
             "android.support.customtabs.extra.KEEP_ALIVE";
 

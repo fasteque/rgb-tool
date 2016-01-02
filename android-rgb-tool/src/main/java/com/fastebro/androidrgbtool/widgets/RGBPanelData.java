@@ -28,11 +28,11 @@ public class RGBPanelData extends LinearLayout {
     @Bind(R.id.btn_dismiss_panel)
     ImageButton mDismissPanelButton;
 
-    int alpha;
-    int red;
-    int green;
-    int blue;
-    float[] hsb;
+    private int alpha;
+    private int red;
+    private int green;
+    private int blue;
+    private float[] hsb;
 
 
     public RGBPanelData(@NonNull Context context) {
@@ -113,7 +113,7 @@ public class RGBPanelData extends LinearLayout {
     }
 
 
-    public void setHSBValue() {
+    private void setHSBValue() {
         if (mHSBValue != null) {
             mHSBValue.setText("");
             mHSBValue.append("(" + String.format("%.0f", hsb[0]));
@@ -123,7 +123,7 @@ public class RGBPanelData extends LinearLayout {
     }
 
 
-    public void setHEXValue(int touchedRGB) {
+    private void setHEXValue(int touchedRGB) {
         if (mHEXValue != null) {
             mHEXValue.setText(("#" + Integer.toHexString(touchedRGB)).toUpperCase());
         }
