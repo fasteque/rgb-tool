@@ -25,10 +25,6 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private SelectPictureListAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-
     public SelectPictureDialogFragment() { }
 
     @Override
@@ -36,9 +32,11 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
         View view = inflater.inflate(R.layout.dialog_select_picture, container);
         ButterKnife.bind(this, view);
 
-        adapter = new SelectPictureListAdapter(getResources().getStringArray(R.array.pick_color_array), this);
+        SelectPictureListAdapter adapter = new SelectPictureListAdapter(getResources().getStringArray(R.array
+                .pick_color_array), this);
 
-        layoutManager = new RecyclerViewLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new RecyclerViewLinearLayoutManager(getActivity(),
+                LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
