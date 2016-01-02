@@ -27,7 +27,7 @@ public class PrintJobDialogFragment extends DialogFragment {
     @Bind(R.id.message)
     EditText message;
 
-    public static final String ARG_JOB_TYPE = "JOB_TYPE";
+    private static final String ARG_JOB_TYPE = "JOB_TYPE";
     public static final int PRINT_COLOR_JOB = 0;
     public static final int PRINT_PALETTE_JOB = 1;
     public static final int PRINT_COLOR_DETAILS_JOB = 2;

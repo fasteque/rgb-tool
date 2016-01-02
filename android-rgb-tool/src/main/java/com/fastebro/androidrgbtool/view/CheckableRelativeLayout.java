@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
  */
 public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
     private static final int[] STATE_CHECKABLE = {android.R.attr.state_pressed};
-    boolean checked = false;
+    private boolean checked = false;
 
     public CheckableRelativeLayout(@NonNull Context context) {
         super(context);

@@ -32,7 +32,7 @@ public class RGBToolGalleryActivity extends BaseActivity
     @Bind(R.id.grid_view)
     GridView mGridView;
 
-    RGBToolImagesCursorAdapter mAdapter;
+    private RGBToolImagesCursorAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class RGBToolGalleryActivity extends BaseActivity
         Uri IMAGES_URI = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
     }
 
-    public class MultiChoiceModeListener implements
+    private class MultiChoiceModeListener implements
             GridView.MultiChoiceModeListener {
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.setTitle(getString(R.string.rgbtool_gallery_context_menu_title));
