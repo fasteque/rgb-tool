@@ -62,7 +62,7 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
         customTabActivityHelper.setConnectionCallback(connectionCallback);
     }
 
-    private CustomTabActivityHelper.ConnectionCallback connectionCallback = new CustomTabActivityHelper
+    private final CustomTabActivityHelper.ConnectionCallback connectionCallback = new CustomTabActivityHelper
             .ConnectionCallback() {
         @Override
         public void onCustomTabsConnected() {

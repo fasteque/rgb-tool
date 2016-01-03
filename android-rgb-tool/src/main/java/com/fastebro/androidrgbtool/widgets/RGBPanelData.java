@@ -53,8 +53,8 @@ public class RGBPanelData extends LinearLayout {
     }
 
     private class ClipboardLongClickListener implements OnLongClickListener {
-        Context context;
-        CharSequence label;
+        final Context context;
+        final CharSequence label;
 
         public ClipboardLongClickListener(Context context, CharSequence label) {
             this.context = context;

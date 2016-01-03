@@ -297,7 +297,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         });
     }
 
-    private View.OnClickListener RGBAClickListener = new View.OnClickListener() {
+    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             short[] rgbaValues = new short[]{(short) RGB_R_COLOR, (short) RGB_G_COLOR, (short) RGB_B_COLOR, (short)

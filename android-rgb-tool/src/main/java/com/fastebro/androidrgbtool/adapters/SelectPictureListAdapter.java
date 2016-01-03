@@ -17,8 +17,8 @@ import butterknife.ButterKnife;
  * Project: rgb-tool
  */
 public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPictureListAdapter.ViewHolder> {
-    private String[] entries;
-    private ItemClickListener listener;
+    private final String[] entries;
+    private final ItemClickListener listener;
 
     public SelectPictureListAdapter(@NonNull String[] entries, @NonNull ItemClickListener listener) {
         this.entries = entries;
@@ -66,7 +66,7 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.entry_icon) ImageView icon;
         @Bind(R.id.entry_title) TextView title;
-        ItemClickListener listener;
+        final ItemClickListener listener;
 
         public ViewHolder(View v, ItemClickListener listener) {
             super(v);
