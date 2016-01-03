@@ -698,6 +698,7 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         printColor(event.message);
     }
 
+    @SuppressWarnings("UnusedParameters")
     public void onEvent(UpdateSaveColorUIEvent event) {
         updateSaveColorButton();
     }
