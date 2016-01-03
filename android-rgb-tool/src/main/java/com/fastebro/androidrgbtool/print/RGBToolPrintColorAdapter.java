@@ -29,12 +29,12 @@ import java.io.IOException;
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class RGBToolPrintColorAdapter extends PrintDocumentAdapter {
-    private Context context;
-    private String message;
-    private int RGBRColor;
-    private int RGBGColor;
-    private int RGBBColor;
-    private int RGBOpacity;
+    private final Context context;
+    private final String message;
+    private final int RGBRColor;
+    private final int RGBGColor;
+    private final int RGBBColor;
+    private final int RGBOpacity;
 
     private PrintedPdfDocument pdfDocument;
 

@@ -32,10 +32,10 @@ import java.util.ArrayList;
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
-    private Context context;
-    private String message;
-    private String filename;
-    private ArrayList<PaletteSwatch> swatches;
+    private final Context context;
+    private final String message;
+    private final String filename;
+    private final ArrayList<PaletteSwatch> swatches;
 
     private PrintedPdfDocument pdfDocument;
 

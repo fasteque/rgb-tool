@@ -22,8 +22,8 @@ import butterknife.ButterKnife;
  * Project: rgb-tool
  */
 public class ImagePaletteAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<PaletteSwatch> swatches;
+    private final Context context;
+    private final ArrayList<PaletteSwatch> swatches;
 
     public ImagePaletteAdapter(@NonNull Context context, @NonNull ArrayList<PaletteSwatch> swatches) {
         this.context = context;
