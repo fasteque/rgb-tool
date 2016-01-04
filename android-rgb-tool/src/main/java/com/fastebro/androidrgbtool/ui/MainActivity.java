@@ -185,6 +185,15 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (scalePictureSubscription != null && scalePictureSubscription.isUnsubscribed()) {
+            scalePictureSubscription.unsubscribe();
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         savePreferences();
