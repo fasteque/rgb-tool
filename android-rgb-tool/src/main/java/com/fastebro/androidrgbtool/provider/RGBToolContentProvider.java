@@ -30,7 +30,7 @@ public class RGBToolContentProvider extends ContentProvider {
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/colors";
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/color";
 
-    // used for the UriMacher
+    // used for the UriMatcher
     private static final int COLORS = 10;
     private static final int COLOR_ID = 20;
 
