@@ -61,8 +61,7 @@
     <!-- Attributions -->
     <string name="pref_help">Aide</string>
     <string name="pref_report_issue">Signaler un problème</string>
-    <string name="pref_send_feedback">Envoyez-nous un commentaire</string>
-
+    <string name="pref_send_feedback">Envoyer un commentaire</string>
     <string name="pref_open_source_libs">Bibliothèques Open Source</string>
     <string name="prefs_picasso">Picasso</string>
     <string name="prefs_butter_knife">Butter Knife</string>
