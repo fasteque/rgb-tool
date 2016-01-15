@@ -59,6 +59,9 @@
     <string name="error_open_gallery_image">Ошибка: файл должен находиться на устройстве!</string>
 
     <!-- Attributions -->
+    <string name="pref_help">Помощь</string>
+    <string name="pref_report_issue">Сообщить о проблеме</string>
+    <string name="pref_send_feedback">Отправить обратную связь</string>
     <string name="pref_open_source_libs">Open Source библиотеки</string>
     <string name="prefs_picasso">Picasso</string>
     <string name="prefs_butter_knife">Butter Knife</string>
