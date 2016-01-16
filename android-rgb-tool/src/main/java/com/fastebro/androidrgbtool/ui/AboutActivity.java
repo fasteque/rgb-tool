@@ -1,5 +1,6 @@
 package com.fastebro.androidrgbtool.ui;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -89,5 +90,20 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
 
 
         CustomTabActivityHelper.openCustomTab(this, intentBuilder.build(), uri, new WebViewFallback());
+    }
+
+    @Override
+    public void onPreferenceSendEmailSelected(String[] addresses, String subject) {
+        composeEmail(addresses, subject);
+    }
+
+    private void composeEmail(String[] addresses, String subject) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
