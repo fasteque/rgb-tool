@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_help">
+        <Preference android:title="@string/pref_report_issue">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/fasteque/rgb-tool/issues/new"/>
+        </Preference>
+        <Preference android:title="@string/pref_send_feedback">
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="daniele.altomare@gmail.com"/>
+        </Preference>
+    </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/pref_open_source_libs" >
-        <Preference android:title="@string/prefs_picasso" >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="http://square.github.io/picasso/" />
+        android:title="@string/pref_open_source_libs">
+        <Preference android:title="@string/prefs_picasso">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://square.github.io/picasso/"/>
         </Preference>
-        <Preference android:title="@string/prefs_butter_knife" >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="http://jakewharton.github.io/butterknife/" />
+        <Preference android:title="@string/prefs_butter_knife">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://jakewharton.github.io/butterknife/"/>
         </Preference>
-        <Preference android:title="@string/prefs_photoview" >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/chrisbanes/PhotoView" />
+        <Preference android:title="@string/prefs_photoview">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/chrisbanes/PhotoView"/>
         </Preference>
-        <Preference android:title="@string/prefs_eventbus" >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/greenrobot/EventBus" />
+        <Preference android:title="@string/prefs_eventbus">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/greenrobot/EventBus"/>
         </Preference>
-        <Preference android:title="@string/prefs_rxandroid" >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/ReactiveX/RxAndroid" />
+        <Preference android:title="@string/prefs_rxandroid">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/ReactiveX/RxAndroid"/>
         </Preference>
-        <Preference android:title="@string/prefs_leak_canary" >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://github.com/square/leakcanary" />
+        <Preference android:title="@string/prefs_leak_canary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/square/leakcanary"/>
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
