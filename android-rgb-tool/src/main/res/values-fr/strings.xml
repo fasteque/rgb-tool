@@ -8,6 +8,7 @@
     <string name="hsb_label">TSL</string>
     <string name="color_hexadecimal_label">HEX</string>
     <string name="color_list_empty">Aucune couleur</string>
+    <string name="action_not_supported_error">Aucune application disponible pour l\'action requise</string>
 
     <!-- Common actions -->
     <string name="action_common_set">Définir</string>
