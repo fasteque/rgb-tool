@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 
 import com.fastebro.androidrgbtool.R;
@@ -99,11 +100,15 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
 
     private void composeEmail(String[] addresses, String subject) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        // Only email apps should handle this.
+        intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        } else {
+            Snackbar.make(findViewById(android.R.id.content),
+                    getString(R.string.action_not_supported_error), Snackbar.LENGTH_SHORT).show();
         }
     }
 }
