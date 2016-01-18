@@ -17,7 +17,7 @@ public class RecyclerViewLinearLayoutManager extends LinearLayoutManager {
         super(context, orientation, reverseLayout);
     }
 
-    private int[] measuredDimension = new int[2];
+    private final int[] measuredDimension = new int[2];
 
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
