@@ -34,6 +34,12 @@ public class RGBToolGalleryActivity extends BaseActivity
 
     private RGBToolImagesCursorAdapter mAdapter;
 
+    interface RGBToolImagesQuery {
+        int QUERY_ID = 1;
+        Uri IMAGES_URI = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        String ORDER_BY = MediaStore.Images.Media.DATE_ADDED + " DESC";
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +57,7 @@ public class RGBToolGalleryActivity extends BaseActivity
         mGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
         mGridView.setMultiChoiceModeListener(new MultiChoiceModeListener());
 
-        getLoaderManager().initLoader(RGBToolImagesQuery.QUERY_ID,
-                null,
-                this);
+        getLoaderManager().initLoader(RGBToolImagesQuery.QUERY_ID, null, this);
     }
 
     @Override
@@ -78,7 +82,7 @@ public class RGBToolGalleryActivity extends BaseActivity
                     new String[] {"_data", "_id"},
                     "_data LIKE ?",
                     new String[] {"%" + getString(R.string.album_name) +"%"},
-                    null);
+                    RGBToolImagesQuery.ORDER_BY);
         }
 
         return null;
@@ -108,11 +112,6 @@ public class RGBToolGalleryActivity extends BaseActivity
                 startActivity(colorPickerIntent);
             }
         }
-    }
-
-    interface RGBToolImagesQuery {
-        int QUERY_ID = 1;
-        Uri IMAGES_URI = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
     }
 
     private class MultiChoiceModeListener implements
