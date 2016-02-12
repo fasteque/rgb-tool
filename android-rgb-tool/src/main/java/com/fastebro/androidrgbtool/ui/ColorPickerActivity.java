@@ -105,18 +105,17 @@ public class ColorPickerActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 finishAfterTransition();
             } else {
                 finish();
             }
             return true;
-        } else if(item.getItemId() == R.id.action_palette) {
+        } else if (item.getItemId() == R.id.action_palette) {
             generatePalette();
             return true;
-        }
-        else {
+        } else {
             return super.onOptionsItemSelected(item);
         }
     }
