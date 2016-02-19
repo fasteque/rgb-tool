@@ -57,6 +57,7 @@ import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.io.IOException;
@@ -669,7 +670,8 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         editor.apply();
     }
 
-    public void onEvent(ColorSelectEvent event) {
+    @Subscribe
+    public void onColorSelectEvent(ColorSelectEvent event) {
         updateRGBColor(event.RGBRComponent,
                 event.RGBGComponent,
                 event.RGBBComponent,
@@ -686,7 +688,8 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         savePreferences();
     }
 
-    public void onEvent(PhotoScaledEvent event) {
+    @Subscribe
+    public void onPhotoScaledEvent(PhotoScaledEvent event) {
         /**
          * Tell the media scanner about the new file so that it is
          * immediately available to the user.
@@ -704,16 +707,19 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         startActivity(colorPickerIntent);
     }
 
-    public void onEvent(PrintColorEvent event) {
+    @Subscribe
+    public void onPrintColorEvent(PrintColorEvent event) {
         printColor(event.message);
     }
 
     @SuppressWarnings("UnusedParameters")
-    public void onEvent(UpdateSaveColorUIEvent event) {
+    @Subscribe
+    public void onUpdateSaveColorUIEvent(UpdateSaveColorUIEvent event) {
         updateSaveColorButton();
     }
 
-    public void onEvent(RGBAInsertionEvent event) {
+    @Subscribe
+    public void onRGBAInsertionEvent(RGBAInsertionEvent event) {
         RGB_R_COLOR = event.rgbaValues[0];
         RGB_G_COLOR = event.rgbaValues[1];
         RGB_B_COLOR = event.rgbaValues[2];
@@ -726,7 +732,8 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         savePreferences();
     }
 
-    public void onEvent(UpdateHexValueEvent event) {
+    @Subscribe
+    public void onUpdateHexValueEvent(UpdateHexValueEvent event) {
         int[] rgb = ColorUtils.hexToRGB(event.hexValue);
         RGB_R_COLOR = rgb[0];
         RGB_G_COLOR = rgb[1];
@@ -738,7 +745,8 @@ public class MainActivity extends EventBaseActivity  implements ActivityCompat.O
         savePreferences();
     }
 
-    public void onEvent(ErrorMessageEvent event) {
+    @Subscribe
+    public void onErrorMessageEvent(ErrorMessageEvent event) {
         Snackbar.make(findViewById(android.R.id.content), event.message, Snackbar.LENGTH_SHORT).show();
     }
 }

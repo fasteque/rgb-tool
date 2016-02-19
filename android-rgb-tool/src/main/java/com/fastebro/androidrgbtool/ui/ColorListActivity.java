@@ -27,6 +27,7 @@ import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -153,7 +154,8 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         adapter.swapCursor(null);
     }
 
-    public void onEvent(ColorDeleteEvent event) {
+    @Subscribe
+    public void onColorDeleteEvent(ColorDeleteEvent event) {
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
         String[] mSelectionArgs = {String.valueOf(event.colorId)};
 
@@ -163,7 +165,8 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
                 mSelectionArgs);
     }
 
-    public void onEvent(ColorShareEvent event) {
+    @Subscribe
+    public void onColorShareEvent(ColorShareEvent event) {
         String[] projection = { ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,

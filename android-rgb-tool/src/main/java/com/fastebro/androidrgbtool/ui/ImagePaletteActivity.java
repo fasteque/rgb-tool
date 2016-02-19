@@ -21,6 +21,8 @@ import com.fastebro.androidrgbtool.model.PaletteSwatch;
 import com.fastebro.androidrgbtool.print.RGBToolPrintPaletteAdapter;
 import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -116,7 +118,8 @@ public class ImagePaletteActivity extends EventBaseActivity {
         dialog.show(getSupportFragmentManager(), null);
     }
 
-    public void onEvent(PrintPaletteEvent event) {
+    @Subscribe
+    public void onPrintPaletteEvent(PrintPaletteEvent event) {
         printColor(event.message);
     }
 

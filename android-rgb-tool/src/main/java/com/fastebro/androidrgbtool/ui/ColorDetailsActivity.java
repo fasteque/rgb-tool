@@ -23,6 +23,8 @@ import com.fastebro.androidrgbtool.fragments.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorDetailsAdapter;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+
 public class ColorDetailsActivity extends EventBaseActivity {
 
     static final String INTENT_EXTRA_RGB_COLOR = "com.fastebro.androidrgbtool.extra.RGB_COLOR";
@@ -76,7 +78,8 @@ public class ColorDetailsActivity extends EventBaseActivity {
         showPrintColorDialog(PrintJobDialogFragment.PRINT_COLOR_DETAILS_JOB);
     }
 
-    public void onEvent(PrintColorDetailsEvent event) {
+    @Subscribe
+    public void onPrintColorDetailsEvent(PrintColorDetailsEvent event) {
         startPrintJob(event.message);
     }
 
