@@ -17,7 +17,7 @@ import com.fastebro.android.rgbtool.model.events.ColorShareEvent;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.view.CircleView;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by daltomare on 17/04/14.

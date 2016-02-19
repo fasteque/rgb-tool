@@ -13,9 +13,10 @@ import com.fastebro.android.rgbtool.model.events.ErrorMessageEvent;
 import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 26/03/14.

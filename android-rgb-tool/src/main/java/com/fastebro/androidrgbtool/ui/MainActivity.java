@@ -56,6 +56,8 @@ import com.fastebro.androidrgbtool.utils.CommonUtils;
 import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -63,7 +65,6 @@ import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.app.AppObservable;

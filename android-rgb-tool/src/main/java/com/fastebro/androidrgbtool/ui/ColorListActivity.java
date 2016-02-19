@@ -26,9 +26,10 @@ import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by danielealtomare on 15/02/15.

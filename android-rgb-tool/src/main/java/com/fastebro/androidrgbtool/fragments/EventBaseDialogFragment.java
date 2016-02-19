@@ -2,7 +2,7 @@ package com.fastebro.androidrgbtool.fragments;
 
 import android.support.v4.app.DialogFragment;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by danielealtomare on 26/12/14.
