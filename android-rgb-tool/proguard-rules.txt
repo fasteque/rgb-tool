@@ -38,7 +38,11 @@
 -keep class android.support.v7.widget.ShareActionProvider { *; }
 
 # Greenbot EventBus
--keepclassmembers class ** { public void onEvent*(**); }
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
 # RxAndroid
 -dontwarn rx.internal.util.unsafe.**
