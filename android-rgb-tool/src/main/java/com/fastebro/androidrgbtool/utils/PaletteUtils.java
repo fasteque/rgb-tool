@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.model.PaletteSwatch;
+import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 
 import java.util.ArrayList;
 

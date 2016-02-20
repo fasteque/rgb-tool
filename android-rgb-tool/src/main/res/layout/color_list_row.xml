@@ -28,7 +28,7 @@
             android:adjustViewBounds="true"
             android:scaleType="centerInside" />
 
-        <com.fastebro.androidrgbtool.view.CircleView
+        <com.fastebro.androidrgbtool.widgets.CircleView
             android:id="@+id/rgb_panel_color"
             android:layout_width="56dp"
             android:layout_height="56dp"

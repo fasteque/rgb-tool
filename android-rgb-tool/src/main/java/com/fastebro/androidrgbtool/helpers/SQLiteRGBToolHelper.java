@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 
-import com.fastebro.androidrgbtool.contracts.ColorDataContract;
+import com.fastebro.androidrgbtool.colors.ColorDataContract;
 
 public class SQLiteRGBToolHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";

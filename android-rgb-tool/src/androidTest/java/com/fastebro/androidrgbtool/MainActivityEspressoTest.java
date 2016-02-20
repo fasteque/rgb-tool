@@ -3,7 +3,7 @@ package com.fastebro.androidrgbtool;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.fastebro.androidrgbtool.ui.MainActivity;
+import com.fastebro.androidrgbtool.rgb.MainActivity;
 
 /**
  * Created by danielealtomare on 23/01/15.

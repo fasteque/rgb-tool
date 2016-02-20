@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Rgbtool">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".rgb.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -40,49 +40,49 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ColorPickerActivity"
+            android:name=".colorpicker.ColorPickerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_color_picker"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.RGBToolGalleryActivity"
+            android:name=".gallery.RGBToolGalleryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/rgb_gallery_name"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.ColorListActivity"
+            android:name=".colors.ColorListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_color_list"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.AboutActivity"
+            android:name=".settings.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_about"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.ImagePaletteActivity"
+            android:name=".palette.ImagePaletteActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_palette"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.ColorDetailsActivity"
+            android:name=".colordetails.ColorDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Rgbtool.NoActionBar">
         </activity>
 
         <provider
-            android:name=".provider.RGBToolContentProvider"
+            android:name=".colors.RGBToolContentProvider"
             android:authorities="com.fastebro.androidrgbtool.rgbtoolprovider"
             android:exported="false">
         </provider>

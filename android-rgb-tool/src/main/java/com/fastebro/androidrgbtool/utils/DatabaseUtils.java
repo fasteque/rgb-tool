@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 
-import com.fastebro.androidrgbtool.contracts.ColorDataContract;
-import com.fastebro.androidrgbtool.provider.RGBToolContentProvider;
+import com.fastebro.androidrgbtool.colors.ColorDataContract;
+import com.fastebro.androidrgbtool.colors.RGBToolContentProvider;
 
 /**
  * Created by danielealtomare on 17/05/14.
