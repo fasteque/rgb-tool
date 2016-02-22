@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by danielealtomare on 27/12/14.
  * Project: rgb-tool
  */
-public class ImagePaletteAdapter extends BaseAdapter {
+class ImagePaletteAdapter extends BaseAdapter {
     private final Context context;
     private final ArrayList<PaletteSwatch> swatches;
 

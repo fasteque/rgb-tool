@@ -22,7 +22,7 @@ import org.greenrobot.eventbus.EventBus;
  * Created by daltomare on 17/04/14.
  * Project: rgb-tool
  */
-public class ColorListAdapter extends SimpleCursorAdapter {
+class ColorListAdapter extends SimpleCursorAdapter {
 
     public ColorListAdapter(@NonNull Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, from, to, flags);

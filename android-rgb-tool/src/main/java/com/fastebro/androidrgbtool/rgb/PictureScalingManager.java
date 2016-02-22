@@ -25,7 +25,7 @@ import rx.Subscriber;
  * Created by danielealtomare on 5/10/15.
  * Project: rgb-tool
  */
-public class PictureScalingManager {
+class PictureScalingManager {
 
     @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     public static Observable<ScaledPicture> scalePictureObservable(@NonNull final String sourcePath,
