@@ -78,19 +78,15 @@ public class ColorListAdapter extends SimpleCursorAdapter {
     }
 
     private void showPopupMenu(View view) {
-        // Retrieve the clicked item from view's tag
         final int colorId = (int) view.getTag();
 
         PopupMenu popup = new PopupMenu(view.getContext(), view);
         popup.getMenuInflater().inflate(R.menu.color_popup, popup.getMenu());
-
-        // Set a listener so we are notified if a menu item is clicked
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_remove:
-                        // Remove the item from the adapter
                         EventBus.getDefault().post(new ColorDeleteEvent(colorId));
                         return true;
                     case R.id.menu_share:
