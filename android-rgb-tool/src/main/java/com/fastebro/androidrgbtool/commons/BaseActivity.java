@@ -29,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark, getTheme()));
             } else {
+                //noinspection deprecation
                 getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
             }
             getWindow().setEnterTransition(new Explode());
