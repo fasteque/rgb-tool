@@ -11,7 +11,7 @@ ext {
     androidTargetSdkVersion = 23
     androidCompileSdkVersion = 23
 
-    androidSupportLibraryVersion = '23.1.1'
+    androidSupportLibraryVersion = '23.2.0'
     rxAndroidVersion = '0.25.0'
     butterKnifeVersion = '7.0.1'
     picassoVersion = '2.5.2'
