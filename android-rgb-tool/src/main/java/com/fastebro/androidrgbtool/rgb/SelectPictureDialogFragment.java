@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.widgets.RecyclerViewLinearLayoutManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,10 +31,7 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
 
         SelectPictureListAdapter adapter = new SelectPictureListAdapter(getResources().getStringArray(R.array
                 .pick_color_array), this);
-
-        RecyclerView.LayoutManager layoutManager = new RecyclerViewLinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
