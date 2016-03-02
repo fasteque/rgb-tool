@@ -75,7 +75,8 @@ public class CustomTabActivityHelper {
 
     /**
      * Register a Callback to be called when connected or disconnected from the Custom Tabs Service
-     * @param connectionCallback
+     *
+     * @param connectionCallback called when connected or disconnected from the Custom Tabs Service
      */
     public void setConnectionCallback(ConnectionCallback connectionCallback) {
         this.connectionCallback = connectionCallback;
