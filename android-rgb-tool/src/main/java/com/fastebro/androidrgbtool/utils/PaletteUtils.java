@@ -12,7 +12,12 @@ import java.util.ArrayList;
  * Created by danielealtomare on 28/12/14.
  * Project: rgb-tool
  */
-public class PaletteUtils {
+public final class PaletteUtils {
+
+    private PaletteUtils() {
+
+    }
+
     public static String getSwatchDescription(@NonNull Context context, PaletteSwatch.SwatchType type) {
         switch (type) {
             case VIBRANT:

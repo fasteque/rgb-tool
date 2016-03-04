@@ -3,7 +3,11 @@ package com.fastebro.androidrgbtool.utils;
 import android.graphics.Color;
 import android.support.annotation.IntRange;
 
-public class ColorUtils {
+public final class ColorUtils {
+
+    private ColorUtils() {
+
+    }
 
     public static String getRGB(float n) {
         return String.format("%.0f", n).replaceAll("\\.0*$", "");

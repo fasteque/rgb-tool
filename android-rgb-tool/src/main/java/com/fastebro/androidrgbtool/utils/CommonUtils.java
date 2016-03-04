@@ -4,7 +4,12 @@ package com.fastebro.androidrgbtool.utils;
  * Created by daltomare on 13/03/14.
  * Project: rgb-tool
  */
-public class CommonUtils {
+public final class CommonUtils {
+
+    private CommonUtils() {
+
+    }
+
     public static final String PREFS_NAME = "RGBToolFile";
 
     /**

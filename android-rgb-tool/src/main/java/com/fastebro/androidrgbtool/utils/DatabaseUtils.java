@@ -11,7 +11,12 @@ import com.fastebro.androidrgbtool.colors.RGBToolContentProvider;
  * Created by danielealtomare on 17/05/14.
  * Project: rgb-tool
  */
-public class DatabaseUtils {
+public final class DatabaseUtils {
+
+    private DatabaseUtils() {
+
+    }
+
     public static final String[] COLORS_SUMMARY_PROJECTION = new String[]
             {
                     ColorDataContract.ColorEntry._ID,
