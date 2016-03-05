@@ -19,10 +19,9 @@ ext {
     eventBusVersion = '3.0.0'
     leakCanaryVersion = '1.3.1'
     jUnitVersion = '4.12'
-    mockitoVersion = '1.10.19'
+    mockitoVersion = '2.0.43-beta'
     espressoCoreVersion = '2.2.2'
     testRunnerVersion = '0.5'
-
 
     appDependencies = [
             appCompat:          "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
