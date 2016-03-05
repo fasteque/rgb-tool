@@ -19,6 +19,7 @@ ext {
     eventBusVersion = '3.0.0'
     leakCanaryVersion = '1.3.1'
     jUnitVersion = '4.12'
+    mockitoVersion = '1.10.19'
     espressoCoreVersion = '2.2.2'
     testRunnerVersion = '0.5'
 
@@ -47,7 +48,8 @@ ext {
     ]
 
     appTestDependencies = [
-            jUnit:              "junit:junit:${jUnitVersion}"
+            jUnit:              "junit:junit:${jUnitVersion}",
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}"
     ]
 
     appAndroidTestDependencies = [

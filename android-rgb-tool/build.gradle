@@ -76,10 +76,9 @@ dependencies {
     debugCompile appDebugDependencies.leakCanary
     releaseCompile appReleaseDependencies.leakCanaryNoOp
 
-    // Unit testing dependencies
+    // Testing dependencies
     testCompile appTestDependencies.jUnit
-
-    // Testing-only dependencies
+    testCompile appTestDependencies.mockito
     androidTestCompile appAndroidTestDependencies.espressoCore
     androidTestCompile appAndroidTestDependencies.testRunner
     androidTestCompile appAndroidTestDependencies.supportAnnotation
