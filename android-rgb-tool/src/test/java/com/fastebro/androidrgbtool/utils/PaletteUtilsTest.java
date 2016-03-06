@@ -3,7 +3,6 @@ package com.fastebro.androidrgbtool.utils;
 import android.content.Context;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.model.entities.Swatch;
 import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 
 import org.junit.Before;
