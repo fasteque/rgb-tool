@@ -2,7 +2,9 @@ package com.fastebro.androidrgbtool.utils;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 
 /**
  * Created by danielealtomare on 10/06/15.
@@ -11,7 +13,7 @@ import static org.junit.Assert.*;
 public class ColorUtilsTest {
 
     @Test
-    public void testGetRGB() throws Exception {
+    public void colorUtils_getRGB() {
         assertEquals(ColorUtils.getRGB(0), "0");
         assertEquals(ColorUtils.getRGB(100), "100");
         assertEquals(ColorUtils.getRGB(255), "255");
@@ -21,14 +23,14 @@ public class ColorUtilsTest {
     }
 
     @Test
-    public void testRGBToHex() throws Exception {
+    public void colorUtils_RGBToHex() {
         assertEquals(ColorUtils.RGBToHex(0), "00");
         assertEquals(ColorUtils.RGBToHex(16), "10");
         assertEquals(ColorUtils.RGBToHex(255), "FF");
     }
 
     @Test
-    public void testHexToRGB() throws Exception {
+    public void colorUtils_hexToRGB() {
         int[] rgb = ColorUtils.hexToRGB("");
         assertNotNull(rgb);
         assertEquals(rgb.length, 3);
