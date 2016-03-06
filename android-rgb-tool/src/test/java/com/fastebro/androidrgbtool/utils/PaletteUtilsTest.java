@@ -3,6 +3,7 @@ package com.fastebro.androidrgbtool.utils;
 import android.content.Context;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.model.entities.Swatch;
 import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 
 import org.junit.Before;
@@ -45,5 +46,35 @@ public class PaletteUtilsTest {
     public void paletteUtils_getVibrantSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(mockContext, PaletteSwatch.SwatchType.VIBRANT);
         assertTrue(description.equals(mockContext.getString(R.string.swatch_vibrant)));
+    }
+
+    @Test
+    public void paletteUtils_getLightVibrantSwatchDescription() {
+        String description = PaletteUtils.getSwatchDescription(mockContext, PaletteSwatch.SwatchType.LIGHT_VIBRANT);
+        assertTrue(description.equals(mockContext.getString(R.string.swatch_light_vibrant)));
+    }
+
+    @Test
+    public void paletteUtils_getDarkVibrantSwatchDescription() {
+        String description = PaletteUtils.getSwatchDescription(mockContext, PaletteSwatch.SwatchType.DARK_VIBRANT);
+        assertTrue(description.equals(mockContext.getString(R.string.swatch_dark_vibrant)));
+    }
+
+    @Test
+    public void paletteUtils_getMutedSwatchDescription() {
+        String description = PaletteUtils.getSwatchDescription(mockContext, PaletteSwatch.SwatchType.MUTED);
+        assertTrue(description.equals(mockContext.getString(R.string.swatch_muted)));
+    }
+
+    @Test
+    public void paletteUtils_getLightMutedSwatchDescription() {
+        String description = PaletteUtils.getSwatchDescription(mockContext, PaletteSwatch.SwatchType.LIGHT_MUTED);
+        assertTrue(description.equals(mockContext.getString(R.string.swatch_light_muted)));
+    }
+
+    @Test
+    public void paletteUtils_getDarkMutedSwatchDescription() {
+        String description = PaletteUtils.getSwatchDescription(mockContext, PaletteSwatch.SwatchType.DARK_MUTED);
+        assertTrue(description.equals(mockContext.getString(R.string.swatch_dark_muted)));
     }
 }
