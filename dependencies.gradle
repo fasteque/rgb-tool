@@ -54,6 +54,7 @@ ext {
     appAndroidTestDependencies = [
             espressoCore:       "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
             testRunner:         "com.android.support.test:runner:${testRunnerVersion}",
+            testRules:          "com.android.support.test:rules:${testRunnerVersion}",
             supportAnnotation:  "com.android.support:support-annotations:${androidSupportLibraryVersion}"
     ]
 }

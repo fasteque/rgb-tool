@@ -81,5 +81,6 @@ dependencies {
     testCompile appTestDependencies.mockito
     androidTestCompile appAndroidTestDependencies.espressoCore
     androidTestCompile appAndroidTestDependencies.testRunner
+    androidTestCompile appAndroidTestDependencies.testRules
     androidTestCompile appAndroidTestDependencies.supportAnnotation
 }
