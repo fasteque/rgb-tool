@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.android.rgbtool.model.events.RGBAInsertionEvent;
+import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

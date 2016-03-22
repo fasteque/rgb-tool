@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.fastebro.android.rgbtool.model.events.ErrorMessageEvent;
-import com.fastebro.android.rgbtool.model.events.UpdateHexValueEvent;
+import com.fastebro.androidrgbtool.model.events.ErrorMessageEvent;
+import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 
 import org.greenrobot.eventbus.EventBus;

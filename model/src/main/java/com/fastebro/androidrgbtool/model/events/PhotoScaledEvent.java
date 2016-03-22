@@ -1,4 +1,4 @@
-package com.fastebro.android.rgbtool.model.events;
+package com.fastebro.androidrgbtool.model.events;
 
 /**
  * Created by danielealtomare on 26/12/14.

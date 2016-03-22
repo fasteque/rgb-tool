@@ -15,11 +15,9 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.fastebro.android.rgbtool.model.events.PrintColorDetailsEvent;
+import com.fastebro.androidrgbtool.model.events.PrintColorDetailsEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.commons.EventBaseActivity;
-import com.fastebro.androidrgbtool.colordetails.ColorComplementaryFragment;
-import com.fastebro.androidrgbtool.colordetails.ColorSampleFragment;
 import com.fastebro.androidrgbtool.print.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorDetailsAdapter;
 import com.fastebro.androidrgbtool.utils.ColorUtils;

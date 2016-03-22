@@ -16,10 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.android.rgbtool.model.events.ColorDeleteEvent;
-import com.fastebro.android.rgbtool.model.events.ColorSelectEvent;
-import com.fastebro.android.rgbtool.model.events.ColorShareEvent;
-import com.fastebro.android.rgbtool.model.events.UpdateSaveColorUIEvent;
+import com.fastebro.androidrgbtool.model.events.ColorDeleteEvent;
+import com.fastebro.androidrgbtool.model.events.ColorSelectEvent;
+import com.fastebro.androidrgbtool.model.events.ColorShareEvent;
+import com.fastebro.androidrgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.commons.EventBaseActivity;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.DatabaseUtils;
