@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.fastebro.androidrgbtool"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.fastebro.androidrgbtool"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <supports-screens
         android:largeScreens="true"
@@ -10,16 +9,14 @@
         android:xlargeScreens="true"/>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <!-- Google Play check Application support to OpenGL ES 2.0 -->
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
-
-    <!-- If the device doesn't have a camera, the app can works anyway -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera.flash"/>
 
     <application
         android:name=".RGBToolApplication"
@@ -80,12 +77,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Rgbtool.NoActionBar">
         </activity>
+        <activity android:name=".livepicker.LivePickerActivity">
+        </activity>
 
         <provider
             android:name=".colors.RGBToolContentProvider"
             android:authorities="com.fastebro.androidrgbtool.rgbtoolprovider"
             android:exported="false">
         </provider>
+
     </application>
 
 </manifest>
