@@ -1,5 +1,4 @@
 <resources>
-
     <color name="white">#FFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="silver">#FFC0C0C0</color>
@@ -21,4 +20,8 @@
     <color name="fab_color_pressed">#FB6D6D</color>
     <color name="fab_color_shadow">#44000000</color>
     <color name="transparent_accent">#99FF5252</color>
+
+    <!-- Live picker -->
+    <color name="live_picker_pointer_color">#80FFFFFF</color>
+    <color name="live_picker_pointer_stroke">#FFFFFFFF</color>
 </resources>

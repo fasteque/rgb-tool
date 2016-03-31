@@ -25,4 +25,9 @@
     <dimen name="btn_fab_margins">28dp</dimen>
     <dimen name="btn_fab_elevation">10dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+
+    <!-- Live picker -->
+    <dimen name="live_picker_pointer_size">8dp</dimen>
+    <dimen name="live_picker_pointer_stroke_size">48dp</dimen>
+    <dimen name="live_picker_pointer_stroke_thickness">8dp</dimen>
 </resources>
