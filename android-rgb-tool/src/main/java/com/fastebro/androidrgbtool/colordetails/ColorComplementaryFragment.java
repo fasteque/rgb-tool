@@ -19,23 +19,24 @@ import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class ColorComplementaryFragment extends Fragment {
 
     private static final String ARG_RGB_COLOR = "arg_rgb_color";
     private short[] argbValues;
 
-    @Bind(R.id.complementaryColorBackground)
+    @BindView(R.id.complementaryColorBackground)
     CardView complementaryColorBackground;
-    @Bind(R.id.complementaryColorText)
+    @BindView(R.id.complementaryColorText)
     TextView complementaryColorText;
-
-    @Bind(R.id.contrastColorBackground)
+    @BindView(R.id.contrastColorBackground)
     CardView contrastColorBackground;
-    @Bind(R.id.contrastColorText)
+    @BindView(R.id.contrastColorText)
     TextView contrastColorText;
+    private Unbinder unbinder;
 
     private ShareActionProvider shareActionProvider;
 
@@ -62,7 +63,7 @@ public class ColorComplementaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_color_complementary, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
         return view;
     }
@@ -91,7 +92,9 @@ public class ColorComplementaryFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 
     @Override

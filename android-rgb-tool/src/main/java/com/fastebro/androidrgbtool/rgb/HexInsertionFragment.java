@@ -15,16 +15,18 @@ import com.fastebro.androidrgbtool.R;
 
 import org.greenrobot.eventbus.EventBus;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by danielealtomare on 26/03/14.
  * Project: rgb-tool
  */
 public class HexInsertionFragment extends DialogFragment {
-    @Bind(R.id.new_hex_value)
+    @BindView(R.id.new_hex_value)
     EditText newHexValue;
+    private Unbinder unbinder;
 
     private static final String ARG_HEX_VALUE = "HEX_VALUE";
 
@@ -56,7 +58,7 @@ public class HexInsertionFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_hex_insertion, null);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
@@ -94,7 +96,9 @@ public class HexInsertionFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 
     private boolean checkHexValue(String hexValue) {

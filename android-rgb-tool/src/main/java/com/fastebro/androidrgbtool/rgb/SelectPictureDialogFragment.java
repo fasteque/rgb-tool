@@ -11,23 +11,25 @@ import android.view.ViewGroup;
 
 import com.fastebro.androidrgbtool.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by danielealtomare on 21/06/14.
  * Project: rgb-tool
  */
 public class SelectPictureDialogFragment extends DialogFragment implements SelectPictureListAdapter.ItemClickListener {
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    private Unbinder unbinder;
 
     public SelectPictureDialogFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_select_picture, container);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         SelectPictureListAdapter adapter = new SelectPictureListAdapter(getResources().getStringArray(R.array
                 .pick_color_array), this);
@@ -70,6 +72,8 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 }

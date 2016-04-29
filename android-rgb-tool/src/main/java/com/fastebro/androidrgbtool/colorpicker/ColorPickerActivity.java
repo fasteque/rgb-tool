@@ -21,7 +21,7 @@ import com.fastebro.androidrgbtool.commons.BaseActivity;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -30,10 +30,9 @@ import java.util.ArrayList;
 
 
 public class ColorPickerActivity extends BaseActivity {
-    @Bind(R.id.color_picker_main_layout)
+    @BindView(R.id.color_picker_main_layout)
     RelativeLayout mainLayout;
-
-    @Bind(R.id.iv_photo)
+    @BindView(R.id.iv_photo)
     ImageView imageView;
 
     private PhotoViewAttacher attacher;

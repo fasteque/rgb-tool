@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -64,8 +64,8 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
 
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @Bind(R.id.entry_icon) ImageView icon;
-        @Bind(R.id.entry_title) TextView title;
+        @BindView(R.id.entry_icon) ImageView icon;
+        @BindView(R.id.entry_title) TextView title;
         final ItemClickListener listener;
 
         public ViewHolder(View v, ItemClickListener listener) {

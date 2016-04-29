@@ -27,7 +27,7 @@ import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -35,13 +35,11 @@ import butterknife.ButterKnife;
  * Project: rgb-tool
  */
 public class ColorListActivity extends EventBaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
-    @Bind(android.R.id.list)
+    @BindView(android.R.id.list)
     ListView listView;
-
-    @Bind(R.id.list_empty_progress)
+    @BindView(R.id.list_empty_progress)
     LinearLayout progressBar;
-
-    @Bind(R.id.list_empty_text)
+    @BindView(R.id.list_empty_text)
     TextView emptyListMessage;
 
     private ColorListAdapter adapter;

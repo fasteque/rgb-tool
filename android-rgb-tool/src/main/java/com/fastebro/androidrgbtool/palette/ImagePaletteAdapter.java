@@ -13,7 +13,7 @@ import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -66,9 +66,9 @@ class ImagePaletteAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        @Bind(R.id.palette_item_color) View color;
-        @Bind(R.id.palette_item_rgb) TextView rgb;
-        @Bind(R.id.palette_item_type) TextView type;
+        @BindView(R.id.palette_item_color) View color;
+        @BindView(R.id.palette_item_rgb) TextView rgb;
+        @BindView(R.id.palette_item_type) TextView type;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

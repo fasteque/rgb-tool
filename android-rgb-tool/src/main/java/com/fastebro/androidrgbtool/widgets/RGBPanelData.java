@@ -12,20 +12,20 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class RGBPanelData extends LinearLayout {
 
-    @Bind(R.id.rgb_value)
+    @BindView(R.id.rgb_value)
     TextView mRGBValue;
-    @Bind(R.id.hsb_value)
+    @BindView(R.id.hsb_value)
     TextView mHSBValue;
-    @Bind(R.id.hex_value)
+    @BindView(R.id.hex_value)
     TextView mHEXValue;
-    @Bind(R.id.btn_dismiss_panel)
+    @BindView(R.id.btn_dismiss_panel)
     ImageButton mDismissPanelButton;
 
     private int alpha;
@@ -34,18 +34,15 @@ public class RGBPanelData extends LinearLayout {
     private int blue;
     private float[] hsb;
 
-
     public RGBPanelData(@NonNull Context context) {
         super(context);
         setupPanel(context);
     }
 
-
     public RGBPanelData(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
         setupPanel(context);
     }
-
 
     public RGBPanelData(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -92,7 +89,6 @@ public class RGBPanelData extends LinearLayout {
                 context.getString(R.string.app_name)));
     }
 
-
     public void updateData(int touchedRGB) {
         alpha = (touchedRGB >> 24) & 0xFF;
         red = (touchedRGB >> 16) & 0xFF;
@@ -105,13 +101,11 @@ public class RGBPanelData extends LinearLayout {
         setHEXValue(touchedRGB);
     }
 
-
     public void setRGBValue() {
         if (mRGBValue != null) {
             mRGBValue.setText("(" + alpha + ", " + red + ", " + green + ", " + blue + ")");
         }
     }
-
 
     private void setHSBValue() {
         if (mHSBValue != null) {
@@ -121,7 +115,6 @@ public class RGBPanelData extends LinearLayout {
             mHSBValue.append(", " + String.format("%.0f%%", (hsb[2] * 100.0f)) + ")");
         }
     }
-
 
     private void setHEXValue(int touchedRGB) {
         if (mHEXValue != null) {

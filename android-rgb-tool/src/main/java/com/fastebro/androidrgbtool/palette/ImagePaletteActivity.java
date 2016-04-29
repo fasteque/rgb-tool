@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  * Project: rgb-tool
  */
 public class ImagePaletteActivity extends EventBaseActivity {
-    @Bind(R.id.palette_grid)
+    @BindView(R.id.palette_grid)
     GridView paletteGrid;
 
     public static final String EXTRA_SWATCHES = "com.fastebro.androidrgbtool.EXTRA_SWATCHES";

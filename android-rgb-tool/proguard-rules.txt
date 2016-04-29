@@ -14,19 +14,6 @@
 # Apache Commons-IO
 -keep class org.apache.commons.io.**
 
-# ButterKnife
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
-
 # PhotoView
 -keep class uk.co.senab.photoview.** { *; }
 -keep interface uk.co.senab.photoview.** { *; }

@@ -14,8 +14,9 @@ import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by danielealtomare on 26/03/14.
@@ -24,14 +25,15 @@ import butterknife.ButterKnife;
 public class RgbaInsertionFragment extends DialogFragment {
     private static final String ARG_RGBA_VALUES = "RGBA_VALUES";
 
-    @Bind(R.id.numberPickerR)
+    @BindView(R.id.numberPickerR)
     NumberPicker pickerR;
-    @Bind(R.id.numberPickerG)
+    @BindView(R.id.numberPickerG)
     NumberPicker pickerG;
-    @Bind(R.id.numberPickerB)
+    @BindView(R.id.numberPickerB)
     NumberPicker pickerB;
-    @Bind(R.id.numberPickerA)
+    @BindView(R.id.numberPickerA)
     NumberPicker pickerA;
+    private Unbinder unbinder;
 
     private short[] rgbaValues;
 
@@ -52,7 +54,7 @@ public class RgbaInsertionFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_rgba_insertion, null);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         pickerR.setMinValue(0);
         pickerR.setMaxValue(255);
@@ -111,6 +113,8 @@ public class RgbaInsertionFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 }

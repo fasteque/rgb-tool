@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -67,6 +68,7 @@ dependencies {
     compile appDependencies.photoView
     compile appDependencies.picasso
     compile appDependencies.butterKnife
+    apt appDependencies.butterKnifeCompiler
     compile appDependencies.eventBus
     compile appDependencies.rxAndroid
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])

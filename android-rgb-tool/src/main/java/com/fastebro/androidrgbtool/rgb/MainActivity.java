@@ -66,7 +66,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.Subscription;
@@ -76,46 +76,40 @@ import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends EventBaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
-    @Bind(R.id.seekBar_R)
+    @BindView(R.id.seekBar_R)
     SeekBar seekBar_R;
-    @Bind(R.id.seekBar_G)
+    @BindView(R.id.seekBar_G)
     SeekBar seekBar_G;
-    @Bind(R.id.seekBar_B)
+    @BindView(R.id.seekBar_B)
     SeekBar seekBar_B;
-    @Bind(R.id.seekBar_O)
+    @BindView(R.id.seekBar_O)
     SeekBar seekBar_O;
-
     // RGB channel: R,G,B.
-    @Bind(R.id.textView_RGB_R)
+    @BindView(R.id.textView_RGB_R)
     TextView textView_RGB_R;
-    @Bind(R.id.textView_RGB_G)
+    @BindView(R.id.textView_RGB_G)
     TextView textView_RGB_G;
-    @Bind(R.id.textView_RGB_B)
+    @BindView(R.id.textView_RGB_B)
     TextView textView_RGB_B;
-    @Bind(R.id.textView_RGB_O)
+    @BindView(R.id.textView_RGB_O)
     TextView textView_RGB_O;
-
     // HSB: Hue, Saturation, Brightness.
-    @Bind(R.id.textView_HSB_H)
+    @BindView(R.id.textView_HSB_H)
     TextView textView_HSB_H;
-    @Bind(R.id.textView_HSB_S)
+    @BindView(R.id.textView_HSB_S)
     TextView textView_HSB_S;
-    @Bind(R.id.textView_HSB_B)
+    @BindView(R.id.textView_HSB_B)
     TextView textView_HSB_B;
-
     // Hexadecimal color value.
-    @Bind(R.id.textView_Hexadecimal)
+    @BindView(R.id.textView_Hexadecimal)
     TextView textView_Hexadecimal;
-
     // Save color button.
-    @Bind(R.id.btn_save_color)
+    @BindView(R.id.btn_save_color)
     ImageButton btn_SaveColor;
-
     // Color details.
-    @Bind(R.id.btn_color_details)
+    @BindView(R.id.btn_color_details)
     ImageButton btn_ColorDetails;
-
-    @Bind(R.id.color_view)
+    @BindView(R.id.color_view)
     View colorView;
 
     private String currentPhotoPath;

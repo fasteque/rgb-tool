@@ -13,7 +13,7 @@ ext {
 
     androidSupportLibraryVersion = '23.3.0'
     rxAndroidVersion = '0.25.0'
-    butterKnifeVersion = '7.0.1'
+    butterKnifeVersion = '8.0.1'
     picassoVersion = '2.5.2'
     photoViewVersion = '1.2.4'
     eventBusVersion = '3.0.0'
@@ -32,6 +32,7 @@ ext {
             palette:            "com.android.support:palette-v7:${androidSupportLibraryVersion}",
             percent:            "com.android.support:percent:${androidSupportLibraryVersion}",
             butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeCompiler:"com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             picasso:            "com.squareup.picasso:picasso:${picassoVersion}",
             rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
             photoView:          "com.commit451:PhotoView:${photoViewVersion}",

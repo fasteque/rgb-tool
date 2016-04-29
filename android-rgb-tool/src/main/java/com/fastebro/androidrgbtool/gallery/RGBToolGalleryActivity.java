@@ -14,7 +14,7 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.commons.BaseActivity;
@@ -27,10 +27,10 @@ import java.util.Collections;
 
 
 public class RGBToolGalleryActivity extends BaseActivity
-    implements LoaderManager.LoaderCallbacks<Cursor>,
+        implements LoaderManager.LoaderCallbacks<Cursor>,
         AdapterView.OnItemClickListener {
 
-    @Bind(R.id.grid_view)
+    @BindView(R.id.grid_view)
     GridView mGridView;
 
     private RGBToolImagesCursorAdapter mAdapter;

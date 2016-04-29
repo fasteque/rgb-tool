@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class ColorSampleFragment extends Fragment {
 
@@ -22,23 +23,23 @@ public class ColorSampleFragment extends Fragment {
     private short[] argbValues;
     private boolean isText;
 
-    @Bind(R.id.firstColorSampleBackground)
+    @BindView(R.id.firstColorSampleBackground)
     CardView firstColorSampleBackground;
-    @Bind(R.id.firstColorSampleTextItalic)
+    @BindView(R.id.firstColorSampleTextItalic)
     TextView firstColorSampleTextItalic;
-    @Bind(R.id.firstColorSampleTextNormal)
+    @BindView(R.id.firstColorSampleTextNormal)
     TextView firstColorSampleTextNormal;
-    @Bind(R.id.firstColorSampleTextBold)
+    @BindView(R.id.firstColorSampleTextBold)
     TextView firstColorSampleTextBold;
-
-    @Bind(R.id.secondColorSampleBackground)
+    @BindView(R.id.secondColorSampleBackground)
     CardView secondColorSampleBackground;
-    @Bind(R.id.secondColorSampleTextItalic)
+    @BindView(R.id.secondColorSampleTextItalic)
     TextView secondColorSampleTextItalic;
-    @Bind(R.id.secondColorSampleTextNormal)
+    @BindView(R.id.secondColorSampleTextNormal)
     TextView secondColorSampleTextNormal;
-    @Bind(R.id.secondColorSampleTextBold)
+    @BindView(R.id.secondColorSampleTextBold)
     TextView secondColorSampleTextBold;
+    private Unbinder unbinder;
 
 
     public ColorSampleFragment() {
@@ -65,7 +66,7 @@ public class ColorSampleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_color_sample, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         if (isText) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -131,6 +132,8 @@ public class ColorSampleFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 }
