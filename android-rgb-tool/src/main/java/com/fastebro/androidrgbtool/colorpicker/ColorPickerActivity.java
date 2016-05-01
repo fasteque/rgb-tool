@@ -185,13 +185,17 @@ public class ColorPickerActivity extends BaseActivity {
         }
 
         @Override
+        public void onOutsidePhotoTap() {
+            // Not being used so far.
+        }
+
+        @Override
         public void onPhotoTap(View view, float x, float y) {
             // x and y represent the percentage of the Drawable where the user clicked.
             int imageX = (int) (x * bitmap.getWidth());
             int imageY = (int) (y * bitmap.getHeight());
 
             int touchedRGB = bitmap.getPixel(imageX, imageY);
-
 
             if (imageY < bitmap.getHeight() / 2) {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -218,6 +222,8 @@ public class ColorPickerActivity extends BaseActivity {
                     rgbPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             }
+
+
         }
     }
 

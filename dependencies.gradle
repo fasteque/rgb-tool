@@ -15,7 +15,7 @@ ext {
     rxAndroidVersion = '0.25.0'
     butterKnifeVersion = '8.0.1'
     picassoVersion = '2.5.2'
-    photoViewVersion = '1.2.4'
+    photoViewVersion = '1.2.6'
     eventBusVersion = '3.0.0'
     leakCanaryVersion = '1.3.1'
     jUnitVersion = '4.12'
@@ -35,7 +35,7 @@ ext {
             butterKnifeCompiler:"com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             picasso:            "com.squareup.picasso:picasso:${picassoVersion}",
             rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
-            photoView:          "com.commit451:PhotoView:${photoViewVersion}",
+            photoView:          "com.github.chrisbanes:PhotoView:${photoViewVersion}",
             eventBus:           "org.greenrobot:eventbus:${eventBusVersion}",
     ]
 
