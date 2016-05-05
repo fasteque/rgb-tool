@@ -18,10 +18,10 @@ public class LivePickerTextureView extends TextureView implements TextureView.Su
     private Camera camera;
     private Camera.Size previewSize;
     private int[] selectedColor;
-    private OnColorSelectedListener onColorSelectedListener;
+    private OnColorPointedListener onColorPointedListener;
 
-    public interface OnColorSelectedListener {
-        void onColorSelected(int newColor);
+    public interface OnColorPointedListener {
+        void onColorPointed(int newColor);
     }
 
     public LivePickerTextureView(Context context, Camera camera) {
@@ -37,13 +37,13 @@ public class LivePickerTextureView extends TextureView implements TextureView.Su
         this.selectedColor = new int[3];
     }
 
-    public void setOnColorSelectedListener(OnColorSelectedListener onColorSelectedListener) {
-        this.onColorSelectedListener = onColorSelectedListener;
+    public void setOnColorPointedListener(OnColorPointedListener onColorPointedListener) {
+        this.onColorPointedListener = onColorPointedListener;
     }
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        if (onColorSelectedListener != null) {
+        if (onColorPointedListener != null) {
             final int midX = previewSize.width / 2;
             final int midY = previewSize.height / 2;
 
@@ -60,7 +60,7 @@ public class LivePickerTextureView extends TextureView implements TextureView.Su
                 }
             }
 
-            onColorSelectedListener.onColorSelected(Color.rgb(selectedColor[0], selectedColor[1], selectedColor[2]));
+            onColorPointedListener.onColorPointed(Color.rgb(selectedColor[0], selectedColor[1], selectedColor[2]));
         }
     }
 
