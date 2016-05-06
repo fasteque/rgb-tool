@@ -101,7 +101,7 @@ public class RGBPanelData extends LinearLayout {
         setHEXValue(touchedRGB);
     }
 
-    public void setRGBValue() {
+    private void setRGBValue() {
         if (mRGBValue != null) {
             mRGBValue.setText("(" + alpha + ", " + red + ", " + green + ", " + blue + ")");
         }

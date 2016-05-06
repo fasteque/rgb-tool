@@ -102,7 +102,7 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 
     private class CameraAsyncTask extends AsyncTask<Void, Void, Camera> {
 
-        protected FrameLayout.LayoutParams previewParams;
+        FrameLayout.LayoutParams previewParams;
 
         @Override
         protected Camera doInBackground(Void... params) {
