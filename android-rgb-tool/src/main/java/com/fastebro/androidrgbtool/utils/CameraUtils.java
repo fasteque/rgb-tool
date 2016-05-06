@@ -125,7 +125,7 @@ public final class CameraUtils {
                 break;
         }
 
-        int displayOrientation = 0;
+        int displayOrientation;
         if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             displayOrientation = (info.orientation + degrees) % 360;
             displayOrientation = (360 - displayOrientation) % 360;  // compensate the mirror
