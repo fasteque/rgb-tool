@@ -107,6 +107,7 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
+            //noinspection ConstantConditions
             Snackbar.make(findViewById(android.R.id.content),
                     getString(R.string.action_not_supported_error), Snackbar.LENGTH_SHORT).show();
         }
