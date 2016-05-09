@@ -4,8 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
-import android.util.Log;
 import android.view.TextureView;
+
+import timber.log.Timber;
 
 /**
  * Created by danielealtomare on 31/03/16.
@@ -98,7 +99,7 @@ public class LivePickerTextureView extends TextureView implements TextureView.Su
             camera.setPreviewCallback(this);
             camera.startPreview();
         } catch (Exception e) {
-            Log.d(TAG, "Camera preview start failure: " + e.getMessage());
+            Timber.d("Camera preview start failure: %s", e.getMessage());
         }
     }
 

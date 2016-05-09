@@ -76,6 +76,7 @@ dependencies {
     apt appDependencies.butterKnifeCompiler
     compile appDependencies.eventBus
     compile appDependencies.rxAndroid
+    compile appDependencies.timber
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compile project(':model')
 

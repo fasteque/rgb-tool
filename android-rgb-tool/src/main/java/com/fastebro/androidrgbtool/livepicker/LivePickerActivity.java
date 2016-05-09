@@ -7,13 +7,14 @@ import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.CameraUtils;
+
+import timber.log.Timber;
 
 public class LivePickerActivity extends AppCompatActivity implements LivePickerTextureView.OnColorPointedListener,
         View.OnClickListener {
@@ -34,7 +35,7 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
         try {
             camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
         } catch (Exception e) {
-            Log.d(TAG, e.getMessage());
+            Timber.d("Error getting camera instance: %s", e.getMessage());
         }
         return camera;
     }
