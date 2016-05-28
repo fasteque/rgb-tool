@@ -33,24 +33,24 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.fastebro.androidrgbtool.model.events.ErrorMessageEvent;
-import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.colordetails.ColorDetailsActivity;
+import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
 import com.fastebro.androidrgbtool.colors.ColorDataContract;
+import com.fastebro.androidrgbtool.colors.ColorListActivity;
+import com.fastebro.androidrgbtool.colors.RGBToolContentProvider;
+import com.fastebro.androidrgbtool.commons.EventBaseActivity;
+import com.fastebro.androidrgbtool.gallery.RGBToolGalleryActivity;
+import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
 import com.fastebro.androidrgbtool.model.events.ColorSelectEvent;
+import com.fastebro.androidrgbtool.model.events.ErrorMessageEvent;
 import com.fastebro.androidrgbtool.model.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.model.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
+import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateSaveColorUIEvent;
-import com.fastebro.androidrgbtool.colors.ColorListActivity;
-import com.fastebro.androidrgbtool.commons.EventBaseActivity;
 import com.fastebro.androidrgbtool.print.PrintJobDialogFragment;
-import com.fastebro.androidrgbtool.gallery.RGBToolGalleryActivity;
-import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
-import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
-import com.fastebro.androidrgbtool.colors.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.settings.AboutActivity;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
@@ -70,7 +70,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.Subscription;
-import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -183,17 +182,13 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
 
         if (scalePictureSubscription != null && scalePictureSubscription.isUnsubscribed()) {
             scalePictureSubscription.unsubscribe();
         }
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
         savePreferences();
     }
 
@@ -596,27 +591,27 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
                 destinationPath = currentPhotoPath;
             }
 
-            scalePictureSubscription = AppObservable.bindActivity(this,
-                    PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath))
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ScaledPicture>() {
-                        @Override
-                        public void onCompleted() {
-                            // Nothing to do.
-                        }
+            scalePictureSubscription =
+                    PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath)
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Observer<ScaledPicture>() {
+                                @Override
+                                public void onCompleted() {
+                                    // Nothing to do.
+                                }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            // Nothing to do.
-                        }
+                                @Override
+                                public void onError(Throwable e) {
+                                    // Nothing to do.
+                                }
 
-                        @Override
-                        public void onNext(ScaledPicture scaledPicture) {
-                            EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
-                                    scaledPicture.isTempFile()));
-                        }
-                    });
+                                @Override
+                                public void onNext(ScaledPicture scaledPicture) {
+                                    EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
+                                            scaledPicture.isTempFile()));
+                                }
+                            });
         } else {
             Snackbar.make(findViewById(android.R.id.content),
                     getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();

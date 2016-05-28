@@ -42,10 +42,14 @@ class PictureScalingManager {
                     savePrescaledBitmap(destinationPath);
 
                     ScaledPicture scaledPicture = new ScaledPicture(destinationPath, useTempFile);
-                    subscriber.onNext(scaledPicture);
-                    subscriber.onCompleted();
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onNext(scaledPicture);
+                        subscriber.onCompleted();
+                    }
                 } catch (IOException e) {
-                    subscriber.onError(e);
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onError(e);
+                    }
                 }
             }
         });

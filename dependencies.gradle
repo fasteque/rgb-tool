@@ -12,7 +12,7 @@ ext {
     androidCompileSdkVersion = 23
 
     androidSupportLibraryVersion = '23.3.0'
-    rxAndroidVersion = '0.25.0'
+    rxAndroidVersion = '1.2.0'
     butterKnifeVersion = '8.0.1'
     picassoVersion = '2.5.2'
     photoViewVersion = '1.2.6'
