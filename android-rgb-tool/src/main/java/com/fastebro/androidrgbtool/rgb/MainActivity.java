@@ -123,8 +123,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
-    private String hexValue;
-
     private ShareActionProvider shareActionProvider;
 
     private Subscription scalePictureSubscription;
@@ -516,7 +514,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
      * Update hex field.
      */
     private void updateHexadecimalField() {
-        hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
+        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
                 ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
 
         textView_Hexadecimal.setText(hexValue);
