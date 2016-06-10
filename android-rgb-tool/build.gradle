@@ -12,6 +12,8 @@ android {
     compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
     buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
     defaultConfig {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
@@ -64,6 +66,7 @@ dependencies {
     def appAndroidTestDependencies = globalConfiguration.appAndroidTestDependencies
 
     compile appDependencies.appCompat
+    compile appDependencies.constraintLayout
     compile appDependencies.cardView
     compile appDependencies.recyclerView
     compile appDependencies.palette

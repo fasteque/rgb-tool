@@ -8,12 +8,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.graphics.Palette;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 import com.fastebro.androidrgbtool.palette.ImagePaletteActivity;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class ColorPickerActivity extends BaseActivity {
     @BindView(R.id.color_picker_main_layout)
-    RelativeLayout mainLayout;
+    ConstraintLayout mainLayout;
     @BindView(R.id.iv_photo)
     ImageView imageView;
 
@@ -83,8 +83,9 @@ public class ColorPickerActivity extends BaseActivity {
             }
         }
 
-        mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT));
+        mainLayout.addView(rgbPanelDataLayout, new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams
+                .WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT));
     }
 
     @Override
@@ -198,32 +199,34 @@ public class ColorPickerActivity extends BaseActivity {
             int touchedRGB = bitmap.getPixel(imageX, imageY);
 
             if (imageY < bitmap.getHeight() / 2) {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                rgbPanelDataLayout.setLayoutParams(params);
+                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout
+                        .LayoutParams.WRAP_CONTENT,
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                params.bottomToBottom = R.id.color_picker_main_layout;
+                params.leftToLeft = R.id.color_picker_main_layout;
+                params.rightToRight = R.id.color_picker_main_layout;
 
+                rgbPanelDataLayout.setLayoutParams(params);
                 rgbPanelDataLayout.updateData(touchedRGB);
 
                 if (rgbPanelDataLayout.getVisibility() == View.GONE) {
                     rgbPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             } else {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                rgbPanelDataLayout.setLayoutParams(params);
+                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout
+                        .LayoutParams.WRAP_CONTENT,
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                params.topToTop = R.id.color_picker_main_layout;
+                params.leftToLeft = R.id.color_picker_main_layout;
+                params.rightToRight = R.id.color_picker_main_layout;
 
+                rgbPanelDataLayout.setLayoutParams(params);
                 rgbPanelDataLayout.updateData(touchedRGB);
 
                 if (rgbPanelDataLayout.getVisibility() == View.GONE) {
                     rgbPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             }
-
-
         }
     }
 
