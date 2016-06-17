@@ -1,12 +1,10 @@
 package com.fastebro.androidrgbtool.print;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
@@ -28,7 +26,6 @@ import java.io.IOException;
  * Created by danielealtomare on 01/03/15.
  * Project: rgb-tool
  */
-@TargetApi(Build.VERSION_CODES.KITKAT)
 public class RGBToolPrintColorDetailsAdapter extends PrintDocumentAdapter {
     private final Context context;
     private final String message;

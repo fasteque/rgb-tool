@@ -1,6 +1,5 @@
 package com.fastebro.androidrgbtool.colordetails;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -82,7 +81,6 @@ public class ColorDetailsActivity extends EventBaseActivity {
         startPrintJob(event.message);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void startPrintJob(String message) {
         // Get a PrintManager instance
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);

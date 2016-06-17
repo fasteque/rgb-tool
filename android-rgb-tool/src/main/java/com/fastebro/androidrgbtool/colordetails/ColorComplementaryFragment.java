@@ -2,7 +2,6 @@ package com.fastebro.androidrgbtool.colordetails;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -104,12 +103,6 @@ public class ColorComplementaryFragment extends Fragment {
         MenuItem item = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedColor();
-
-        item = menu.findItem(R.id.action_print);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            item.setVisible(false);
-        }
 
         super.onCreateOptionsMenu(menu, inflater);
     }

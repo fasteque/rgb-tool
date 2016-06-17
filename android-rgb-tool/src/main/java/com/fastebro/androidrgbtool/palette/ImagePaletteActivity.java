@@ -72,12 +72,6 @@ public class ImagePaletteActivity extends EventBaseActivity {
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedPalette();
 
-        item = menu.findItem(R.id.action_print);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            item.setVisible(false);
-        }
-
         return super.onCreateOptionsMenu(menu);
     }
 

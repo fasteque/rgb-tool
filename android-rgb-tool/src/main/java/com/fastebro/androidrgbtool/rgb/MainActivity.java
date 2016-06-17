@@ -1,7 +1,6 @@
 package com.fastebro.androidrgbtool.rgb;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
@@ -207,12 +206,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedColor();
 
-        item = menu.findItem(R.id.action_print);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            item.setVisible(false);
-        }
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -370,7 +363,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         btn_SaveColor.setVisibility(View.INVISIBLE);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void printColor(String message) {
         // Get a PrintManager instance
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
