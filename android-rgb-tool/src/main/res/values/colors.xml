@@ -6,6 +6,10 @@
     <color name="dark_gray">#FF787878</color>
     <color name="light_silver">#FFEEEEEE</color>
     <color name="white_translucent">#88FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="gray">#b3b3b3</color>
 
     <!-- Material Theme colors -->
     <color name="primary">#3F51B5</color>
