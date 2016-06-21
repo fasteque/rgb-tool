@@ -1,0 +1,148 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:background="@color/light_silver">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/slider_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp">
+
+                <TextView
+                    android:id="@+id/red_tool_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"/>
+
+                <SeekBar
+                    android:id="@+id/red_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:maxHeight="3dip"
+                    android:minHeight="3dip"
+                    android:progressDrawable="@drawable/red_progress"
+                    android:thumbTint="@color/red"/>
+
+                <TextView
+                    android:id="@+id/green_tool_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/green"
+                    android:textSize="18sp"/>
+
+                <SeekBar
+                    android:id="@+id/green_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:maxHeight="3dip"
+                    android:minHeight="3dip"
+                    android:progressDrawable="@drawable/green_progress"
+                    android:thumbTint="@color/green"/>
+
+                <TextView
+                    android:id="@+id/blue_tool_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/blue"
+                    android:textSize="18sp"/>
+
+                <SeekBar
+                    android:id="@+id/blue_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:maxHeight="3dip"
+                    android:minHeight="3dip"
+                    android:progressDrawable="@drawable/blue_progress"
+                    android:thumbTint="@color/blue"/>
+
+                <TextView
+                    android:id="@+id/opacity_tool_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/light_silver"
+                    android:textSize="18sp"/>
+
+                <SeekBar
+                    android:id="@+id/opacity_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255"
+                    android:maxHeight="3dip"
+                    android:minHeight="3dip"
+                    android:progressDrawable="@drawable/gray_progress"
+                    android:thumbTint="@color/light_silver"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/slider_container"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/robot"/>
+
+            <View
+                android:id="@+id/color_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet_container"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@color/white"
+        android:clipToPadding="true"
+        app:behavior_peekHeight="100dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+        >
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_color"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@color/white"/>
+</android.support.design.widget.CoordinatorLayout>
