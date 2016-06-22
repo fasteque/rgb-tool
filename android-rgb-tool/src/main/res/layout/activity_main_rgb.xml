@@ -138,7 +138,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_add_color"
+        android:id="@+id/fab_save_color"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom|end"

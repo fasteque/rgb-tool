@@ -17,23 +17,20 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.colordetails.ColorDetailsActivity;
 import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
 import com.fastebro.androidrgbtool.colors.ColorDataContract;
 import com.fastebro.androidrgbtool.colors.ColorListActivity;
@@ -74,39 +71,37 @@ import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends EventBaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
-    @BindView(R.id.seekBar_R)
-    SeekBar seekBar_R;
-    @BindView(R.id.seekBar_G)
-    SeekBar seekBar_G;
-    @BindView(R.id.seekBar_B)
-    SeekBar seekBar_B;
-    @BindView(R.id.seekBar_O)
-    SeekBar seekBar_O;
-    // RGB channel: R,G,B.
-    @BindView(R.id.textView_RGB_R)
-    TextView textView_RGB_R;
-    @BindView(R.id.textView_RGB_G)
-    TextView textView_RGB_G;
-    @BindView(R.id.textView_RGB_B)
-    TextView textView_RGB_B;
-    @BindView(R.id.textView_RGB_O)
-    TextView textView_RGB_O;
-    // HSB: Hue, Saturation, Brightness.
-    @BindView(R.id.textView_HSB_H)
-    TextView textView_HSB_H;
-    @BindView(R.id.textView_HSB_S)
-    TextView textView_HSB_S;
-    @BindView(R.id.textView_HSB_B)
-    TextView textView_HSB_B;
-    // Hexadecimal color value.
-    @BindView(R.id.textView_Hexadecimal)
-    TextView textView_Hexadecimal;
+    @BindView(R.id.red_seek_bar)
+    SeekBar seekBarRed;
+    @BindView(R.id.green_seek_bar)
+    SeekBar seekBarGreen;
+    @BindView(R.id.blue_seek_bar)
+    SeekBar seekBarBlue;
+    @BindView(R.id.opacity_seek_bar)
+    SeekBar seekBarOpacity;
+
+//    // RGB channel: R,G,B.
+//    @BindView(R.id.textView_RGB_R)
+//    TextView textView_RGB_R;
+//    @BindView(R.id.textView_RGB_G)
+//    TextView textView_RGB_G;
+//    @BindView(R.id.textView_RGB_B)
+//    TextView textView_RGB_B;
+//    @BindView(R.id.textView_RGB_O)
+//    TextView textView_RGB_O;
+//    // HSB: Hue, Saturation, Brightness.
+//    @BindView(R.id.textView_HSB_H)
+//    TextView textView_HSB_H;
+//    @BindView(R.id.textView_HSB_S)
+//    TextView textView_HSB_S;
+//    @BindView(R.id.textView_HSB_B)
+//    TextView textView_HSB_B;
+//    // Hexadecimal color value.
+//    @BindView(R.id.textView_Hexadecimal)
+//    TextView textView_Hexadecimal;
     // Save color button.
-    @BindView(R.id.btn_save_color)
-    ImageButton btn_SaveColor;
-    // Color details.
-    @BindView(R.id.btn_color_details)
-    ImageButton btn_ColorDetails;
+    @BindView(R.id.fab_save_color)
+    FloatingActionButton btn_SaveColor;
     @BindView(R.id.color_view)
     View colorView;
 
@@ -127,6 +122,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     private Subscription scalePictureSubscription;
 
 
+    private BottomSheetBehavior bottomSheetBehavior;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_Rgbtool);
@@ -136,28 +133,25 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
-        setContentView(R.layout.activity_main_bottom);
-
-        // Import main layout (with SeekBar sliders).
-        LayoutInflater inflater = getLayoutInflater();
-        addContentView(inflater.inflate(R.layout.activity_main, null),
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        );
+        setContentView(R.layout.activity_main_rgb);
 
         ButterKnife.bind(this);
+
+        View bottomSheet = findViewById(R.id.bottom_sheet_container);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         restorePreferences();
-        seekBar_R.setProgress(RGB_R_COLOR);
-        seekBar_G.setProgress(RGB_G_COLOR);
-        seekBar_B.setProgress(RGB_B_COLOR);
-        seekBar_O.setProgress(RGB_OPACITY);
+        seekBarRed.setProgress(RGB_R_COLOR);
+        seekBarGreen.setProgress(RGB_G_COLOR);
+        seekBarBlue.setProgress(RGB_B_COLOR);
+        seekBarOpacity.setProgress(RGB_OPACITY);
 
         // Setting-up SeekBars listeners.
-        seekBar_R.setOnSeekBarChangeListener(getRGB());
-        seekBar_G.setOnSeekBarChangeListener(getRGB());
-        seekBar_B.setOnSeekBarChangeListener(getRGB());
-        seekBar_O.setOnSeekBarChangeListener(getRGB());
+        seekBarRed.setOnSeekBarChangeListener(getRGB());
+        seekBarGreen.setOnSeekBarChangeListener(getRGB());
+        seekBarBlue.setOnSeekBarChangeListener(getRGB());
+        seekBarOpacity.setOnSeekBarChangeListener(getRGB());
 
         // Save color currently displayed.
         btn_SaveColor.setOnClickListener(new View.OnClickListener() {
@@ -167,16 +161,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
             }
         });
 
-        btn_ColorDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showColorDetails();
-            }
-        });
-
-        setColorValuesClickListener();
+//        setColorValuesClickListener();
         refreshUI();
     }
+
 
     @Override
     protected void onStop() {
@@ -275,32 +263,32 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         }
     }
 
-    private void setColorValuesClickListener() {
-        textView_RGB_R.setOnClickListener(RGBAClickListener);
-        textView_RGB_G.setOnClickListener(RGBAClickListener);
-        textView_RGB_B.setOnClickListener(RGBAClickListener);
-        textView_RGB_O.setOnClickListener(RGBAClickListener);
-        textView_Hexadecimal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HexInsertionFragment fragment =
-                        HexInsertionFragment.newInstance(textView_Hexadecimal.getText().toString().substring(3));
-                fragment.show(getSupportFragmentManager(), null);
-            }
-        });
-    }
-
-    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            short[] rgbaValues = new short[]{(short) RGB_R_COLOR, (short) RGB_G_COLOR, (short) RGB_B_COLOR, (short)
-                    RGB_OPACITY
-            };
-
-            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
-            fragment.show(getSupportFragmentManager(), null);
-        }
-    };
+//    private void setColorValuesClickListener() {
+//        textView_RGB_R.setOnClickListener(RGBAClickListener);
+//        textView_RGB_G.setOnClickListener(RGBAClickListener);
+//        textView_RGB_B.setOnClickListener(RGBAClickListener);
+//        textView_RGB_O.setOnClickListener(RGBAClickListener);
+//        textView_Hexadecimal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                HexInsertionFragment fragment =
+//                        HexInsertionFragment.newInstance(textView_Hexadecimal.getText().toString().substring(3));
+//                fragment.show(getSupportFragmentManager(), null);
+//            }
+//        });
+//    }
+//
+//    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            short[] rgbaValues = new short[]{(short) RGB_R_COLOR, (short) RGB_G_COLOR, (short) RGB_B_COLOR, (short)
+//                    RGB_OPACITY
+//            };
+//
+//            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
+//            fragment.show(getSupportFragmentManager(), null);
+//        }
+//    };
 
     private void showColorList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -320,17 +308,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         } else {
             startActivity(new Intent(this, AboutActivity.class));
         }
-    }
-
-    private void showColorDetails() {
-        Intent colorDetailsIntent =  new Intent(MainActivity.this, ColorDetailsActivity.class);
-        short[] argbValues = new short[4];
-        argbValues[0] = (short) RGB_OPACITY;
-        argbValues[1] = (short) RGB_R_COLOR;
-        argbValues[2] = (short) RGB_G_COLOR;
-        argbValues[3] = (short) RGB_B_COLOR;
-        colorDetailsIntent.putExtra(ColorDetailsActivity.INTENT_EXTRA_RGB_COLOR, argbValues);
-        startActivity(colorDetailsIntent);
     }
 
     private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
@@ -442,19 +419,19 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (seekBar.equals(seekBar_O)) {
+                if (seekBar.equals(seekBarOpacity)) {
                     RGB_OPACITY = progress;
                 }
 
-                if (seekBar.equals(seekBar_R)) {
+                if (seekBar.equals(seekBarRed)) {
                     RGB_R_COLOR = progress;
                 }
 
-                if (seekBar.equals(seekBar_G)) {
+                if (seekBar.equals(seekBarGreen)) {
                     RGB_G_COLOR = progress;
                 }
 
-                if (seekBar.equals(seekBar_B)) {
+                if (seekBar.equals(seekBarBlue)) {
                     RGB_B_COLOR = progress;
                 }
 
@@ -472,45 +449,39 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     private void refreshUI() {
-        updateRGBField();
-        updateHSBField();
-        updateHexadecimalField();
+//        updateRGBField();
+//        updateHSBField();
+//        updateHexadecimalField();
         updateSharedColor();
         updateSaveColorButton();
 
         colorView.setBackgroundColor(Color.argb(RGB_OPACITY, RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR));
     }
 
-    private void updateRGBField() {
-        // RGB channel: R, G, B, OPACITY.
-        textView_RGB_R.setText(ColorUtils.getRGB(RGB_R_COLOR));
-        textView_RGB_G.setText(ColorUtils.getRGB(RGB_G_COLOR));
-        textView_RGB_B.setText(ColorUtils.getRGB(RGB_B_COLOR));
-        textView_RGB_O.setText(ColorUtils.getRGB(RGB_OPACITY));
-    }
-
-    /**
-     * Update HSB values.
-     */
-    private void updateHSBField() {
-        // Get float array with 3 values for HSB-HSV.
-        float[] hsb = ColorUtils.RGBToHSB(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR);
-
-        // Set HSB-HSV single channel value.
-        textView_HSB_H.setText(String.format("%.0f", hsb[0]));
-        textView_HSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
-        textView_HSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
-    }
-
-    /**
-     * Update hex field.
-     */
-    private void updateHexadecimalField() {
-        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
-                ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
-
-        textView_Hexadecimal.setText(hexValue);
-    }
+//    private void updateRGBField() {
+//        // RGB channel: R, G, B, OPACITY.
+//        textView_RGB_R.setText(ColorUtils.getRGB(RGB_R_COLOR));
+//        textView_RGB_G.setText(ColorUtils.getRGB(RGB_G_COLOR));
+//        textView_RGB_B.setText(ColorUtils.getRGB(RGB_B_COLOR));
+//        textView_RGB_O.setText(ColorUtils.getRGB(RGB_OPACITY));
+//    }
+//
+//    private void updateHSBField() {
+//        // Get float array with 3 values for HSB-HSV.
+//        float[] hsb = ColorUtils.RGBToHSB(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR);
+//
+//        // Set HSB-HSV single channel value.
+//        textView_HSB_H.setText(String.format("%.0f", hsb[0]));
+//        textView_HSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
+//        textView_HSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
+//    }
+//
+//    private void updateHexadecimalField() {
+//        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
+//                ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
+//
+//        textView_Hexadecimal.setText(hexValue);
+//    }
 
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -669,10 +640,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         refreshUI();
 
         // Also update the seek bars.
-        seekBar_R.setProgress(event.RGBRComponent);
-        seekBar_G.setProgress(event.RGBGComponent);
-        seekBar_B.setProgress(event.RGBBComponent);
-        seekBar_O.setProgress(event.RGBOComponent);
+        seekBarRed.setProgress(event.RGBRComponent);
+        seekBarGreen.setProgress(event.RGBGComponent);
+        seekBarBlue.setProgress(event.RGBBComponent);
+        seekBarOpacity.setProgress(event.RGBOComponent);
 
         savePreferences();
     }
@@ -713,10 +684,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         RGB_G_COLOR = event.rgbaValues[1];
         RGB_B_COLOR = event.rgbaValues[2];
         RGB_OPACITY = event.rgbaValues[3];
-        seekBar_R.setProgress(event.rgbaValues[0]);
-        seekBar_G.setProgress(event.rgbaValues[1]);
-        seekBar_B.setProgress(event.rgbaValues[2]);
-        seekBar_O.setProgress(event.rgbaValues[3]);
+        seekBarRed.setProgress(event.rgbaValues[0]);
+        seekBarGreen.setProgress(event.rgbaValues[1]);
+        seekBarBlue.setProgress(event.rgbaValues[2]);
+        seekBarOpacity.setProgress(event.rgbaValues[3]);
         refreshUI();
         savePreferences();
     }
@@ -727,9 +698,9 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         RGB_R_COLOR = rgb[0];
         RGB_G_COLOR = rgb[1];
         RGB_B_COLOR = rgb[2];
-        seekBar_R.setProgress(rgb[0]);
-        seekBar_G.setProgress(rgb[1]);
-        seekBar_B.setProgress(rgb[2]);
+        seekBarRed.setProgress(rgb[0]);
+        seekBarGreen.setProgress(rgb[1]);
+        seekBarBlue.setProgress(rgb[2]);
         refreshUI();
         savePreferences();
     }
