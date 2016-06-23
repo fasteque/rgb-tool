@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:textColor="@color/light_silver"
+                    android:textColor="@color/gray"
                     android:textSize="18sp"/>
 
                 <SeekBar
@@ -95,7 +95,7 @@
                     android:maxHeight="3dip"
                     android:minHeight="3dip"
                     android:progressDrawable="@drawable/gray_progress"
-                    android:thumbTint="@color/light_silver"/>
+                    android:thumbTint="@color/gray"/>
 
             </LinearLayout>
 
