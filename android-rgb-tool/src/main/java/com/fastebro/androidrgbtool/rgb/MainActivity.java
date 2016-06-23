@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -29,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
@@ -79,6 +81,16 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     SeekBar seekBarBlue;
     @BindView(R.id.opacity_seek_bar)
     SeekBar seekBarOpacity;
+    @BindView(R.id.red_tool_tip)
+    TextView redToolTip;
+    @BindView(R.id.green_tool_tip)
+    TextView greenToolTip;
+    @BindView(R.id.blue_tool_tip)
+    TextView blueToolTip;
+    @BindView(R.id.opacity_tool_tip)
+    TextView opacityToolTip;
+    private Rect thumbRect;
+    private int seekBarLeft;
 
 //    // RGB channel: R,G,B.
 //    @BindView(R.id.textView_RGB_R)
@@ -108,21 +120,19 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     private String currentPhotoPath;
     private BaseAlbumDirFactory albumStorageDirFactory = null;
 
-    private int RGB_R_COLOR = 0;
-    private int RGB_G_COLOR = 0;
-    private int RGB_B_COLOR = 0;
-    private int RGB_OPACITY = 255;
+    private int redColor = 0;
+    private int greenColor = 0;
+    private int blueColor = 0;
+    private int opacity = 255;
 
     private static final int REQUEST_OPEN_GALLERY = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     private ShareActionProvider shareActionProvider;
-
     private Subscription scalePictureSubscription;
-
-
     private BottomSheetBehavior bottomSheetBehavior;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,10 +152,11 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         restorePreferences();
-        seekBarRed.setProgress(RGB_R_COLOR);
-        seekBarGreen.setProgress(RGB_G_COLOR);
-        seekBarBlue.setProgress(RGB_B_COLOR);
-        seekBarOpacity.setProgress(RGB_OPACITY);
+        seekBarRed.setProgress(redColor);
+        seekBarGreen.setProgress(greenColor);
+        seekBarBlue.setProgress(blueColor);
+        seekBarOpacity.setProgress(opacity);
+        seekBarLeft = seekBarRed.getPaddingLeft();
 
         // Setting-up SeekBars listeners.
         seekBarRed.setOnSeekBarChangeListener(getRGB());
@@ -157,7 +168,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         btn_SaveColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveColor(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR, RGB_OPACITY, "");
+                saveColor(redColor, greenColor, blueColor, opacity, "");
             }
         });
 
@@ -281,8 +292,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 //    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
 //        @Override
 //        public void onClick(View v) {
-//            short[] rgbaValues = new short[]{(short) RGB_R_COLOR, (short) RGB_G_COLOR, (short) RGB_B_COLOR, (short)
-//                    RGB_OPACITY
+//            short[] rgbaValues = new short[]{(short) redColor, (short) greenColor, (short) blueColor, (short)
+//                    opacity
 //            };
 //
 //            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
@@ -319,10 +330,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         ContentValues values = new ContentValues();
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_NAME, colorName);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HEX, String.format("#%s%s%s%s",
-                ColorUtils.RGBToHex(RGB_OPACITY),
-                ColorUtils.RGBToHex(RGB_R_COLOR),
-                ColorUtils.RGBToHex(RGB_G_COLOR),
-                ColorUtils.RGBToHex(RGB_B_COLOR)));
+                ColorUtils.RGBToHex(opacity),
+                ColorUtils.RGBToHex(redColor),
+                ColorUtils.RGBToHex(greenColor),
+                ColorUtils.RGBToHex(blueColor)));
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R, RGBRComponent);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G, RGBGComponent);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B, RGBBComponent);
@@ -348,15 +359,15 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         String jobName = getString(R.string.app_name) + "_Color";
 
         // Start a print job, passing in a PrintDocumentAdapter implementation
-        printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, RGB_R_COLOR, RGB_G_COLOR,
-                RGB_B_COLOR, RGB_OPACITY), null);
+        printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, redColor, greenColor,
+                blueColor, opacity), null);
     }
 
     private void updateSharedColor() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getColorMessage(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR,
-                RGB_OPACITY));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getColorMessage(redColor, greenColor, blueColor,
+                opacity));
         shareIntent.setType("text/plain");
         setShareIntent(shareIntent);
     }
@@ -404,9 +415,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         }
     }
 
-    /**
-     * @return SeekBar listener.
-     */
     private OnSeekBarChangeListener getRGB() {
         return new OnSeekBarChangeListener() {
             @Override
@@ -419,20 +427,65 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (seekBar.equals(seekBarOpacity)) {
-                    RGB_OPACITY = progress;
-                }
-
                 if (seekBar.equals(seekBarRed)) {
-                    RGB_R_COLOR = progress;
+                    redColor = progress;
+
+                    thumbRect = seekBar.getThumb().getBounds();
+
+                    redToolTip.setX((seekBarLeft / 2) + thumbRect.left);
+
+                    if (progress < 10) {
+                        redToolTip.setText("  " + redColor);
+                    } else if (progress < 100) {
+                        redToolTip.setText(" " + redColor);
+                    } else {
+                        redToolTip.setText(redColor + "");
+                    }
                 }
 
                 if (seekBar.equals(seekBarGreen)) {
-                    RGB_G_COLOR = progress;
+                    greenColor = progress;
+
+                    thumbRect = seekBar.getThumb().getBounds();
+
+                    greenToolTip.setX((seekBarLeft / 2) + thumbRect.left);
+                    if (progress < 10) {
+                        greenToolTip.setText("  " + greenColor);
+                    } else if (progress < 100) {
+                        greenToolTip.setText(" " + greenColor);
+                    } else {
+                        greenToolTip.setText(greenColor + "");
+                    }
                 }
 
                 if (seekBar.equals(seekBarBlue)) {
-                    RGB_B_COLOR = progress;
+                    blueColor = progress;
+
+                    thumbRect = seekBar.getThumb().getBounds();
+
+                    blueToolTip.setX((seekBarLeft / 2) + thumbRect.left);
+                    if (progress < 10) {
+                        blueToolTip.setText("  " + blueColor);
+                    } else if (progress < 100) {
+                        blueToolTip.setText(" " + blueColor);
+                    } else {
+                        blueToolTip.setText(blueColor + "");
+                    }
+                }
+
+                if (seekBar.equals(seekBarOpacity)) {
+                    opacity = progress;
+
+                    thumbRect = seekBar.getThumb().getBounds();
+
+                    opacityToolTip.setX((seekBarLeft / 2) + thumbRect.left);
+                    if (progress < 10) {
+                        opacityToolTip.setText("  " + opacity);
+                    } else if (progress < 100) {
+                        opacityToolTip.setText(" " + opacity);
+                    } else {
+                        opacityToolTip.setText(opacity + "");
+                    }
                 }
 
                 refreshUI();
@@ -441,7 +494,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     private void updateSaveColorButton() {
-        if (DatabaseUtils.findColor(MainActivity.this, RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR, RGB_OPACITY)) {
+        if (DatabaseUtils.findColor(MainActivity.this, redColor, greenColor, blueColor, opacity)) {
             btn_SaveColor.setVisibility(View.INVISIBLE);
         } else {
             btn_SaveColor.setVisibility(View.VISIBLE);
@@ -455,20 +508,20 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         updateSharedColor();
         updateSaveColorButton();
 
-        colorView.setBackgroundColor(Color.argb(RGB_OPACITY, RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR));
+        colorView.setBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
     }
 
 //    private void updateRGBField() {
 //        // RGB channel: R, G, B, OPACITY.
-//        textView_RGB_R.setText(ColorUtils.getRGB(RGB_R_COLOR));
-//        textView_RGB_G.setText(ColorUtils.getRGB(RGB_G_COLOR));
-//        textView_RGB_B.setText(ColorUtils.getRGB(RGB_B_COLOR));
-//        textView_RGB_O.setText(ColorUtils.getRGB(RGB_OPACITY));
+//        textView_RGB_R.setText(ColorUtils.getRGB(redColor));
+//        textView_RGB_G.setText(ColorUtils.getRGB(greenColor));
+//        textView_RGB_B.setText(ColorUtils.getRGB(blueColor));
+//        textView_RGB_O.setText(ColorUtils.getRGB(opacity));
 //    }
 //
 //    private void updateHSBField() {
 //        // Get float array with 3 values for HSB-HSV.
-//        float[] hsb = ColorUtils.RGBToHSB(RGB_R_COLOR, RGB_G_COLOR, RGB_B_COLOR);
+//        float[] hsb = ColorUtils.RGBToHSB(redColor, greenColor, blueColor);
 //
 //        // Set HSB-HSV single channel value.
 //        textView_HSB_H.setText(String.format("%.0f", hsb[0]));
@@ -477,8 +530,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 //    }
 //
 //    private void updateHexadecimalField() {
-//        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(RGB_OPACITY), ColorUtils.RGBToHex(RGB_R_COLOR),
-//                ColorUtils.RGBToHex(RGB_G_COLOR), ColorUtils.RGBToHex(RGB_B_COLOR));
+//        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(opacity), ColorUtils.RGBToHex(redColor),
+//                ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
 //
 //        textView_Hexadecimal.setText(hexValue);
 //    }
@@ -605,10 +658,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     private void updateRGBColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent) {
-        RGB_R_COLOR = RGBRComponent;
-        RGB_G_COLOR = RGBGComponent;
-        RGB_B_COLOR = RGBBComponent;
-        RGB_OPACITY = RGBOComponent;
+        redColor = RGBRComponent;
+        greenColor = RGBGComponent;
+        blueColor = RGBBComponent;
+        opacity = RGBOComponent;
     }
 
     private void restorePreferences() {
@@ -623,10 +676,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     private void savePreferences() {
         SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt(CommonUtils.PREFS_R_COLOR, RGB_R_COLOR);
-        editor.putInt(CommonUtils.PREFS_G_COLOR, RGB_G_COLOR);
-        editor.putInt(CommonUtils.PREFS_B_COLOR, RGB_B_COLOR);
-        editor.putInt(CommonUtils.PREFS_OPACITY, RGB_OPACITY);
+        editor.putInt(CommonUtils.PREFS_R_COLOR, redColor);
+        editor.putInt(CommonUtils.PREFS_G_COLOR, greenColor);
+        editor.putInt(CommonUtils.PREFS_B_COLOR, blueColor);
+        editor.putInt(CommonUtils.PREFS_OPACITY, opacity);
         editor.apply();
     }
 
@@ -639,7 +692,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
         refreshUI();
 
-        // Also update the seek bars.
         seekBarRed.setProgress(event.RGBRComponent);
         seekBarGreen.setProgress(event.RGBGComponent);
         seekBarBlue.setProgress(event.RGBBComponent);
@@ -680,10 +732,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
     @Subscribe
     public void onRGBAInsertionEvent(RGBAInsertionEvent event) {
-        RGB_R_COLOR = event.rgbaValues[0];
-        RGB_G_COLOR = event.rgbaValues[1];
-        RGB_B_COLOR = event.rgbaValues[2];
-        RGB_OPACITY = event.rgbaValues[3];
+        redColor = event.rgbaValues[0];
+        greenColor = event.rgbaValues[1];
+        blueColor = event.rgbaValues[2];
+        opacity = event.rgbaValues[3];
         seekBarRed.setProgress(event.rgbaValues[0]);
         seekBarGreen.setProgress(event.rgbaValues[1]);
         seekBarBlue.setProgress(event.rgbaValues[2]);
@@ -695,9 +747,9 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     @Subscribe
     public void onUpdateHexValueEvent(UpdateHexValueEvent event) {
         int[] rgb = ColorUtils.hexToRGB(event.hexValue);
-        RGB_R_COLOR = rgb[0];
-        RGB_G_COLOR = rgb[1];
-        RGB_B_COLOR = rgb[2];
+        redColor = rgb[0];
+        greenColor = rgb[1];
+        blueColor = rgb[2];
         seekBarRed.setProgress(rgb[0]);
         seekBarGreen.setProgress(rgb[1]);
         seekBarBlue.setProgress(rgb[2]);
