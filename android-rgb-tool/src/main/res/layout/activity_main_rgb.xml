@@ -125,17 +125,7 @@
 
     </RelativeLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/bottom_sheet_container"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:background="@color/white"
-        android:clipToPadding="true"
-        app:behavior_peekHeight="100dp"
-        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-        >
-
-    </android.support.v4.widget.NestedScrollView>
+    <include layout="@layout/activity_main_rgb_sheet"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_save_color"
