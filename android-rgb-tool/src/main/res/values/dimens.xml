@@ -30,4 +30,7 @@
     <dimen name="live_picker_pointer_size">8dp</dimen>
     <dimen name="live_picker_pointer_stroke_size">48dp</dimen>
     <dimen name="live_picker_pointer_stroke_thickness">8dp</dimen>
+
+    <!-- Manual picker -->
+    <dimen name="manual_picker_bottom_sheet_peek_height">80dp</dimen>
 </resources>
