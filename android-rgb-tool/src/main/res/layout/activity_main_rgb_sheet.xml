@@ -13,17 +13,19 @@
     <LinearLayout android:id="@+id/rgb_top_panel"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:background="@android:color/white"
                   android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/manual_picker_bottom_sheet_peek_height"
+            android:background="@color/primary"
+            android:padding="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/textView_Hexadecimal"
                 style="@style/RGBPanelComponent"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"/>
@@ -33,7 +35,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="7dp"
+            android:padding="@dimen/activity_horizontal_margin"
             android:stretchColumns="0,1,2,3,4">
 
             <TableRow
