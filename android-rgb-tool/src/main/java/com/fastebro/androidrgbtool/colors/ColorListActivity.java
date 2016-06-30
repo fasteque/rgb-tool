@@ -42,6 +42,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
     @BindView(R.id.list_empty_text)
     TextView emptyListMessage;
 
+    private static final int GET_COLORS_REQUEST_ID = 0;
     private ColorListAdapter adapter;
 
     @Override
@@ -64,14 +65,14 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setAdapter(adapter);
 
-        getSupportLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(GET_COLORS_REQUEST_ID, null, this);
 
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onDestroy() {
-        getSupportLoaderManager().destroyLoader(0);
+        getSupportLoaderManager().destroyLoader(GET_COLORS_REQUEST_ID);
         EventBus.getDefault().post(new UpdateSaveColorUIEvent());
         super.onDestroy();
     }
