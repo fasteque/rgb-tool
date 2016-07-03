@@ -12,17 +12,15 @@
     <color name="gray">#b3b3b3</color>
 
     <!-- Material Theme colors -->
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#7483D4</color>
-    <color name="accent">#FF5252</color>
+    <color name="primary">#607D8B</color>
+    <color name="primary_dark">#455A64</color>
+    <color name="primary_light">#CFD8DC</color>
+    <color name="accent">#FF5722</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
-    <color name="fab_color_pressed">#FB6D6D</color>
-    <color name="fab_color_shadow">#44000000</color>
     <color name="transparent_accent">#99FF5252</color>
 
     <!-- Live picker -->
