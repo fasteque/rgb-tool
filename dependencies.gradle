@@ -12,7 +12,7 @@ ext {
     androidCompileSdkVersion = 24
 
     androidSupportLibraryVersion = '24.0.0'
-    constraintLayoutVersion = '1.0.0-alpha3'
+    constraintLayoutVersion = '1.0.0-alpha4'
     rxAndroidVersion = '1.2.0'
     butterKnifeVersion = '8.1.0'
     picassoVersion = '2.5.2'
