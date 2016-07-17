@@ -14,7 +14,7 @@ ext {
     androidSupportLibraryVersion = '24.0.0'
     constraintLayoutVersion = '1.0.0-alpha4'
     rxAndroidVersion = '1.2.0'
-    butterKnifeVersion = '8.1.0'
+    butterKnifeVersion = '8.2.1'
     picassoVersion = '2.5.2'
     photoViewVersion = '1.2.6'
     eventBusVersion = '3.0.0'
