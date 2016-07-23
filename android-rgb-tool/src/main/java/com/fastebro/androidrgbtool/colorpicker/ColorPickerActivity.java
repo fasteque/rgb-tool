@@ -203,7 +203,7 @@ public class ColorPickerActivity extends BaseActivity {
                         .LayoutParams.WRAP_CONTENT,
                         ConstraintLayout.LayoutParams.WRAP_CONTENT);
                 params.bottomToBottom = R.id.color_picker_main_layout;
-                params.leftToLeft = R.id.color_picker_main_layout;
+                params.lefToLeft = R.id.color_picker_main_layout;
                 params.rightToRight = R.id.color_picker_main_layout;
 
                 rgbPanelDataLayout.setLayoutParams(params);
@@ -217,7 +217,7 @@ public class ColorPickerActivity extends BaseActivity {
                         .LayoutParams.WRAP_CONTENT,
                         ConstraintLayout.LayoutParams.WRAP_CONTENT);
                 params.topToTop = R.id.color_picker_main_layout;
-                params.leftToLeft = R.id.color_picker_main_layout;
+                params.lefToLeft = R.id.color_picker_main_layout;
                 params.rightToRight = R.id.color_picker_main_layout;
 
                 rgbPanelDataLayout.setLayoutParams(params);
