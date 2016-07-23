@@ -6,12 +6,12 @@ allprojects {
 
 ext {
     // Android
-    androidBuildToolsVersion = "24.0.0"
+    androidBuildToolsVersion = "24.0.1"
     androidMinSdkVersion = 19
     androidTargetSdkVersion = 24
     androidCompileSdkVersion = 24
 
-    androidSupportLibraryVersion = '24.0.0'
+    androidSupportLibraryVersion = '24.1.1'
     constraintLayoutVersion = '1.0.0-alpha4'
     rxAndroidVersion = '1.2.0'
     butterKnifeVersion = '8.2.1'
@@ -27,9 +27,7 @@ ext {
 
     appDependencies = [
             appCompat:              "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
-            constraintLayoutSolver:       "com.android.support" +
-                    ".constraint:constraint-layout-solver:${constraintLayoutVersion}",
-            constraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            constraintLayout:       "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
             design:                 "com.android.support:design:${androidSupportLibraryVersion}",
             recyclerView:           "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
             cardView:               "com.android.support:cardview-v7:${androidSupportLibraryVersion}",

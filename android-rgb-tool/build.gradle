@@ -66,7 +66,6 @@ dependencies {
     def appAndroidTestDependencies = globalConfiguration.appAndroidTestDependencies
 
     compile appDependencies.appCompat
-    compile appDependencies.constraintLayoutSolver
     compile appDependencies.constraintLayout
     compile appDependencies.cardView
     compile appDependencies.recyclerView
