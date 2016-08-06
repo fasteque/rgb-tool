@@ -78,11 +78,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                finishAfterTransition();
-            } else {
-                finish();
-            }
+            finishAfterTransition();
             return true;
         } else if (item.getItemId() == R.id.action_print) {
             showPrintPaletteDialog();

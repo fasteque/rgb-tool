@@ -21,21 +21,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if(getSupportActionBar() != null) {
-                getSupportActionBar().setElevation(0);
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark, getTheme()));
-            } else {
-                //noinspection deprecation
-                getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
-            }
-            getWindow().setEnterTransition(new Explode());
-            getWindow().setExitTransition(new Fade());
-            getWindow().setAllowEnterTransitionOverlap(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(0);
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark, getTheme()));
+        } else {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
+        }
+        getWindow().setEnterTransition(new Explode());
+        getWindow().setExitTransition(new Fade());
+        getWindow().setAllowEnterTransitionOverlap(true);
     }
 
     protected void showPrintColorDialog(int jobType) {

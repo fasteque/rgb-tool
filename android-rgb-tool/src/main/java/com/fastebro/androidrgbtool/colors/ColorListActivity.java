@@ -80,11 +80,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                finishAfterTransition();
-            } else {
-                finish();
-            }
+            finishAfterTransition();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -104,11 +100,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
             EventBus.getDefault().post(new ColorSelectEvent(rgbRValue,
                     rgbGValue, rgbBValue, rgbAValue, null));
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                finishAfterTransition();
-            } else {
-                finish();
-            }
+            finishAfterTransition();
         }
     }
 

@@ -302,23 +302,13 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 //    };
 
     private void showColorList() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //noinspection unchecked
-            startActivity(new Intent(this, ColorListActivity.class), ActivityOptions
-                    .makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, ColorListActivity.class));
-        }
+        startActivity(new Intent(this, ColorListActivity.class), ActivityOptions
+                .makeSceneTransitionAnimation(this).toBundle());
     }
 
     private void showAbout() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //noinspection unchecked
-            startActivity(new Intent(this, AboutActivity.class), ActivityOptions
-                    .makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, AboutActivity.class));
-        }
+        startActivity(new Intent(this, AboutActivity.class), ActivityOptions
+                .makeSceneTransitionAnimation(this).toBundle());
     }
 
     private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
@@ -388,13 +378,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     public void openRGBToolGallery() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //noinspection unchecked
-            startActivity(new Intent(this, RGBToolGalleryActivity.class), ActivityOptions
-                    .makeSceneTransitionAnimation(this).toBundle());
-        } else {
-            startActivity(new Intent(this, RGBToolGalleryActivity.class));
-        }
+        startActivity(new Intent(this, RGBToolGalleryActivity.class), ActivityOptions
+                .makeSceneTransitionAnimation(this).toBundle());
     }
 
     @Override

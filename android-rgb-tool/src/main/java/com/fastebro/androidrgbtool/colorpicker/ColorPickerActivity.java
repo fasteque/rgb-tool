@@ -108,11 +108,7 @@ public class ColorPickerActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                finishAfterTransition();
-            } else {
-                finish();
-            }
+            finishAfterTransition();
             return true;
         } else if (item.getItemId() == R.id.action_palette) {
             generatePalette();
@@ -165,13 +161,8 @@ public class ColorPickerActivity extends BaseActivity {
                     intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
                     intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        //noinspection unchecked
-                        startActivity(intent,
-                                ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
-                    } else {
-                        startActivity(intent);
-                    }
+                    startActivity(intent,
+                            ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
                 }
             });
         }
@@ -232,10 +223,6 @@ public class ColorPickerActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAfterTransition();
-        } else {
-            finish();
-        }
+        finishAfterTransition();
     }
 }
