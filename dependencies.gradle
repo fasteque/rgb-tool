@@ -18,7 +18,6 @@ ext {
     picassoVersion = '2.5.2'
     photoViewVersion = '1.2.6'
     eventBusVersion = '3.0.0'
-    leakCanaryVersion = '1.3.1'
     timberVersion = '4.1.2'
     jUnitVersion = '4.12'
     mockitoVersion = '2.0.96-beta'
@@ -41,14 +40,6 @@ ext {
             photoView:              "com.github.chrisbanes:PhotoView:${photoViewVersion}",
             eventBus:               "org.greenrobot:eventbus:${eventBusVersion}",
             timber:                 "com.jakewharton.timber:timber:${timberVersion}",
-    ]
-
-    appDebugDependencies = [
-            leakCanary:         "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
-    ]
-
-    appReleaseDependencies = [
-            leakCanaryNoOp:     "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
     ]
 
     appTestDependencies = [

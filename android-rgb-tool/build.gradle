@@ -60,8 +60,6 @@ android {
 dependencies {
     def globalConfiguration = rootProject.extensions.getByName("ext")
     def appDependencies = globalConfiguration.appDependencies
-    def appDebugDependencies = globalConfiguration.appDebugDependencies
-    def appReleaseDependencies = globalConfiguration.appReleaseDependencies
     def appTestDependencies = globalConfiguration.appTestDependencies
     def appAndroidTestDependencies = globalConfiguration.appAndroidTestDependencies
 
@@ -82,10 +80,6 @@ dependencies {
     compile appDependencies.timber
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compile project(':model')
-
-    // Memory leak detection
-    debugCompile appDebugDependencies.leakCanary
-    releaseCompile appReleaseDependencies.leakCanaryNoOp
 
     // Testing dependencies
     testCompile appTestDependencies.jUnit
