@@ -6,19 +6,19 @@ allprojects {
 
 ext {
     // Android
-    androidBuildToolsVersion = "24.0.1"
+    androidBuildToolsVersion = "24.0.2"
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 24
     androidCompileSdkVersion = 24
 
-    androidSupportLibraryVersion = '24.1.1'
+    androidSupportLibraryVersion = '24.2.0'
     constraintLayoutVersion = '1.0.0-alpha1'
     rxAndroidVersion = '1.2.1'
-    butterKnifeVersion = '8.2.1'
+    butterKnifeVersion = '8.4.0'
     picassoVersion = '2.5.2'
-    photoViewVersion = '1.2.6'
+    photoViewVersion = '1.3.0'
     eventBusVersion = '3.0.0'
-    timberVersion = '4.1.2'
+    timberVersion = '4.3.0'
     jUnitVersion = '4.12'
     mockitoVersion = '2.0.96-beta'
     espressoCoreVersion = '2.2.2'

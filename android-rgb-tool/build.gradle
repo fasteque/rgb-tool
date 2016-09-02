@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileOptions {
@@ -74,7 +73,7 @@ dependencies {
     compile appDependencies.photoView
     compile appDependencies.picasso
     compile appDependencies.butterKnife
-    apt appDependencies.butterKnifeCompiler
+    annotationProcessor appDependencies.butterKnifeCompiler
     compile appDependencies.eventBus
     compile appDependencies.rxAndroid
     compile appDependencies.timber
