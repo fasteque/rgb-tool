@@ -1,18 +1,66 @@
 package com.fastebro.androidrgbtool.livepicker;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
+import android.util.AttributeSet;
 import android.view.TextureView;
-
-import timber.log.Timber;
 
 /**
  * Created by danielealtomare on 31/03/16.
  * Project: rgb-tool
  */
-public class LivePickerTextureView extends TextureView implements TextureView.SurfaceTextureListener, Camera
+public class LivePickerTextureView extends TextureView {
+
+
+        private int ratioWidth = 0;
+        private int ratioHeight = 0;
+
+        public LivePickerTextureView(Context context) {
+            this(context, null);
+        }
+
+        public LivePickerTextureView(Context context, AttributeSet attrs) {
+            this(context, attrs, 0);
+        }
+
+        public LivePickerTextureView(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+        }
+
+        /**
+         * Sets the aspect ratio for this view. The size of the view will be measured based on the ratio
+         * calculated from the parameters. Note that the actual sizes of parameters don't matter, that
+         * is, calling setAspectRatio(2, 3) and setAspectRatio(4, 6) make the same result.
+         *
+         * @param width  Relative horizontal size
+         * @param height Relative vertical size
+         */
+    public void setAspectRatio(int width, int height) {
+        if (width < 0 || height < 0) {
+            throw new IllegalArgumentException("Size cannot be negative.");
+        }
+        ratioWidth = width;
+        ratioHeight = height;
+        requestLayout();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        if (0 == ratioWidth || 0 == ratioHeight) {
+            setMeasuredDimension(width, height);
+        } else {
+            if (width < height * ratioWidth / ratioHeight) {
+                setMeasuredDimension(width, width * ratioHeight / ratioWidth);
+            } else {
+                setMeasuredDimension(height * ratioWidth / ratioHeight, height);
+            }
+        }
+    }
+
+    /*
+        implements TextureView.SurfaceTextureListener, Camera
         .PreviewCallback {
     private static final String TAG = LivePickerTextureView.class.getCanonicalName();
     private static final int POINTER_RADIUS = 5;
@@ -117,4 +165,5 @@ public class LivePickerTextureView extends TextureView implements TextureView.Su
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 
     }
+    */
 }

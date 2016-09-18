@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.fastebro.androidrgbtool.livepicker.LivePickerActivity">
 
+    <com.fastebro.androidrgbtool.livepicker.LivePickerTextureView
+        android:id="@+id/live_picker_texture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
+
     <FrameLayout
         android:id="@+id/live_picker_preview_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:background="#808080">
+        android:layout_height="match_parent">
 
         <View
             android:id="@+id/live_picker_pointer_stroke"
@@ -33,7 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@color/primary"
         android:minHeight="?attr/actionBarSize">
 
         <ImageButton
