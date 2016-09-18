@@ -121,49 +121,46 @@ public class ColorPickerActivity extends BaseActivity {
     private void generatePalette() {
         if (bitmap != null) {
             Palette.Builder paletteBuilder = Palette.from(bitmap);
-            paletteBuilder.generate(new Palette.PaletteAsyncListener() {
-                @Override
-                public void onGenerated(Palette palette) {
-                    Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
+            paletteBuilder.generate(palette -> {
+                Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
 
-                    ArrayList<PaletteSwatch> swatches = new ArrayList<>();
+                ArrayList<PaletteSwatch> swatches = new ArrayList<>();
 
-                    if(palette.getVibrantSwatch() != null) {
-                        swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
-                                PaletteSwatch.SwatchType.VIBRANT));
-                    }
-
-                    if(palette.getMutedSwatch() != null) {
-                        swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
-                                PaletteSwatch.SwatchType.MUTED));
-                    }
-
-                    if(palette.getLightVibrantSwatch() != null) {
-                        swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
-                                PaletteSwatch.SwatchType.LIGHT_VIBRANT));
-                    }
-
-                    if(palette.getLightMutedSwatch() != null) {
-                        swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
-                                PaletteSwatch.SwatchType.LIGHT_MUTED));
-                    }
-
-                    if(palette.getDarkVibrantSwatch() != null) {
-                        swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
-                                PaletteSwatch.SwatchType.DARK_VIBRANT));
-                    }
-
-                    if(palette.getDarkMutedSwatch() != null) {
-                        swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
-                                PaletteSwatch.SwatchType.DARK_MUTED));
-                    }
-
-                    intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
-                    intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
-
-                    startActivity(intent,
-                            ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
+                if(palette.getVibrantSwatch() != null) {
+                    swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
+                            PaletteSwatch.SwatchType.VIBRANT));
                 }
+
+                if(palette.getMutedSwatch() != null) {
+                    swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
+                            PaletteSwatch.SwatchType.MUTED));
+                }
+
+                if(palette.getLightVibrantSwatch() != null) {
+                    swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
+                            PaletteSwatch.SwatchType.LIGHT_VIBRANT));
+                }
+
+                if(palette.getLightMutedSwatch() != null) {
+                    swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
+                            PaletteSwatch.SwatchType.LIGHT_MUTED));
+                }
+
+                if(palette.getDarkVibrantSwatch() != null) {
+                    swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
+                            PaletteSwatch.SwatchType.DARK_VIBRANT));
+                }
+
+                if(palette.getDarkMutedSwatch() != null) {
+                    swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
+                            PaletteSwatch.SwatchType.DARK_MUTED));
+                }
+
+                intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
+                intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
+
+                startActivity(intent,
+                        ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
             });
         }
     }

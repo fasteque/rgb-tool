@@ -9,10 +9,10 @@ import android.net.Uri;
  * Project: rgb-tool
  */
 public class WebViewFallback implements CustomTabActivityHelper.CustomTabFallback {
-@Override
-public void openUri(Activity activity, Uri uri) {
+    @Override
+    public void openUri(Activity activity, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(uri);
         activity.startActivity(intent);
-        }
-        }
+    }
+}

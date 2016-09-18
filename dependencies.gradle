@@ -20,7 +20,7 @@ ext {
     eventBusVersion = '3.0.0'
     timberVersion = '4.3.0'
     jUnitVersion = '4.12'
-    mockitoVersion = '2.0.96-beta'
+    mockitoVersion = '2.1.0-RC.1'
     espressoCoreVersion = '2.2.2'
     testRunnerVersion = '0.5'
 

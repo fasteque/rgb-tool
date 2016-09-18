@@ -86,24 +86,21 @@ public class RgbaInsertionFragment extends DialogFragment {
         builder.setView(view)
                 .setTitle(getString(R.string.rgba_insertion_dialog_title))
                 .setPositiveButton(getString(R.string.action_common_set),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                pickerR.clearFocus();
-                                pickerG.clearFocus();
-                                pickerB.clearFocus();
-                                pickerA.clearFocus();
+                        (dialog, id) -> {
+                            pickerR.clearFocus();
+                            pickerG.clearFocus();
+                            pickerB.clearFocus();
+                            pickerA.clearFocus();
 
-                                short[] rgbaValues = new short[]{
-                                        (short) pickerR.getValue(),
-                                        (short) pickerG.getValue(),
-                                        (short) pickerB.getValue(),
-                                        (short) pickerA.getValue()
-                                };
+                            short[] rgbaValues1 = new short[]{
+                                    (short) pickerR.getValue(),
+                                    (short) pickerG.getValue(),
+                                    (short) pickerB.getValue(),
+                                    (short) pickerA.getValue()
+                            };
 
-                                EventBus.getDefault().post(new RGBAInsertionEvent(rgbaValues));
-                                RgbaInsertionFragment.this.getDialog().cancel();
-                            }
+                            EventBus.getDefault().post(new RGBAInsertionEvent(rgbaValues1));
+                            RgbaInsertionFragment.this.getDialog().cancel();
                         }
                 );
 

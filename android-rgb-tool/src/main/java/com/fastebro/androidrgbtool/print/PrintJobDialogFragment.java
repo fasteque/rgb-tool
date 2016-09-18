@@ -81,33 +81,28 @@ public class PrintJobDialogFragment extends DialogFragment {
         builder.setView(view)
                 .setTitle(title)
                 .setPositiveButton(getString(R.string.action_common_set),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                if (jobType == PRINT_COLOR_JOB) {
-                                    EventBus.getDefault().post(new PrintColorEvent(message.getText().toString()));
-                                } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
-                                    EventBus.getDefault().post(new PrintColorDetailsEvent(message.getText().toString
-                                            ()));
-                                } else {
-                                    EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
-                                }
-                                PrintJobDialogFragment.this.getDialog().cancel();
+                        (dialog, id) -> {
+                            if (jobType == PRINT_COLOR_JOB) {
+                                EventBus.getDefault().post(new PrintColorEvent(message.getText().toString()));
+                            } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
+                                EventBus.getDefault().post(new PrintColorDetailsEvent(message.getText().toString
+                                        ()));
+                            } else {
+                                EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
                             }
+                            PrintJobDialogFragment.this.getDialog().cancel();
                         }
                 )
                 .setNegativeButton(getString(R.string.action_common_skip),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                if (jobType == PRINT_COLOR_JOB) {
-                                    EventBus.getDefault().post(new PrintColorEvent(null));
-                                } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
-                                    EventBus.getDefault().post(new PrintColorDetailsEvent(null));
-                                } else {
-                                    EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
-                                }
-                                PrintJobDialogFragment.this.getDialog().cancel();
+                        (dialog, id) -> {
+                            if (jobType == PRINT_COLOR_JOB) {
+                                EventBus.getDefault().post(new PrintColorEvent(null));
+                            } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
+                                EventBus.getDefault().post(new PrintColorDetailsEvent(null));
+                            } else {
+                                EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
                             }
+                            PrintJobDialogFragment.this.getDialog().cancel();
                         }
                 );
 

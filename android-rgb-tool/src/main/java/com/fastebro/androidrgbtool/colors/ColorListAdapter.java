@@ -59,19 +59,11 @@ class ColorListAdapter extends SimpleCursorAdapter {
         color.setFillColor(Color.argb(rgbAValue, rgbRValue, rgbGValue, rgbBValue));
         color.setStrokeColor(Color.argb(rgbAValue, rgbRValue, rgbGValue, rgbBValue));
 
-        popupMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                // We need to post a Runnable to show the popup to make sure that the PopupMenu is
-                // correctly positioned. The reason being that the view may change position before the
-                // PopupMenu is shown.
-                v.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        showPopupMenu(v);
-                    }
-                });
-            }
+        popupMenu.setOnClickListener(v -> {
+            // We need to post a Runnable to show the popup to make sure that the PopupMenu is
+            // correctly positioned. The reason being that the view may change position before the
+            // PopupMenu is shown.
+            v.post(() -> showPopupMenu(v));
         });
 
         popupMenu.setTag(colorId);
@@ -82,19 +74,16 @@ class ColorListAdapter extends SimpleCursorAdapter {
 
         PopupMenu popup = new PopupMenu(view.getContext(), view);
         popup.getMenuInflater().inflate(R.menu.color_popup, popup.getMenu());
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.menu_remove:
-                        EventBus.getDefault().post(new ColorDeleteEvent(colorId));
-                        return true;
-                    case R.id.menu_share:
-                        EventBus.getDefault().post(new ColorShareEvent(colorId));
-                        return true;
-                }
-                return false;
+        popup.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_remove:
+                    EventBus.getDefault().post(new ColorDeleteEvent(colorId));
+                    return true;
+                case R.id.menu_share:
+                    EventBus.getDefault().post(new ColorShareEvent(colorId));
+                    return true;
             }
+            return false;
         });
 
         popup.show();

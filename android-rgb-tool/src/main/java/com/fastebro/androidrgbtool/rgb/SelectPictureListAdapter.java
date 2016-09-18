@@ -31,12 +31,7 @@ public class SelectPictureListAdapter extends RecyclerView.Adapter<SelectPicture
                 from(viewGroup.getContext()).
                 inflate(R.layout.select_picture_row, viewGroup, false);
 
-        return new ViewHolder(itemView, new ItemClickListener() {
-            @Override
-            public void onClick(View v, int position, boolean isLongClick) {
-                listener.onClick(v, position, isLongClick);
-            }
-        });
+        return new ViewHolder(itemView, (v, position, isLongClick) -> listener.onClick(v, position, isLongClick));
     }
 
     @Override

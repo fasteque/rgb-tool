@@ -65,26 +65,19 @@ public class HexInsertionFragment extends DialogFragment {
         builder.setView(view)
                 .setTitle(getString(R.string.hex_insertion_title))
                 .setPositiveButton(getString(R.string.action_common_set),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                if(checkHexValue(newHexValue.getText().toString())) {
-                                    EventBus.getDefault().post(
-                                            new UpdateHexValueEvent(newHexValue.getText().toString()));
-                                } else {
-                                    EventBus.getDefault().post(
-                                            new ErrorMessageEvent(getString(R.string.hex_insertion_not_valid_error)));
-                                }
-                                HexInsertionFragment.this.getDialog().cancel();
+                        (dialog, id) -> {
+                            if(checkHexValue(newHexValue.getText().toString())) {
+                                EventBus.getDefault().post(
+                                        new UpdateHexValueEvent(newHexValue.getText().toString()));
+                            } else {
+                                EventBus.getDefault().post(
+                                        new ErrorMessageEvent(getString(R.string.hex_insertion_not_valid_error)));
                             }
+                            HexInsertionFragment.this.getDialog().cancel();
                         }
                 )
                 .setNegativeButton(getString(R.string.action_common_cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                HexInsertionFragment.this.getDialog().cancel();
-                            }
-                        }
+                        (dialog, id) -> HexInsertionFragment.this.getDialog().cancel()
                 );
 
         newHexValue.setText(hexValue);

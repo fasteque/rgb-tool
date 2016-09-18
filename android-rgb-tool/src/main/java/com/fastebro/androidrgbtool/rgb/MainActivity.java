@@ -165,12 +165,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         seekBarOpacity.setOnSeekBarChangeListener(getRGB());
 
         // Save color currently displayed.
-        btn_SaveColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveColor(redColor, greenColor, blueColor, opacity, "");
-            }
-        });
+        btn_SaveColor.setOnClickListener(v -> saveColor(redColor, greenColor, blueColor, opacity, ""));
 
 //        setColorValuesClickListener();
         refreshUI();
@@ -234,16 +229,12 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Snackbar.make(findViewById(android.R.id.content), getString(R.string.rationale_external_storage),
-                        Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), new View
-                        .OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Request the permission
-                        ActivityCompat.requestPermissions(MainActivity.this,
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                    }
-                }).show();
+                        Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), view -> {
+                            // Request the permission
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                        }).show();
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
@@ -693,9 +684,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
          */
         MediaScannerConnection.scanFile(getApplicationContext(),
                 new String[]{event.photoPath}, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                    }
+                (path, uri) -> {
                 });
 
         Intent colorPickerIntent = new Intent(this, ColorPickerActivity.class);

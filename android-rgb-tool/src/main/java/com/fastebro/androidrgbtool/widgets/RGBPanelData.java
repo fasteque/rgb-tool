@@ -74,12 +74,7 @@ public class RGBPanelData extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.rgb_data_panel_small, this);
         ButterKnife.bind(this);
-        mDismissPanelButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setVisibility(GONE);
-            }
-        });
+        mDismissPanelButton.setOnClickListener(v -> setVisibility(GONE));
 
         mRGBValue.setOnLongClickListener(new ClipboardLongClickListener(context,
                 context.getString(R.string.app_name)));
