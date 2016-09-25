@@ -72,12 +72,6 @@
             android:label="@string/title_activity_palette"
             android:screenOrientation="portrait">
         </activity>
-        <activity
-            android:name=".colordetails.ColorDetailsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Rgbtool.NoActionBar">
-        </activity>
         <activity android:name=".livepicker.LivePickerActivity">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN"/>-->

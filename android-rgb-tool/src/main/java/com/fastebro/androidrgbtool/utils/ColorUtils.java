@@ -122,9 +122,9 @@ public final class ColorUtils {
         return rgb;
     }
 
-    public static int getComplementaryColor(@IntRange(from = 0, to = 255) short rgbRColor,
-                                            @IntRange(from = 0, to = 255) short rgbGColor,
-                                            @IntRange(from = 0, to = 255) short rgbBColor) {
+    public static int getComplementaryColor(@IntRange(from = 0, to = 255) int rgbRColor,
+                                            @IntRange(from = 0, to = 255) int rgbGColor,
+                                            @IntRange(from = 0, to = 255) int rgbBColor) {
         float[] hsv = new float[3];
         Color.RGBToHSV(rgbRColor, rgbGColor, rgbBColor, hsv);
         hsv[0] = (hsv[0] + 180) % 360;
@@ -132,9 +132,9 @@ public final class ColorUtils {
         return Color.HSVToColor(hsv);
     }
 
-    public static int getContrastColor(@IntRange(from = 0, to = 255) short rgbRColor,
-                                       @IntRange(from = 0, to = 255) short rgbGColor,
-                                       @IntRange(from = 0, to = 255) short rgbBColor) {
+    public static int getContrastColor(@IntRange(from = 0, to = 255) int rgbRColor,
+                                       @IntRange(from = 0, to = 255) int rgbGColor,
+                                       @IntRange(from = 0, to = 255) int rgbBColor) {
         float[] hsv = new float[3];
         Color.RGBToHSV(rgbRColor, rgbGColor, rgbBColor, hsv);
         if (hsv[2] < 0.5) {

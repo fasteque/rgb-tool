@@ -24,6 +24,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,30 +93,63 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     private Rect thumbRect;
     private int seekBarLeft;
 
-//    // RGB channel: R,G,B.
-//    @BindView(R.id.textView_RGB_R)
-//    TextView textView_RGB_R;
-//    @BindView(R.id.textView_RGB_G)
-//    TextView textView_RGB_G;
-//    @BindView(R.id.textView_RGB_B)
-//    TextView textView_RGB_B;
-//    @BindView(R.id.textView_RGB_O)
-//    TextView textView_RGB_O;
-//    // HSB: Hue, Saturation, Brightness.
-//    @BindView(R.id.textView_HSB_H)
-//    TextView textView_HSB_H;
-//    @BindView(R.id.textView_HSB_S)
-//    TextView textView_HSB_S;
-//    @BindView(R.id.textView_HSB_B)
-//    TextView textView_HSB_B;
-//    // Hexadecimal color value.
-//    @BindView(R.id.textView_Hexadecimal)
-//    TextView textView_Hexadecimal;
+    // RGB channel: R,G,B.
+    @BindView(R.id.textView_RGB_R)
+    TextView tvRGB_R;
+    @BindView(R.id.textView_RGB_G)
+    TextView tvRGB_G;
+    @BindView(R.id.textView_RGB_B)
+    TextView tvRGB_B;
+    @BindView(R.id.textView_RGB_O)
+    TextView tvRGB_O;
+
+    // HSB: Hue, Saturation, Brightness.
+    @BindView(R.id.textView_HSB_H)
+    TextView tvHSB_H;
+    @BindView(R.id.textView_HSB_S)
+    TextView tvHSB_S;
+    @BindView(R.id.textView_HSB_B)
+    TextView tvHSB_B;
+
+    // Hexadecimal color value.
+    @BindView(R.id.tv_hexadecimal)
+    TextView tvHexadecimal;
+
     // Save color button.
     @BindView(R.id.fab_save_color)
     FloatingActionButton btn_SaveColor;
     @BindView(R.id.color_view)
     View colorView;
+
+    // Color details.
+    @BindView(R.id.complementaryColorBackground)
+    CardView complementaryColorBackground;
+    @BindView(R.id.complementaryColorText)
+    TextView complementaryColorText;
+    @BindView(R.id.contrastColorBackground)
+    CardView contrastColorBackground;
+    @BindView(R.id.contrastColorText)
+    TextView contrastColorText;
+    private int complementaryColor;
+    private int contrastColor;
+
+    // Color samples.
+    @BindView(R.id.firstColorSampleBackground)
+    CardView firstColorSampleBackground;
+    @BindView(R.id.firstColorSampleTextNormal)
+    TextView firstColorSampleTextNormal;
+    @BindView(R.id.secondColorSampleBackground)
+    CardView secondColorSampleBackground;
+    @BindView(R.id.secondColorSampleTextNormal)
+    TextView secondColorSampleTextNormal;
+    @BindView(R.id.firstColorSampleBackgroundBg)
+    CardView firstColorSampleBackgroundBg;
+    @BindView(R.id.firstColorSampleTextNormalBg)
+    TextView firstColorSampleTextNormalBg;
+    @BindView(R.id.secondColorSampleBackgroundBg)
+    CardView secondColorSampleBackgroundBg;
+    @BindView(R.id.secondColorSampleTextNormalBg)
+    TextView secondColorSampleTextNormalBg;
 
     private String currentPhotoPath;
     private BaseAlbumDirFactory albumStorageDirFactory = null;
@@ -167,7 +201,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         // Save color currently displayed.
         btn_SaveColor.setOnClickListener(v -> saveColor(redColor, greenColor, blueColor, opacity, ""));
 
-//        setColorValuesClickListener();
+        setColorValuesClickListener();
         refreshUI();
     }
 
@@ -230,11 +264,11 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Snackbar.make(findViewById(android.R.id.content), getString(R.string.rationale_external_storage),
                         Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), view -> {
-                            // Request the permission
-                            ActivityCompat.requestPermissions(MainActivity.this,
-                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                    PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                        }).show();
+                    // Request the permission
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                }).show();
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
@@ -265,21 +299,18 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         }
     }
 
-//    private void setColorValuesClickListener() {
-//        textView_RGB_R.setOnClickListener(RGBAClickListener);
-//        textView_RGB_G.setOnClickListener(RGBAClickListener);
-//        textView_RGB_B.setOnClickListener(RGBAClickListener);
-//        textView_RGB_O.setOnClickListener(RGBAClickListener);
-//        textView_Hexadecimal.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                HexInsertionFragment fragment =
-//                        HexInsertionFragment.newInstance(textView_Hexadecimal.getText().toString().substring(3));
-//                fragment.show(getSupportFragmentManager(), null);
-//            }
-//        });
-//    }
-//
+    private void setColorValuesClickListener() {
+//        tvRGB_R.setOnClickListener(RGBAClickListener);
+//        tvRGB_G.setOnClickListener(RGBAClickListener);
+//        tvRGB_B.setOnClickListener(RGBAClickListener);
+//        tvRGB_O.setOnClickListener(RGBAClickListener);
+        tvHexadecimal.setOnClickListener(v -> {
+            HexInsertionFragment fragment =
+                    HexInsertionFragment.newInstance(tvHexadecimal.getText().toString().substring(3));
+            fragment.show(getSupportFragmentManager(), null);
+        });
+    }
+
 //    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
 //        @Override
 //        public void onClick(View v) {
@@ -304,7 +335,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
     private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
             colorName) {
-        AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) { };
+        AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) {
+        };
 
         float[] hsb = ColorUtils.RGBToHSB(RGBRComponent, RGBGComponent, RGBBComponent);
 
@@ -478,39 +510,78 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     private void refreshUI() {
-//        updateRGBField();
-//        updateHSBField();
-//        updateHexadecimalField();
+        updateRGBField();
+        updateHSBField();
+        updateHexadecimalField();
         updateSharedColor();
         updateSaveColorButton();
-
+        updateColorDetails();
+        updateColorSample();
         colorView.setBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
     }
 
-//    private void updateRGBField() {
-//        // RGB channel: R, G, B, OPACITY.
-//        textView_RGB_R.setText(ColorUtils.getRGB(redColor));
-//        textView_RGB_G.setText(ColorUtils.getRGB(greenColor));
-//        textView_RGB_B.setText(ColorUtils.getRGB(blueColor));
-//        textView_RGB_O.setText(ColorUtils.getRGB(opacity));
-//    }
-//
-//    private void updateHSBField() {
-//        // Get float array with 3 values for HSB-HSV.
-//        float[] hsb = ColorUtils.RGBToHSB(redColor, greenColor, blueColor);
-//
-//        // Set HSB-HSV single channel value.
-//        textView_HSB_H.setText(String.format("%.0f", hsb[0]));
-//        textView_HSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
-//        textView_HSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
-//    }
-//
-//    private void updateHexadecimalField() {
-//        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(opacity), ColorUtils.RGBToHex(redColor),
-//                ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
-//
-//        textView_Hexadecimal.setText(hexValue);
-//    }
+    private void updateRGBField() {
+        // RGB channel: R, G, B, OPACITY.
+        tvRGB_R.setText(ColorUtils.getRGB(redColor));
+        tvRGB_G.setText(ColorUtils.getRGB(greenColor));
+        tvRGB_B.setText(ColorUtils.getRGB(blueColor));
+        tvRGB_O.setText(ColorUtils.getRGB(opacity));
+    }
+
+    private void updateHSBField() {
+        // Get float array with 3 values for HSB-HSV.
+        float[] hsb = ColorUtils.RGBToHSB(redColor, greenColor, blueColor);
+
+        // Set HSB-HSV single channel value.
+        tvHSB_H.setText(String.format("%.0f", hsb[0]));
+        tvHSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
+        tvHSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
+    }
+
+    private void updateHexadecimalField() {
+        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(opacity), ColorUtils.RGBToHex(redColor),
+                ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
+
+        tvHexadecimal.setText(hexValue);
+    }
+
+    private void updateColorDetails() {
+        complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
+        complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
+                (complementaryColor)));
+        complementaryColorBackground.setCardBackgroundColor(complementaryColor);
+
+        contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
+        contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
+                (contrastColor)));
+        contrastColorBackground.setCardBackgroundColor(contrastColor);
+    }
+
+    private void updateColorSample() {
+        // Text.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white, getTheme()));
+            secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black, getTheme()));
+        } else {
+            firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white));
+            secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black));
+        }
+
+        firstColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
+        secondColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
+
+        // Background.
+        firstColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
+        secondColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white, getTheme()));
+            secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black, getTheme()));
+        } else {
+            firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white));
+            secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
 
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
