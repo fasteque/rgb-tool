@@ -387,11 +387,9 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     public void openDeviceGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
         galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-
         startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
     }
 
