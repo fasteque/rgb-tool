@@ -356,10 +356,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B, (int) hsb[2] * 100);
         values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE, 1);
 
-        handler.startInsert(-1,
-                null,
-                RGBToolContentProvider.CONTENT_URI,
-                values);
+        handler.startInsert(-1, null, RGBToolContentProvider.CONTENT_URI, values);
 
         btn_SaveColor.setVisibility(View.INVISIBLE);
     }
