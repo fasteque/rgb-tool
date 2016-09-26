@@ -130,8 +130,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     CardView contrastColorBackground;
     @BindView(R.id.contrastColorText)
     TextView contrastColorText;
-    private int complementaryColor;
-    private int contrastColor;
 
     // Color samples.
     @BindView(R.id.firstColorSampleBackground)
@@ -543,12 +541,12 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     private void updateColorDetails() {
-        complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
+        int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
         complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
                 (complementaryColor)));
         complementaryColorBackground.setCardBackgroundColor(complementaryColor);
 
-        contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
+        int contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
         contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
                 (contrastColor)));
         contrastColorBackground.setCardBackgroundColor(contrastColor);
