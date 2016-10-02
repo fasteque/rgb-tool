@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,28 +37,76 @@
 
 
     <RelativeLayout
+        android:id="@+id/live_picker_bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:minHeight="?attr/actionBarSize">
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin">
+
+        <com.fastebro.androidrgbtool.widgets.CircleView
+            android:id="@+id/live_picker_picked_color"
+            android:layout_width="@dimen/rgb_too_generic_icon_size"
+            android:layout_height="@dimen/rgb_too_generic_icon_size"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            app:circleGap="0dp"
+            app:circleRadius="24dp"
+            app:strokeWidth="0dp"/>
+
+        <TextView
+            android:id="@+id/live_picker_picked_color_hex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/live_picker_picked_color"
+            android:textSize="@dimen/rgb_text_size_small"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/live_picker_pick_color"
+            android:layout_width="@dimen/rgb_too_generic_icon_size"
+            android:layout_height="@dimen/rgb_too_generic_icon_size"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu_camera"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            />
+            android:id="@+id/live_picker_manual_picker"
+            android:layout_width="@dimen/rgb_too_generic_icon_size"
+            android:layout_height="@dimen/rgb_too_generic_icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu_camera"/>
+
+        <ImageButton
+            android:id="@+id/live_picker_save_color"
+            android:layout_width="@dimen/rgb_too_generic_icon_size"
+            android:layout_height="@dimen/rgb_too_generic_icon_size"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/live_picker_manual_picker"
+            android:src="@drawable/ic_menu_camera"/>
+
     </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/live_picker_flip_camera"
+        android:layout_width="@dimen/rgb_too_generic_icon_size"
+        android:layout_height="@dimen/rgb_too_generic_icon_size"
+        android:layout_above="@+id/live_picker_bottom_toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_menu_camera"/>
+
+    <ImageButton
+        android:id="@+id/live_picker_camera_flash"
+        android:layout_width="@dimen/rgb_too_generic_icon_size"
+        android:layout_height="@dimen/rgb_too_generic_icon_size"
+        android:layout_above="@+id/live_picker_flip_camera"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_menu_camera"/>
 
 </RelativeLayout>
