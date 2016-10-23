@@ -71,7 +71,8 @@
             android:layout_height="@dimen/rgb_too_generic_icon_size"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu_camera"/>
+            android:background="@null"
+            android:src="@drawable/ic_camera_black"/>
 
         <ImageButton
             android:id="@+id/live_picker_manual_picker"
@@ -79,7 +80,8 @@
             android:layout_height="@dimen/rgb_too_generic_icon_size"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu_camera"/>
+            android:background="@null"
+            android:src="@drawable/ic_palette_black"/>
 
         <ImageButton
             android:id="@+id/live_picker_save_color"
@@ -87,7 +89,8 @@
             android:layout_height="@dimen/rgb_too_generic_icon_size"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/live_picker_manual_picker"
-            android:src="@drawable/ic_menu_camera"/>
+            android:background="@null"
+            android:src="@drawable/ic_add_black"/>
 
     </RelativeLayout>
 
@@ -97,8 +100,10 @@
         android:layout_height="@dimen/rgb_too_generic_icon_size"
         android:layout_above="@+id/live_picker_bottom_toolbar"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_menu_camera"/>
+        android:background="@null"
+        android:src="@drawable/ic_flip_white"/>
 
     <ImageButton
         android:id="@+id/live_picker_camera_flash"
@@ -106,7 +111,9 @@
         android:layout_height="@dimen/rgb_too_generic_icon_size"
         android:layout_above="@+id/live_picker_flip_camera"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_menu_camera"/>
+        android:background="@null"
+        android:src="@drawable/ic_flash_on_white"/>
 
 </RelativeLayout>
