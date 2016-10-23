@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.graphics.Palette;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 import com.fastebro.androidrgbtool.palette.ImagePaletteActivity;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class ColorPickerActivity extends BaseActivity {
     @BindView(R.id.color_picker_main_layout)
-    ConstraintLayout mainLayout;
+    RelativeLayout mainLayout;
     @BindView(R.id.iv_photo)
     ImageView imageView;
 
@@ -52,7 +52,7 @@ public class ColorPickerActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -83,9 +83,8 @@ public class ColorPickerActivity extends BaseActivity {
             }
         }
 
-        mainLayout.addView(rgbPanelDataLayout, new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams
-                .WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT));
+        mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT));
     }
 
     @Override
@@ -126,32 +125,32 @@ public class ColorPickerActivity extends BaseActivity {
 
                 ArrayList<PaletteSwatch> swatches = new ArrayList<>();
 
-                if(palette.getVibrantSwatch() != null) {
+                if (palette.getVibrantSwatch() != null) {
                     swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
                             PaletteSwatch.SwatchType.VIBRANT));
                 }
 
-                if(palette.getMutedSwatch() != null) {
+                if (palette.getMutedSwatch() != null) {
                     swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
                             PaletteSwatch.SwatchType.MUTED));
                 }
 
-                if(palette.getLightVibrantSwatch() != null) {
+                if (palette.getLightVibrantSwatch() != null) {
                     swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
                             PaletteSwatch.SwatchType.LIGHT_VIBRANT));
                 }
 
-                if(palette.getLightMutedSwatch() != null) {
+                if (palette.getLightMutedSwatch() != null) {
                     swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
                             PaletteSwatch.SwatchType.LIGHT_MUTED));
                 }
 
-                if(palette.getDarkVibrantSwatch() != null) {
+                if (palette.getDarkVibrantSwatch() != null) {
                     swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
                             PaletteSwatch.SwatchType.DARK_VIBRANT));
                 }
 
-                if(palette.getDarkMutedSwatch() != null) {
+                if (palette.getDarkMutedSwatch() != null) {
                     swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
                             PaletteSwatch.SwatchType.DARK_MUTED));
                 }
@@ -187,13 +186,10 @@ public class ColorPickerActivity extends BaseActivity {
             int touchedRGB = bitmap.getPixel(imageX, imageY);
 
             if (imageY < bitmap.getHeight() / 2) {
-                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout
-                        .LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT);
-                params.bottomToBottom = R.id.color_picker_main_layout;
-                params.lefToLeft = R.id.color_picker_main_layout;
-                params.rightToRight = R.id.color_picker_main_layout;
-
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+                        .WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 rgbPanelDataLayout.setLayoutParams(params);
                 rgbPanelDataLayout.updateData(touchedRGB);
 
@@ -201,13 +197,10 @@ public class ColorPickerActivity extends BaseActivity {
                     rgbPanelDataLayout.setVisibility(View.VISIBLE);
                 }
             } else {
-                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(ConstraintLayout
-                        .LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT);
-                params.topToTop = R.id.color_picker_main_layout;
-                params.lefToLeft = R.id.color_picker_main_layout;
-                params.rightToRight = R.id.color_picker_main_layout;
-
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+                        .WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 rgbPanelDataLayout.setLayoutParams(params);
                 rgbPanelDataLayout.updateData(touchedRGB);
 

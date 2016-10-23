@@ -1,21 +1,16 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:id="@+id/color_picker_main_layout"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/black"
-                                             tools:context=".colorpicker.ColorPickerActivity"
-                                             android:animateLayoutChanges="true">
+<RelativeLayout android:id="@+id/color_picker_main_layout"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:background="@color/black"
+                tools:context=".colorpicker.ColorPickerActivity">
 
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/iv_photo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="@dimen/rgb_panel_padding"
-        app:layout_constraintLeft_toLeftOf="@+id/color_picker_main_layout"
-        app:layout_constraintTop_toTopOf="@+id/color_picker_main_layout"
-        app:layout_constraintRight_toRightOf="@+id/color_picker_main_layout"
-        app:layout_constraintBottom_toBottomOf="@+id/color_picker_main_layout"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/rgb_panel_padding"/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

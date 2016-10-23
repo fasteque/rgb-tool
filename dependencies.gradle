@@ -6,13 +6,12 @@ allprojects {
 
 ext {
     // Android
-    androidBuildToolsVersion = "24.0.2"
+    androidBuildToolsVersion = "24.0.3"
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 24
     androidCompileSdkVersion = 24
 
     androidSupportLibraryVersion = '24.2.1'
-    constraintLayoutVersion = '1.0.0-alpha1'
     rxAndroidVersion = '1.2.1'
     butterKnifeVersion = '8.4.0'
     picassoVersion = '2.5.2'
@@ -20,13 +19,12 @@ ext {
     eventBusVersion = '3.0.0'
     timberVersion = '4.3.0'
     jUnitVersion = '4.12'
-    mockitoVersion = '2.1.0-RC.1'
+    mockitoVersion = '2.2.6'
     espressoCoreVersion = '2.2.2'
     testRunnerVersion = '0.5'
 
     appDependencies = [
             appCompat:              "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
-            constraintLayout:       "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
             design:                 "com.android.support:design:${androidSupportLibraryVersion}",
             recyclerView:           "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
             cardView:               "com.android.support:cardview-v7:${androidSupportLibraryVersion}",
