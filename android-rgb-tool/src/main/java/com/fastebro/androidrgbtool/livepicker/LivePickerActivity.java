@@ -10,23 +10,39 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.CameraUtils;
+import com.fastebro.androidrgbtool.widgets.CircleView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class LivePickerActivity extends AppCompatActivity implements LivePickerTextureView.OnColorPointedListener,
 		View.OnClickListener {
 	private static final String TAG = LivePickerActivity.class.getName();
 
+	@BindView(R.id.live_picker_preview_container)
+	FrameLayout livePreviewContainer;
+	@BindView(R.id.live_picker_pointer_stroke)
+	View pointerRing;
+    @BindView(R.id.live_picker_btn_back)
+    ImageButton btnBack;
+    @BindView(R.id.live_picker_last_color)
+    CircleView lastColor;
+    @BindView(R.id.live_picker_btn_save_color)
+    ImageButton btnSaveColor;
+    @BindView(R.id.live_picker_btn_flash)
+    ImageButton btnFlashToggle;
+
 	private Camera camera;
 	private CameraAsyncTask cameraAsyncTask;
-	private FrameLayout livePreviewContainer;
+
 	private LivePickerTextureView livePickerTextureView;
 	private boolean isPortrait;
 	private int pointedColor;
-	private View pointerRing;
 
 	private boolean isFlashOn;
 
@@ -45,12 +61,16 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_live_picker);
 
-		initViews();
+		ButterKnife.bind(this);
+
+        initViews();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+        isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
 		cameraAsyncTask = new CameraAsyncTask();
 		cameraAsyncTask.execute();
@@ -68,12 +88,19 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 		releaseCamera();
 	}
 
-	private void initViews() {
-		// TODO: use ButterKnife
-		isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-		livePreviewContainer = (FrameLayout) findViewById(R.id.live_picker_preview_container);
-		pointerRing = findViewById(R.id.live_picker_pointer_stroke);
-	}
+    private void initViews() {
+        btnBack.setOnClickListener(view -> {
+            // TODO
+        });
+
+        btnSaveColor.setOnClickListener(view -> {
+            // TODO
+        });
+
+        btnFlashToggle.setOnClickListener(view -> {
+            // TODO
+        });
+    }
 
 	private void releaseCameraPreview() {
 		if (livePickerTextureView != null) {
@@ -181,7 +208,6 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 			camera.setParameters(parameters);
 			camera.startPreview();
 			isFlashOn = !isFlashOn;
-			invalidateOptionsMenu();
 		}
 	}
 }

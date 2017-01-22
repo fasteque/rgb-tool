@@ -10,6 +10,7 @@
     <color name="green">#4CAF50</color>
     <color name="blue">#2196F3</color>
     <color name="gray">#b3b3b3</color>
+    <color name="black_translucent">#22000000</color>
 
     <!-- Material Theme colors -->
     <color name="primary">#141115</color>

@@ -27,6 +27,24 @@
 
     </FrameLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageButton
+            android:id="@+id/live_picker_btn_back"
+            android:layout_width="@dimen/live_picker_button_size"
+            android:layout_height="@dimen/live_picker_button_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_forward_white"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,23 +52,36 @@
         android:layout_alignParentBottom="true"
         android:minHeight="?attr/actionBarSize">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            />
+        <com.fastebro.androidrgbtool.widgets.CircleView
+            android:id="@+id/live_picker_last_color"
+            android:layout_width="@dimen/live_picker_button_size"
+            android:layout_height="@dimen/live_picker_button_size"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/live_picker_btn_save_color"
+            android:layout_width="@dimen/live_picker_button_size"
+            android:layout_height="@dimen/live_picker_button_size"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add_white"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            />
+            android:id="@+id/live_picker_btn_flash"
+            android:layout_width="@dimen/live_picker_button_size"
+            android:layout_height="@dimen/live_picker_button_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_flash_on_white"/>
     </RelativeLayout>
 
 </RelativeLayout>

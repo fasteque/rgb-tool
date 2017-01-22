@@ -32,6 +32,7 @@
     <dimen name="live_picker_pointer_size">4dp</dimen>
     <dimen name="live_picker_pointer_stroke_size">56dp</dimen>
     <dimen name="live_picker_pointer_stroke_thickness">6dp</dimen>
+    <dimen name="live_picker_button_size">28dp</dimen>
 
     <!-- Manual picker -->
     <dimen name="manual_picker_bottom_sheet_peek_height">64dp</dimen>
