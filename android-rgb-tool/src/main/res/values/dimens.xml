@@ -29,9 +29,9 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <!-- Live picker -->
-    <dimen name="live_picker_pointer_size">8dp</dimen>
-    <dimen name="live_picker_pointer_stroke_size">48dp</dimen>
-    <dimen name="live_picker_pointer_stroke_thickness">8dp</dimen>
+    <dimen name="live_picker_pointer_size">4dp</dimen>
+    <dimen name="live_picker_pointer_stroke_size">56dp</dimen>
+    <dimen name="live_picker_pointer_stroke_thickness">6dp</dimen>
 
     <!-- Manual picker -->
     <dimen name="manual_picker_bottom_sheet_peek_height">64dp</dimen>
