@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.fastebro.androidrgbtool.livepicker.LivePickerActivity">
 
-    <com.fastebro.androidrgbtool.livepicker.LivePickerTextureView
-        android:id="@+id/live_picker_texture"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
-
     <FrameLayout
         android:id="@+id/live_picker_preview_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:background="#808080">
 
         <View
             android:id="@+id/live_picker_pointer_stroke"
@@ -37,87 +30,29 @@
 
 
     <RelativeLayout
-        android:id="@+id/live_picker_bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:minHeight="?attr/actionBarSize"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin">
+        android:background="@color/primary"
+        android:minHeight="?attr/actionBarSize">
 
-        <com.fastebro.androidrgbtool.widgets.CircleView
-            android:id="@+id/live_picker_picked_color"
-            android:layout_width="@dimen/rgb_tool_generic_icon_size"
-            android:layout_height="@dimen/rgb_tool_generic_icon_size"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
-            app:circleGap="0dp"
-            app:circleRadius="24dp"
-            app:strokeWidth="0dp"/>
-
-        <TextView
-            android:id="@+id/live_picker_picked_color_hex"
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/live_picker_picked_color"
-            android:textSize="@dimen/rgb_text_size_small"/>
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            />
 
         <ImageButton
-            android:id="@+id/live_picker_pick_color"
-            android:layout_width="@dimen/rgb_tool_generic_icon_size"
-            android:layout_height="@dimen/rgb_tool_generic_icon_size"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_camera_black"/>
+            />
 
         <ImageButton
-            android:id="@+id/live_picker_manual_picker"
-            android:layout_width="@dimen/rgb_tool_generic_icon_size"
-            android:layout_height="@dimen/rgb_tool_generic_icon_size"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_palette_black"/>
-
-        <ImageButton
-            android:id="@+id/live_picker_save_color"
-            android:layout_width="@dimen/rgb_tool_generic_icon_size"
-            android:layout_height="@dimen/rgb_tool_generic_icon_size"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/live_picker_manual_picker"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_add_black"/>
-
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            />
     </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/live_picker_flip_camera"
-        android:layout_width="@dimen/rgb_tool_generic_icon_size"
-        android:layout_height="@dimen/rgb_tool_generic_icon_size"
-        android:layout_above="@+id/live_picker_bottom_toolbar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_flip_white"/>
-
-    <ImageButton
-        android:id="@+id/live_picker_camera_flash"
-        android:layout_width="@dimen/rgb_tool_generic_icon_size"
-        android:layout_height="@dimen/rgb_tool_generic_icon_size"
-        android:layout_above="@+id/live_picker_flip_camera"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_flash_on_white"/>
 
 </RelativeLayout>
