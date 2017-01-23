@@ -1,5 +1,6 @@
 package com.fastebro.androidrgbtool.livepicker;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
@@ -13,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.rgb.MainActivity;
 import com.fastebro.androidrgbtool.utils.CameraUtils;
 import com.fastebro.androidrgbtool.widgets.CircleView;
 
@@ -88,18 +90,30 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 		releaseCamera();
 	}
 
-    private void initViews() {
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		toggleFlash();
+	}
+
+	private void initViews() {
         btnBack.setOnClickListener(view -> {
-            // TODO
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+            finish();
         });
 
         btnSaveColor.setOnClickListener(view -> {
             // TODO
         });
 
-        btnFlashToggle.setOnClickListener(view -> {
-            // TODO
-        });
+        if (isFlashSupported()) {
+            btnFlashToggle.setVisibility(View.VISIBLE);
+            btnFlashToggle.setOnClickListener(view -> {
+				toggleFlash();
+            });
+        }
     }
 
 	private void releaseCameraPreview() {
@@ -208,6 +222,14 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 			camera.setParameters(parameters);
 			camera.startPreview();
 			isFlashOn = !isFlashOn;
+
+			if (btnFlashToggle != null) {
+				if (isFlashOn) {
+					btnFlashToggle.setImageDrawable(getDrawable(R.drawable.ic_flash_off_white));
+				} else {
+					btnFlashToggle.setImageDrawable(getDrawable(R.drawable.ic_flash_on_white));
+				}
+			}
 		}
 	}
 }

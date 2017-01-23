@@ -81,7 +81,8 @@
             android:adjustViewBounds="true"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_flash_on_white"/>
+            android:src="@drawable/ic_flash_on_white"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </RelativeLayout>
