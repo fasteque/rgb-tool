@@ -6,10 +6,10 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-24.0.3
+    - build-tools-25.0.2
     - extra-android-support
     - extra-android-m2repository
-    - android-24
+    - android-25
 
 script:
   - ./gradlew clean testDebugUnitTest
