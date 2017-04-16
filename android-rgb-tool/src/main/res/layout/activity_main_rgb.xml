@@ -1,131 +1,20 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:background="@color/light_silver">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/light_silver">
 
-    <RelativeLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/activity_main_sliding_tabs"
+        style="@style/RGBTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/manual_picker_bottom_sheet_peek_height">
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"/>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/slider_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:background="@color/white">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activity_main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp">
-
-                <TextView
-                    android:id="@+id/red_tool_tip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textColor="@color/red"
-                    android:textSize="18sp"/>
-
-                <SeekBar
-                    android:id="@+id/red_seek_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="255"
-                    android:maxHeight="3dp"
-                    android:minHeight="3dp"
-                    android:progressDrawable="@drawable/red_progress"
-                    android:thumbTint="@color/red"/>
-
-                <TextView
-                    android:id="@+id/green_tool_tip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textColor="@color/green"
-                    android:textSize="18sp"/>
-
-                <SeekBar
-                    android:id="@+id/green_seek_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="255"
-                    android:maxHeight="3dp"
-                    android:minHeight="3dp"
-                    android:progressDrawable="@drawable/green_progress"
-                    android:thumbTint="@color/green"/>
-
-                <TextView
-                    android:id="@+id/blue_tool_tip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textColor="@color/blue"
-                    android:textSize="18sp"/>
-
-                <SeekBar
-                    android:id="@+id/blue_seek_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="255"
-                    android:maxHeight="3dp"
-                    android:minHeight="3dp"
-                    android:progressDrawable="@drawable/blue_progress"
-                    android:thumbTint="@color/blue"/>
-
-                <TextView
-                    android:id="@+id/opacity_tool_tip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:textColor="@color/gray"
-                    android:textSize="18sp"/>
-
-                <SeekBar
-                    android:id="@+id/opacity_seek_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="255"
-                    android:maxHeight="3dp"
-                    android:minHeight="3dp"
-                    android:progressDrawable="@drawable/gray_progress"
-                    android:thumbTint="@color/gray"/>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/slider_container"
-            android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/activity_horizontal_margin">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:src="@drawable/robot"/>
-
-            <View
-                android:id="@+id/color_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </android.support.v7.widget.CardView>
-
-    </RelativeLayout>
-
-    <include layout="@layout/activity_main_rgb_sheet"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
