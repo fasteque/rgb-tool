@@ -187,7 +187,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
         ButterKnife.bind(this);
 
-        viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);
 
 //        colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
