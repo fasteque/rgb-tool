@@ -10,6 +10,10 @@
     <string name="color_list_empty">Aucune couleur</string>
     <string name="action_not_supported_error">Aucune application disponible pour l\'action requise</string>
 
+    <!-- Main tabs -->
+    <string name="main_tab_color">Couleur</string>
+    <string name="main_tab_details">Détails</string>
+
     <!-- Common actions -->
     <string name="action_common_set">Définir</string>
     <string name="action_common_cancel">Annuler</string>

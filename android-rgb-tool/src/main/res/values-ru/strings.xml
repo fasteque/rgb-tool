@@ -10,6 +10,10 @@
     <string name="color_list_empty">Нет цветов</string>
     <string name="action_not_supported_error">Нет доступных приложений для требуемого действия</string>
 
+    <!-- Main tabs -->
+    <string name="main_tab_color">цвет</string>
+    <string name="main_tab_details">Детали</string>
+
     <!-- Common actions -->
     <string name="action_common_set">OK</string>
     <string name="action_common_cancel">Отмена</string>
