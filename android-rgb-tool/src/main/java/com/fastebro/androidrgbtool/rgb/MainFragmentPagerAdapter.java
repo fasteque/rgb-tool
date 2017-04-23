@@ -32,7 +32,7 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new MainColorFragment();
         } else if (position == 1) {
-            return new MainColorFragment();
+            return new ColorDetailsFragment();
         }
 
         // It should never happen.
