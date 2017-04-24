@@ -1,9 +1,5 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:background="@color/light_silver">
-
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/manual_picker_bottom_sheet_peek_height">
@@ -125,5 +121,3 @@
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>
-
-</android.support.design.widget.CoordinatorLayout>

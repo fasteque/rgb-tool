@@ -128,34 +128,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     FloatingActionButton btn_SaveColor;
     @BindView(R.id.color_view)
     View colorView;
-
-    // Color details.
-    @BindView(R.id.complementaryColorBackground)
-    CardView complementaryColorBackground;
-    @BindView(R.id.complementaryColorText)
-    TextView complementaryColorText;
-    @BindView(R.id.contrastColorBackground)
-    CardView contrastColorBackground;
-    @BindView(R.id.contrastColorText)
-    TextView contrastColorText;
-
-    // Color samples.
-    @BindView(R.id.firstColorSampleBackground)
-    CardView firstColorSampleBackground;
-    @BindView(R.id.firstColorSampleTextNormal)
-    TextView firstColorSampleTextNormal;
-    @BindView(R.id.secondColorSampleBackground)
-    CardView secondColorSampleBackground;
-    @BindView(R.id.secondColorSampleTextNormal)
-    TextView secondColorSampleTextNormal;
-    @BindView(R.id.firstColorSampleBackgroundBg)
-    CardView firstColorSampleBackgroundBg;
-    @BindView(R.id.firstColorSampleTextNormalBg)
-    TextView firstColorSampleTextNormalBg;
-    @BindView(R.id.secondColorSampleBackgroundBg)
-    CardView secondColorSampleBackgroundBg;
-    @BindView(R.id.secondColorSampleTextNormalBg)
-    TextView secondColorSampleTextNormalBg;
     */
 
     private String currentPhotoPath;
@@ -519,8 +491,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         updateHexadecimalField();
         updateSharedColor();
         updateSaveColorButton();
-        updateColorDetails();
-        updateColorSample();
+//        updateColorDetails();
+//        updateColorSample();
 //        colorView.setBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
     }
 
@@ -547,44 +519,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
                 ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
 
 //        tvHexadecimal.setText(hexValue);
-    }
-
-    private void updateColorDetails() {
-//        int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
-//        complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
-//                (complementaryColor)));
-//        complementaryColorBackground.setCardBackgroundColor(complementaryColor);
-//
-//        int contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
-//        contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
-//                (contrastColor)));
-//        contrastColorBackground.setCardBackgroundColor(contrastColor);
-    }
-
-    private void updateColorSample() {
-        // Text.
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white, getTheme()));
-//            secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black, getTheme()));
-//        } else {
-//            firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white));
-//            secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black));
-//        }
-//
-//        firstColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
-//        secondColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
-//
-//        // Background.
-//        firstColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
-//        secondColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white, getTheme()));
-//            secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black, getTheme()));
-//        } else {
-//            firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white));
-//            secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black));
-//        }
     }
 
     public void dispatchTakePictureIntent() {

@@ -1,6 +1,7 @@
 package com.fastebro.androidrgbtool.rgb;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,14 @@ public class MainColorFragment extends Fragment {
     public MainColorFragment() { }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_rgb_tab_picker, container);
+        View view = inflater.inflate(R.layout.fragment_main_rgb_tab_picker, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         return view;

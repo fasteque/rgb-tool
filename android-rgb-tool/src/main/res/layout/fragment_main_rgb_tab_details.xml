@@ -1,334 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    android:id="@+id/bottom_sheet_container"
+<LinearLayout
+    android:id="@+id/rgb_top_panel"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:clipToPadding="true"
-    app:behavior_peekHeight="@dimen/manual_picker_bottom_sheet_peek_height"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/rgb_top_panel"
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:stretchColumns="0,1,2,3,4">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/manual_picker_bottom_sheet_peek_height"
-            android:background="@color/primary">
+        <TableRow
+            android:gravity="center_vertical"
+            android:minHeight="36dp">
 
             <TextView
-                android:id="@+id/tv_hexadecimal"
-                style="@style/RGBPanelComponent"
-                android:layout_width="wrap_content"
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:textColor="@color/white"
+                android:layout_weight="10"
+                android:text="@string/color_red"/>
+
+            <TextView
+                android:id="@+id/textView_RGB_R"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
                 android:textIsSelectable="true"/>
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_save_color"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@android:drawable/ic_input_add"
-                android:tint="@color/white"/>
-
-        </RelativeLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:stretchColumns="0,1,2,3,4">
-
-            <TableRow
-                android:gravity="center_vertical"
-                android:minHeight="36dp">
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_red"/>
-
-                <TextView
-                    android:id="@+id/textView_RGB_R"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:textIsSelectable="true"/>
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_green"/>
-
-                <TextView
-                    android:id="@+id/textView_RGB_G"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:textIsSelectable="true"/>
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_blue"/>
-
-                <TextView
-                    android:id="@+id/textView_RGB_B"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:textIsSelectable="true"/>
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_opacity"/>
-
-                <TextView
-                    android:id="@+id/textView_RGB_O"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:textIsSelectable="true"/>
-
-            </TableRow>
-
-            <TableRow
-                android:gravity="center_vertical"
-                android:minHeight="36dp">
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_hue"/>
-
-                <TextView
-                    android:id="@+id/textView_HSB_H"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:textIsSelectable="true"/>
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_saturation"/>
-
-                <TextView
-                    android:id="@+id/textView_HSB_S"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="40"
-                    android:textIsSelectable="true"/>
-
-                <TextView
-                    style="@style/RGBPanelComponentLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:text="@string/color_brightness"/>
-
-                <TextView
-                    android:id="@+id/textView_HSB_B"
-                    style="@style/RGBPanelComponent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="90"
-                    android:textIsSelectable="true"/>
-
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:id="@+id/complementaryColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+            <TextView
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/color_green"/>
 
             <TextView
-                android:id="@+id/complementaryColorText"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView_RGB_G"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/rgb_text_size_medium"/>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/complementaryColorBackground"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
-
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/contrastColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+                android:layout_weight="40"
+                android:textIsSelectable="true"/>
 
             <TextView
-                android:id="@+id/contrastColorText"
-                android:layout_width="wrap_content"
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/rgb_text_size_medium"/>
+                android:layout_weight="10"
+                android:text="@string/color_blue"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/contrastColorBackground"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+            <TextView
+                android:id="@+id/textView_RGB_B"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:textIsSelectable="true"/>
 
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+            <TextView
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/color_opacity"/>
 
-        <LinearLayout
-            android:id="@+id/firstColorSample"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView_RGB_O"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:textIsSelectable="true"/>
+
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_vertical"
+            android:minHeight="36dp">
+
+            <TextView
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/color_hue"/>
+
+            <TextView
+                android:id="@+id/textView_HSB_H"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:textIsSelectable="true"/>
+
+            <TextView
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/color_saturation"/>
+
+            <TextView
+                android:id="@+id/textView_HSB_S"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:textIsSelectable="true"/>
+
+            <TextView
+                style="@style/RGBPanelComponentLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="@string/color_brightness"/>
+
+            <TextView
+                android:id="@+id/textView_HSB_B"
+                style="@style/RGBPanelComponent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:textIsSelectable="true"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/complementaryColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/complementaryColorText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin">
+            android:textSize="@dimen/rgb_text_size_medium"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/firstColorSampleBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
-
-                <TextView
-                    android:id="@+id/firstColorSampleTextNormal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/secondColorSample"
+        <android.support.v7.widget.CardView
+            android:id="@+id/complementaryColorBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin">
+            android:layout_height="48dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/secondColorSampleBackground"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
-
-                <TextView
-                    android:id="@+id/secondColorSampleTextNormal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/firstColorSampleBg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/firstColorSampleBackgroundBg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
-
-                <TextView
-                    android:id="@+id/firstColorSampleTextNormalBg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/secondColorSampleBg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/secondColorSampleBackgroundBg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
-
-                <TextView
-                    android:id="@+id/secondColorSampleTextNormalBg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/contrastColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/contrastColorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/rgb_text_size_medium"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/contrastColorBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/firstColorSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/firstColorSampleBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/firstColorSampleTextNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondColorSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/secondColorSampleBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/secondColorSampleTextNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/firstColorSampleBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/firstColorSampleBackgroundBg"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/firstColorSampleTextNormalBg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondColorSampleBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/secondColorSampleBackgroundBg"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/secondColorSampleTextNormalBg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>
