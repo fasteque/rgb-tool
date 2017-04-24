@@ -24,6 +24,24 @@ import butterknife.Unbinder;
 
 public class ColorDetailsFragment extends Fragment {
 
+    // RGB channel: R,G,B.
+    @BindView(R.id.textView_RGB_R)
+    TextView tvRGB_R;
+    @BindView(R.id.textView_RGB_G)
+    TextView tvRGB_G;
+    @BindView(R.id.textView_RGB_B)
+    TextView tvRGB_B;
+    @BindView(R.id.textView_RGB_O)
+    TextView tvRGB_O;
+
+    // HSB: Hue, Saturation, Brightness.
+    @BindView(R.id.textView_HSB_H)
+    TextView tvHSB_H;
+    @BindView(R.id.textView_HSB_S)
+    TextView tvHSB_S;
+    @BindView(R.id.textView_HSB_B)
+    TextView tvHSB_B;
+
     // Color details.
     @BindView(R.id.complementaryColorBackground)
     CardView complementaryColorBackground;

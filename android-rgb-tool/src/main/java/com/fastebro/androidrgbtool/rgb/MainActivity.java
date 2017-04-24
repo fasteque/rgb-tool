@@ -9,11 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.print.PrintManager;
@@ -25,14 +22,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
@@ -55,7 +49,6 @@ import com.fastebro.androidrgbtool.settings.AboutActivity;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.CommonUtils;
-import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -80,55 +73,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     TabLayout tabLayout;
     @BindView(R.id.activity_main_viewpager)
     ViewPager viewPager;
-
-    /*
-    @BindView(R.id.red_seek_bar)
-    SeekBar seekBarRed;
-    @BindView(R.id.green_seek_bar)
-    SeekBar seekBarGreen;
-    @BindView(R.id.blue_seek_bar)
-    SeekBar seekBarBlue;
-    @BindView(R.id.opacity_seek_bar)
-    SeekBar seekBarOpacity;
-    @BindView(R.id.red_tool_tip)
-    TextView redToolTip;
-    @BindView(R.id.green_tool_tip)
-    TextView greenToolTip;
-    @BindView(R.id.blue_tool_tip)
-    TextView blueToolTip;
-    @BindView(R.id.opacity_tool_tip)
-    TextView opacityToolTip;
-    private Rect thumbRect;
-    private int seekBarLeft;
-
-    // RGB channel: R,G,B.
-    @BindView(R.id.textView_RGB_R)
-    TextView tvRGB_R;
-    @BindView(R.id.textView_RGB_G)
-    TextView tvRGB_G;
-    @BindView(R.id.textView_RGB_B)
-    TextView tvRGB_B;
-    @BindView(R.id.textView_RGB_O)
-    TextView tvRGB_O;
-
-    // HSB: Hue, Saturation, Brightness.
-    @BindView(R.id.textView_HSB_H)
-    TextView tvHSB_H;
-    @BindView(R.id.textView_HSB_S)
-    TextView tvHSB_S;
-    @BindView(R.id.textView_HSB_B)
-    TextView tvHSB_B;
-
-    // Hexadecimal color value.
-    @BindView(R.id.tv_hexadecimal)
-    TextView tvHexadecimal;
-
-    // Save color button.
-    @BindView(R.id.fab_save_color)
-    FloatingActionButton btn_SaveColor;
-    @BindView(R.id.color_view)
-    View colorView;
-    */
 
     private String currentPhotoPath;
     private BaseAlbumDirFactory albumStorageDirFactory = null;
