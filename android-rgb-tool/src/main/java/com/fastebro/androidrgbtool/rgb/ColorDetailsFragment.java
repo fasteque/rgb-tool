@@ -1,6 +1,6 @@
 package com.fastebro.androidrgbtool.rgb;
 
-import android.graphics.Color;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

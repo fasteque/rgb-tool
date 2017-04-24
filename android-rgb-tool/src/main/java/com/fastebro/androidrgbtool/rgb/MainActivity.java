@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.print.PrintManager;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;

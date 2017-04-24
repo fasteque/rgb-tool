@@ -36,11 +36,11 @@
 
     <style name="RGBTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/accent</item>
-        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorHeight">4dp</item>
         <item name="tabPaddingStart">12dp</item>
         <item name="tabPaddingEnd">12dp</item>
         <item name="tabBackground">@color/primary</item>
-        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+        <item name="tabSelectedTextColor">@color/accent</item>
     </style>
 
 </resources>
