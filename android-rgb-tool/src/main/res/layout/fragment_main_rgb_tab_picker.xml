@@ -1,15 +1,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/manual_picker_bottom_sheet_peek_height">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:id="@+id/slider_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/default_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:background="@color/white">
@@ -18,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp">
+            android:paddingBottom="@dimen/default_margin"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp">
 
             <TextView
                 android:id="@+id/red_tool_tip"
@@ -103,15 +102,18 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/slider_container"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/activity_horizontal_margin">
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/default_margin">
 
         <ImageView
+            android:id="@+id/main_picker_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/robot"/>
+            android:scaleType="centerInside"/>
 
         <View
             android:id="@+id/color_view"

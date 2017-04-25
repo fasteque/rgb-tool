@@ -1,7 +1,7 @@
 <resources>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">8dp</dimen>
     <dimen name="activity_vertical_margin">8dp</dimen>
-    <dimen name="fab_default_margin">16dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
 
     <!-- Common resources -->
     <dimen name="rgb_tool_generic_icon_size">36dp</dimen>

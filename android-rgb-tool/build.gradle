@@ -78,6 +78,8 @@ dependencies {
     compile appDependencies.eventBus
     compile appDependencies.rxAndroid
     compile appDependencies.timber
+    compile appDependencies.glide
+
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     compile project(':model')
 

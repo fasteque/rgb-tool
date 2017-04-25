@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fastebro.androidrgbtool.R;
 
 import butterknife.BindView;
@@ -29,6 +31,8 @@ public class MainColorFragment extends Fragment {
 //    FloatingActionButton btn_SaveColor;
     @BindView(R.id.color_view)
     View colorView;
+    @BindView(R.id.main_picker_image)
+    ImageView pickerImage;
 
     // Hexadecimal color value.
 //    @BindView(R.id.tv_hexadecimal)
@@ -69,6 +73,16 @@ public class MainColorFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (isAdded()) {
+            // FIXME: restore last shown picture.
+            Glide.with(this).load(R.drawable.robot).into(pickerImage);
+        }
     }
 
     @Override
