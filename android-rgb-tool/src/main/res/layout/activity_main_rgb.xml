@@ -10,6 +10,7 @@
         style="@style/RGBTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabTextColor="@color/white"
         app:tabMode="fixed"/>
 
     <android.support.v4.view.ViewPager
