@@ -57,6 +57,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -88,7 +89,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     private ShareActionProvider shareActionProvider;
     private Subscription scalePictureSubscription;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_Rgbtool);
@@ -105,26 +105,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);
 
-//        colorView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-//
-//        restorePreferences();
-//        seekBarRed.setProgress(redColor);
-//        seekBarGreen.setProgress(greenColor);
-//        seekBarBlue.setProgress(blueColor);
-//        seekBarOpacity.setProgress(opacity);
-//        seekBarLeft = seekBarRed.getPaddingLeft();
-//
-//        // Setting-up SeekBars listeners.
-//        seekBarRed.setOnSeekBarChangeListener(getRGB());
-//        seekBarGreen.setOnSeekBarChangeListener(getRGB());
-//        seekBarBlue.setOnSeekBarChangeListener(getRGB());
-//        seekBarOpacity.setOnSeekBarChangeListener(getRGB());
-//
-//        // Save color currently displayed.
-//        btn_SaveColor.setOnClickListener(v -> saveColor(redColor, greenColor, blueColor, opacity, ""));
-//
-//        setColorValuesClickListener();
-//        refreshUI();
+        restorePreferences();
     }
 
 
@@ -221,30 +202,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         }
     }
 
-    private void setColorValuesClickListener() {
-//        tvRGB_R.setOnClickListener(RGBAClickListener);
-//        tvRGB_G.setOnClickListener(RGBAClickListener);
-//        tvRGB_B.setOnClickListener(RGBAClickListener);
-//        tvRGB_O.setOnClickListener(RGBAClickListener);
-//        tvHexadecimal.setOnClickListener(v -> {
-//            HexInsertionFragment fragment =
-//                    HexInsertionFragment.newInstance(tvHexadecimal.getText().toString().substring(3));
-//            fragment.show(getSupportFragmentManager(), null);
-//        });
-    }
-
-//    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            short[] rgbaValues = new short[]{(short) redColor, (short) greenColor, (short) blueColor, (short)
-//                    opacity
-//            };
-//
-//            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
-//            fragment.show(getSupportFragmentManager(), null);
-//        }
-//    };
-
     private void showColorList() {
         startActivity(new Intent(this, ColorListActivity.class), ActivityOptions
                 .makeSceneTransitionAnimation(this).toBundle());
@@ -255,34 +212,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
                 .makeSceneTransitionAnimation(this).toBundle());
     }
 
-    private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
-            colorName) {
-        AsyncQueryHandler handler = new AsyncQueryHandler(getContentResolver()) {
-        };
-
-        float[] hsb = ColorUtils.RGBToHSB(RGBRComponent, RGBGComponent, RGBBComponent);
-
-        ContentValues values = new ContentValues();
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_NAME, colorName);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HEX, String.format("#%s%s%s%s",
-                ColorUtils.RGBToHex(opacity),
-                ColorUtils.RGBToHex(redColor),
-                ColorUtils.RGBToHex(greenColor),
-                ColorUtils.RGBToHex(blueColor)));
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R, RGBRComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G, RGBGComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B, RGBBComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A, RGBOComponent);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_H, (int) hsb[0]);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_S, (int) hsb[1] * 100);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_HSB_B, (int) hsb[2] * 100);
-        values.put(ColorDataContract.ColorEntry.COLUMN_COLOR_FAVORITE, 1);
-
-        handler.startInsert(-1, null, RGBToolContentProvider.CONTENT_URI, values);
-
-//        btn_SaveColor.setVisibility(View.INVISIBLE);
-    }
-
     private void printColor(String message) {
         // Get a PrintManager instance
         PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
@@ -291,8 +220,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         String jobName = getString(R.string.app_name) + "_Color";
 
         // Start a print job, passing in a PrintDocumentAdapter implementation
-        printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, redColor, greenColor,
-                blueColor, opacity), null);
+        printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, redColor, greenColor, blueColor,
+                opacity), null);
     }
 
     private void updateSharedColor() {
@@ -340,130 +269,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
         }
     }
 
-    private OnSeekBarChangeListener getRGB() {
-        return new OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                /*
-                if (seekBar.equals(seekBarRed)) {
-                    redColor = progress;
-
-                    thumbRect = seekBar.getThumb().getBounds();
-
-                    redToolTip.setX((seekBarLeft / 2) + thumbRect.left);
-
-                    if (progress < 10) {
-                        redToolTip.setText("  " + redColor);
-                    } else if (progress < 100) {
-                        redToolTip.setText(" " + redColor);
-                    } else {
-                        redToolTip.setText(redColor + "");
-                    }
-                }
-
-                if (seekBar.equals(seekBarGreen)) {
-                    greenColor = progress;
-
-                    thumbRect = seekBar.getThumb().getBounds();
-
-                    greenToolTip.setX((seekBarLeft / 2) + thumbRect.left);
-                    if (progress < 10) {
-                        greenToolTip.setText("  " + greenColor);
-                    } else if (progress < 100) {
-                        greenToolTip.setText(" " + greenColor);
-                    } else {
-                        greenToolTip.setText(greenColor + "");
-                    }
-                }
-
-                if (seekBar.equals(seekBarBlue)) {
-                    blueColor = progress;
-
-                    thumbRect = seekBar.getThumb().getBounds();
-
-                    blueToolTip.setX((seekBarLeft / 2) + thumbRect.left);
-                    if (progress < 10) {
-                        blueToolTip.setText("  " + blueColor);
-                    } else if (progress < 100) {
-                        blueToolTip.setText(" " + blueColor);
-                    } else {
-                        blueToolTip.setText(blueColor + "");
-                    }
-                }
-
-                if (seekBar.equals(seekBarOpacity)) {
-                    opacity = progress;
-
-                    thumbRect = seekBar.getThumb().getBounds();
-
-                    opacityToolTip.setX((seekBarLeft / 2) + thumbRect.left);
-                    if (progress < 10) {
-                        opacityToolTip.setText("  " + opacity);
-                    } else if (progress < 100) {
-                        opacityToolTip.setText(" " + opacity);
-                    } else {
-                        opacityToolTip.setText(opacity + "");
-                    }
-                }
-
-                refreshUI();
-                */
-            }
-        };
-    }
-
-    private void updateSaveColorButton() {
-//        if (DatabaseUtils.findColor(MainActivity.this, redColor, greenColor, blueColor, opacity)) {
-//            btn_SaveColor.setVisibility(View.INVISIBLE);
-//        } else {
-//            btn_SaveColor.setVisibility(View.VISIBLE);
-//        }
-    }
-
-    private void refreshUI() {
-        updateRGBField();
-        updateHSBField();
-        updateHexadecimalField();
-        updateSharedColor();
-        updateSaveColorButton();
-//        updateColorDetails();
-//        updateColorSample();
-//        colorView.setBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
-    }
-
-    private void updateRGBField() {
-        // RGB channel: R, G, B, OPACITY.
-//        tvRGB_R.setText(ColorUtils.getRGB(redColor));
-//        tvRGB_G.setText(ColorUtils.getRGB(greenColor));
-//        tvRGB_B.setText(ColorUtils.getRGB(blueColor));
-//        tvRGB_O.setText(ColorUtils.getRGB(opacity));
-    }
-
-    private void updateHSBField() {
-        // Get float array with 3 values for HSB-HSV.
-        float[] hsb = ColorUtils.RGBToHSB(redColor, greenColor, blueColor);
-
-        // Set HSB-HSV single channel value.
-//        tvHSB_H.setText(String.format("%.0f", hsb[0]));
-//        tvHSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
-//        tvHSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
-    }
-
-    private void updateHexadecimalField() {
-        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(opacity), ColorUtils.RGBToHex(redColor),
-                ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
-
-//        tvHexadecimal.setText(hexValue);
-    }
-
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File f;
@@ -491,7 +296,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
 
         String imageFileName = ImageUtils.JPEG_FILE_PREFIX + timeStamp + "_";
 
@@ -618,7 +423,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
                 event.RGBBComponent,
                 event.RGBOComponent);
 
-        refreshUI();
+//        refreshUI();
 
 //        seekBarRed.setProgress(event.RGBRComponent);
 //        seekBarGreen.setProgress(event.RGBGComponent);
@@ -653,7 +458,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     @SuppressWarnings("UnusedParameters")
     @Subscribe
     public void onUpdateSaveColorUIEvent(UpdateSaveColorUIEvent event) {
-        updateSaveColorButton();
+//        updateSaveColorButton();
     }
 
     @Subscribe
@@ -666,7 +471,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 //        seekBarGreen.setProgress(event.rgbaValues[1]);
 //        seekBarBlue.setProgress(event.rgbaValues[2]);
 //        seekBarOpacity.setProgress(event.rgbaValues[3]);
-        refreshUI();
+//        refreshUI();
         savePreferences();
     }
 
@@ -679,12 +484,44 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 //        seekBarRed.setProgress(rgb[0]);
 //        seekBarGreen.setProgress(rgb[1]);
 //        seekBarBlue.setProgress(rgb[2]);
-        refreshUI();
+//        refreshUI();
         savePreferences();
     }
 
     @Subscribe
     public void onErrorMessageEvent(ErrorMessageEvent event) {
         Snackbar.make(findViewById(android.R.id.content), event.message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public int getRedColor() {
+        return redColor;
+    }
+
+    public void setRedColor(int redColor) {
+        this.redColor = redColor;
+    }
+
+    public int getGreenColor() {
+        return greenColor;
+    }
+
+    public void setGreenColor(int greenColor) {
+        this.greenColor = greenColor;
+    }
+
+    public int getBlueColor() {
+        return blueColor;
+    }
+
+    public void setBlueColor(int blueColor) {
+        this.blueColor = blueColor;
+    }
+
+    public int getOpacity() {
+        return opacity;
+    }
+
+    public void setOpacity(int opacity) {
+        this.opacity = opacity;
     }
 }
