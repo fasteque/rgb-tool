@@ -2,8 +2,6 @@ package com.fastebro.androidrgbtool.rgb;
 
 import android.Manifest;
 import android.app.ActivityOptions;
-import android.content.AsyncQueryHandler;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,14 +22,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
-import com.fastebro.androidrgbtool.colors.ColorDataContract;
 import com.fastebro.androidrgbtool.colors.ColorListActivity;
-import com.fastebro.androidrgbtool.colors.RGBToolContentProvider;
 import com.fastebro.androidrgbtool.commons.EventBaseActivity;
 import com.fastebro.androidrgbtool.gallery.RGBToolGalleryActivity;
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
@@ -44,6 +38,7 @@ import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.print.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
+import com.fastebro.androidrgbtool.rgb.widget.CustomSwipeViewPager;
 import com.fastebro.androidrgbtool.settings.AboutActivity;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
@@ -72,7 +67,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     @BindView(R.id.activity_main_sliding_tabs)
     TabLayout tabLayout;
     @BindView(R.id.activity_main_viewpager)
-    ViewPager viewPager;
+    CustomSwipeViewPager viewPager;
 
     private String currentPhotoPath;
     private BaseAlbumDirFactory albumStorageDirFactory = null;
