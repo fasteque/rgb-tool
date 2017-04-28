@@ -108,6 +108,15 @@ public class ColorDetailsFragment extends Fragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && isResumed()) {
+            refreshUI();
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (unbinder != null) {
