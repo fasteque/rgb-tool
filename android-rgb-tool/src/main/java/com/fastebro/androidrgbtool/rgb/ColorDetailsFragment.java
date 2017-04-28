@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,7 +73,19 @@ public class ColorDetailsFragment extends Fragment {
 
     private Unbinder unbinder;
 
-    public ColorDetailsFragment() { }
+    private final View.OnClickListener RGBAClickListener = v -> {
+        short[] rgbaValues = new short[]{(short) ((MainActivity) getActivity()).getRedColor(),
+                (short) ((MainActivity) getActivity()).getGreenColor(),
+                (short) ((MainActivity) getActivity()).getBlueColor(),
+                (short) ((MainActivity) getActivity()).getOpacity()
+        };
+
+//            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
+//            fragment.show(getSupportFragmentManager(), null);
+    };
+
+    public ColorDetailsFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,11 +102,25 @@ public class ColorDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        refreshUI();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (unbinder != null) {
             unbinder.unbind();
         }
+    }
+
+    private void refreshUI() {
+        updateColorDetails();
+        updateColorSample();
+        updateRGBField();
+        setRGBOValuesClickListener();
+        updateHSBField();
     }
 
     private void updateColorDetails() {
@@ -132,5 +159,31 @@ public class ColorDetailsFragment extends Fragment {
             firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white));
             secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black));
         }
+    }
+
+    private void updateRGBField() {
+        // RGB channel: R, G, B, OPACITY.
+        tvRGB_R.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getRedColor()));
+        tvRGB_G.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getGreenColor()));
+        tvRGB_B.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getBlueColor()));
+        tvRGB_O.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getOpacity()));
+    }
+
+    private void updateHSBField() {
+        // Get float array with 3 values for HSB-HSV.
+        float[] hsb = ColorUtils.RGBToHSB(((MainActivity) getActivity()).getRedColor(),
+                ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor());
+
+        // Set HSB-HSV single channel value.
+        tvHSB_H.setText(String.format("%.0f", hsb[0]));
+        tvHSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
+        tvHSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
+    }
+
+    private void setRGBOValuesClickListener() {
+        tvRGB_R.setOnClickListener(RGBAClickListener);
+        tvRGB_G.setOnClickListener(RGBAClickListener);
+        tvRGB_B.setOnClickListener(RGBAClickListener);
+        tvRGB_O.setOnClickListener(RGBAClickListener);
     }
 }

@@ -1,11 +1,9 @@
 package com.fastebro.androidrgbtool.rgb;
 
-import android.content.AsyncQueryHandler;
-import android.content.ContentValues;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.colors.ColorDataContract;
-import com.fastebro.androidrgbtool.colors.RGBToolContentProvider;
-import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,7 +100,12 @@ public class MainColorFragment extends Fragment {
             // Save color currently displayed.
 //        btn_SaveColor.setOnClickListener(v -> saveColor(redColor, greenColor, blueColor, opacity, ""));
 
-            setColorValuesClickListener();
+//            tvHexadecimal.setOnClickListener(v -> {
+//                HexInsertionFragment fragment =
+//                        HexInsertionFragment.newInstance(tvHexadecimal.getText().toString().substring(3));
+//                fragment.show(getSupportFragmentManager(), null);
+//            });
+
             refreshUI();
         }
     }
@@ -118,45 +118,16 @@ public class MainColorFragment extends Fragment {
         }
     }
 
-//    private final View.OnClickListener RGBAClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            short[] rgbaValues = new short[]{(short) redColor, (short) greenColor, (short) blueColor, (short)
-//                    opacity
-//            };
-//
-//            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
-//            fragment.show(getSupportFragmentManager(), null);
-//        }
-//    };
-
     private void refreshUI() {
-        updateRGBField();
-        updateHSBField();
         updateHexadecimalField();
 //        updateSharedColor();
         updateSaveColorButton();
 //        updateColorDetails();
 //        updateColorSample();
-//        colorView.setBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
-    }
-
-    private void updateRGBField() {
-        // RGB channel: R, G, B, OPACITY.
-//        tvRGB_R.setText(ColorUtils.getRGB(redColor));
-//        tvRGB_G.setText(ColorUtils.getRGB(greenColor));
-//        tvRGB_B.setText(ColorUtils.getRGB(blueColor));
-//        tvRGB_O.setText(ColorUtils.getRGB(opacity));
-    }
-
-    private void updateHSBField() {
-        // Get float array with 3 values for HSB-HSV.
-//        float[] hsb = ColorUtils.RGBToHSB(redColor, greenColor, blueColor);
-
-        // Set HSB-HSV single channel value.
-//        tvHSB_H.setText(String.format("%.0f", hsb[0]));
-//        tvHSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
-//        tvHSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
+        colorView.setBackgroundColor(Color.argb(((MainActivity) getActivity()).getOpacity(),
+                ((MainActivity) getActivity()).getRedColor(),
+                ((MainActivity) getActivity()).getGreenColor(),
+                ((MainActivity) getActivity()).getBlueColor()));
     }
 
     private void updateHexadecimalField() {
@@ -164,18 +135,6 @@ public class MainColorFragment extends Fragment {
 //                ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
 
 //        tvHexadecimal.setText(hexValue);
-    }
-
-    private void setColorValuesClickListener() {
-//        tvRGB_R.setOnClickListener(RGBAClickListener);
-//        tvRGB_G.setOnClickListener(RGBAClickListener);
-//        tvRGB_B.setOnClickListener(RGBAClickListener);
-//        tvRGB_O.setOnClickListener(RGBAClickListener);
-//        tvHexadecimal.setOnClickListener(v -> {
-//            HexInsertionFragment fragment =
-//                    HexInsertionFragment.newInstance(tvHexadecimal.getText().toString().substring(3));
-//            fragment.show(getSupportFragmentManager(), null);
-//        });
     }
 
     private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
@@ -218,70 +177,68 @@ public class MainColorFragment extends Fragment {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                /*
                 if (seekBar.equals(seekBarRed)) {
-                    redColor = progress;
+                    ((MainActivity) getActivity()).setRedColor(progress);
 
                     thumbRect = seekBar.getThumb().getBounds();
 
                     redToolTip.setX((seekBarLeft / 2) + thumbRect.left);
 
                     if (progress < 10) {
-                        redToolTip.setText("  " + redColor);
+                        redToolTip.setText("  " + ((MainActivity) getActivity()).getRedColor());
                     } else if (progress < 100) {
-                        redToolTip.setText(" " + redColor);
+                        redToolTip.setText(" " + ((MainActivity) getActivity()).getRedColor());
                     } else {
-                        redToolTip.setText(redColor + "");
+                        redToolTip.setText(((MainActivity) getActivity()).getRedColor() + "");
                     }
                 }
 
                 if (seekBar.equals(seekBarGreen)) {
-                    greenColor = progress;
+                    ((MainActivity) getActivity()).setGreenColor(progress);
 
                     thumbRect = seekBar.getThumb().getBounds();
 
                     greenToolTip.setX((seekBarLeft / 2) + thumbRect.left);
                     if (progress < 10) {
-                        greenToolTip.setText("  " + greenColor);
+                        greenToolTip.setText("  " + ((MainActivity) getActivity()).getGreenColor());
                     } else if (progress < 100) {
-                        greenToolTip.setText(" " + greenColor);
+                        greenToolTip.setText(" " + ((MainActivity) getActivity()).getGreenColor());
                     } else {
-                        greenToolTip.setText(greenColor + "");
+                        greenToolTip.setText(((MainActivity) getActivity()).getGreenColor() + "");
                     }
                 }
 
                 if (seekBar.equals(seekBarBlue)) {
-                    blueColor = progress;
+                    ((MainActivity) getActivity()).setBlueColor(progress);
 
                     thumbRect = seekBar.getThumb().getBounds();
 
                     blueToolTip.setX((seekBarLeft / 2) + thumbRect.left);
                     if (progress < 10) {
-                        blueToolTip.setText("  " + blueColor);
+                        blueToolTip.setText("  " + ((MainActivity) getActivity()).getBlueColor());
                     } else if (progress < 100) {
-                        blueToolTip.setText(" " + blueColor);
+                        blueToolTip.setText(" " + ((MainActivity) getActivity()).getBlueColor());
                     } else {
-                        blueToolTip.setText(blueColor + "");
+                        blueToolTip.setText(((MainActivity) getActivity()).getBlueColor() + "");
                     }
                 }
 
                 if (seekBar.equals(seekBarOpacity)) {
-                    opacity = progress;
+                    ((MainActivity) getActivity()).setOpacity(progress);
 
                     thumbRect = seekBar.getThumb().getBounds();
 
                     opacityToolTip.setX((seekBarLeft / 2) + thumbRect.left);
                     if (progress < 10) {
-                        opacityToolTip.setText("  " + opacity);
+                        opacityToolTip.setText("  " + ((MainActivity) getActivity()).getOpacity());
                     } else if (progress < 100) {
-                        opacityToolTip.setText(" " + opacity);
+                        opacityToolTip.setText(" " + ((MainActivity) getActivity()).getOpacity());
                     } else {
-                        opacityToolTip.setText(opacity + "");
+                        opacityToolTip.setText(((MainActivity) getActivity()).getOpacity() + "");
                     }
                 }
 
                 refreshUI();
-                */
             }
         };
     }
