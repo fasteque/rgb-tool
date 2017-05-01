@@ -20,7 +20,7 @@
             android:hint="@string/hex_insertion_message_hint"
             android:inputType="textNoSuggestions"
             android:lines="2"
-            android:maxLength="6"
+            android:maxLength="8"
             android:maxLines="2" />
     </android.support.design.widget.TextInputLayout>
 

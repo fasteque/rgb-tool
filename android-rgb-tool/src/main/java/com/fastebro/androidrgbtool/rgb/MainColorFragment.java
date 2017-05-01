@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.commons.EventBaseFragment;
+import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +28,7 @@ import butterknife.Unbinder;
  * Project: rgb-tool
  */
 
-public class MainColorFragment extends Fragment {
+public class MainColorFragment extends EventBaseFragment {
 
     // Save color button.
 //    @BindView(R.id.fab_save_color)
@@ -101,11 +104,13 @@ public class MainColorFragment extends Fragment {
             // Save color currently displayed.
 //        btn_SaveColor.setOnClickListener(v -> saveColor(redColor, greenColor, blueColor, opacity, ""));
 
-//            tvHexadecimal.setOnClickListener(v -> {
-//                HexInsertionFragment fragment =
-//                        HexInsertionFragment.newInstance(tvHexadecimal.getText().toString().substring(3));
-//                fragment.show(getSupportFragmentManager(), null);
-//            });
+            tvHexadecimal.setOnClickListener(v -> {
+                if (isAdded()) {
+                    HexInsertionFragment fragment =
+                            HexInsertionFragment.newInstance(tvHexadecimal.getText().toString().substring(1));
+                    fragment.show(getActivity().getSupportFragmentManager(), null);
+                }
+            });
 
             refreshUI();
         }
@@ -261,5 +266,23 @@ public class MainColorFragment extends Fragment {
 //        } else {
 //            btn_SaveColor.setVisibility(View.VISIBLE);
 //        }
+    }
+
+    // Events management
+    @Subscribe
+    public void onUpdateHexValueEvent(UpdateHexValueEvent event) {
+        if (isAdded()) {
+            int[] rgb = ColorUtils.hexToARGB(event.hexValue);
+            ((MainActivity) getActivity()).setOpacity(rgb[0]);
+            ((MainActivity) getActivity()).setRedColor(rgb[1]);
+            ((MainActivity) getActivity()).setGreenColor(rgb[2]);
+            ((MainActivity) getActivity()).setBlueColor(rgb[3]);
+            seekBarOpacity.setProgress(rgb[0]);
+            seekBarRed.setProgress(rgb[1]);
+            seekBarGreen.setProgress(rgb[2]);
+            seekBarBlue.setProgress(rgb[3]);
+            refreshUI();
+//        savePreferences();
+        }
     }
 }

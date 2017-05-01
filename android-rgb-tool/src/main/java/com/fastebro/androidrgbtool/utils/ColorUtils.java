@@ -122,6 +122,19 @@ public final class ColorUtils {
         return rgb;
     }
 
+    public static int[] hexToARGB(String hexValue) {
+        int[] argb = new int[4];
+
+        if(!"".equals(hexValue) && hexValue.length() == 8) {
+            argb[0] = Integer.parseInt(hexValue.substring(0, 2), 16);
+            argb[1] = Integer.parseInt(hexValue.substring(2, 4), 16);
+            argb[2] = Integer.parseInt(hexValue.substring(4, 6), 16);
+            argb[3] = Integer.parseInt(hexValue.substring(6), 16);
+        }
+
+        return argb;
+    }
+
     public static int getComplementaryColor(@IntRange(from = 0, to = 255) int rgbRColor,
                                             @IntRange(from = 0, to = 255) int rgbGColor,
                                             @IntRange(from = 0, to = 255) int rgbBColor) {

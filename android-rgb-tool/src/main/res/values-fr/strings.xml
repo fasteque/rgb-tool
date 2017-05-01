@@ -85,7 +85,7 @@
 
     <!-- HEX insertion value -->
     <string name="hex_insertion_title">Valeur HEX</string>
-    <string name="hex_insertion_message_hint">Couleur HEX à 6 chiffres</string>
+    <string name="hex_insertion_message_hint">Couleur HEX à 8 chiffres (ARGB)</string>
     <string name="hex_insertion_not_valid_error">Erreur : valeur HEX incorrect !</string>
 
     <!-- Color details -->

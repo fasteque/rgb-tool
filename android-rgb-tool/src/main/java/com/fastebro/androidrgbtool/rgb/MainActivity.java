@@ -471,19 +471,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     }
 
     @Subscribe
-    public void onUpdateHexValueEvent(UpdateHexValueEvent event) {
-        int[] rgb = ColorUtils.hexToRGB(event.hexValue);
-        redColor = rgb[0];
-        greenColor = rgb[1];
-        blueColor = rgb[2];
-//        seekBarRed.setProgress(rgb[0]);
-//        seekBarGreen.setProgress(rgb[1]);
-//        seekBarBlue.setProgress(rgb[2]);
-//        refreshUI();
-        savePreferences();
-    }
-
-    @Subscribe
     public void onErrorMessageEvent(ErrorMessageEvent event) {
         Snackbar.make(findViewById(android.R.id.content), event.message, Snackbar.LENGTH_SHORT).show();
     }

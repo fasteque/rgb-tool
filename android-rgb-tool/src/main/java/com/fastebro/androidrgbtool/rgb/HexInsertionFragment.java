@@ -2,7 +2,6 @@ package com.fastebro.androidrgbtool.rgb;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -95,12 +94,12 @@ public class HexInsertionFragment extends DialogFragment {
     }
 
     private boolean checkHexValue(String hexValue) {
-        if("".equals(hexValue) || hexValue.length() != 6) {
+        if("".equals(hexValue) || hexValue.length() != 8) {
             return false;
         } else {
             try {
                 //noinspection ResultOfMethodCallIgnored
-                Integer.parseInt(hexValue, 16);
+                Long.parseLong(hexValue, 16);
                 return true;
             } catch (NumberFormatException ex) {
                 return false;

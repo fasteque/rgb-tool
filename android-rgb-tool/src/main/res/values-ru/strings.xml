@@ -85,7 +85,7 @@
 
     <!-- HEX insertion value -->
     <string name="hex_insertion_title">Значение HEX</string>
-    <string name="hex_insertion_message_hint">6-ти значный HEX код</string>
+    <string name="hex_insertion_message_hint">8-ти значный HEX код (ARGB)</string>
     <string name="hex_insertion_not_valid_error">Ошибка: неверное значение!</string>
 
     <!-- Color details -->
