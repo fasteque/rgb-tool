@@ -74,14 +74,16 @@ public class ColorDetailsFragment extends Fragment {
     private Unbinder unbinder;
 
     private final View.OnClickListener RGBAClickListener = v -> {
-        short[] rgbaValues = new short[]{(short) ((MainActivity) getActivity()).getRedColor(),
-                (short) ((MainActivity) getActivity()).getGreenColor(),
-                (short) ((MainActivity) getActivity()).getBlueColor(),
-                (short) ((MainActivity) getActivity()).getOpacity()
-        };
+        if (isAdded()) {
+            short[] rgbaValues = new short[]{(short) ((MainActivity) getActivity()).getRedColor(),
+                    (short) ((MainActivity) getActivity()).getGreenColor(),
+                    (short) ((MainActivity) getActivity()).getBlueColor(),
+                    (short) ((MainActivity) getActivity()).getOpacity()
+            };
 
-//            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
-//            fragment.show(getSupportFragmentManager(), null);
+            RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
+            fragment.show(getActivity().getSupportFragmentManager(), null);
+        }
     };
 
     public ColorDetailsFragment() {
@@ -133,15 +135,19 @@ public class ColorDetailsFragment extends Fragment {
     }
 
     private void updateColorDetails() {
-//        int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
-//        complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
-//                (complementaryColor)));
-//        complementaryColorBackground.setCardBackgroundColor(complementaryColor);
-//
-//        int contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
-//        contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
-//                (contrastColor)));
-//        contrastColorBackground.setCardBackgroundColor(contrastColor);
+        int redColor = ((MainActivity) getActivity()).getRedColor();
+        int blueColor = ((MainActivity) getActivity()).getBlueColor();
+        int greenColor = ((MainActivity) getActivity()).getGreenColor();
+
+        int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
+        complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
+                (complementaryColor)));
+        complementaryColorBackground.setCardBackgroundColor(complementaryColor);
+
+        int contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
+        contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
+                (contrastColor)));
+        contrastColorBackground.setCardBackgroundColor(contrastColor);
     }
 
     private void updateColorSample() {
