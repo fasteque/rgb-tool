@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +36,8 @@ public class MainColorFragment extends Fragment {
     ImageView pickerImage;
 
     // Hexadecimal color value.
-//    @BindView(R.id.tv_hexadecimal)
-//    TextView tvHexadecimal;
+    @BindView(R.id.tv_hexadecimal)
+    TextView tvHexadecimal;
 
     @BindView(R.id.red_seek_bar)
     SeekBar seekBarRed;
@@ -140,10 +141,12 @@ public class MainColorFragment extends Fragment {
     }
 
     private void updateHexadecimalField() {
-//        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(opacity), ColorUtils.RGBToHex(redColor),
-//                ColorUtils.RGBToHex(greenColor), ColorUtils.RGBToHex(blueColor));
+        String hexValue = String.format("#%s%s%s%s", ColorUtils.RGBToHex(((MainActivity) getActivity()).getOpacity()),
+                ColorUtils.RGBToHex(((MainActivity) getActivity()).getRedColor()),
+                ColorUtils.RGBToHex(((MainActivity) getActivity()).getGreenColor()),
+                ColorUtils.RGBToHex(((MainActivity) getActivity()).getBlueColor()));
 
-//        tvHexadecimal.setText(hexValue);
+        tvHexadecimal.setText(hexValue);
     }
 
     private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
