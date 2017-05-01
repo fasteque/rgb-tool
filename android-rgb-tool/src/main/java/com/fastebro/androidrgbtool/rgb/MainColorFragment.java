@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.commons.EventBaseFragment;
+import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
@@ -282,7 +283,23 @@ public class MainColorFragment extends EventBaseFragment {
             seekBarGreen.setProgress(rgb[2]);
             seekBarBlue.setProgress(rgb[3]);
             refreshUI();
-//        savePreferences();
+            ((MainActivity) getActivity()).savePreferences();
+        }
+    }
+
+    @Subscribe
+    public void onRGBAInsertionEvent(RGBAInsertionEvent event) {
+        if (isAdded()) {
+            ((MainActivity) getActivity()).setRedColor(event.rgbaValues[0]);
+            ((MainActivity) getActivity()).setGreenColor(event.rgbaValues[1]);
+            ((MainActivity) getActivity()).setBlueColor(event.rgbaValues[2]);
+            ((MainActivity) getActivity()).setOpacity(event.rgbaValues[3]);
+            seekBarRed.setProgress(event.rgbaValues[0]);
+            seekBarGreen.setProgress(event.rgbaValues[1]);
+            seekBarBlue.setProgress(event.rgbaValues[2]);
+            seekBarOpacity.setProgress(event.rgbaValues[3]);
+            refreshUI();
+            ((MainActivity) getActivity()).savePreferences();
         }
     }
 }

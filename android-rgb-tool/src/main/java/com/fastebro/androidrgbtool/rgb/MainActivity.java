@@ -18,7 +18,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +32,6 @@ import com.fastebro.androidrgbtool.model.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.model.events.ErrorMessageEvent;
 import com.fastebro.androidrgbtool.model.events.PhotoScaledEvent;
 import com.fastebro.androidrgbtool.model.events.PrintColorEvent;
-import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
-import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.print.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
@@ -401,7 +398,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
                 settings.getInt(CommonUtils.PREFS_OPACITY, 255));
     }
 
-    private void savePreferences() {
+    public void savePreferences() {
         SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(CommonUtils.PREFS_R_COLOR, redColor);
@@ -454,20 +451,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     @Subscribe
     public void onUpdateSaveColorUIEvent(UpdateSaveColorUIEvent event) {
 //        updateSaveColorButton();
-    }
-
-    @Subscribe
-    public void onRGBAInsertionEvent(RGBAInsertionEvent event) {
-        redColor = event.rgbaValues[0];
-        greenColor = event.rgbaValues[1];
-        blueColor = event.rgbaValues[2];
-        opacity = event.rgbaValues[3];
-//        seekBarRed.setProgress(event.rgbaValues[0]);
-//        seekBarGreen.setProgress(event.rgbaValues[1]);
-//        seekBarBlue.setProgress(event.rgbaValues[2]);
-//        seekBarOpacity.setProgress(event.rgbaValues[3]);
-//        refreshUI();
-        savePreferences();
     }
 
     @Subscribe
