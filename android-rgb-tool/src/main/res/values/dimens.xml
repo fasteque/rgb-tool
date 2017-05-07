@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="padding_small">4dp</dimen>
     <dimen name="activity_horizontal_margin">8dp</dimen>
     <dimen name="activity_vertical_margin">8dp</dimen>
     <dimen name="default_margin">16dp</dimen>
@@ -36,4 +37,5 @@
 
     <!-- Manual picker -->
     <dimen name="manual_picker_bottom_sheet_peek_height">64dp</dimen>
+    <dimen name="manual_picker_color_details_width">80dp</dimen>
 </resources>

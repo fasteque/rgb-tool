@@ -1,6 +1,8 @@
 package com.fastebro.androidrgbtool.rgb;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,12 +48,12 @@ public class ColorDetailsFragment extends Fragment {
     TextView tvHSB_B;
 
     // Color details.
-    @BindView(R.id.complementaryColorBackground)
-    CardView complementaryColorBackground;
+    @BindView(R.id.complementaryColor)
+    TextView complementaryColorBg;
     @BindView(R.id.complementaryColorText)
     TextView complementaryColorText;
-    @BindView(R.id.contrastColorBackground)
-    CardView contrastColorBackground;
+    @BindView(R.id.contrastColor)
+    TextView contrastColorBg;
     @BindView(R.id.contrastColorText)
     TextView contrastColorText;
 
@@ -140,59 +144,72 @@ public class ColorDetailsFragment extends Fragment {
         int greenColor = ((MainActivity) getActivity()).getGreenColor();
 
         int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
-        complementaryColorText.setText(getString(R.string.color_details_complementary, ColorUtils.RGBToHex
-                (complementaryColor)));
-        complementaryColorBackground.setCardBackgroundColor(complementaryColor);
+        setRoundedBackground(complementaryColorBg, complementaryColor);
+        complementaryColorText.setText(ColorUtils.RGBToHex(complementaryColor));
 
         int contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
-        contrastColorText.setText(getString(R.string.color_details_contrast, ColorUtils.RGBToHex
-                (contrastColor)));
-        contrastColorBackground.setCardBackgroundColor(contrastColor);
+        setRoundedBackground(contrastColorBg, contrastColor);
+        contrastColorText.setText(ColorUtils.RGBToHex(contrastColor));
     }
 
     private void updateColorSample() {
-        // Text.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white, getTheme()));
-//            secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black, getTheme()));
-        } else {
-            firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white));
-            secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black));
-        }
+        if (isAdded()) {
+            int redColor = ((MainActivity) getActivity()).getRedColor();
+            int blueColor = ((MainActivity) getActivity()).getBlueColor();
+            int greenColor = ((MainActivity) getActivity()).getGreenColor();
+            int opacity = ((MainActivity) getActivity()).getOpacity();
 
-//        firstColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
-//        secondColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            // Text.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white, getContext()
+                        .getTheme()));
+                secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black, getContext
+                        ().getTheme()));
+            } else {
+                firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white));
+                secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black));
+            }
 
-        // Background.
-//        firstColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
-//        secondColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            firstColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            secondColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white, getTheme()));
-//            secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black, getTheme()));
-        } else {
-            firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white));
-            secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black));
+            // Background.
+            firstColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            secondColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white, getContext()
+                        .getTheme()));
+                secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black, getContext()
+                        .getTheme()));
+            } else {
+                firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white));
+                secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black));
+            }
         }
     }
 
     private void updateRGBField() {
-        // RGB channel: R, G, B, OPACITY.
-        tvRGB_R.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getRedColor()));
-        tvRGB_G.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getGreenColor()));
-        tvRGB_B.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getBlueColor()));
-        tvRGB_O.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getOpacity()));
+        if (isAdded()) {
+            // RGB channel: R, G, B, OPACITY.
+            tvRGB_R.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getRedColor()));
+            tvRGB_G.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getGreenColor()));
+            tvRGB_B.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getBlueColor()));
+            tvRGB_O.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getOpacity()));
+        }
     }
 
     private void updateHSBField() {
-        // Get float array with 3 values for HSB-HSV.
-        float[] hsb = ColorUtils.RGBToHSB(((MainActivity) getActivity()).getRedColor(),
-                ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor());
+        if (isAdded()) {
+            // Get float array with 3 values for HSB-HSV.
+            float[] hsb = ColorUtils.RGBToHSB(((MainActivity) getActivity()).getRedColor(),
+                    ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor());
 
-        // Set HSB-HSV single channel value.
-        tvHSB_H.setText(String.format("%.0f", hsb[0]));
-        tvHSB_S.setText(String.format("%.0f%%", (hsb[1] * 100.0f))); // % value.
-        tvHSB_B.setText(String.format("%.0f%%", (hsb[2] * 100.0f))); // % value.
+            // Set HSB-HSV single channel value.
+            tvHSB_H.setText(String.format(Locale.ENGLISH, "%.0f", hsb[0]));
+            tvHSB_S.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[1] * 100.0f))); // % value.
+            tvHSB_B.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[2] * 100.0f))); // % value.
+        }
     }
 
     private void setRGBOValuesClickListener() {
@@ -200,5 +217,13 @@ public class ColorDetailsFragment extends Fragment {
         tvRGB_G.setOnClickListener(RGBAClickListener);
         tvRGB_B.setOnClickListener(RGBAClickListener);
         tvRGB_O.setOnClickListener(RGBAClickListener);
+    }
+
+    private void setRoundedBackground(TextView textView, int argb) {
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(360);
+        shape.setColor(argb);
+
+        textView.setBackground(shape);
     }
 }
