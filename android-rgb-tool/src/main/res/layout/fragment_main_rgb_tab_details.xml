@@ -2,7 +2,6 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -127,6 +126,57 @@
 
                 <TextView
                     android:id="@+id/textView_HSB_B"
+                    style="@style/RGBPanelComponent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="90"
+                    android:textIsSelectable="true"/>
+
+            </TableRow>
+
+            <TableRow
+                android:gravity="center_vertical"
+                android:minHeight="36dp">
+
+                <TextView
+                    style="@style/RGBPanelComponentLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:text="@string/color_hue"/>
+
+                <TextView
+                    android:id="@+id/textView_HSL_H"
+                    style="@style/RGBPanelComponent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:textIsSelectable="true"/>
+
+                <TextView
+                    style="@style/RGBPanelComponentLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:text="@string/color_saturation"/>
+
+                <TextView
+                    android:id="@+id/textView_HSL_S"
+                    style="@style/RGBPanelComponent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:textIsSelectable="true"/>
+
+                <TextView
+                    style="@style/RGBPanelComponentLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:text="@string/color_brightness"/>
+
+                <TextView
+                    android:id="@+id/textView_HSL_L"
                     style="@style/RGBPanelComponent"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -263,24 +313,20 @@
                 android:textSize="@dimen/rgb_text_size_micro"
                 android:textStyle="bold"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/firstColorSampleBackground"
+            <TextView
+                android:id="@+id/firstColorSampleTextNormal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                android:layout_marginBottom="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingEnd="@dimen/default_margin"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
 
-                <TextView
-                    android:id="@+id/firstColorSampleTextNormal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <LinearLayout
@@ -291,24 +337,18 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/secondColorSampleBackground"
+            <TextView
+                android:id="@+id/secondColorSampleTextNormal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingEnd="@dimen/default_margin"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
 
-                <TextView
-                    android:id="@+id/secondColorSampleTextNormal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <View
@@ -332,24 +372,20 @@
                 android:textSize="@dimen/rgb_text_size_micro"
                 android:textStyle="bold"/>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/firstColorSampleBackgroundBg"
+            <TextView
+                android:id="@+id/firstColorSampleTextNormalBg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                android:layout_marginBottom="@dimen/padding_small"
+                android:layout_marginTop="@dimen/padding_small"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingEnd="@dimen/default_margin"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
 
-                <TextView
-                    android:id="@+id/firstColorSampleTextNormalBg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <LinearLayout
@@ -360,24 +396,18 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/secondColorSampleBackgroundBg"
+            <TextView
+                android:id="@+id/secondColorSampleTextNormalBg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="1dp"
-                app:cardUseCompatPadding="true">
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingEnd="@dimen/default_margin"
+                android:paddingStart="@dimen/default_margin"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/color_details_text_sample"
+                android:textSize="@dimen/rgb_text_size_medium"
+                android:textStyle="normal"/>
 
-                <TextView
-                    android:id="@+id/secondColorSampleTextNormalBg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/color_details_text_sample"
-                    android:textSize="@dimen/rgb_text_size_medium"
-                    android:textStyle="normal"/>
-
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </LinearLayout>

@@ -32,6 +32,57 @@ public final class ColorUtils {
         return hsb;
     }
 
+    public static float[] RGBToHSL(@IntRange(from = 0, to = 255) int red,
+                                   @IntRange(from = 0, to = 255) int green,
+                                   @IntRange(from = 0, to = 255) int blue,
+                                   float[] hsl) {
+        //  Get RGB values in the range 0 - 1
+        float r = red / 255f;
+        float g = green / 255f;
+        float b = blue / 255f;
+
+        //	Minimum and Maximum RGB values are used in the HSL calculations
+        float min = Math.min(r, Math.min(g, b));
+        float max = Math.max(r, Math.max(g, b));
+
+        //  Calculate the Hue
+        float h = 0;
+
+        if (max == min) {
+            h = 0;
+        } else if (max == r) {
+            h = (((g - b) / (max - min) / 6f) + 1) % 1;
+        } else if (max == g) {
+            h = ((b - r) / (max - min) / 6f) + 1f / 3f;
+        } else if (max == b) {
+            h = ((r - g) / (max - min) / 6f) + 2f / 3f;
+        }
+
+        //  Calculate the Luminance
+        float l = (max + min) / 2;
+
+        //  Calculate the Saturation
+        float s = 0;
+
+        if (max == min) {
+            s = 0;
+        } else if (l <= .5f) {
+            s = (max - min) / (max + min);
+        } else {
+            s = (max - min) / (2 - max - min);
+        }
+
+        if (hsl == null) {
+            hsl = new float[3];
+        }
+
+        hsl[0] = h;
+        hsl[1] = s;
+        hsl[2] = l;
+
+        return hsl;
+    }
+
     public static String getColorMessage(@IntRange(from=0, to=255) int rgbRColor,
                                          @IntRange(from=0, to=255) int rgbGColor,
                                          @IntRange(from=0, to=255) int rgbBColor,

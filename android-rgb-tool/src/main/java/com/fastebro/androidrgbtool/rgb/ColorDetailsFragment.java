@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +46,14 @@ public class ColorDetailsFragment extends Fragment {
     @BindView(R.id.textView_HSB_B)
     TextView tvHSB_B;
 
+    // HSL: Hue, Saturation, Lightness.
+    @BindView(R.id.textView_HSL_H)
+    TextView tvHSL_H;
+    @BindView(R.id.textView_HSL_S)
+    TextView tvHSL_S;
+    @BindView(R.id.textView_HSL_L)
+    TextView tvHSL_L;
+
     // Color details.
     @BindView(R.id.complementaryColor)
     TextView complementaryColorBg;
@@ -58,20 +65,12 @@ public class ColorDetailsFragment extends Fragment {
     TextView contrastColorText;
 
     // Color samples.
-    @BindView(R.id.firstColorSampleBackground)
-    CardView firstColorSampleBackground;
     @BindView(R.id.firstColorSampleTextNormal)
     TextView firstColorSampleTextNormal;
-    @BindView(R.id.secondColorSampleBackground)
-    CardView secondColorSampleBackground;
     @BindView(R.id.secondColorSampleTextNormal)
     TextView secondColorSampleTextNormal;
-    @BindView(R.id.firstColorSampleBackgroundBg)
-    CardView firstColorSampleBackgroundBg;
     @BindView(R.id.firstColorSampleTextNormalBg)
     TextView firstColorSampleTextNormalBg;
-    @BindView(R.id.secondColorSampleBackgroundBg)
-    CardView secondColorSampleBackgroundBg;
     @BindView(R.id.secondColorSampleTextNormalBg)
     TextView secondColorSampleTextNormalBg;
 
@@ -133,9 +132,10 @@ public class ColorDetailsFragment extends Fragment {
     private void refreshUI() {
         updateColorDetails();
         updateColorSample();
-        updateRGBField();
+        updateRGBValues();
         setRGBOValuesClickListener();
-        updateHSBField();
+        updateHSBValues();
+        updateHSLValues();
     }
 
     private void updateColorDetails() {
@@ -160,22 +160,14 @@ public class ColorDetailsFragment extends Fragment {
             int opacity = ((MainActivity) getActivity()).getOpacity();
 
             // Text.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white, getContext()
-                        .getTheme()));
-                secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black, getContext
-                        ().getTheme()));
-            } else {
-                firstColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.white));
-                secondColorSampleBackground.setCardBackgroundColor(getResources().getColor(R.color.black));
-            }
-
             firstColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            setRoundedBackground(firstColorSampleTextNormal, Color.WHITE);
             secondColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            setRoundedBackground(secondColorSampleTextNormal, Color.BLACK);
 
             // Background.
-            firstColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
-            secondColorSampleBackgroundBg.setCardBackgroundColor(Color.argb(opacity, redColor, greenColor, blueColor));
+            setRoundedBackground(firstColorSampleTextNormalBg, Color.argb(opacity, redColor, greenColor, blueColor));
+            setRoundedBackground(secondColorSampleTextNormalBg, Color.argb(opacity, redColor, greenColor, blueColor));
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white, getContext()
@@ -189,7 +181,7 @@ public class ColorDetailsFragment extends Fragment {
         }
     }
 
-    private void updateRGBField() {
+    private void updateRGBValues() {
         if (isAdded()) {
             // RGB channel: R, G, B, OPACITY.
             tvRGB_R.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getRedColor()));
@@ -199,7 +191,7 @@ public class ColorDetailsFragment extends Fragment {
         }
     }
 
-    private void updateHSBField() {
+    private void updateHSBValues() {
         if (isAdded()) {
             // Get float array with 3 values for HSB-HSV.
             float[] hsb = ColorUtils.RGBToHSB(((MainActivity) getActivity()).getRedColor(),
@@ -209,6 +201,20 @@ public class ColorDetailsFragment extends Fragment {
             tvHSB_H.setText(String.format(Locale.ENGLISH, "%.0f", hsb[0]));
             tvHSB_S.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[1] * 100.0f))); // % value.
             tvHSB_B.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[2] * 100.0f))); // % value.
+        }
+    }
+
+    private void updateHSLValues() {
+        if (isAdded()) {
+            // Get float array with 3 values for HSB-HSV.
+            float[] hsl = ColorUtils.RGBToHSL(((MainActivity) getActivity()).getRedColor(),
+                    ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor(),
+                    null);
+
+            // Set HSB-HSV single channel value.
+            tvHSL_H.setText(String.format(Locale.ENGLISH, "%.0f", hsl[0]));
+            tvHSL_S.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsl[1] * 100.0f))); // % value.
+            tvHSL_L.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsl[2] * 100.0f))); // % value.
         }
     }
 
