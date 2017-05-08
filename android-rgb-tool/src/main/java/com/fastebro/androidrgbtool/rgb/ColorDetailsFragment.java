@@ -193,11 +193,9 @@ public class ColorDetailsFragment extends Fragment {
 
     private void updateHSBValues() {
         if (isAdded()) {
-            // Get float array with 3 values for HSB-HSV.
             float[] hsb = ColorUtils.RGBToHSB(((MainActivity) getActivity()).getRedColor(),
                     ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor());
 
-            // Set HSB-HSV single channel value.
             tvHSB_H.setText(String.format(Locale.ENGLISH, "%.0f", hsb[0]));
             tvHSB_S.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[1] * 100.0f))); // % value.
             tvHSB_B.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[2] * 100.0f))); // % value.
@@ -206,12 +204,10 @@ public class ColorDetailsFragment extends Fragment {
 
     private void updateHSLValues() {
         if (isAdded()) {
-            // Get float array with 3 values for HSB-HSV.
             float[] hsl = ColorUtils.RGBToHSL(((MainActivity) getActivity()).getRedColor(),
                     ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor(),
                     null);
 
-            // Set HSB-HSV single channel value.
             tvHSL_H.setText(String.format(Locale.ENGLISH, "%.0f", hsl[0]));
             tvHSL_S.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsl[1] * 100.0f))); // % value.
             tvHSL_L.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsl[2] * 100.0f))); // % value.
