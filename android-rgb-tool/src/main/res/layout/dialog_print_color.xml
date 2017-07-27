@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -13,8 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
             android:layout_marginTop="16dp"
             android:hint="@string/print_color_dialog_message_hint"
             android:inputType="text|textMultiLine"

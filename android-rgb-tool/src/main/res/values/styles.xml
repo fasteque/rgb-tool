@@ -19,8 +19,8 @@
     </style>
 
     <style name="RGBPanelComponent" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?vectorColor</item>
     </style>
 
     <style name="Theme.Rgbtool.NoActionBar">
@@ -30,17 +30,22 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.Rgbtool.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.Rgbtool.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Theme.Rgbtool.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="RGBTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@color/accent</item>
+    <style name="RGBTabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/light_accent</item>
         <item name="tabIndicatorHeight">4dp</item>
         <item name="tabPaddingStart">12dp</item>
         <item name="tabPaddingEnd">12dp</item>
-        <item name="tabBackground">@color/primary</item>
-        <item name="tabSelectedTextColor">@color/accent</item>
+        <item name="tabBackground">?colorPrimary</item>
+        <item name="tabSelectedTextColor">?colorAccent</item>
     </style>
 
+    <style name="ACRA" parent="Base.Theme.AppCompat.Dialog.MinWidth"/>
+    <style name="CardViewLight" parent="CardView"/>
+    <style name="CardViewDark" parent="CardView.Dark">
+        <item name="cardBackgroundColor">@color/dark_card</item>
+    </style>
 </resources>

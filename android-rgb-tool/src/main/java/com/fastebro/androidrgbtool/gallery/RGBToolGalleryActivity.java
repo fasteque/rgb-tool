@@ -6,24 +6,28 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.SparseBooleanArray;
-import android.view.*;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.commons.BaseActivity;
 import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
+import com.fastebro.androidrgbtool.commons.BaseActivity;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class RGBToolGalleryActivity extends BaseActivity

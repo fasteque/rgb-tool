@@ -1,8 +1,7 @@
 package com.fastebro.androidrgbtool.widgets;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
@@ -12,10 +11,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.utils.ClipboardUtils;
+import com.fastebro.androidrgbtool.utils.ColorUtils;
+
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 public class RGBPanelData extends LinearLayout {
 
@@ -27,6 +30,8 @@ public class RGBPanelData extends LinearLayout {
     TextView mHEXValue;
     @BindView(R.id.btn_dismiss_panel)
     ImageButton mDismissPanelButton;
+    @BindView(R.id.color_view)
+    View mColorView;
 
     private int alpha;
     private int red;
@@ -61,10 +66,7 @@ public class RGBPanelData extends LinearLayout {
         @Override
         public boolean onLongClick(View v) {
             CharSequence text = ((TextView)v).getText();
-            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText(label, text);
-            clipboard.setPrimaryClip(clip);
-
+            ClipboardUtils.copyToClipboard(text.toString());
             Snackbar.make(v, text + " " + context.getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
             return true;
         }
@@ -74,6 +76,7 @@ public class RGBPanelData extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.rgb_data_panel_small, this);
         ButterKnife.bind(this);
+
         mDismissPanelButton.setOnClickListener(v -> setVisibility(GONE));
 
         mRGBValue.setOnLongClickListener(new ClipboardLongClickListener(context,
@@ -94,6 +97,7 @@ public class RGBPanelData extends LinearLayout {
         setRGBValue();
         setHSBValue();
         setHEXValue(touchedRGB);
+        setColorView(touchedRGB);
     }
 
     private void setRGBValue() {
@@ -105,9 +109,9 @@ public class RGBPanelData extends LinearLayout {
     private void setHSBValue() {
         if (mHSBValue != null) {
             mHSBValue.setText("");
-            mHSBValue.append("(" + String.format("%.0f", hsb[0]));
-            mHSBValue.append(", " + String.format("%.0f%%", (hsb[1] * 100.0f)));
-            mHSBValue.append(", " + String.format("%.0f%%", (hsb[2] * 100.0f)) + ")");
+            mHSBValue.append("(" + String.format(Locale.ENGLISH, "%.0f", hsb[0]));
+            mHSBValue.append(", " + String.format(Locale.ENGLISH, "%.0f%%", (hsb[1] * 100.0f)));
+            mHSBValue.append(", " + String.format(Locale.ENGLISH, "%.0f%%", (hsb[2] * 100.0f)) + ")");
         }
     }
 
@@ -115,5 +119,9 @@ public class RGBPanelData extends LinearLayout {
         if (mHEXValue != null) {
             mHEXValue.setText(("#" + Integer.toHexString(touchedRGB)).toUpperCase());
         }
+    }
+
+    private void setColorView(int color){
+        mColorView.setBackgroundColor(color);
     }
 }

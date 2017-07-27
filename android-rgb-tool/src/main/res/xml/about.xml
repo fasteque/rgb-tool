@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_category_ui"/>
+    <ListPreference
+        android:key="about.theme"
+        android:title="@string/pref_theme"
+        android:entries="@array/theme_names"
+        android:entryValues="@array/theme_values"
+        android:defaultValue="0"/>
     <PreferenceCategory android:title="@string/pref_help">
         <Preference android:title="@string/pref_report_issue">
             <intent
@@ -11,9 +18,19 @@
                 android:action="android.intent.action.SENDTO"
                 android:data="daniele.altomare@gmail.com"/>
         </Preference>
+        <Preference android:title="@string/pref_github">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/fasteque/rgb-tool/"/>
+        </Preference>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_open_source_libs">
+        <Preference android:title="@string/prefs_acra">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/acra/ACRA/"/>
+        </Preference>
         <Preference android:title="@string/prefs_picasso">
             <intent
                 android:action="android.intent.action.VIEW"

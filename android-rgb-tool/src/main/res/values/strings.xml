@@ -3,8 +3,8 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">RGB Tool Gallery</string>
-    <string name="argb_label">ARGB</string>
     <string name="rgb_label">RGB</string>
+    <string name="argb_label">ARGB</string>
     <string name="hsb_label">HSB</string>
     <string name="color_hexadecimal_label">HEX</string>
     <string name="color_list_empty">No colors</string>
@@ -64,6 +64,7 @@
     <string name="error_open_gallery_image">Error: the image may not be in the local storage</string>
 
     <!-- Attributions -->
+    <string name="pref_category_ui">UI</string>
     <string name="pref_help">Help</string>
     <string name="pref_report_issue">Report an issue</string>
     <string name="pref_send_feedback">Send a feedback</string>
@@ -91,7 +92,6 @@
     <!-- Color details -->
     <string name="color_details_as_text_title">Text</string>
     <string name="color_details_as_background_title">Background</string>
-    <string name="color_details_colors_title">Colors</string>
     <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
     <string name="color_details_color">Color - #%s</string>
     <string name="color_details_complementary">Complementary</string>
@@ -101,4 +101,12 @@
     <string name="rationale_external_storage">Storage access is required to save and open photos.</string>
     <string name="permissions_not_granted">Permission was not granted.</string>
     <string name="permissions_granted">Storage permission has been granted. You can now use the feature.</string>
+    <string name="pref_theme">App Theme</string>
+
+    <!-- Errors -->
+    <string name="error">Error</string>
+    <string name="error_send_mail">Please send the error report</string>
+    <string name="error_dlg_content">An unexpected error occurred. Sorry for the inconvenience.</string>
+    <string name="prefs_acra">ACRA</string>
+    <string name="pref_github">GitHub</string>
 </resources>

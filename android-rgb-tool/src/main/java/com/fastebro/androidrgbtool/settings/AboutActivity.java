@@ -9,9 +9,9 @@ import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.commons.BaseActivity;
 import com.fastebro.androidrgbtool.helpers.CustomTabActivityHelper;
 import com.fastebro.androidrgbtool.helpers.WebViewFallback;
-import com.fastebro.androidrgbtool.commons.BaseActivity;
 
 public class AboutActivity extends BaseActivity implements AboutFragment.OnPreferenceSelectedListener {
 
@@ -78,10 +78,10 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            intentBuilder.setToolbarColor(getResources().getColor(R.color.primary, getTheme()));
+            intentBuilder.setToolbarColor(getResources().getColor(R.color.light_primary, getTheme()));
         } else {
             //noinspection deprecation
-            intentBuilder.setToolbarColor(getResources().getColor(R.color.primary));
+            intentBuilder.setToolbarColor(getResources().getColor(R.color.light_primary));
         }
         intentBuilder.setShowTitle(true);
 

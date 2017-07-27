@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_silver">
+    android:background="?viewBackground">
 
     <ListView android:id="@android:id/list"
         android:layout_width="match_parent"
@@ -10,7 +10,7 @@
         android:layout_margin="@dimen/rgb_panel_color_list_margin"
         android:scrollbars="none"
         android:dividerHeight="1dp"
-        android:divider="@color/light_silver"
+        android:divider="?viewBackground"
         android:drawSelectorOnTop="true"
         android:listSelector="@drawable/color_list_background"/>
 

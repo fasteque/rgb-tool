@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+
 import com.fastebro.androidrgbtool.R;
 import com.squareup.picasso.Picasso;
 

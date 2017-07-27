@@ -3,8 +3,8 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">Галерея RGB Tool</string>
-    <string name="argb_label">ARGB</string>
     <string name="rgb_label">RGB</string>
+    <string name="argb_label">ARGB</string>
     <string name="hsb_label">HSB</string>
     <string name="color_hexadecimal_label">HEX</string>
     <string name="color_list_empty">Нет цветов</string>
@@ -17,7 +17,7 @@
     <!-- Common actions -->
     <string name="action_common_set">OK</string>
     <string name="action_common_cancel">Отмена</string>
-    <string name="action_common_skip">Пропуск</string>
+    <string name="action_common_skip">Пропустить</string>
 
     <!-- MainActivity action items -->
     <string name="action_camera">Цвет из изображения</string>
@@ -28,12 +28,12 @@
     <string name="action_share">Поделиться</string>
     <string name="action_share_palette">Поделиться палитрой</string>
     <string name="action_generic_delete">Удалить</string>
-    <string name="action_delete">Удалить изображения</string>
+    <string name="action_delete">Удалить</string>
     <string name="action_about">О программе</string>
     <string name="action_palette">Палитра изображения</string>
-    <string name="pick_color">Выбрать картинку</string>
-    <string name="print_color_dialog_message_hint">Сообщения</string>
-    <string name="rgba_insertion_dialog_title">Применить</string>
+    <string name="pick_color">Выбрать изображение</string>
+    <string name="print_color_dialog_message_hint">Сообщениe</string>
+    <string name="rgba_insertion_dialog_title">Применить значения</string>
 
     <!-- UColor items -->
     <string name="color_red">R</string>
@@ -64,9 +64,11 @@
     <string name="error_open_gallery_image">Ошибка: файл должен находиться на устройстве!</string>
 
     <!-- Attributions -->
+    <string name="pref_category_ui">UI</string>
+    <string name="pref_theme">Тема</string>
     <string name="pref_help">Помощь</string>
     <string name="pref_report_issue">Сообщить о проблеме</string>
-    <string name="pref_send_feedback">Отправить обратную связь</string>
+    <string name="pref_send_feedback">Обратная связь</string>
     <string name="pref_open_source_libs">Open Source библиотеки</string>
     <string name="prefs_picasso">Picasso</string>
     <string name="prefs_butter_knife">Butter Knife</string>
@@ -84,21 +86,27 @@
     <string name="swatch_dark_muted">Тёмный приглушенный</string>
 
     <!-- HEX insertion value -->
-    <string name="hex_insertion_title">Значение HEX</string>
-    <string name="hex_insertion_message_hint">8-ти значный HEX код (ARGB)</string>
+    <string name="hex_insertion_title">Значение в HEX</string>
+    <string name="hex_insertion_message_hint">8-ми значный HEX код (ARGB)</string>
     <string name="hex_insertion_not_valid_error">Ошибка: неверное значение!</string>
 
     <!-- Color details -->
     <string name="color_details_as_text_title">Текст</string>
     <string name="color_details_as_background_title">Фон</string>
-    <string name="color_details_colors_title">Цвета</string>
     <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
     <string name="color_details_color">Цвет - #%s</string>
     <string name="color_details_complementary">Дополнительно - #%s</string>
-    <string name="color_details_contrast">Постоянная - #%s</string>
+    <string name="color_details_contrast">Контраст - #%s</string>
 
     <!-- Permissions -->
-    <string name="rationale_external_storage">Доступ к Sdcard требуется для сохранения данных и возможности использовать галерею.</string>
+    <string name="rationale_external_storage">Доступ к SD-Card требуется для сохранения данных и возможности использовать галерею.</string>
     <string name="permissions_not_granted">Разрешение не получено</string>
     <string name="permissions_granted">Разрешение получено. Теперь вы можете использовать эту функцию.</string>
+
+    <!-- Errors -->
+    <string name="error">Ошибка в работе программы</string>
+    <string name="error_send_mail">Пожалуйста, отправьте отчёт об ошибке.</string>
+    <string name="error_dlg_content">Произошла непридвиденная ошибка, остановившая приложение. Пожалуйта, отправьте отчёт об ошибке (требуется приложение для отправки e-mail).</string>
+    <string name="prefs_acra">ACRA</string>
+    <string name="pref_github">GitHub</string>
 </resources>

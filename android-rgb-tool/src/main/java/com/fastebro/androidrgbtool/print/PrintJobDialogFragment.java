@@ -2,7 +2,6 @@ package com.fastebro.androidrgbtool.print;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.v4.app.DialogFragment;
@@ -10,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.fastebro.androidrgbtool.model.events.PrintColorDetailsEvent;
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.model.events.PrintColorDetailsEvent;
 import com.fastebro.androidrgbtool.model.events.PrintColorEvent;
 import com.fastebro.androidrgbtool.model.events.PrintPaletteEvent;
 

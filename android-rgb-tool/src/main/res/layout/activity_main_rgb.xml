@@ -3,15 +3,15 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:background="@color/light_silver">
+              android:background="?viewBackground">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/activity_main_sliding_tabs"
         style="@style/RGBTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@color/white"
-        app:tabMode="fixed"/>
+        app:tabMode="fixed"
+        app:elevation="4dp"/>
 
     <com.fastebro.androidrgbtool.rgb.widget.CustomSwipeViewPager
         android:id="@+id/activity_main_viewpager"

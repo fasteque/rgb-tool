@@ -2,13 +2,17 @@ package com.fastebro.androidrgbtool.palette;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.RGBToolApplication;
+import com.fastebro.androidrgbtool.utils.ClipboardUtils;
 import com.fastebro.androidrgbtool.utils.PaletteUtils;
 
 import java.util.ArrayList;
@@ -59,9 +63,13 @@ class ImagePaletteAdapter extends BaseAdapter {
         }
 
         holder.color.setBackgroundColor(swatches.get(position).getRgb());
-        holder.rgb.setText("#" + Integer.toHexString(swatches.get(position).getRgb()).toUpperCase());
+        holder.rgb.setText(String.format("#%s", Integer.toHexString(swatches.get(position).getRgb()).toUpperCase()));
         holder.type.setText(PaletteUtils.getSwatchDescription(context, swatches.get(position).getType()));
-
+        holder.copy.setOnClickListener(view -> {
+            final String colorText = Integer.toHexString(swatches.get(position).getRgb()).toUpperCase();
+            ClipboardUtils.copyToClipboard(colorText);
+            Snackbar.make(view, colorText + " " + RGBToolApplication.getCtx().getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
+        });
         return convertView;
     }
 
@@ -69,6 +77,7 @@ class ImagePaletteAdapter extends BaseAdapter {
         @BindView(R.id.palette_item_color) View color;
         @BindView(R.id.palette_item_rgb) TextView rgb;
         @BindView(R.id.palette_item_type) TextView type;
+        @BindView(R.id.hexadecimalCopy) ImageButton copy;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

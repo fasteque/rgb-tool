@@ -9,4 +9,11 @@
         <attr name="circleGap" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="RGBTool">
+        <attr name="viewBackground" format="color"/>
+        <attr name="vectorColor" format="color"/>
+        <attr name="ctxVectorColor" format="color"/>
+        <attr name="cardStyle" format="reference"/>
+        <attr name="tabTextColor" format="color"/>
+    </declare-styleable>
 </resources>

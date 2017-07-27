@@ -4,27 +4,34 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/rgb_panel_margin_top"
-    android:layout_marginBottom="@dimen/rgb_panel_margin_bottom" >
+    android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
+    style="?cardStyle">
     <LinearLayout android:id="@+id/rgb_panel"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/card_background_translucent"
         android:clickable="true" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="2dp"
-            android:orientation="vertical"
-            android:gravity="right" >
+            android:orientation="horizontal">
 
+            <View
+                android:id="@+id/color_view"
+                android:layout_width="64dp"
+                android:layout_height="32dp"/>
+            <Space
+                android:layout_width="64dp"
+                android:layout_height="wrap_content" />
             <ImageButton
                 android:id="@+id/btn_dismiss_panel"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:background="@null"
-                android:src="@drawable/btn_dismiss" />
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/btn_dismiss"
+                android:layout_gravity="end"/>
 
         </LinearLayout>
 
@@ -44,7 +51,7 @@
                 android:id="@+id/rgb_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+                android:layout_marginStart="@dimen/rgb_panel_margin_left"
                 style="@style/RGBPanelComponentLabel" />
 
         </LinearLayout>
@@ -65,7 +72,7 @@
                 android:id="@+id/hsb_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
+                android:layout_marginStart="@dimen/rgb_panel_margin_left"
                 style="@style/RGBPanelComponentLabel" />
 
         </LinearLayout>
@@ -86,8 +93,9 @@
                 android:id="@+id/hex_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                style="@style/RGBPanelComponent" />
+                android:layout_marginStart="@dimen/rgb_panel_margin_left"
+                style="@style/RGBPanelComponent"
+                />
 
         </LinearLayout>
 

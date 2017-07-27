@@ -2,8 +2,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="silver">#FFC0C0C0</color>
-    <color name="dark_gray_2">#FF4a494C</color>
     <color name="dark_gray">#FF787878</color>
+    <color name="dark_gray_2">#FF4a494C</color>
     <color name="light_silver">#FFEEEEEE</color>
     <color name="white_translucent">#88FFFFFF</color>
     <color name="red">#F44336</color>
@@ -13,16 +13,29 @@
     <color name="black_translucent">#22000000</color>
 
     <!-- Material Theme colors -->
-    <color name="primary">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
-    <color name="accent">#FF9800</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#BDBDBD</color>
+    <!-- Light Theme -->
+    <color name="light_splash_screen">#42a5f5</color>
+    <color name="light_primary">#ffffff</color>
+    <color name="light_primary_dark">#9e9e9e</color>
+    <color name="light_primary_light">#C5CAE9</color>
+    <color name="light_accent">#1e88e5</color>
+    <color name="light_vector_icons">#414141</color>
+    <color name="light_ctx_vector_icons">#757575</color>
+    <color name="light_tab_text_color">#616161</color>
 
-    <color name="transparent_accent">#99FF9800</color>
+    <color name="transparent_accent">#991e88e5</color>
+
+    <!-- Dark Theme -->
+    <color name="dark_splash_screen">#141414</color>
+    <color name="dark_primary">#212121</color>
+    <color name="dark_primary_dark">#181818</color>
+    <color name="dark_primary_light">#424242</color>
+    <color name="dark_accent">#4a81d3</color>
+    <color name="dark_vector_icons">#ffffff</color>
+    <color name="dark_ctx_vector_icons">#9e9e9e</color>
+    <color name="dark_tab_text_color">#616161</color>
+    <color name="dark_card">#212121</color>
+
 
     <!-- Live picker -->
     <color name="live_picker_pointer_color">#80FFFFFF</color>

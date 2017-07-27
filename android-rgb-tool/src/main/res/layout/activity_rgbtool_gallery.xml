@@ -2,8 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".gallery.RGBToolGalleryActivity"
-                android:background="@color/white" >
+                tools:context=".gallery.RGBToolGalleryActivity">
 
     <GridView
         android:id="@+id/grid_view"
@@ -15,7 +14,7 @@
         android:verticalSpacing="@dimen/rgb_grid_view_vertical_spacing"
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="none"
-        android:listSelector="@color/accent"
+        android:listSelector="?colorAccent"
         android:stretchMode="columnWidth"
         android:gravity="center" />
 
