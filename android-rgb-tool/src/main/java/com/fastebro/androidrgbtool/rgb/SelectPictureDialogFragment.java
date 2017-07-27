@@ -8,8 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
+
+import org.acra.ACRA;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +63,12 @@ public class SelectPictureDialogFragment extends DialogFragment implements Selec
                 break;
             case 2:
                 if (getActivity() != null) {
-                    ((MainActivity) getActivity()).dispatchTakePictureIntent();
+                    try {
+                        ((MainActivity) getActivity()).dispatchTakePictureIntent();
+                    } catch (Exception e){
+                        ACRA.getErrorReporter().handleException(e);
+                        Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                    }
                     dismiss();
                 }
                 break;

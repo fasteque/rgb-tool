@@ -4,9 +4,11 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -16,9 +18,12 @@ import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.commons.EventBaseFragment;
 import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
+import com.fastebro.androidrgbtool.utils.ClipboardUtils;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +47,10 @@ public class MainColorFragment extends EventBaseFragment {
     // Hexadecimal color value.
     @BindView(R.id.tv_hexadecimal)
     TextView tvHexadecimal;
+
+    // Copy Hexadecimal color value.
+    @BindView(R.id.hexadecimalCopy)
+    ImageButton buttonCopyHexadecimal;
 
     @BindView(R.id.red_seek_bar)
     SeekBar seekBarRed;
@@ -114,6 +123,11 @@ public class MainColorFragment extends EventBaseFragment {
             });
 
             refreshUI();
+            buttonCopyHexadecimal.setOnClickListener(v -> {
+                final String colorText = tvHexadecimal.getText().toString().substring(1);
+                ClipboardUtils.copyToClipboard(colorText);
+                Snackbar.make(v, colorText + " " + getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
+            });
         }
     }
 
@@ -153,6 +167,7 @@ public class MainColorFragment extends EventBaseFragment {
                 ColorUtils.RGBToHex(((MainActivity) getActivity()).getBlueColor()));
 
         tvHexadecimal.setText(hexValue);
+
     }
 
     private void saveColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent, String
@@ -203,11 +218,11 @@ public class MainColorFragment extends EventBaseFragment {
                     redToolTip.setX((seekBarLeft / 2) + thumbRect.left);
 
                     if (progress < 10) {
-                        redToolTip.setText("  " + ((MainActivity) getActivity()).getRedColor());
+                        redToolTip.setText(String.format(Locale.ENGLISH, "  %d", ((MainActivity) getActivity()).getRedColor()));
                     } else if (progress < 100) {
-                        redToolTip.setText(" " + ((MainActivity) getActivity()).getRedColor());
+                        redToolTip.setText(String.format(Locale.ENGLISH, " %d", ((MainActivity) getActivity()).getRedColor()));
                     } else {
-                        redToolTip.setText(((MainActivity) getActivity()).getRedColor() + "");
+                        redToolTip.setText(String.format(Locale.ENGLISH, "%d", ((MainActivity) getActivity()).getRedColor()));
                     }
                 }
 
@@ -218,11 +233,11 @@ public class MainColorFragment extends EventBaseFragment {
 
                     greenToolTip.setX((seekBarLeft / 2) + thumbRect.left);
                     if (progress < 10) {
-                        greenToolTip.setText("  " + ((MainActivity) getActivity()).getGreenColor());
+                        greenToolTip.setText(String.format(Locale.ENGLISH, "  %d", ((MainActivity) getActivity()).getGreenColor()));
                     } else if (progress < 100) {
-                        greenToolTip.setText(" " + ((MainActivity) getActivity()).getGreenColor());
+                        greenToolTip.setText(String.format(Locale.ENGLISH, " %d", ((MainActivity) getActivity()).getGreenColor()));
                     } else {
-                        greenToolTip.setText(((MainActivity) getActivity()).getGreenColor() + "");
+                        greenToolTip.setText(String.format(Locale.ENGLISH, "%d", ((MainActivity) getActivity()).getGreenColor()));
                     }
                 }
 
@@ -233,11 +248,11 @@ public class MainColorFragment extends EventBaseFragment {
 
                     blueToolTip.setX((seekBarLeft / 2) + thumbRect.left);
                     if (progress < 10) {
-                        blueToolTip.setText("  " + ((MainActivity) getActivity()).getBlueColor());
+                        blueToolTip.setText(String.format(Locale.ENGLISH, "  %d", ((MainActivity) getActivity()).getBlueColor()));
                     } else if (progress < 100) {
-                        blueToolTip.setText(" " + ((MainActivity) getActivity()).getBlueColor());
+                        blueToolTip.setText(String.format(Locale.ENGLISH, " %d", ((MainActivity) getActivity()).getBlueColor()));
                     } else {
-                        blueToolTip.setText(((MainActivity) getActivity()).getBlueColor() + "");
+                        blueToolTip.setText(String.format(Locale.ENGLISH, "%d", ((MainActivity) getActivity()).getBlueColor()));
                     }
                 }
 
@@ -248,11 +263,11 @@ public class MainColorFragment extends EventBaseFragment {
 
                     opacityToolTip.setX((seekBarLeft / 2) + thumbRect.left);
                     if (progress < 10) {
-                        opacityToolTip.setText("  " + ((MainActivity) getActivity()).getOpacity());
+                        opacityToolTip.setText(String.format(Locale.ENGLISH, "  %d", ((MainActivity) getActivity()).getOpacity()));
                     } else if (progress < 100) {
-                        opacityToolTip.setText(" " + ((MainActivity) getActivity()).getOpacity());
+                        opacityToolTip.setText(String.format(Locale.ENGLISH, " %d", ((MainActivity) getActivity()).getOpacity()));
                     } else {
-                        opacityToolTip.setText(((MainActivity) getActivity()).getOpacity() + "");
+                        opacityToolTip.setText(String.format(Locale.ENGLISH, "%d", ((MainActivity) getActivity()).getOpacity()));
                     }
                 }
 

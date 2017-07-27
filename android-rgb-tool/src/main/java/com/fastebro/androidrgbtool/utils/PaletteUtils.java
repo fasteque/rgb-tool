@@ -18,6 +18,7 @@ public final class PaletteUtils {
 
     }
 
+    //TODO: Context can be replaced with RGBToolApplication.getCtx()
     public static String getSwatchDescription(@NonNull Context context, PaletteSwatch.SwatchType type) {
         switch (type) {
             case VIBRANT:

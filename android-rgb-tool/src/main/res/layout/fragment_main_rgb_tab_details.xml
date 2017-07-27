@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/rgb_top_panel"
@@ -232,8 +232,15 @@
                     android:paddingEnd="@dimen/default_margin"
                     android:paddingStart="@dimen/default_margin"
                     android:paddingTop="@dimen/padding_small"
-                    android:textColor="@color/silver"
                     android:textSize="@dimen/rgb_text_size_medium"/>
+
+                <ImageButton
+                    android:id="@+id/complementaryCopy"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:srcCompat="@drawable/ic_content_copy"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:background="?selectableItemBackgroundBorderless"/>
 
             </LinearLayout>
 
@@ -285,9 +292,15 @@
                     android:paddingEnd="@dimen/default_margin"
                     android:paddingStart="@dimen/default_margin"
                     android:paddingTop="@dimen/padding_small"
-                    android:textColor="@color/silver"
                     android:textSize="@dimen/rgb_text_size_medium"/>
 
+                <ImageButton
+                    android:id="@+id/contrastCopy"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:srcCompat="@drawable/ic_content_copy"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:background="?selectableItemBackgroundBorderless"/>
             </LinearLayout>
 
         </LinearLayout>

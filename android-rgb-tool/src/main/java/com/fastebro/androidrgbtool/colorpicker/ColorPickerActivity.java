@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.graphics.Palette;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,18 +16,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.palette.PaletteSwatch;
-import com.fastebro.androidrgbtool.palette.ImagePaletteActivity;
 import com.fastebro.androidrgbtool.commons.BaseActivity;
+import com.fastebro.androidrgbtool.palette.ImagePaletteActivity;
+import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 import com.fastebro.androidrgbtool.widgets.RGBPanelData;
+
+import java.io.File;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.senab.photoview.PhotoViewAttacher;
-
-import java.io.File;
-import java.util.ArrayList;
 
 
 public class ColorPickerActivity extends BaseActivity {
@@ -49,7 +50,7 @@ public class ColorPickerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker);
-
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         ButterKnife.bind(this);
 
         if (getSupportActionBar() != null) {

@@ -3,8 +3,8 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">Galleria RGB Tool</string>
-    <string name="argb_label">ARGB</string>
     <string name="rgb_label">RGB</string>
+    <string name="argb_label">ARGB</string>
     <string name="hsb_label">HSB</string>
     <string name="color_hexadecimal_label">HEX</string>
     <string name="color_list_empty">Nessun colore</string>
@@ -64,6 +64,8 @@
     <string name="error_open_gallery_image">Errore: l\'immagine potrebbe non essere nella memoria locale</string>
 
     <!-- Attributions -->
+    <string name="pref_category_ui">UI</string>
+    <string name="pref_theme">App A Tema</string>
     <string name="pref_help">Supporto</string>
     <string name="pref_report_issue">Segnala un problema</string>
     <string name="pref_send_feedback">Invia un feedback</string>
@@ -91,7 +93,6 @@
     <!-- Color details -->
     <string name="color_details_as_text_title">Testo</string>
     <string name="color_details_as_background_title">Sfondo</string>
-    <string name="color_details_colors_title">Colori</string>
     <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
     <string name="color_details_color">Colore - #%s</string>
     <string name="color_details_complementary">Complementare - #%s</string>
@@ -103,4 +104,11 @@
     <string name="permissions_not_granted">Il permesso non è stato concesso.</string>
     <string name="permissions_granted">Il permesso di archiviazione è stato concesso. È ora possibile
         utilizzare la funzionalità.</string>
+
+    <!-- Errors -->
+    <string name="error">Errore</string>
+    <string name="error_send_mail">Si prega di inviare la segnalazione dell\'errore</string>
+    <string name="error_dlg_content">Un errore imprevisto si è verificato. Ci scusiamo per il disagio.</string>
+    <string name="prefs_acra">ACRA</string>
+    <string name="pref_github">GitHub</string>
 </resources>

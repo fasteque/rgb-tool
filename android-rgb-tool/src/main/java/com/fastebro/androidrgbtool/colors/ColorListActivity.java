@@ -3,7 +3,6 @@ package com.fastebro.androidrgbtool.colors;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -16,11 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.commons.EventBaseActivity;
 import com.fastebro.androidrgbtool.model.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.model.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.model.events.ColorShareEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateSaveColorUIEvent;
-import com.fastebro.androidrgbtool.commons.EventBaseActivity;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.DatabaseUtils;
 

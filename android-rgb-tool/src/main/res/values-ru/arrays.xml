@@ -2,7 +2,11 @@
 <resources>
     <string-array name="pick_color_array">
         <item>Галерея RGB Tool</item>
-        <item>Галерея устройство</item>
-        <item>Сфотографировать</item>
+        <item>Выбрать с устройства</item>
+        <item>Снимок с камеры</item>
+    </string-array>
+    <string-array name="theme_names">
+        <item>Светлая</item>
+        <item>Тёмная</item>
     </string-array>
 </resources>

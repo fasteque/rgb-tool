@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.fastebro.androidrgbtool.colors.ColorDataContract;
 import com.fastebro.androidrgbtool.helpers.SQLiteRGBToolHelper;
 
 import java.util.Arrays;

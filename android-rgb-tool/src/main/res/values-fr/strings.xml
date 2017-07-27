@@ -3,8 +3,8 @@
 
     <string name="app_name">RGB Tool</string>
     <string name="rgb_gallery_name">Galerie outil RVB</string>
-    <string name="argb_label">ARVB</string>
     <string name="rgb_label">RVB</string>
+    <string name="argb_label">ARVB</string>
     <string name="hsb_label">TSL</string>
     <string name="color_hexadecimal_label">HEX</string>
     <string name="color_list_empty">Aucune couleur</string>
@@ -64,6 +64,8 @@
     <string name="error_open_gallery_image">Erreur : l\'image peut ne pas être dans le stockage local</string>
 
     <!-- Attributions -->
+    <string name="pref_category_ui">UI</string>
+    <string name="pref_theme">App Thème</string>
     <string name="pref_help">Aide</string>
     <string name="pref_report_issue">Signaler un problème</string>
     <string name="pref_send_feedback">Envoyer un commentaire</string>
@@ -91,7 +93,6 @@
     <!-- Color details -->
     <string name="color_details_as_text_title">Texte</string>
     <string name="color_details_as_background_title">Fond</string>
-    <string name="color_details_colors_title">Couleurs</string>
     <string name="color_details_text_sample">Lorem ipsum dolor sit amet&#8230;</string>
     <string name="color_details_color">Couleur - #%s</string>
     <string name="color_details_complementary">Complémentaire - #%s</string>
@@ -101,4 +102,11 @@
     <string name="rationale_external_storage">L\'accès au stockage est nécessaire pour enregistrer et ouvrir des photos.</string>
     <string name="permissions_not_granted">Autorisation non accordée.</string>
     <string name="permissions_granted">L\'accès au stockage a été accordée. Vous pouvez maintenant utiliser la fonction.</string>
+
+    <!-- Errors -->
+    <string name="error">Erreur</string>
+    <string name="error_send_mail">Please send the error report.</string>
+    <string name="error_dlg_content">Une erreur inattendue s\'est produite. Désolé pour la gêne occasionnée.</string>
+    <string name="prefs_acra">ACRA</string>
+    <string name="pref_github">GitHub</string>
 </resources>

@@ -5,11 +5,11 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.model.events.ColorShareEvent;

@@ -6,13 +6,16 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.utils.ClipboardUtils;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 
 import java.util.Locale;
@@ -63,6 +66,12 @@ public class ColorDetailsFragment extends Fragment {
     TextView contrastColorBg;
     @BindView(R.id.contrastColorText)
     TextView contrastColorText;
+
+    //Copy buttons
+    @BindView(R.id.contrastCopy)
+    ImageButton buttonContrastCopy;
+    @BindView(R.id.complementaryCopy)
+    ImageButton buttonComplementaryCopy;
 
     // Color samples.
     @BindView(R.id.firstColorSampleTextNormal)
@@ -134,9 +143,12 @@ public class ColorDetailsFragment extends Fragment {
         updateColorSample();
         updateRGBValues();
         setRGBOValuesClickListener();
+        setCopyClickListener();
         updateHSBValues();
         updateHSLValues();
     }
+
+
 
     private void updateColorDetails() {
         int redColor = ((MainActivity) getActivity()).getRedColor();
@@ -189,6 +201,20 @@ public class ColorDetailsFragment extends Fragment {
             tvRGB_B.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getBlueColor()));
             tvRGB_O.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getOpacity()));
         }
+    }
+
+    private void setCopyClickListener() {
+        final String[] colorText = new String[1];
+        buttonComplementaryCopy.setOnClickListener(v -> {
+            colorText[0] = complementaryColorText.getText().toString();
+            ClipboardUtils.copyToClipboard(colorText[0]);
+            Snackbar.make(buttonComplementaryCopy, colorText[0] + " " + getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
+        });
+        buttonContrastCopy.setOnClickListener(v -> {
+            colorText[0] = contrastColorText.getText().toString();
+            ClipboardUtils.copyToClipboard(colorText[0]);
+            Snackbar.make(buttonContrastCopy, colorText[0] + " " + getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
+        });
     }
 
     private void updateHSBValues() {

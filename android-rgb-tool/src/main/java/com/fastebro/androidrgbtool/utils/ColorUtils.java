@@ -3,6 +3,11 @@ package com.fastebro.androidrgbtool.utils;
 import android.graphics.Color;
 import android.support.annotation.IntRange;
 
+import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.RGBToolApplication;
+
+import java.util.Locale;
+
 public final class ColorUtils {
 
     private ColorUtils() {
@@ -10,11 +15,11 @@ public final class ColorUtils {
     }
 
     public static String getRGB(float n) {
-        return String.format("%.0f", n).replaceAll("\\.0*$", "");
+        return String.format(Locale.ENGLISH, "%.0f", n).replaceAll("\\.0*$", "");
     }
 
     public static String RGBToHex(int n) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(Integer.toHexString(n));
         // Add '0' character at first index if the string length < 2.
         if (sb.length() < 2) {
@@ -83,13 +88,13 @@ public final class ColorUtils {
         return hsl;
     }
 
-    public static String getColorMessage(@IntRange(from=0, to=255) int rgbRColor,
-                                         @IntRange(from=0, to=255) int rgbGColor,
-                                         @IntRange(from=0, to=255) int rgbBColor,
-                                         @IntRange(from=0, to=255) int rgbOpacity) {
+    public static String getColorMessage(@IntRange(from = 0, to = 255) int rgbRColor,
+                                         @IntRange(from = 0, to = 255) int rgbGColor,
+                                         @IntRange(from = 0, to = 255) int rgbBColor,
+                                         @IntRange(from = 0, to = 255) int rgbOpacity) {
         StringBuilder message = new StringBuilder();
 
-        message.append("RGB Tool");
+        message.append(RGBToolApplication.getCtx().getString(R.string.app_name));
         message.append(System.getProperty("line.separator"));
 
         message.append("RGB - ");
@@ -108,11 +113,11 @@ public final class ColorUtils {
         message.append("HSB - ");
         float[] hsb = ColorUtils.RGBToHSB(rgbRColor, rgbGColor, rgbBColor);
         message.append("H: ");
-        message.append(String.format("%.0f", hsb[0]));
+        message.append(String.format(Locale.ENGLISH, "%.0f", hsb[0]));
         message.append("  S: ");
-        message.append(String.format("%.0f%%", (hsb[1] * 100.0f)));
+        message.append(String.format(Locale.ENGLISH, "%.0f%%", (hsb[1] * 100.0f)));
         message.append("  B: ");
-        message.append(String.format("%.0f%%", (hsb[2] * 100.0f)));
+        message.append(String.format(Locale.ENGLISH, "%.0f%%", (hsb[2] * 100.0f)));
         message.append(System.getProperty("line.separator"));
 
         message.append("HEX - ");
@@ -128,36 +133,29 @@ public final class ColorUtils {
 
     public static String getComplementaryColorMessage(short[] argbColorValues, short[] argbComplementaryColorValues,
                                                       short[] argbContrastColorValues) {
-        StringBuilder message = new StringBuilder();
-
-        message.append("RGB Tool");
-        message.append(System.getProperty("line.separator"));
-
-        message.append("Color - ");
-        message.append(String.format("#%s%s%s%s",
-                ColorUtils.RGBToHex(argbColorValues[0]),
-                ColorUtils.RGBToHex(argbColorValues[1]),
-                ColorUtils.RGBToHex(argbColorValues[2]),
-                ColorUtils.RGBToHex(argbColorValues[3])));
-        message.append(System.getProperty("line.separator"));
-
         // Opacity is fixed as FF.
-        message.append("Complementary - ");
-        message.append(String.format("#FF%s%s%s",
-                ColorUtils.RGBToHex(argbComplementaryColorValues[1]),
-                ColorUtils.RGBToHex(argbComplementaryColorValues[2]),
-                ColorUtils.RGBToHex(argbComplementaryColorValues[3])));
-        message.append(System.getProperty("line.separator"));
 
-        // Opacity is fixed as FF.
-        message.append("Contrast - ");
-        message.append(String.format("#FF%s%s%s",
-                ColorUtils.RGBToHex(argbContrastColorValues[1]),
-                ColorUtils.RGBToHex(argbContrastColorValues[2]),
-                ColorUtils.RGBToHex(argbContrastColorValues[3])));
-        message.append(System.getProperty("line.separator"));
-
-        return message.toString();
+        return RGBToolApplication.getCtx().getString(R.string.app_name) +
+                System.getProperty("line.separator") +
+                "Color - " +
+                String.format("#%s%s%s%s",
+                        ColorUtils.RGBToHex(argbColorValues[0]),
+                        ColorUtils.RGBToHex(argbColorValues[1]),
+                        ColorUtils.RGBToHex(argbColorValues[2]),
+                        ColorUtils.RGBToHex(argbColorValues[3])) +
+                System.getProperty("line.separator") +
+                "Complementary - " +
+                String.format("#FF%s%s%s",
+                        ColorUtils.RGBToHex(argbComplementaryColorValues[1]),
+                        ColorUtils.RGBToHex(argbComplementaryColorValues[2]),
+                        ColorUtils.RGBToHex(argbComplementaryColorValues[3])) +
+                System.getProperty("line.separator") +
+                "Contrast - " +
+                String.format("#FF%s%s%s",
+                        ColorUtils.RGBToHex(argbContrastColorValues[1]),
+                        ColorUtils.RGBToHex(argbContrastColorValues[2]),
+                        ColorUtils.RGBToHex(argbContrastColorValues[3])) +
+                System.getProperty("line.separator");
     }
 
     public static int[] hexToRGB(String hexValue) {
