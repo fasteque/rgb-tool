@@ -15,5 +15,6 @@
         <attr name="ctxVectorColor" format="color"/>
         <attr name="cardStyle" format="reference"/>
         <attr name="tabTextColor" format="color"/>
+        <attr name="bottomSheetStyle" format="reference"/>
     </declare-styleable>
 </resources>

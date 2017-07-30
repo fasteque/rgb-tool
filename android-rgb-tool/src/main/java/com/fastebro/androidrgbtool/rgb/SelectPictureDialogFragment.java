@@ -1,7 +1,7 @@
 package com.fastebro.androidrgbtool.rgb;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +22,7 @@ import butterknife.Unbinder;
  * Created by danielealtomare on 21/06/14.
  * Project: rgb-tool
  */
-public class SelectPictureDialogFragment extends DialogFragment implements SelectPictureListAdapter.ItemClickListener {
+public class SelectPictureDialogFragment extends BottomSheetDialogFragment implements SelectPictureListAdapter.ItemClickListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private Unbinder unbinder;

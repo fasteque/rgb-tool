@@ -1,6 +1,6 @@
 package com.fastebro.androidrgbtool.commons;
 
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 

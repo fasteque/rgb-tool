@@ -64,7 +64,7 @@ class ImagePaletteAdapter extends BaseAdapter {
 
         holder.color.setBackgroundColor(swatches.get(position).getRgb());
         holder.rgb.setText(String.format("#%s", Integer.toHexString(swatches.get(position).getRgb()).toUpperCase()));
-        holder.type.setText(PaletteUtils.getSwatchDescription(context, swatches.get(position).getType()));
+        holder.type.setText(PaletteUtils.getSwatchDescription(swatches.get(position).getType()));
         holder.copy.setOnClickListener(view -> {
             final String colorText = Integer.toHexString(swatches.get(position).getRgb()).toUpperCase();
             ClipboardUtils.copyToClipboard(colorText);

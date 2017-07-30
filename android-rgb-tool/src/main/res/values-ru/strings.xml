@@ -13,6 +13,7 @@
     <!-- Main tabs -->
     <string name="main_tab_color">Цвет</string>
     <string name="main_tab_details">Детали</string>
+    <string name="main_tab_color_list">Список цветов</string>
 
     <!-- Common actions -->
     <string name="action_common_set">OK</string>
@@ -21,7 +22,6 @@
 
     <!-- MainActivity action items -->
     <string name="action_camera">Цвет из изображения</string>
-    <string name="action_color_list">Список цветов</string>
     <string name="action_print">Печать цвета</string>
     <string name="action_print_palette">Печать палитры</string>
     <string name="action_generic_share">Поделиться</string>

@@ -21,7 +21,7 @@
 
     <!-- MainActivity action items -->
     <string name="action_camera">Colore da immagine</string>
-    <string name="action_color_list">Lista colori</string>
+    <string name="main_tab_color_list">Lista colori</string>
     <string name="action_print">Stampa colore</string>
     <string name="action_print_palette">Stampa palette</string>
     <string name="action_generic_share">Condividi</string>

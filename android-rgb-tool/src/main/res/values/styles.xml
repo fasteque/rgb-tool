@@ -48,4 +48,13 @@
     <style name="CardViewDark" parent="CardView.Dark">
         <item name="cardBackgroundColor">@color/dark_card</item>
     </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="BottomSheetDialog.Dark" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:background">@color/dark_card</item>
+        <item name="android:textColor">@color/light_silver</item>
+    </style>
 </resources>

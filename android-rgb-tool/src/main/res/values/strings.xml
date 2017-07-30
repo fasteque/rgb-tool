@@ -13,6 +13,7 @@
     <!-- Main tabs -->
     <string name="main_tab_color">Color</string>
     <string name="main_tab_details">Details</string>
+    <string name="main_tab_color_list">Color list</string>
 
     <!-- Common actions -->
     <string name="action_common_set">Set</string>
@@ -21,7 +22,6 @@
 
     <!-- MainActivity action items -->
     <string name="action_camera">Color from image</string>
-    <string name="action_color_list">Color list</string>
     <string name="action_print">Print color</string>
     <string name="action_print_palette">Print palette</string>
     <string name="action_generic_share">Share</string>

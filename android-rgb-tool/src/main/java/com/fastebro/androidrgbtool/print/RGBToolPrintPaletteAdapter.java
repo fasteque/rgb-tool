@@ -161,7 +161,7 @@ public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
             paint.setColor(Color.BLACK);
             token = new StringBuilder();
             token.append("Type: ");
-            token.append(PaletteUtils.getSwatchDescription(context, swatches.get(i).getType()));
+            token.append(PaletteUtils.getSwatchDescription(swatches.get(i).getType()));
             canvas.drawText(token.toString(), leftMargin, titleBaseLine + (50 + (i * 100)), paint);
 
             token = new StringBuilder();

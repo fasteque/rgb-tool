@@ -3,6 +3,8 @@ package com.fastebro.androidrgbtool.rgb;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,7 @@ import butterknife.Unbinder;
  * Created by danielealtomare on 26/03/14.
  * Project: rgb-tool
  */
-public class HexInsertionFragment extends DialogFragment {
+public class HexInsertionFragment extends BottomSheetDialogFragment {
     @BindView(R.id.new_hex_value)
     EditText newHexValue;
     private Unbinder unbinder;
@@ -50,6 +52,7 @@ public class HexInsertionFragment extends DialogFragment {
         }
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

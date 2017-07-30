@@ -94,7 +94,7 @@ public class ColorDetailsFragment extends Fragment {
             };
 
             RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
-            fragment.show(getActivity().getSupportFragmentManager(), null);
+            fragment.show(((MainActivity) getActivity()).getSupportFragmentManager(), null);
         }
     };
 

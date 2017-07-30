@@ -1,9 +1,7 @@
 package com.fastebro.androidrgbtool.utils;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-
 import com.fastebro.androidrgbtool.R;
+import com.fastebro.androidrgbtool.RGBToolApplication;
 import com.fastebro.androidrgbtool.palette.PaletteSwatch;
 
 import java.util.ArrayList;
@@ -19,26 +17,26 @@ public final class PaletteUtils {
     }
 
     //TODO: Context can be replaced with RGBToolApplication.getCtx()
-    public static String getSwatchDescription(@NonNull Context context, PaletteSwatch.SwatchType type) {
+    public static String getSwatchDescription(PaletteSwatch.SwatchType type) {
         switch (type) {
             case VIBRANT:
-                return context.getString(R.string.swatch_vibrant);
+                return RGBToolApplication.getCtx().getString(R.string.swatch_vibrant);
             case LIGHT_VIBRANT:
-                return context.getString(R.string.swatch_light_vibrant);
+                return RGBToolApplication.getCtx().getString(R.string.swatch_light_vibrant);
             case DARK_VIBRANT:
-                return context.getString(R.string.swatch_dark_vibrant);
+                return RGBToolApplication.getCtx().getString(R.string.swatch_dark_vibrant);
             case MUTED:
-                return context.getString(R.string.swatch_muted);
+                return RGBToolApplication.getCtx().getString(R.string.swatch_muted);
             case LIGHT_MUTED:
-                return context.getString(R.string.swatch_light_muted);
+                return RGBToolApplication.getCtx().getString(R.string.swatch_light_muted);
             case DARK_MUTED:
-                return context.getString(R.string.swatch_dark_muted);
+                return RGBToolApplication.getCtx().getString(R.string.swatch_dark_muted);
             default:
                 return "";
         }
     }
 
-    public static String getPaletteMessage(@NonNull Context context, String filename, ArrayList<PaletteSwatch> swatches) {
+    public static String getPaletteMessage(String filename, ArrayList<PaletteSwatch> swatches) {
         StringBuilder message = new StringBuilder();
 
         message.append("RGB Tool - Image Palette");
@@ -51,7 +49,7 @@ public final class PaletteUtils {
         }
 
         for(PaletteSwatch swatch : swatches) {
-            message.append(PaletteUtils.getSwatchDescription(context, swatch.getType()));
+            message.append(PaletteUtils.getSwatchDescription(swatch.getType()));
             message.append(": ");
             message.append("HEX - ");
             message.append("#");

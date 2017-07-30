@@ -1,5 +1,7 @@
 package com.fastebro.androidrgbtool.rgb;
-
+/* ============================ Replaced by BottomNavigationView ============================ */
+// BottomNavigationView do not support swipe gestures by default.
+/*
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -8,10 +10,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.fastebro.androidrgbtool.R;
 
+*/
 /**
  * Created by danielealtomare on 16/04/17.
  * Project: rgb-tool
- */
+ *//*
+
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -51,3 +55,5 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
         return context.getString(R.string.main_tab_color);
     }
 }
+
+*/

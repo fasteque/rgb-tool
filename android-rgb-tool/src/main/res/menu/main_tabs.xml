@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bottom_main"
+        android:title="@string/main_tab_color"
+        android:icon="@drawable/ic_bottombar_main"
+        android:checkable="true"/>
+    <item android:id="@+id/bottom_details"
+        android:title="@string/main_tab_details"
+        android:icon="@drawable/ic_bottombar_details"
+        android:checkable="true"/>
+    <item android:id="@+id/bottom_list"
+        android:title="@string/main_tab_color_list"
+        android:icon="@drawable/ic_bottombar_color_list"
+        android:checkable="true"/>
+</menu>

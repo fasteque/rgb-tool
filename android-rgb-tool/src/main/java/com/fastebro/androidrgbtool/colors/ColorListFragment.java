@@ -4,18 +4,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.commons.EventBaseActivity;
+import com.fastebro.androidrgbtool.commons.EventBaseFragment;
 import com.fastebro.androidrgbtool.model.events.ColorDeleteEvent;
 import com.fastebro.androidrgbtool.model.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.model.events.ColorShareEvent;
@@ -28,34 +30,37 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by danielealtomare on 15/02/15.
  * Project: rgb-tool
  */
-public class ColorListActivity extends EventBaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class ColorListFragment extends EventBaseFragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
     @BindView(android.R.id.list)
     ListView listView;
     @BindView(R.id.list_empty_progress)
     LinearLayout progressBar;
     @BindView(R.id.list_empty_text)
     TextView emptyListMessage;
+    private Unbinder unbinder;
 
     private static final int GET_COLORS_REQUEST_ID = 0;
     private ColorListAdapter adapter;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_color_list);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_color_list, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
 
-        ButterKnife.bind(this);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-        adapter = new ColorListAdapter(this,
+        adapter = new ColorListAdapter(getActivity(),
                 R.layout.color_list_row, null,
                 new String[]{ColorDataContract.ColorEntry.COLUMN_COLOR_HEX},
                 new int[]{R.id.hex_value}, 0);
@@ -64,25 +69,22 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setAdapter(adapter);
 
-        getSupportLoaderManager().initLoader(GET_COLORS_REQUEST_ID, null, this);
-
+        getActivity().getSupportLoaderManager().initLoader(GET_COLORS_REQUEST_ID, null, this);
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    protected void onDestroy() {
-        getSupportLoaderManager().destroyLoader(GET_COLORS_REQUEST_ID);
+    public void onDestroy() {
+        getActivity().getSupportLoaderManager().destroyLoader(GET_COLORS_REQUEST_ID);
         EventBus.getDefault().post(new UpdateSaveColorUIEvent());
         super.onDestroy();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
-            finishAfterTransition();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unbinder != null) {
+            unbinder.unbind();
         }
     }
 
@@ -99,7 +101,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
             EventBus.getDefault().post(new ColorSelectEvent(rgbRValue,
                     rgbGValue, rgbBValue, rgbAValue, null));
 
-            finishAfterTransition();
+            getActivity().finishAfterTransition();
         }
     }
 
@@ -114,7 +116,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
         String select = "((" + ColorDataContract.ColorEntry.COLUMN_COLOR_HEX + " NOTNULL))";
-        return new CursorLoader(this, baseUri,
+        return new CursorLoader(getActivity(), baseUri,
                 DatabaseUtils.COLORS_SUMMARY_PROJECTION, select, null,
                 ColorDataContract.ColorEntry._ID + " DESC");
     }
@@ -147,7 +149,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
         String[] mSelectionArgs = {String.valueOf(event.colorId)};
 
-        getContentResolver().delete(
+        getActivity().getContentResolver().delete(
                 RGBToolContentProvider.CONTENT_URI,
                 mSelectionClause,
                 mSelectionArgs);
@@ -163,7 +165,7 @@ public class ColorListActivity extends EventBaseActivity implements AdapterView.
         String selectionClause = ColorDataContract.ColorEntry._ID + "=?";
         String[] selectionArgs = { String.valueOf(event.colorId) };
 
-        Cursor cursor = getContentResolver().query(RGBToolContentProvider.CONTENT_URI,
+        Cursor cursor = getActivity().getContentResolver().query(RGBToolContentProvider.CONTENT_URI,
                 projection,
                 selectionClause,
                 selectionArgs,

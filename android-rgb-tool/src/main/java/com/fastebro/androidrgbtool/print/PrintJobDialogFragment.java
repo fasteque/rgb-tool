@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
-import android.support.v4.app.DialogFragment;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +24,7 @@ import butterknife.Unbinder;
  * Created by danielealtomare on 26/03/14.
  * Project: rgb-tool
  */
-public class PrintJobDialogFragment extends DialogFragment {
+public class PrintJobDialogFragment extends BottomSheetDialogFragment {
     @BindView(R.id.message)
     EditText message;
     private Unbinder unbinder;

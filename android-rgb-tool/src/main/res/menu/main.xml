@@ -9,12 +9,6 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_color_list"
-        android:title="@string/action_color_list"
-        android:icon="@drawable/ic_menu_color_list"
-        android:orderInCategory="101"
-        app:showAsAction="ifRoom" />
-
     <item android:id="@+id/action_print"
         android:title="@string/action_print"
         android:icon="@drawable/ic_menu_print"

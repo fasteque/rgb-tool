@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.print.PrintManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
+import android.support.v7.widget.ShareActionProvider;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.commons.EventBaseActivity;
@@ -91,7 +91,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
     private void updateSharedPalette() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, PaletteUtils.getPaletteMessage(this, filename, swatches));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, PaletteUtils.getPaletteMessage(filename, swatches));
         shareIntent.setType("text/plain");
         setShareIntent(shareIntent);
     }
