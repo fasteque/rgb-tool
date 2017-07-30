@@ -57,13 +57,6 @@
             tools:targetApi="n">
         </activity>
         <activity
-            android:name=".colors.ColorListActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_color_list"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".settings.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
