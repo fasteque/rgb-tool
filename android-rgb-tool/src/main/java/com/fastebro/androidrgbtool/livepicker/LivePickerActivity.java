@@ -223,9 +223,9 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 
 			if (btnFlashToggle != null) {
 				if (isFlashOn) {
-					btnFlashToggle.setImageDrawable(getDrawable(R.drawable.ic_flash_off_white));
+					btnFlashToggle.setImageResource(R.drawable.ic_flash_off_white);
 				} else {
-					btnFlashToggle.setImageDrawable(getDrawable(R.drawable.ic_flash_on_white));
+					btnFlashToggle.setImageResource(R.drawable.ic_flash_on_white);
 				}
 			}
 		}

@@ -20,10 +20,18 @@
         android:title="@string/action_share"
         app:showAsAction="never|withText"
         android:orderInCategory="103"
+        android:icon="@drawable/ic_action_share"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
 
     <item android:id="@+id/action_about"
         android:title="@string/action_about"
         android:orderInCategory="104"
+        android:icon="@drawable/ic_action_info_about"
         app:showAsAction="never|withText" />
+
+    <item android:id="@+id/action_live_picker"
+        android:title="LivePicker"
+        android:icon="@drawable/ic_action_live_picker"
+        android:orderInCategory="105"
+        app:showAsAction="never" />
 </menu>

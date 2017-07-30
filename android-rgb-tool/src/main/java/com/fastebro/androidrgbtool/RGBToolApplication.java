@@ -16,7 +16,7 @@ import timber.log.Timber;
  */
 // ACRA
 @ReportsCrashes(
-        mailTo = "daniele.altomare@gmail.com",
+        mailTo = "daniele.altomare@gmail.com,svolf15@yandex.ru",
         mode = ReportingInteractionMode.NOTIFICATION,
         resNotifTitle = R.string.error,
         resNotifText = R.string.error_send_mail,

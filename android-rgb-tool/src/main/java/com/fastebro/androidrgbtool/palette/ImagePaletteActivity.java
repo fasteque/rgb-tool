@@ -8,10 +8,11 @@ import android.os.Bundle;
 import android.print.PrintManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
-import android.support.v7.widget.ShareActionProvider;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.commons.EventBaseActivity;
@@ -67,7 +68,11 @@ public class ImagePaletteActivity extends EventBaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.image_palette, menu);
-
+        // Set overflow menu icons visible
+        if (menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
         MenuItem item = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         updateSharedPalette();

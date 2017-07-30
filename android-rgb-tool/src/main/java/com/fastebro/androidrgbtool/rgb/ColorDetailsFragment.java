@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,18 +88,24 @@ public class ColorDetailsFragment extends Fragment {
 
     private final View.OnClickListener RGBAClickListener = v -> {
         if (isAdded()) {
-            short[] rgbaValues = new short[]{(short) ((MainActivity) getActivity()).getRedColor(),
-                    (short) ((MainActivity) getActivity()).getGreenColor(),
-                    (short) ((MainActivity) getActivity()).getBlueColor(),
-                    (short) ((MainActivity) getActivity()).getOpacity()
+            short[] rgbaValues = new short[]{
+                    (short) getMainActivity().getRedColor(),
+                    (short) getMainActivity().getGreenColor(),
+                    (short) getMainActivity().getBlueColor(),
+                    (short) getMainActivity().getOpacity()
             };
 
             RgbaInsertionFragment fragment = RgbaInsertionFragment.newInstance(rgbaValues);
-            fragment.show(((MainActivity) getActivity()).getSupportFragmentManager(), null);
+            fragment.show(getActivity().getSupportFragmentManager(), null);
         }
     };
 
     public ColorDetailsFragment() {
+    }
+
+    // Provide MainActivity instance more simplify
+    public MainActivity getMainActivity(){
+        return ((MainActivity) getActivity());
     }
 
     @Override
@@ -151,9 +158,9 @@ public class ColorDetailsFragment extends Fragment {
 
 
     private void updateColorDetails() {
-        int redColor = ((MainActivity) getActivity()).getRedColor();
-        int blueColor = ((MainActivity) getActivity()).getBlueColor();
-        int greenColor = ((MainActivity) getActivity()).getGreenColor();
+        int redColor = getMainActivity().getRedColor();
+        int blueColor = getMainActivity().getBlueColor();
+        int greenColor = getMainActivity().getGreenColor();
 
         int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
         setRoundedBackground(complementaryColorBg, complementaryColor);
@@ -166,10 +173,10 @@ public class ColorDetailsFragment extends Fragment {
 
     private void updateColorSample() {
         if (isAdded()) {
-            int redColor = ((MainActivity) getActivity()).getRedColor();
-            int blueColor = ((MainActivity) getActivity()).getBlueColor();
-            int greenColor = ((MainActivity) getActivity()).getGreenColor();
-            int opacity = ((MainActivity) getActivity()).getOpacity();
+            int redColor = getMainActivity().getRedColor();
+            int blueColor = getMainActivity().getBlueColor();
+            int greenColor = getMainActivity().getGreenColor();
+            int opacity = getMainActivity().getOpacity();
 
             // Text.
             firstColorSampleTextNormal.setTextColor(Color.argb(opacity, redColor, greenColor, blueColor));
@@ -187,8 +194,8 @@ public class ColorDetailsFragment extends Fragment {
                 secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black, getContext()
                         .getTheme()));
             } else {
-                firstColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.white));
-                secondColorSampleTextNormalBg.setTextColor(getResources().getColor(R.color.black));
+                firstColorSampleTextNormalBg.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
+                secondColorSampleTextNormalBg.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
             }
         }
     }
@@ -196,10 +203,10 @@ public class ColorDetailsFragment extends Fragment {
     private void updateRGBValues() {
         if (isAdded()) {
             // RGB channel: R, G, B, OPACITY.
-            tvRGB_R.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getRedColor()));
-            tvRGB_G.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getGreenColor()));
-            tvRGB_B.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getBlueColor()));
-            tvRGB_O.setText(ColorUtils.getRGB(((MainActivity) getActivity()).getOpacity()));
+            tvRGB_R.setText(ColorUtils.getRGB(getMainActivity().getRedColor()));
+            tvRGB_G.setText(ColorUtils.getRGB(getMainActivity().getGreenColor()));
+            tvRGB_B.setText(ColorUtils.getRGB(getMainActivity().getBlueColor()));
+            tvRGB_O.setText(ColorUtils.getRGB(getMainActivity().getOpacity()));
         }
     }
 
@@ -219,8 +226,8 @@ public class ColorDetailsFragment extends Fragment {
 
     private void updateHSBValues() {
         if (isAdded()) {
-            float[] hsb = ColorUtils.RGBToHSB(((MainActivity) getActivity()).getRedColor(),
-                    ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor());
+            float[] hsb = ColorUtils.RGBToHSB(getMainActivity().getRedColor(),
+                    getMainActivity().getGreenColor(), getMainActivity().getBlueColor());
 
             tvHSB_H.setText(String.format(Locale.ENGLISH, "%.0f", hsb[0]));
             tvHSB_S.setText(String.format(Locale.ENGLISH, "%.0f%%", (hsb[1] * 100.0f))); // % value.
@@ -230,8 +237,8 @@ public class ColorDetailsFragment extends Fragment {
 
     private void updateHSLValues() {
         if (isAdded()) {
-            float[] hsl = ColorUtils.RGBToHSL(((MainActivity) getActivity()).getRedColor(),
-                    ((MainActivity) getActivity()).getGreenColor(), ((MainActivity) getActivity()).getBlueColor(),
+            float[] hsl = ColorUtils.RGBToHSL(getMainActivity().getRedColor(),
+                    getMainActivity().getGreenColor(), getMainActivity().getBlueColor(),
                     null);
 
             tvHSL_H.setText(String.format(Locale.ENGLISH, "%.0f", hsl[0]));

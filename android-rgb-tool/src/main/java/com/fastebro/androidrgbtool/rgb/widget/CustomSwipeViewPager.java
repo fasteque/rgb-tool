@@ -1,14 +1,18 @@
 package com.fastebro.androidrgbtool.rgb.widget;
-
+/* ============================ Replaced by BottomNavigationView ============================ */
+// BottomNavigationView do not support swipe gestures by default.
+/*
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+*/
 /**
  * Created by danielealtomare on 28/04/17.
  * Project: rgb-tool
- */
+ *//*
+
 
 public class CustomSwipeViewPager extends ViewPager {
 
@@ -45,3 +49,4 @@ public class CustomSwipeViewPager extends ViewPager {
         this.enableSwipe = enableSwipe;
     }
 }
+*/

@@ -20,15 +20,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.widget.ShareActionProvider;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.colorpicker.ColorPickerActivity;
 import com.fastebro.androidrgbtool.colors.ColorListFragment;
 import com.fastebro.androidrgbtool.commons.EventBaseActivity;
 import com.fastebro.androidrgbtool.gallery.RGBToolGalleryActivity;
+import com.fastebro.androidrgbtool.livepicker.LivePickerActivity;
 import com.fastebro.androidrgbtool.model.entities.ScaledPicture;
 import com.fastebro.androidrgbtool.model.events.ColorSelectEvent;
 import com.fastebro.androidrgbtool.model.events.ErrorMessageEvent;
@@ -81,7 +83,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         super.onCreate(savedInstanceState);
 
         if (getSupportActionBar() != null) {
@@ -127,6 +128,12 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
+        // Set overflow menu icons visible
+        if (menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
+
         // Check if the device has a camera.
         MenuItem item = menu.findItem(R.id.action_camera);
 
@@ -155,6 +162,10 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
             case R.id.action_about:
                 showAbout();
                 return true;
+            case R.id.action_live_picker:{
+                startActivity(new Intent(this, LivePickerActivity.class));
+                return true;
+            }
             default:
                 return super.onOptionsItemSelected(item);
         }

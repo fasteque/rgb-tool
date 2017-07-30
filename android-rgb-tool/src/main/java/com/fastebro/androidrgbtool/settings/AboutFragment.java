@@ -19,6 +19,7 @@ import com.fastebro.androidrgbtool.utils.ThemeWrapper;
 
 
 public class AboutFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+    public static final String FRAGMENT_TAG = "fragment_about";
 
     private OnPreferenceSelectedListener onPreferenceSelectedListener;
 
@@ -56,8 +57,7 @@ public class AboutFragment extends PreferenceFragment implements SharedPreferenc
         if (preference.getIntent() != null && preference.getIntent().getData() != null) {
             if (preference.getIntent().getAction().equals(Intent.ACTION_SENDTO)) {
                 onPreferenceSelectedListener.onPreferenceSendEmailSelected(new String[]{preference.getIntent()
-                        .getData().toString()}, getString(R
-                        .string.app_name));
+                        .getData().toString()}, getString(R.string.app_name));
             } else {
                 onPreferenceSelectedListener.onPreferenceWithUriSelected(preference.getIntent().getData());
             }

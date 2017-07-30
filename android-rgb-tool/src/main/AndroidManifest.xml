@@ -75,6 +75,7 @@
             tools:targetApi="n">
         </activity>
         <activity
+            android:label="LivePicker"
             android:name=".livepicker.LivePickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <!--<intent-filter>-->

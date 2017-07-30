@@ -1,7 +1,6 @@
 package com.fastebro.androidrgbtool.widgets;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;

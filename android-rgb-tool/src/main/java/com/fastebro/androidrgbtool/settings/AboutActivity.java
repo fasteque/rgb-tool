@@ -1,11 +1,13 @@
 package com.fastebro.androidrgbtool.settings;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 
 import com.fastebro.androidrgbtool.R;
@@ -27,8 +29,15 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
 
         setupCustomTabHelper();
 
+        if (savedInstanceState != null) return;
+        // Create the fragment only when the activity is created for the first time.
+        // ie. not after orientation changes
+        Fragment fragment = getFragmentManager().findFragmentByTag(AboutFragment.FRAGMENT_TAG);
+        if (fragment == null) {
+            fragment = new AboutFragment();
+        }
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new AboutFragment())
+                .replace(android.R.id.content, fragment, AboutFragment.FRAGMENT_TAG)
                 .commit();
     }
 
@@ -80,8 +89,7 @@ public class AboutActivity extends BaseActivity implements AboutFragment.OnPrefe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             intentBuilder.setToolbarColor(getResources().getColor(R.color.light_primary, getTheme()));
         } else {
-            //noinspection deprecation
-            intentBuilder.setToolbarColor(getResources().getColor(R.color.light_primary));
+            intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.light_primary));
         }
         intentBuilder.setShowTitle(true);
 
