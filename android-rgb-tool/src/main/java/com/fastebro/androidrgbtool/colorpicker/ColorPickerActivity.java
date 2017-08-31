@@ -31,189 +31,187 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 public class ColorPickerActivity extends BaseActivity {
-    @BindView(R.id.color_picker_main_layout)
-    RelativeLayout mainLayout;
-    @BindView(R.id.iv_photo)
-    ImageView imageView;
+	private final static float PHOTO_SCALING_FACTOR = 3.0f;
+	@BindView(R.id.color_picker_main_layout)
+	RelativeLayout mainLayout;
+	@BindView(R.id.iv_photo)
+	ImageView imageView;
+	private PhotoViewAttacher attacher;
+	private Bitmap bitmap;
+	private View.OnTouchListener imgSourceOnTouchListener;
+	private RGBPanelData rgbPanelDataLayout;
+	private String currentPath = null;
+	private boolean deleteFile = false;
 
-    private PhotoViewAttacher attacher;
-    private Bitmap bitmap;
-    private View.OnTouchListener imgSourceOnTouchListener;
-    private RGBPanelData rgbPanelDataLayout;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_color_picker);
+		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+		ButterKnife.bind(this);
 
-    private String currentPath = null;
-    private boolean deleteFile = false;
-    private final static float PHOTO_SCALING_FACTOR = 3.0f;
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 
+		rgbPanelDataLayout = new RGBPanelData(this);
+		rgbPanelDataLayout.setVisibility(View.GONE);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_color_picker);
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        ButterKnife.bind(this);
+		if (getIntent() != null) {
+			// get the path of the image and set it.
+			Bundle bundle = getIntent().getExtras();
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+			if (bundle != null) {
+				currentPath = bundle.getString(ImageUtils.EXTRA_JPEG_FILE_PATH);
+				deleteFile = bundle.getBoolean(ImageUtils.EXTRA_DELETE_FILE);
+			}
 
-        rgbPanelDataLayout = new RGBPanelData(this);
-        rgbPanelDataLayout.setVisibility(View.GONE);
+			if (currentPath != null) {
+				try {
+					bitmap = BitmapFactory.decodeFile(currentPath);
+					imageView.setImageBitmap(bitmap);
+					imageView.setOnTouchListener(imgSourceOnTouchListener);
+					attacher = new PhotoViewAttacher(imageView);
+					attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
+					attacher.setOnViewTapListener(new PhotoViewTapListener());
+					attacher.setOnPhotoTapListener(new PhotoViewTapListener());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-        if (getIntent() != null) {
-            // get the path of the image and set it.
-            Bundle bundle = getIntent().getExtras();
+		mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+				.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT));
+	}
 
-            if (bundle != null) {
-                currentPath = bundle.getString(ImageUtils.EXTRA_JPEG_FILE_PATH);
-                deleteFile = bundle.getBoolean(ImageUtils.EXTRA_DELETE_FILE);
-            }
+	@Override
+	protected void onDestroy() {
+		if (deleteFile) {
+			//noinspection ResultOfMethodCallIgnored
+			new File(currentPath).delete();
+			getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+					MediaStore.Images.Media.DATA + "=?", new String[]{currentPath});
+		}
+		super.onDestroy();
+	}
 
-            if (currentPath != null) {
-                try {
-                    bitmap = BitmapFactory.decodeFile(currentPath);
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setOnTouchListener(imgSourceOnTouchListener);
-                    attacher = new PhotoViewAttacher(imageView);
-                    attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
-                    attacher.setOnViewTapListener(new PhotoViewTapListener());
-                    attacher.setOnPhotoTapListener(new PhotoViewTapListener());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.color_picker, menu);
+		return true;
+	}
 
-        mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT));
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			finishAfterTransition();
+			return true;
+		} else if (item.getItemId() == R.id.action_palette) {
+			generatePalette();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
-    @Override
-    protected void onDestroy() {
-        if (deleteFile) {
-            //noinspection ResultOfMethodCallIgnored
-            new File(currentPath).delete();
-            getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    MediaStore.Images.Media.DATA + "=?", new String[]{currentPath});
-        }
-        super.onDestroy();
-    }
+	private void generatePalette() {
+		if (bitmap != null) {
+			Palette.Builder paletteBuilder = Palette.from(bitmap);
+			paletteBuilder.generate(palette -> {
+				Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.color_picker, menu);
-        return true;
-    }
+				ArrayList<PaletteSwatch> swatches = new ArrayList<>();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finishAfterTransition();
-            return true;
-        } else if (item.getItemId() == R.id.action_palette) {
-            generatePalette();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-    }
+				if (palette.getVibrantSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
+							PaletteSwatch.SwatchType.VIBRANT));
+				}
 
-    private void generatePalette() {
-        if (bitmap != null) {
-            Palette.Builder paletteBuilder = Palette.from(bitmap);
-            paletteBuilder.generate(palette -> {
-                Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
+				if (palette.getMutedSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
+							PaletteSwatch.SwatchType.MUTED));
+				}
 
-                ArrayList<PaletteSwatch> swatches = new ArrayList<>();
+				if (palette.getLightVibrantSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
+							PaletteSwatch.SwatchType.LIGHT_VIBRANT));
+				}
 
-                if (palette.getVibrantSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.VIBRANT));
-                }
+				if (palette.getLightMutedSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
+							PaletteSwatch.SwatchType.LIGHT_MUTED));
+				}
 
-                if (palette.getMutedSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.MUTED));
-                }
+				if (palette.getDarkVibrantSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
+							PaletteSwatch.SwatchType.DARK_VIBRANT));
+				}
 
-                if (palette.getLightVibrantSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.LIGHT_VIBRANT));
-                }
+				if (palette.getDarkMutedSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
+							PaletteSwatch.SwatchType.DARK_MUTED));
+				}
 
-                if (palette.getLightMutedSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.LIGHT_MUTED));
-                }
+				intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
+				intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
 
-                if (palette.getDarkVibrantSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.DARK_VIBRANT));
-                }
+				startActivity(intent,
+						ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
+			});
+		}
+	}
 
-                if (palette.getDarkMutedSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.DARK_MUTED));
-                }
+	@Override
+	public void onBackPressed() {
+		finishAfterTransition();
+	}
 
-                intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
-                intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath).getLastPathSegment());
+	private class PhotoViewTapListener
+			implements PhotoViewAttacher.OnViewTapListener,
+			PhotoViewAttacher.OnPhotoTapListener {
+		@Override
+		public void onViewTap(View view, float x, float y) {
+			// Not being used so far.
+		}
 
-                startActivity(intent,
-                        ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
-            });
-        }
-    }
+		@Override
+		public void onOutsidePhotoTap() {
+			// Not being used so far.
+		}
 
-    private class PhotoViewTapListener
-            implements PhotoViewAttacher.OnViewTapListener,
-            PhotoViewAttacher.OnPhotoTapListener {
-        @Override
-        public void onViewTap(View view, float x, float y) {
-            // Not being used so far.
-        }
+		@Override
+		public void onPhotoTap(View view, float x, float y) {
+			// x and y represent the percentage of the Drawable where the user clicked.
+			int imageX = (int) (x * bitmap.getWidth());
+			int imageY = (int) (y * bitmap.getHeight());
 
-        @Override
-        public void onOutsidePhotoTap() {
-            // Not being used so far.
-        }
+			int touchedRGB = bitmap.getPixel(imageX, imageY);
 
-        @Override
-        public void onPhotoTap(View view, float x, float y) {
-            // x and y represent the percentage of the Drawable where the user clicked.
-            int imageX = (int) (x * bitmap.getWidth());
-            int imageY = (int) (y * bitmap.getHeight());
+			if (imageY < bitmap.getHeight() / 2) {
+				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+						.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+				rgbPanelDataLayout.setLayoutParams(params);
+				rgbPanelDataLayout.updateData(touchedRGB);
 
-            int touchedRGB = bitmap.getPixel(imageX, imageY);
+				if (rgbPanelDataLayout.getVisibility() == View.GONE) {
+					rgbPanelDataLayout.setVisibility(View.VISIBLE);
+				}
+			} else {
+				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+						.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+				rgbPanelDataLayout.setLayoutParams(params);
+				rgbPanelDataLayout.updateData(touchedRGB);
 
-            if (imageY < bitmap.getHeight() / 2) {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
-                        .WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                rgbPanelDataLayout.setLayoutParams(params);
-                rgbPanelDataLayout.updateData(touchedRGB);
-
-                if (rgbPanelDataLayout.getVisibility() == View.GONE) {
-                    rgbPanelDataLayout.setVisibility(View.VISIBLE);
-                }
-            } else {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
-                        .WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                rgbPanelDataLayout.setLayoutParams(params);
-                rgbPanelDataLayout.updateData(touchedRGB);
-
-                if (rgbPanelDataLayout.getVisibility() == View.GONE) {
-                    rgbPanelDataLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        finishAfterTransition();
-    }
+				if (rgbPanelDataLayout.getVisibility() == View.GONE) {
+					rgbPanelDataLayout.setVisibility(View.VISIBLE);
+				}
+			}
+		}
+	}
 }

@@ -288,7 +288,7 @@ public class MainColorFragment extends EventBaseFragment {
     @Subscribe
     public void onUpdateHexValueEvent(UpdateHexValueEvent event) {
         if (isAdded()) {
-            int[] rgb = ColorUtils.hexToARGB(event.hexValue);
+            int[] rgb = ColorUtils.hexToARGB(event.getHexValue());
             ((MainActivity) getActivity()).setOpacity(rgb[0]);
             ((MainActivity) getActivity()).setRedColor(rgb[1]);
             ((MainActivity) getActivity()).setGreenColor(rgb[2]);
@@ -305,14 +305,14 @@ public class MainColorFragment extends EventBaseFragment {
     @Subscribe
     public void onRGBAInsertionEvent(RGBAInsertionEvent event) {
         if (isAdded()) {
-            ((MainActivity) getActivity()).setRedColor(event.rgbaValues[0]);
-            ((MainActivity) getActivity()).setGreenColor(event.rgbaValues[1]);
-            ((MainActivity) getActivity()).setBlueColor(event.rgbaValues[2]);
-            ((MainActivity) getActivity()).setOpacity(event.rgbaValues[3]);
-            seekBarRed.setProgress(event.rgbaValues[0]);
-            seekBarGreen.setProgress(event.rgbaValues[1]);
-            seekBarBlue.setProgress(event.rgbaValues[2]);
-            seekBarOpacity.setProgress(event.rgbaValues[3]);
+            ((MainActivity) getActivity()).setRedColor(event.getRgbaValues()[0]);
+            ((MainActivity) getActivity()).setGreenColor(event.getRgbaValues()[1]);
+            ((MainActivity) getActivity()).setBlueColor(event.getRgbaValues()[2]);
+            ((MainActivity) getActivity()).setOpacity(event.getRgbaValues()[3]);
+            seekBarRed.setProgress(event.getRgbaValues()[0]);
+            seekBarGreen.setProgress(event.getRgbaValues()[1]);
+            seekBarBlue.setProgress(event.getRgbaValues()[2]);
+            seekBarOpacity.setProgress(event.getRgbaValues()[3]);
             refreshUI();
             ((MainActivity) getActivity()).savePreferences();
         }

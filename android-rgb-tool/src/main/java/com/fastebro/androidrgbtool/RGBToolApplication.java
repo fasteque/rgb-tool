@@ -16,47 +16,48 @@ import timber.log.Timber;
  */
 // ACRA
 @ReportsCrashes(
-        mailTo = "daniele.altomare@gmail.com,svolf15@yandex.ru",
-        mode = ReportingInteractionMode.NOTIFICATION,
-        resNotifTitle = R.string.error,
-        resNotifText = R.string.error_send_mail,
-        resNotifTickerText = R.string.error_dlg_content,
-        resToastText = R.string.error,
-        resDialogTitle = R.string.error,
-        resDialogIcon = R.mipmap.ic_launcher,
-        resDialogText = R.string.error_dlg_content,
-        resDialogTheme = R.style.ACRA,
-        customReportContent = {
-                ReportField.APP_VERSION_NAME,
-                ReportField.APP_VERSION_CODE,
-                ReportField.ANDROID_VERSION,
-                ReportField.BRAND,
-                ReportField.PHONE_MODEL,
-                ReportField.STACK_TRACE,
-                ReportField.LOGCAT,
-        }
+		mailTo = "daniele.altomare@gmail.com,svolf15@yandex.ru",
+		mode = ReportingInteractionMode.NOTIFICATION,
+		resNotifTitle = R.string.error,
+		resNotifText = R.string.error_send_mail,
+		resNotifTickerText = R.string.error_dlg_content,
+		resToastText = R.string.error,
+		resDialogTitle = R.string.error,
+		resDialogIcon = R.mipmap.ic_launcher,
+		resDialogText = R.string.error_dlg_content,
+		resDialogTheme = R.style.ACRA,
+		customReportContent = {
+				ReportField.APP_VERSION_NAME,
+				ReportField.APP_VERSION_CODE,
+				ReportField.ANDROID_VERSION,
+				ReportField.BRAND,
+				ReportField.PHONE_MODEL,
+				ReportField.STACK_TRACE,
+				ReportField.LOGCAT,
+		}
 )
 public class RGBToolApplication extends Application {
-    private static RGBToolApplication ctx = new RGBToolApplication();
+	private static RGBToolApplication ctx = new RGBToolApplication();
 
-    public RGBToolApplication(){
-        ctx = this;
-    }
+	public RGBToolApplication() {
+		ctx = this;
+	}
 
-    @Override public void onCreate() {
-        super.onCreate();
-        // ACRA initialization
-        ACRA.init(this);
+	public static RGBToolApplication getCtx() {
+		return ctx;
+	}
 
-        // Set default settings
-        PreferenceManager.setDefaultValues(this, R.xml.about, false);
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		// ACRA initialization.
+		ACRA.init(this);
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
-    }
+		// Set default settings.
+		PreferenceManager.setDefaultValues(this, R.xml.about, false);
 
-    public static RGBToolApplication getCtx(){
-        return ctx;
-    }
+		if (BuildConfig.DEBUG) {
+			Timber.plant(new Timber.DebugTree());
+		}
+	}
 }

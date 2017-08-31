@@ -17,103 +17,101 @@ import com.fastebro.androidrgbtool.helpers.WebViewFallback;
 
 public class AboutActivity extends BaseActivity implements AboutFragment.OnPreferenceSelectedListener {
 
-    private CustomTabActivityHelper customTabActivityHelper;
+	private final CustomTabActivityHelper.ConnectionCallback connectionCallback = new CustomTabActivityHelper
+			.ConnectionCallback() {
+		@Override
+		public void onCustomTabsConnected() {
+			// Use this callback to perform UI changes.
+		}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		@Override
+		public void onCustomTabsDisconnected() {
+			// Use this callback to perform UI changes.
+		}
+	};
+	private CustomTabActivityHelper customTabActivityHelper;
 
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        setupCustomTabHelper();
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 
-        if (savedInstanceState != null) return;
-        // Create the fragment only when the activity is created for the first time.
-        // ie. not after orientation changes
-        Fragment fragment = getFragmentManager().findFragmentByTag(AboutFragment.FRAGMENT_TAG);
-        if (fragment == null) {
-            fragment = new AboutFragment();
-        }
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, fragment, AboutFragment.FRAGMENT_TAG)
-                .commit();
-    }
+		setupCustomTabHelper();
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        customTabActivityHelper.bindCustomTabsService(this);
-    }
+		if (savedInstanceState != null) return;
+		// Create the fragment only when the activity is created for the first time.
+		// ie. not after orientation changes
+		Fragment fragment = getFragmentManager().findFragmentByTag(AboutFragment.FRAGMENT_TAG);
+		if (fragment == null) {
+			fragment = new AboutFragment();
+		}
+		getFragmentManager().beginTransaction()
+				.replace(android.R.id.content, fragment, AboutFragment.FRAGMENT_TAG)
+				.commit();
+	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		customTabActivityHelper.bindCustomTabsService(this);
+	}
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        customTabActivityHelper.unbindCustomTabsService(this);
-    }
+	@Override
+	protected void onStop() {
+		super.onStop();
+		customTabActivityHelper.unbindCustomTabsService(this);
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home) {
-            finishAfterTransition();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			finishAfterTransition();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
-    private void setupCustomTabHelper() {
-        customTabActivityHelper = new CustomTabActivityHelper();
-        customTabActivityHelper.setConnectionCallback(connectionCallback);
-    }
+	private void setupCustomTabHelper() {
+		customTabActivityHelper = new CustomTabActivityHelper();
+		customTabActivityHelper.setConnectionCallback(connectionCallback);
+	}
 
-    private final CustomTabActivityHelper.ConnectionCallback connectionCallback = new CustomTabActivityHelper
-            .ConnectionCallback() {
-        @Override
-        public void onCustomTabsConnected() {
-            // Use this callback to perform UI changes.
-        }
+	@Override
+	public void onPreferenceWithUriSelected(Uri uri) {
+		CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
 
-        @Override
-        public void onCustomTabsDisconnected() {
-            // Use this callback to perform UI changes.
-        }
-    };
-
-    @Override
-    public void onPreferenceWithUriSelected(Uri uri) {
-        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            intentBuilder.setToolbarColor(getResources().getColor(R.color.light_primary, getTheme()));
-        } else {
-            intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.light_primary));
-        }
-        intentBuilder.setShowTitle(true);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			intentBuilder.setToolbarColor(getResources().getColor(R.color.light_primary, getTheme()));
+		} else {
+			intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.light_primary));
+		}
+		intentBuilder.setShowTitle(true);
 
 
-        CustomTabActivityHelper.openCustomTab(this, intentBuilder.build(), uri, new WebViewFallback());
-    }
+		CustomTabActivityHelper.openCustomTab(this, intentBuilder.build(), uri, new WebViewFallback());
+	}
 
-    @Override
-    public void onPreferenceSendEmailSelected(String[] addresses, String subject) {
-        composeEmail(addresses, subject);
-    }
+	@Override
+	public void onPreferenceSendEmailSelected(String[] addresses, String subject) {
+		composeEmail(addresses, subject);
+	}
 
-    private void composeEmail(String[] addresses, String subject) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        // Only email apps should handle this.
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            //noinspection ConstantConditions
-            Snackbar.make(findViewById(android.R.id.content),
-                    getString(R.string.action_not_supported_error), Snackbar.LENGTH_SHORT).show();
-        }
-    }
+	private void composeEmail(String[] addresses, String subject) {
+		Intent intent = new Intent(Intent.ACTION_SENDTO);
+		// Only email apps should handle this.
+		intent.setData(Uri.parse("mailto:"));
+		intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+		intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		if (intent.resolveActivity(getPackageManager()) != null) {
+			startActivity(intent);
+		} else {
+			//noinspection ConstantConditions
+			Snackbar.make(findViewById(android.R.id.content),
+					getString(R.string.action_not_supported_error), Snackbar.LENGTH_SHORT).show();
+		}
+	}
 }

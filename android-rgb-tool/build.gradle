@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileOptions {
@@ -18,7 +17,7 @@ android {
         versionCode 13
         versionName "2.0.0-SNAPSHOT"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-		vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary = true
     }
 
     //noinspection GroovyAssignabilityCheck
@@ -91,6 +90,6 @@ dependencies {
     androidTestCompile appAndroidTestDependencies.supportAnnotation
 }
 
-tasks.matching {it instanceof Test}.all {
+tasks.matching { it instanceof Test }.all {
     testLogging.events = ["failed", "passed", "skipped"]
 }

@@ -10,8 +10,8 @@ import java.io.File;
  * Project: rgb-tool
  */
 public class BaseAlbumDirFactory extends AlbumStorageDirFactory {
-    @Override
-    public File getAlbumStorageDir(@NonNull String albumName) {
-        return new File(Environment.getExternalStorageDirectory() + "/" + albumName);
-    }
+	@Override
+	public File getAlbumStorageDir(@NonNull String albumName) {
+		return new File(Environment.getExternalStorageDirectory() + "/" + albumName);
+	}
 }

@@ -25,94 +25,93 @@ import butterknife.Unbinder;
  * Project: rgb-tool
  */
 public class PrintJobDialogFragment extends BottomSheetDialogFragment {
-    @BindView(R.id.message)
-    EditText message;
-    private Unbinder unbinder;
+	public static final int PRINT_COLOR_JOB = 0;
+	public static final int PRINT_PALETTE_JOB = 1;
+	public static final int PRINT_COLOR_DETAILS_JOB = 2;
+	private static final String ARG_JOB_TYPE = "JOB_TYPE";
+	@BindView(R.id.message)
+	EditText message;
+	private Unbinder unbinder;
+	private int jobType;
 
-    private static final String ARG_JOB_TYPE = "JOB_TYPE";
-    public static final int PRINT_COLOR_JOB = 0;
-    public static final int PRINT_PALETTE_JOB = 1;
-    public static final int PRINT_COLOR_DETAILS_JOB = 2;
+	public PrintJobDialogFragment() {
+	}
 
-    public PrintJobDialogFragment() { }
+	public static PrintJobDialogFragment newInstance(@JobType int jobType) {
+		PrintJobDialogFragment fragment = new PrintJobDialogFragment();
+		Bundle args = new Bundle();
+		args.putInt(ARG_JOB_TYPE, jobType);
+		fragment.setArguments(args);
+		return fragment;
+	}
 
-    private int jobType;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    @IntDef({PRINT_COLOR_JOB, PRINT_PALETTE_JOB, PRINT_COLOR_DETAILS_JOB})
-    public @interface JobType {
-    }
+		if (getArguments() != null) {
+			jobType = getArguments().getInt(ARG_JOB_TYPE, 0);
+		}
+	}
 
-    public static PrintJobDialogFragment newInstance(@JobType int jobType) {
-        PrintJobDialogFragment fragment = new PrintJobDialogFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_JOB_TYPE, jobType);
-        fragment.setArguments(args);
-        return fragment;
-    }
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		// Get the layout inflater
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		View view = inflater.inflate(R.layout.dialog_print_color, null);
+		unbinder = ButterKnife.bind(this, view);
 
-        if (getArguments() != null) {
-            jobType = getArguments().getInt(ARG_JOB_TYPE, 0);
-        }
-    }
+		String title;
+		if (jobType == PRINT_COLOR_JOB) {
+			title = getString(R.string.action_print);
+		} else {
+			title = getString(R.string.action_print_palette);
+		}
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		// Inflate and set the layout for the dialog
+		// Pass null as the parent view because its going in the dialog layout
+		builder.setView(view)
+				.setTitle(title)
+				.setPositiveButton(getString(R.string.action_common_set),
+						(dialog, id) -> {
+							if (jobType == PRINT_COLOR_JOB) {
+								EventBus.getDefault().post(new PrintColorEvent(message.getText().toString()));
+							} else if (jobType == PRINT_COLOR_DETAILS_JOB) {
+								EventBus.getDefault().post(new PrintColorDetailsEvent(message.getText().toString
+										()));
+							} else {
+								EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
+							}
+							PrintJobDialogFragment.this.getDialog().cancel();
+						}
+				)
+				.setNegativeButton(getString(R.string.action_common_skip),
+						(dialog, id) -> {
+							if (jobType == PRINT_COLOR_JOB) {
+								EventBus.getDefault().post(new PrintColorEvent(null));
+							} else if (jobType == PRINT_COLOR_DETAILS_JOB) {
+								EventBus.getDefault().post(new PrintColorDetailsEvent(null));
+							} else {
+								EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
+							}
+							PrintJobDialogFragment.this.getDialog().cancel();
+						}
+				);
 
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_print_color, null);
-        unbinder = ButterKnife.bind(this, view);
+		return builder.create();
+	}
 
-        String title;
-        if (jobType == PRINT_COLOR_JOB) {
-            title = getString(R.string.action_print);
-        } else {
-            title = getString(R.string.action_print_palette);
-        }
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		if (unbinder != null) {
+			unbinder.unbind();
+		}
+	}
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(view)
-                .setTitle(title)
-                .setPositiveButton(getString(R.string.action_common_set),
-                        (dialog, id) -> {
-                            if (jobType == PRINT_COLOR_JOB) {
-                                EventBus.getDefault().post(new PrintColorEvent(message.getText().toString()));
-                            } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
-                                EventBus.getDefault().post(new PrintColorDetailsEvent(message.getText().toString
-                                        ()));
-                            } else {
-                                EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
-                            }
-                            PrintJobDialogFragment.this.getDialog().cancel();
-                        }
-                )
-                .setNegativeButton(getString(R.string.action_common_skip),
-                        (dialog, id) -> {
-                            if (jobType == PRINT_COLOR_JOB) {
-                                EventBus.getDefault().post(new PrintColorEvent(null));
-                            } else if (jobType == PRINT_COLOR_DETAILS_JOB) {
-                                EventBus.getDefault().post(new PrintColorDetailsEvent(null));
-                            } else {
-                                EventBus.getDefault().post(new PrintPaletteEvent(message.getText().toString()));
-                            }
-                            PrintJobDialogFragment.this.getDialog().cancel();
-                        }
-                );
-
-        return builder.create();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
-    }
+	@IntDef({PRINT_COLOR_JOB, PRINT_PALETTE_JOB, PRINT_COLOR_DETAILS_JOB})
+	public @interface JobType {
+	}
 }
