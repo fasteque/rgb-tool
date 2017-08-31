@@ -61,33 +61,33 @@ dependencies {
     def appTestDependencies = globalConfiguration.appTestDependencies
     def appAndroidTestDependencies = globalConfiguration.appAndroidTestDependencies
 
-    compile appDependencies.appCompat
-    compile appDependencies.cardView
-    compile appDependencies.recyclerView
-    compile appDependencies.palette
-    compile appDependencies.design
-    compile appDependencies.customTabs
-    compile appDependencies.percent
-    compile appDependencies.photoView
-    compile appDependencies.picasso
-    compile appDependencies.butterKnife
+    implementation appDependencies.appCompat
+    implementation appDependencies.cardView
+    implementation appDependencies.recyclerView
+    implementation appDependencies.palette
+    implementation appDependencies.design
+    implementation appDependencies.customTabs
+    implementation appDependencies.percent
+    implementation appDependencies.photoView
+    implementation appDependencies.picasso
+    implementation appDependencies.butterKnife
     annotationProcessor appDependencies.butterKnifeCompiler
-    compile appDependencies.eventBus
-    compile appDependencies.rxAndroid
-    compile appDependencies.timber
-    compile appDependencies.glide
-    compile appDependencies.acra
+    implementation appDependencies.eventBus
+    implementation appDependencies.rxAndroid
+    implementation appDependencies.timber
+    implementation appDependencies.glide
+    implementation appDependencies.acra
 
-    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    compile project(':model')
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation project(':model')
 
     // Testing dependencies
-    testCompile appTestDependencies.jUnit
-    testCompile appTestDependencies.mockito
-    androidTestCompile appAndroidTestDependencies.espressoCore
-    androidTestCompile appAndroidTestDependencies.testRunner
-    androidTestCompile appAndroidTestDependencies.testRules
-    androidTestCompile appAndroidTestDependencies.supportAnnotation
+    testImplementation appTestDependencies.jUnit
+    testImplementation appTestDependencies.mockito
+    androidTestImplementation appAndroidTestDependencies.espressoCore
+    androidTestImplementation appAndroidTestDependencies.testRunner
+    androidTestImplementation appAndroidTestDependencies.testRules
+    androidTestImplementation appAndroidTestDependencies.supportAnnotation
 }
 
 tasks.matching { it instanceof Test }.all {
