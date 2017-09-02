@@ -4,13 +4,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
-                android:background="@color/black"
                 tools:context=".colorpicker.ColorPickerActivity">
+
+    <ImageView
+        android:id="@+id/color_picker_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_colorpicker_empty"
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/color_picker_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color_picker_choose"
+        android:textColor="?ctxVectorColor"
+        android:layout_below="@+id/color_picker_image"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
 
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/iv_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/rgb_panel_padding"/>
+        android:padding="@dimen/rgb_panel_padding" />
 
 </RelativeLayout>

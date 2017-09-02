@@ -12,26 +12,26 @@
     <item android:id="@+id/action_print"
         android:title="@string/action_print"
         android:icon="@drawable/ic_menu_print"
-        android:orderInCategory="102"
+        android:orderInCategory="103"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_share"
         android:title="@string/action_share"
         app:showAsAction="never|withText"
-        android:orderInCategory="103"
+        android:orderInCategory="104"
         android:icon="@drawable/ic_action_share"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
 
     <item android:id="@+id/action_about"
         android:title="@string/action_about"
-        android:orderInCategory="104"
+        android:orderInCategory="105"
         android:icon="@drawable/ic_action_info_about"
         app:showAsAction="never|withText" />
 
     <item android:id="@+id/action_live_picker"
-        android:title="LivePicker"
+        android:title="@string/title_activity_live_picker"
         android:icon="@drawable/ic_action_live_picker"
-        android:orderInCategory="105"
-        app:showAsAction="never" />
+        android:orderInCategory="102"
+        app:showAsAction="ifRoom" />
 </menu>

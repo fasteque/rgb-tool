@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".colorpicker.ColorPickerActivity" >
 
+    <item android:id="@+id/action_load"
+        android:title="@string/pick_color"
+        android:icon="@drawable/ic_action_choose_photo"
+        android:orderInCategory="99"
+        app:showAsAction="ifRoom"/>
+
     <item android:id="@+id/action_palette"
         android:title="@string/action_palette"
         android:icon="@drawable/ic_menu_palette"

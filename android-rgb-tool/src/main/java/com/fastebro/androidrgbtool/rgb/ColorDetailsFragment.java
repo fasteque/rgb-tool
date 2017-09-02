@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.utils.ClipboardUtils;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
+import com.fastebro.androidrgbtool.utils.ThemeWrapper;
 
 import java.util.Locale;
 
@@ -164,10 +165,12 @@ public class ColorDetailsFragment extends Fragment {
 
         int complementaryColor = ColorUtils.getComplementaryColor(redColor, blueColor, greenColor);
         setRoundedBackground(complementaryColorBg, complementaryColor);
+        ThemeWrapper.mono(complementaryColorText);
         complementaryColorText.setText(ColorUtils.RGBToHex(complementaryColor));
 
         int contrastColor = ColorUtils.getContrastColor(redColor, blueColor, greenColor);
         setRoundedBackground(contrastColorBg, contrastColor);
+        ThemeWrapper.mono(contrastColorText);
         contrastColorText.setText(ColorUtils.RGBToHex(contrastColor));
     }
 

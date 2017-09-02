@@ -7,13 +7,12 @@
         <item name="colorControlHighlight">@color/transparent_accent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@android:color/background_light</item>
-        <item name="android:navigationBarColor">@color/light_primary_dark</item>
         <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:navigationBarColor">@color/light_primary_dark</item>
         <item name="vectorColor">@color/light_vector_icons</item>
         <item name="ctxVectorColor">@color/light_ctx_vector_icons</item>
         <item name="viewBackground">@color/light_silver</item>
         <item name="cardStyle">@style/CardViewLight</item>
-        <item name="bottomSheetStyle">@style/BottomSheetDialog</item>
 
         <!-- ActionBar contextual mode -->
         <item name="actionModeBackground">@color/light_primary_light</item>
@@ -26,19 +25,20 @@
         <item name="colorControlHighlight">@color/transparent_accent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/dark_splash_screen</item>
-        <item name="android:navigationBarColor">@color/light_primary_dark</item>
         <item name="android:popupTheme">@style/ThemeOverlay.AppCompat</item>
+        <item name="android:navigationBarColor">@color/dark_primary_dark</item>
         <item name="vectorColor">@color/dark_vector_icons</item>
         <item name="ctxVectorColor">@color/dark_ctx_vector_icons</item>
         <item name="viewBackground">@color/dark_splash_screen</item>
         <item name="cardStyle">@style/CardViewDark</item>
-        <item name="bottomSheetStyle">@style/BottomSheetDialog.Dark</item>
 
         <!-- ActionBar contextual mode -->
         <item name="actionModeBackground">@color/dark_primary_light</item>
     </style>
-    
+
     <style name="Theme.Rgbtool.Launcher">
+        <item name="android:colorPrimaryDark">@color/light_accent</item>
+        <item name="android:navigationBarColor">@color/light_accent</item>
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 </resources>

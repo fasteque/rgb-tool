@@ -1,32 +1,22 @@
 package com.fastebro.androidrgbtool.rgb;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.model.events.ErrorMessageEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
+import com.fastebro.androidrgbtool.widgets.SweetInputDialog;
 
 import org.greenrobot.eventbus.EventBus;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by danielealtomare on 26/03/14.
  * Project: rgb-tool
  */
 public class HexInsertionFragment extends BottomSheetDialogFragment {
-    @BindView(R.id.new_hex_value)
-    EditText newHexValue;
-    private Unbinder unbinder;
 
     private static final String ARG_HEX_VALUE = "HEX_VALUE";
 
@@ -54,45 +44,36 @@ public class HexInsertionFragment extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        SweetInputDialog builder = new SweetInputDialog(getActivity());
 
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_hex_insertion, null);
-        unbinder = ButterKnife.bind(this, view);
-
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(view)
-                .setTitle(getString(R.string.hex_insertion_title))
-                .setPositiveButton(getString(R.string.action_common_set),
-                        (dialog, id) -> {
-                            if(checkHexValue(newHexValue.getText().toString())) {
+        builder.setTitle(R.string.hex_insertion_title);
+        builder.setPositiveButton(R.string.action_common_set, v -> {
+                            if(checkHexValue(builder.getInputString())) {
                                 EventBus.getDefault().post(
-                                        new UpdateHexValueEvent(newHexValue.getText().toString()));
+                                        new UpdateHexValueEvent(builder.getInputString()));
+                            } else if (!checkHexValue(builder.getInputString()) && builder.getInputString().length() == 6){
+                                EventBus.getDefault().post(
+                                        new UpdateHexValueEvent("FF" + builder.getInputString()));
                             } else {
                                 EventBus.getDefault().post(
                                         new ErrorMessageEvent(getString(R.string.hex_insertion_not_valid_error)));
                             }
                             HexInsertionFragment.this.getDialog().cancel();
                         }
-                )
-                .setNegativeButton(getString(R.string.action_common_cancel),
-                        (dialog, id) -> HexInsertionFragment.this.getDialog().cancel()
                 );
+        builder.setNegativeButton(R.string.action_common_cancel, v -> HexInsertionFragment.this.getDialog().cancel()
+                );
+        builder.setHint(R.string.hex_insertion_message_hint);
+        builder.setCharactersToUse("1234567890ABCDEFabcdef");
+        builder.setInputString(hexValue);
+        builder.setMaxLines(1);
 
-        newHexValue.setText(hexValue);
-        newHexValue.setSelection(newHexValue.getText().length());
-
-        return builder.create();
+        return builder;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
     }
 
     private boolean checkHexValue(String hexValue) {

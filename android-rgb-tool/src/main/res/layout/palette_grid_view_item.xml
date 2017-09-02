@@ -34,6 +34,8 @@
                     android:id="@+id/palette_item_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
                     style="@style/RGBPanelLabel" />
                 <TextView
                     android:id="@+id/palette_item_rgb"

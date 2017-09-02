@@ -1,6 +1,9 @@
 package com.fastebro.androidrgbtool;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
 import org.acra.ACRA;
@@ -38,6 +41,7 @@ import timber.log.Timber;
 )
 public class RGBToolApplication extends Application {
     private static RGBToolApplication ctx = new RGBToolApplication();
+    SharedPreferences preferences;
 
     public RGBToolApplication(){
         ctx = this;
@@ -47,6 +51,8 @@ public class RGBToolApplication extends Application {
         super.onCreate();
         // ACRA initialization
         ACRA.init(this);
+        // See javadoc for details
+        hackVmPolicy();
 
         // Set default settings
         PreferenceManager.setDefaultValues(this, R.xml.about, false);
@@ -58,5 +64,35 @@ public class RGBToolApplication extends Application {
 
     public static RGBToolApplication getCtx(){
         return ctx;
+    }
+
+    public SharedPreferences getPreferences(){
+        if (preferences == null)
+            preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences;
+    }
+
+    /**
+     * Disable file uri exposed check on Android N
+     * @see android.os.FileUriExposedException
+     * starting with Android N, we need to replace
+     * all file:/// uri with the content:// uri
+     * and use custom FileProvider to manage user files.
+     *
+     * This method replaces stock VmPolicy, and disable
+     * default exposed check.
+     * @see StrictMode.VmPolicy.Builder#detectFileUriExposure()
+     *
+     * This is a temporary hack, and will be removed later.
+     *
+     * //TODO: Remove this code after 2.0.0 release
+     **/
+    private void hackVmPolicy(){
+        if (Build.VERSION.SDK_INT >= 24) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        } else {
+            Timber.i("Lower android version %d", Build.VERSION.SDK_INT);
+        }
     }
 }
