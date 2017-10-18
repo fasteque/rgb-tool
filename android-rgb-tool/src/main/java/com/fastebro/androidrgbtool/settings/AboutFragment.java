@@ -1,6 +1,5 @@
 package com.fastebro.androidrgbtool.settings;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,13 +8,11 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.fastebro.androidrgbtool.R;
-import com.fastebro.androidrgbtool.utils.ThemeWrapper;
 
 
 public class AboutFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -26,20 +23,14 @@ public class AboutFragment extends PreferenceFragment implements SharedPreferenc
 	public AboutFragment() {
 	}
 
-	public static int getThemeIndex(Context ctx) {
-		return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(ctx).getString("about.theme", String
-				.valueOf(ThemeWrapper.Theme.LIGHT.ordinal())));
-	}
-
-	@SuppressWarnings("deprecation")
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+	public void onAttach(Context context) {
+		super.onAttach(context);
 
 		try {
-			onPreferenceSelectedListener = (OnPreferenceSelectedListener) activity;
+			onPreferenceSelectedListener = (OnPreferenceSelectedListener) getActivity();
 		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnPreferenceSelectedListener");
+			throw new ClassCastException(getActivity().toString() + " must implement OnPreferenceSelectedListener");
 		}
 	}
 
@@ -48,7 +39,8 @@ public class AboutFragment extends PreferenceFragment implements SharedPreferenc
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.about);
 		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-		// иначе будет падать на kit-kat
+		// FIXME: KitKat is not supported anymore.
+		// Otherwise it fails on KitKat.
 		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 		setCurrentValue((ListPreference) findPreference("about.theme"));
 	}

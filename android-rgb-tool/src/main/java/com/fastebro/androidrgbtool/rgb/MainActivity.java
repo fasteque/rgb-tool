@@ -39,6 +39,7 @@ import com.fastebro.androidrgbtool.model.events.UpdateSaveColorUIEvent;
 import com.fastebro.androidrgbtool.print.PrintJobDialogFragment;
 import com.fastebro.androidrgbtool.print.RGBToolPrintColorAdapter;
 import com.fastebro.androidrgbtool.settings.AboutActivity;
+import com.fastebro.androidrgbtool.settings.Preferences;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.CommonUtils;
@@ -94,14 +95,17 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 				case R.id.bottom_main:
 					FragmentUtils.iterate(MainActivity.this, R.id.main_container, new MainColorFragment());
 					item.setChecked(true);
+					Preferences.saveTabPosition(0);
 					break;
 				case R.id.bottom_details:
 					FragmentUtils.iterate(MainActivity.this, R.id.main_container, new ColorDetailsFragment());
 					item.setChecked(true);
+					Preferences.saveTabPosition(1);
 					break;
 				case R.id.bottom_list:
 					FragmentUtils.iterate(MainActivity.this, R.id.main_container, new ColorListFragment());
 					item.setChecked(true);
+					Preferences.saveTabPosition(2);
 					break;
 			}
 			return false;
@@ -382,7 +386,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
 		if (document_id != null) {
 			cursor = getContentResolver().query(
-					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+					MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
 					null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
 			if (cursor != null) {
 				cursor.moveToFirst();
@@ -390,7 +394,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 				cursor.close();
 			}
 		}
-
 		return path;
 	}
 
@@ -408,6 +411,8 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 				settings.getInt(CommonUtils.PREFS_G_COLOR, 0),
 				settings.getInt(CommonUtils.PREFS_B_COLOR, 0),
 				settings.getInt(CommonUtils.PREFS_OPACITY, 255));
+		// restore last selected tab item
+		bottomBar.setSelectedItemId(Preferences.getTabPosition());
 	}
 
 	public void savePreferences() {

@@ -17,21 +17,24 @@
             android:layout_height="match_parent"
             android:padding="2dp"
             android:orientation="horizontal">
-
-            <View
-                android:id="@+id/color_view"
-                android:layout_width="64dp"
-                android:layout_height="32dp"/>
-            <Space
-                android:layout_width="64dp"
-                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
             <ImageButton
                 android:id="@+id/btn_dismiss_panel"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/btn_dismiss"
-                android:layout_gravity="end"/>
+                android:layout_alignParentTop="true" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/color_view"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -52,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/rgb_panel_margin_left"
+                android:text="999 999 999 999"
                 style="@style/RGBPanelComponentLabel" />
 
         </LinearLayout>

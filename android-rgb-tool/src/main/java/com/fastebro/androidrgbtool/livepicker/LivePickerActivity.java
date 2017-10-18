@@ -4,18 +4,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.content.res.AppCompatResources;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
 import com.fastebro.androidrgbtool.rgb.MainActivity;
 import com.fastebro.androidrgbtool.utils.CameraUtils;
+import com.fastebro.androidrgbtool.utils.ClipboardUtils;
 import com.fastebro.androidrgbtool.widgets.CircleView;
 
 import butterknife.BindView;
@@ -38,13 +43,15 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 	ImageButton btnSaveColor;
 	@BindView(R.id.live_picker_btn_flash)
 	ImageButton btnFlashToggle;
+	@BindView(R.id.live_picker_hex_color)
+	TextView txtHexValue;
 
-	private Camera camera;
-	private CameraAsyncTask cameraAsyncTask;
+	private Camera mCamera;
+	private CameraAsyncTask mCameraAsyncTask;
 
 	private LivePickerTextureView livePickerTextureView;
 	private boolean isPortrait;
-	private int pointedColor;
+	private int mPointedColor;
 
 	private boolean isFlashOn;
 
@@ -53,7 +60,7 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 		try {
 			camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
 		} catch (Exception e) {
-			Timber.d("Error getting camera instance: %s", e.getMessage());
+			Timber.d("Error getting mCamera instance: %s", e.getMessage());
 		}
 		return camera;
 	}
@@ -74,16 +81,16 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 
 		isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
-		cameraAsyncTask = new CameraAsyncTask();
-		cameraAsyncTask.execute();
+		mCameraAsyncTask = new CameraAsyncTask();
+		mCameraAsyncTask.execute();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 
-		if (cameraAsyncTask != null) {
-			cameraAsyncTask.cancel(true);
+		if (mCameraAsyncTask != null) {
+			mCameraAsyncTask.cancel(true);
 		}
 
 		releaseCameraPreview();
@@ -112,6 +119,13 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 			btnFlashToggle.setVisibility(View.VISIBLE);
 			btnFlashToggle.setOnClickListener(view -> toggleFlash());
 		}
+
+		txtHexValue.setOnClickListener(view -> {
+			ClipboardUtils.copyToClipboard(txtHexValue.getText().toString().substring(1));
+			Toast.makeText(LivePickerActivity.this, String.format("%s %s",
+					txtHexValue.getText().toString().substring(1),
+					getString(R.string.clipboard)), Toast.LENGTH_SHORT).show();
+		});
 	}
 
 	private void releaseCameraPreview() {
@@ -121,23 +135,27 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 	}
 
 	private void releaseCamera() {
-		if (camera != null) {
-			camera.stopPreview();
-			camera.setPreviewCallback(null);
-			camera.release();
-			camera = null;
+		if (mCamera != null) {
+			mCamera.stopPreview();
+			mCamera.setPreviewCallback(null);
+			mCamera.release();
+			mCamera = null;
 		}
 	}
 
 	@Override
 	public void onColorPointed(int newColor) {
-		pointedColor = newColor;
-		pointerRing.getBackground().setColorFilter(pointedColor, PorterDuff.Mode.SRC_ATOP);
+		mPointedColor = newColor;
+		pointerRing.getBackground().setColorFilter(mPointedColor, PorterDuff.Mode.SRC_ATOP);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO
+		// Set humanized color drawable
+		lastColor.setBackground(new ColorDrawable(mPointedColor));
+		// Set hex color value
+		txtHexValue.setText(String.format("#%06X", (0xffffff & mPointedColor)));
 	}
 
 	private boolean isFlashSupported() {
@@ -145,21 +163,23 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 	}
 
 	private void toggleFlash() {
-		if (camera != null) {
-			final Camera.Parameters parameters = camera.getParameters();
+		if (mCamera != null) {
+			final Camera.Parameters parameters = mCamera.getParameters();
 			final String flashParameter = isFlashOn ? Camera.Parameters.FLASH_MODE_OFF : Camera.Parameters
 					.FLASH_MODE_TORCH;
 			parameters.setFlashMode(flashParameter);
-			camera.stopPreview();
-			camera.setParameters(parameters);
-			camera.startPreview();
+			mCamera.stopPreview();
+			mCamera.setParameters(parameters);
+			mCamera.startPreview();
 			isFlashOn = !isFlashOn;
 
 			if (btnFlashToggle != null) {
 				if (isFlashOn) {
-					btnFlashToggle.setImageResource(R.drawable.ic_flash_off_white);
+					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
+							.ic_flash_off_white));
 				} else {
-					btnFlashToggle.setImageResource(R.drawable.ic_flash_on_white);
+					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
+							.ic_flash_on_white));
 				}
 			}
 		}
@@ -177,8 +197,8 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 		@Override
 		protected void onPostExecute(Camera camera) {
 			if (!isCancelled()) {
-				LivePickerActivity.this.camera = camera;
-				if (LivePickerActivity.this.camera == null) {
+				mCamera = camera;
+				if (mCamera == null) {
 					LivePickerActivity.this.finish();
 				} else {
 					Camera.Parameters cameraParameters = camera.getParameters();
@@ -187,7 +207,7 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 							, livePreviewContainer.getWidth()
 							, livePreviewContainer.getHeight()
 							, isPortrait);
-					// Set optimal camera preview
+					// Set optimal mCamera preview
 					cameraParameters.setPreviewSize(bestSize.width, bestSize.height);
 					// Set focus mode
 					if (cameraParameters.getSupportedFocusModes().contains(
@@ -197,7 +217,7 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 
 					camera.setParameters(cameraParameters);
 
-					// Set camera orientation to match with current device orientation
+					// Set mCamera orientation to match with current device orientation
 					CameraUtils.setCameraDisplayOrientation(LivePickerActivity.this, camera);
 
 					// Get proportional dimension for the layout used to display preview according to the preview size
@@ -212,9 +232,8 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 					previewParams = new FrameLayout.LayoutParams(adaptedDimension[0], adaptedDimension[1]);
 					previewParams.gravity = Gravity.CENTER;
 
-					// Set up camera preview
-					livePickerTextureView = new LivePickerTextureView(LivePickerActivity.this, LivePickerActivity
-							.this.camera);
+					// Set up mCamera preview
+					livePickerTextureView = new LivePickerTextureView(LivePickerActivity.this, mCamera);
 					livePickerTextureView.setOnColorPointedListener(LivePickerActivity.this);
 					livePickerTextureView.setOnClickListener(LivePickerActivity.this);
 

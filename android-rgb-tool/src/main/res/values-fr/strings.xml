@@ -62,6 +62,7 @@
     <string name="title_activity_about">À propos</string>
     <string name="title_activity_palette">Palette</string>
     <string name="error_open_gallery_image">Erreur : l\'image peut ne pas être dans le stockage local</string>
+    <string name="color_picker_choose">Tap on the picture to choose an image</string>
 
     <!-- Attributions -->
     <string name="pref_category_ui">UI</string>
@@ -109,4 +110,5 @@
     <string name="error_dlg_content">Une erreur inattendue s\'est produite. Désolé pour la gêne occasionnée.</string>
     <string name="prefs_acra">ACRA</string>
     <string name="pref_github">GitHub</string>
+    <string name="title_activity_live_picker">LivePicker</string>
 </resources>

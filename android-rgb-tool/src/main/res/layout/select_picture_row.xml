@@ -13,7 +13,6 @@
             android:layout_height="24dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/rgb_select_picture_row_padding"
             android:layout_marginStart="@dimen/rgb_select_picture_row_padding" />
 
         <TextView

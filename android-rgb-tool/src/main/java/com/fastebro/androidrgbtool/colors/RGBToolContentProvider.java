@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.fastebro.androidrgbtool.helpers.SQLiteRGBToolHelper;
@@ -25,6 +26,7 @@ public class RGBToolContentProvider extends ContentProvider {
 	private static final String AUTHORITY = "com.fastebro.androidrgbtool.rgbtoolprovider";
 	private static final String BASE_PATH = "colors";
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+
 	// used for the UriMatcher
 	private static final int COLORS = 10;
 	private static final int COLOR_ID = 20;
@@ -46,7 +48,8 @@ public class RGBToolContentProvider extends ContentProvider {
 
 
 	@Override
-	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+	public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String
+			sortOrder) {
 		// Use SQLiteQueryBuilder instead of query() method.
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -77,7 +80,7 @@ public class RGBToolContentProvider extends ContentProvider {
 		// Notify potential listeners.
 		try {
 			cursor.setNotificationUri(getContext().getContentResolver(), uri);
-		} catch (NullPointerException e) {
+		} catch (NullPointerException ignored) {
 		}
 
 		return cursor;
@@ -85,13 +88,13 @@ public class RGBToolContentProvider extends ContentProvider {
 
 
 	@Override
-	public String getType(Uri uri) {
+	public String getType(@NonNull Uri uri) {
 		return null;
 	}
 
 
 	@Override
-	public Uri insert(Uri uri, ContentValues values) {
+	public Uri insert(@NonNull Uri uri, ContentValues values) {
 		int uriType = sURIMatcher.match(uri);
 
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
@@ -110,7 +113,7 @@ public class RGBToolContentProvider extends ContentProvider {
 			// Notify potential listeners.
 			try {
 				getContext().getContentResolver().notifyChange(uri, null);
-			} catch (NullPointerException e) {
+			} catch (NullPointerException ignored) {
 			}
 
 			return Uri.parse(BASE_PATH + "/" + id);
@@ -121,7 +124,7 @@ public class RGBToolContentProvider extends ContentProvider {
 
 
 	@Override
-	public int delete(Uri uri, String selection, String[] selectionArgs) {
+	public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
 		int uriType = sURIMatcher.match(uri);
 
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
@@ -155,7 +158,7 @@ public class RGBToolContentProvider extends ContentProvider {
 			// Notify potential listeners.
 			try {
 				getContext().getContentResolver().notifyChange(uri, null);
-			} catch (NullPointerException e) {
+			} catch (NullPointerException ignored) {
 			}
 
 		}
@@ -165,7 +168,7 @@ public class RGBToolContentProvider extends ContentProvider {
 
 
 	@Override
-	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+	public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 		int uriType = sURIMatcher.match(uri);
 
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
@@ -204,7 +207,7 @@ public class RGBToolContentProvider extends ContentProvider {
 			// Notify potential listeners.
 			try {
 				getContext().getContentResolver().notifyChange(uri, null);
-			} catch (NullPointerException e) {
+			} catch (NullPointerException ignored) {
 			}
 
 		}
@@ -239,5 +242,4 @@ public class RGBToolContentProvider extends ContentProvider {
 			}
 		}
 	}
-
 }

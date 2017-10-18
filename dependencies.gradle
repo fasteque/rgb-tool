@@ -9,7 +9,7 @@ ext {
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 26
     androidCompileSdkVersion = 26
-
+    
     androidSupportLibraryVersion = '26.0.2'
     rxAndroidVersion = '1.2.1'
     butterKnifeVersion = '8.6.0'
