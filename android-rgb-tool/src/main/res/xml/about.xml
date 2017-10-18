@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_category_ui"/>
-    <ListPreference
-        android:key="about.theme"
-        android:title="@string/pref_theme"
-        android:entries="@array/theme_names"
-        android:entryValues="@array/theme_values"
-        android:defaultValue="0"/>
     <PreferenceCategory android:title="@string/pref_help">
         <Preference android:title="@string/pref_report_issue">
             <intent

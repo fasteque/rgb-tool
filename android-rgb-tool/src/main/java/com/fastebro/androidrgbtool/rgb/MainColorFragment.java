@@ -20,7 +20,6 @@ import com.fastebro.androidrgbtool.model.events.RGBAInsertionEvent;
 import com.fastebro.androidrgbtool.model.events.UpdateHexValueEvent;
 import com.fastebro.androidrgbtool.utils.ClipboardUtils;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
-import com.fastebro.androidrgbtool.utils.ThemeWrapper;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -114,7 +113,6 @@ public class MainColorFragment extends EventBaseFragment {
 
 			// Save color currently displayed.
 //        btn_SaveColor.setOnClickListener(v -> saveColor(redColor, greenColor, blueColor, opacity, ""));
-			ThemeWrapper.mono(tvHexadecimal);
 			tvHexadecimal.setOnClickListener(v -> {
 				if (isAdded()) {
 					HexInsertionFragment fragment =
