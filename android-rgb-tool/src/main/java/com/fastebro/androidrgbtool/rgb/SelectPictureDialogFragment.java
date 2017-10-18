@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.fastebro.androidrgbtool.R;
 
-import org.acra.ACRA;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,12 +28,6 @@ public class SelectPictureDialogFragment extends BottomSheetDialogFragment imple
 
 	public SelectPictureDialogFragment() {
 	}
-
-//	@NonNull
-//	@Override
-//	public Dialog onCreateDialog(Bundle savedInstanceState) {
-//		return new BottomSheetDialog(getContext());
-//	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,7 +66,6 @@ public class SelectPictureDialogFragment extends BottomSheetDialogFragment imple
 					try {
 						((MainActivity) getActivity()).dispatchTakePictureIntent();
 					} catch (Exception e) {
-						ACRA.getErrorReporter().handleException(e);
 						Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
 					}
 					dismiss();

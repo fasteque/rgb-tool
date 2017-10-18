@@ -19,11 +19,6 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_open_source_libs">
-        <Preference android:title="@string/prefs_acra">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/acra/ACRA/"/>
-        </Preference>
         <Preference android:title="@string/prefs_picasso">
             <intent
                 android:action="android.intent.action.VIEW"
