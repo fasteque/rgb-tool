@@ -80,6 +80,7 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.Theme_Rgbtool);
 		super.onCreate(savedInstanceState);
 
 		if (getSupportActionBar() != null) {
