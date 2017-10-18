@@ -11,10 +11,11 @@ import com.fastebro.androidrgbtool.RGBToolApplication;
  */
 
 public class ClipboardUtils {
-    // Копирование текста в буфер обмена / Copy text to clipboard
-    public static void copyToClipboard(String s){
-        ClipboardManager clipboard = (ClipboardManager) RGBToolApplication.getCtx().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("JavaGirl", s);
-        clipboard.setPrimaryClip(clip);
-    }
+	// Copy text to clipboard
+	public static void copyToClipboard(String s) {
+		ClipboardManager clipboard = (ClipboardManager) RGBToolApplication.getCtx().getSystemService(Context
+				.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("RGB-Tool", s);
+		clipboard.setPrimaryClip(clip);
+	}
 }

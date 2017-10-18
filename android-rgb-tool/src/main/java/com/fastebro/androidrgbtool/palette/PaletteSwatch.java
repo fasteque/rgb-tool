@@ -12,8 +12,8 @@ import com.fastebro.androidrgbtool.model.entities.Swatch;
 public class PaletteSwatch extends Swatch implements Parcelable {
 
     public PaletteSwatch(int rgb, SwatchType type) {
-        this.rgb = rgb;
-        this.type = type;
+        this.setRgb(rgb);
+        this.setType(type);
     }
 
     @Override
@@ -23,8 +23,8 @@ public class PaletteSwatch extends Swatch implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(rgb);
-        dest.writeInt(type.ordinal());
+        dest.writeInt(getRgb());
+        dest.writeInt(getType().ordinal());
     }
     public static final Parcelable.Creator<PaletteSwatch> CREATOR
             = new Parcelable.Creator<PaletteSwatch>() {
@@ -38,7 +38,7 @@ public class PaletteSwatch extends Swatch implements Parcelable {
     };
 
     private PaletteSwatch(Parcel in) {
-        rgb = in.readInt();
-        type = SwatchType.values()[in.readInt()];
+        setRgb(in.readInt());
+        setType(SwatchType.values()[in.readInt()]);
     }
 }

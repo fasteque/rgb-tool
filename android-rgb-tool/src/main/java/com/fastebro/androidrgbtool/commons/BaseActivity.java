@@ -21,44 +21,40 @@ import com.fastebro.androidrgbtool.utils.ThemeWrapper;
  * Project: rgb-tool
  */
 public abstract class BaseActivity extends AppCompatActivity {
-    @SuppressLint("NewApi")
+	@SuppressLint("NewApi")
 
-    // Theme Receiver
-    private final BroadcastReceiver mThemeReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (AboutActivity.class.equals(BaseActivity.this.getClass())){
-                finish();
-                startActivity(getIntent());
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            } else recreate();
-        }
-    };
+	// Theme Receiver
+	private final BroadcastReceiver mThemeReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (AboutActivity.class.equals(BaseActivity.this.getClass())) {
+				finish();
+				startActivity(getIntent());
+				overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+			} else recreate();
+		}
+	};
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LocalBroadcastManager.getInstance(this).registerReceiver(mThemeReceiver, new IntentFilter("org.openintents.action.REFRESH_THEME"));
-        ThemeWrapper.applyTheme(this);
-        // Replaced with styles-v21
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.light_primary_dark));
-//        } else {
-//            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.light_primary_dark));
-//        }
-        getWindow().setEnterTransition(new Explode());
-        getWindow().setExitTransition(new Fade());
-        getWindow().setAllowEnterTransitionOverlap(true);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		LocalBroadcastManager.getInstance(this).registerReceiver(mThemeReceiver, new IntentFilter("org.openintents" +
+				".action.REFRESH_THEME"));
+		ThemeWrapper.applyTheme(this);
 
-    protected void showPrintColorDialog(int jobType) {
-        DialogFragment dialog = PrintJobDialogFragment.newInstance(jobType);
-        dialog.show(getSupportFragmentManager(), null);
-    }
+		getWindow().setEnterTransition(new Explode());
+		getWindow().setExitTransition(new Fade());
+		getWindow().setAllowEnterTransitionOverlap(true);
+	}
 
-    @Override
-    protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mThemeReceiver);
-        super.onDestroy();
-    }
+	protected void showPrintColorDialog(int jobType) {
+		DialogFragment dialog = PrintJobDialogFragment.newInstance(jobType);
+		dialog.show(getSupportFragmentManager(), null);
+	}
+
+	@Override
+	protected void onDestroy() {
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(mThemeReceiver);
+		super.onDestroy();
+	}
 }

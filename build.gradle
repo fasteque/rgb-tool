@@ -4,16 +4,17 @@ apply from: 'dependencies.gradle'
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-		classpath 'me.tatarka:gradle-retrolambda:3.6.1'
+        classpath 'com.android.tools.build:gradle:3.0.0-rc1'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
         // Required by com.github.chrisbanes:PhotoView
         maven { url "https://jitpack.io" }
     }

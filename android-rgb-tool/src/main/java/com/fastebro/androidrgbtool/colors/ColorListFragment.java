@@ -147,7 +147,7 @@ public class ColorListFragment extends EventBaseFragment implements AdapterView.
     @Subscribe
     public void onColorDeleteEvent(ColorDeleteEvent event) {
         String mSelectionClause = ColorDataContract.ColorEntry._ID + "=?";
-        String[] mSelectionArgs = {String.valueOf(event.colorId)};
+        String[] mSelectionArgs = {String.valueOf(event.getColorId())};
 
         getActivity().getContentResolver().delete(
                 RGBToolContentProvider.CONTENT_URI,
@@ -163,7 +163,7 @@ public class ColorListFragment extends EventBaseFragment implements AdapterView.
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A
         };
         String selectionClause = ColorDataContract.ColorEntry._ID + "=?";
-        String[] selectionArgs = { String.valueOf(event.colorId) };
+        String[] selectionArgs = { String.valueOf(event.getColorId()) };
 
         Cursor cursor = getActivity().getContentResolver().query(RGBToolContentProvider.CONTENT_URI,
                 projection,

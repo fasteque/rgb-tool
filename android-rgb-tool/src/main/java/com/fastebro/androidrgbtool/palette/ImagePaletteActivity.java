@@ -114,7 +114,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
 
     @Subscribe
     public void onPrintPaletteEvent(PrintPaletteEvent event) {
-        printColor(event.message);
+        printColor(event.getMessage());
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)

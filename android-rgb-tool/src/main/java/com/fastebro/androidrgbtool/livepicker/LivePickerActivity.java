@@ -35,16 +35,16 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 	FrameLayout livePreviewContainer;
 	@BindView(R.id.live_picker_pointer_stroke)
 	View pointerRing;
-    @BindView(R.id.live_picker_btn_back)
-    ImageButton btnBack;
-    @BindView(R.id.live_picker_last_color)
-    CircleView lastColor;
-    @BindView(R.id.live_picker_btn_save_color)
-    ImageButton btnSaveColor;
-    @BindView(R.id.live_picker_btn_flash)
-    ImageButton btnFlashToggle;
-    @BindView(R.id.live_picker_hex_color)
-    TextView txtHexValue;
+	@BindView(R.id.live_picker_btn_back)
+	ImageButton btnBack;
+	@BindView(R.id.live_picker_last_color)
+	CircleView lastColor;
+	@BindView(R.id.live_picker_btn_save_color)
+	ImageButton btnSaveColor;
+	@BindView(R.id.live_picker_btn_flash)
+	ImageButton btnFlashToggle;
+	@BindView(R.id.live_picker_hex_color)
+	TextView txtHexValue;
 
 	private Camera mCamera;
 	private CameraAsyncTask mCameraAsyncTask;
@@ -72,14 +72,14 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 
 		ButterKnife.bind(this);
 
-        initViews();
+		initViews();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-        isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+		isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
 		mCameraAsyncTask = new CameraAsyncTask();
 		mCameraAsyncTask.execute();
@@ -105,28 +105,28 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 	}
 
 	private void initViews() {
-        btnBack.setOnClickListener(view -> {
+		btnBack.setOnClickListener(view -> {
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
-            finish();
-        });
+			finish();
+		});
 
-        btnSaveColor.setOnClickListener(view -> {
-            // TODO
-        });
+		btnSaveColor.setOnClickListener(view -> {
+			// TODO
+		});
 
-        if (isFlashSupported()) {
-            btnFlashToggle.setVisibility(View.VISIBLE);
-            btnFlashToggle.setOnClickListener(view -> toggleFlash());
-        }
+		if (isFlashSupported()) {
+			btnFlashToggle.setVisibility(View.VISIBLE);
+			btnFlashToggle.setOnClickListener(view -> toggleFlash());
+		}
 
-        txtHexValue.setOnClickListener(view -> {
-            ClipboardUtils.copyToClipboard(txtHexValue.getText().toString().substring(1));
-            Toast.makeText(LivePickerActivity.this, String.format("%s %s",
-                    txtHexValue.getText().toString().substring(1),
-                    getString(R.string.clipboard)), Toast.LENGTH_SHORT).show();
-        });
-    }
+		txtHexValue.setOnClickListener(view -> {
+			ClipboardUtils.copyToClipboard(txtHexValue.getText().toString().substring(1));
+			Toast.makeText(LivePickerActivity.this, String.format("%s %s",
+					txtHexValue.getText().toString().substring(1),
+					getString(R.string.clipboard)), Toast.LENGTH_SHORT).show();
+		});
+	}
 
 	private void releaseCameraPreview() {
 		if (livePickerTextureView != null) {
@@ -152,10 +152,37 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 	@Override
 	public void onClick(View v) {
 		// TODO
-        // Set humanized color drawable
-        lastColor.setBackground(new ColorDrawable(mPointedColor));
-        // Set hex color value
+		// Set humanized color drawable
+		lastColor.setBackground(new ColorDrawable(mPointedColor));
+		// Set hex color value
 		txtHexValue.setText(String.format("#%06X", (0xffffff & mPointedColor)));
+	}
+
+	private boolean isFlashSupported() {
+		return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+	}
+
+	private void toggleFlash() {
+		if (mCamera != null) {
+			final Camera.Parameters parameters = mCamera.getParameters();
+			final String flashParameter = isFlashOn ? Camera.Parameters.FLASH_MODE_OFF : Camera.Parameters
+					.FLASH_MODE_TORCH;
+			parameters.setFlashMode(flashParameter);
+			mCamera.stopPreview();
+			mCamera.setParameters(parameters);
+			mCamera.startPreview();
+			isFlashOn = !isFlashOn;
+
+			if (btnFlashToggle != null) {
+				if (isFlashOn) {
+					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
+							.ic_flash_off_white));
+				} else {
+					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
+							.ic_flash_on_white));
+				}
+			}
+		}
 	}
 
 	private class CameraAsyncTask extends AsyncTask<Void, Void, Camera> {
@@ -219,31 +246,6 @@ public class LivePickerActivity extends AppCompatActivity implements LivePickerT
 		protected void onCancelled(Camera camera) {
 			if (camera != null) {
 				camera.release();
-			}
-		}
-	}
-
-	private boolean isFlashSupported() {
-		return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-	}
-
-	private void toggleFlash() {
-		if (mCamera != null) {
-			final Camera.Parameters parameters = mCamera.getParameters();
-			final String flashParameter = isFlashOn ? Camera.Parameters.FLASH_MODE_OFF : Camera.Parameters
-					.FLASH_MODE_TORCH;
-			parameters.setFlashMode(flashParameter);
-			mCamera.stopPreview();
-			mCamera.setParameters(parameters);
-			mCamera.startPreview();
-			isFlashOn = !isFlashOn;
-
-			if (btnFlashToggle != null) {
-				if (isFlashOn) {
-					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_flash_off_white));
-				} else {
-					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_flash_on_white));
-				}
 			}
 		}
 	}

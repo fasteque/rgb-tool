@@ -16,70 +16,74 @@ import com.fastebro.androidrgbtool.R;
 
 
 public class AboutFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-    public static final String FRAGMENT_TAG = "fragment_about";
+	public static final String FRAGMENT_TAG = "fragment_about";
 
-    private OnPreferenceSelectedListener onPreferenceSelectedListener;
+	private OnPreferenceSelectedListener onPreferenceSelectedListener;
 
-    public interface OnPreferenceSelectedListener {
-        void onPreferenceWithUriSelected(Uri uri);
-        void onPreferenceSendEmailSelected(String[] addresses, String subject);
-    }
+	public AboutFragment() {
+	}
 
-    public AboutFragment() {}
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+		try {
+			onPreferenceSelectedListener = (OnPreferenceSelectedListener) getActivity();
+		} catch (ClassCastException e) {
+			throw new ClassCastException(getActivity().toString() + " must implement OnPreferenceSelectedListener");
+		}
+	}
 
-        try {
-            onPreferenceSelectedListener = (OnPreferenceSelectedListener) getActivity();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement OnPreferenceSelectedListener");
-        }
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addPreferencesFromResource(R.xml.about);
+		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		// FIXME: KitKat is not supported anymore.
+		// Otherwise it fails on KitKat.
+		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+		setCurrentValue((ListPreference) findPreference("about.theme"));
+	}
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.about);
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-        // иначе будет падать на kit-kat
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        setCurrentValue((ListPreference) findPreference("about.theme"));
-    }
+	@Override
+	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+		if (preference.getIntent() != null && preference.getIntent().getData() != null) {
+			if (preference.getIntent().getAction().equals(Intent.ACTION_SENDTO)) {
+				onPreferenceSelectedListener.onPreferenceSendEmailSelected(new String[]{preference.getIntent()
+						.getData().toString()}, getString(R.string.app_name));
+			} else {
+				onPreferenceSelectedListener.onPreferenceWithUriSelected(preference.getIntent().getData());
+			}
+			return true;
+		}
 
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference.getIntent() != null && preference.getIntent().getData() != null) {
-            if (preference.getIntent().getAction().equals(Intent.ACTION_SENDTO)) {
-                onPreferenceSelectedListener.onPreferenceSendEmailSelected(new String[]{preference.getIntent()
-                        .getData().toString()}, getString(R.string.app_name));
-            } else {
-                onPreferenceSelectedListener.onPreferenceWithUriSelected(preference.getIntent().getData());
-            }
-            return true;
-        }
+		return super.onPreferenceTreeClick(preferenceScreen, preference);
+	}
 
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		switch (key) {
+			case "about.theme":
+				setCurrentValue((ListPreference) findPreference(key));
+				LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("org.openintents.action" +
+						".REFRESH_THEME"));
+				break;
+		}
+	}
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key) {
-            case "about.theme":
-                setCurrentValue((ListPreference) findPreference(key));
-                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("org.openintents.action.REFRESH_THEME"));
-                break;
-        }
-    }
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+	}
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-    }
+	private void setCurrentValue(ListPreference listPreference) {
+		listPreference.setSummary(listPreference.getEntry());
+	}
 
-    private void setCurrentValue(ListPreference listPreference){
-        listPreference.setSummary(listPreference.getEntry());
-    }
+	public interface OnPreferenceSelectedListener {
+		void onPreferenceWithUriSelected(Uri uri);
+
+		void onPreferenceSendEmailSelected(String[] addresses, String subject);
+	}
 }

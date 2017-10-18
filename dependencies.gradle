@@ -5,13 +5,12 @@ allprojects {
 }
 
 ext {
-    // Android
-    androidBuildToolsVersion = "26.0.1"
+    androidBuildToolsVersion = "26.0.2"
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 26
     androidCompileSdkVersion = 26
-
-    androidSupportLibraryVersion = '26.0.0-alpha1'
+    
+    androidSupportLibraryVersion = '26.0.2'
     rxAndroidVersion = '1.2.1'
     butterKnifeVersion = '8.6.0'
     picassoVersion = '2.5.2'
@@ -22,38 +21,38 @@ ext {
     acraVersion = '4.10.0'
 
     jUnitVersion = '4.12'
-    mockitoVersion = '2.7.20'
+    mockitoVersion = '2.9.0'
     espressoCoreVersion = '2.2.2'
     testRunnerVersion = '0.5'
 
     appDependencies = [
-            appCompat:              "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
-            design:                 "com.android.support:design:${androidSupportLibraryVersion}",
-            recyclerView:           "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
-            cardView:               "com.android.support:cardview-v7:${androidSupportLibraryVersion}",
-            customTabs:             "com.android.support:customtabs:${androidSupportLibraryVersion}",
-            palette:                "com.android.support:palette-v7:${androidSupportLibraryVersion}",
-            percent:                "com.android.support:percent:${androidSupportLibraryVersion}",
-            butterKnife:            "com.jakewharton:butterknife:${butterKnifeVersion}",
-            butterKnifeCompiler:    "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-            picasso:                "com.squareup.picasso:picasso:${picassoVersion}",
-            rxAndroid:              "io.reactivex:rxandroid:${rxAndroidVersion}",
-            photoView:              "com.github.chrisbanes:PhotoView:${photoViewVersion}",
-            eventBus:               "org.greenrobot:eventbus:${eventBusVersion}",
-            timber:                 "com.jakewharton.timber:timber:${timberVersion}",
-            glide:                  "com.github.bumptech.glide:glide:${glideVersion}",
-            acra:                   "com.faendir:acra:${acraVersion}"
+            appCompat          : "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
+            design             : "com.android.support:design:${androidSupportLibraryVersion}",
+            recyclerView       : "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
+            cardView           : "com.android.support:cardview-v7:${androidSupportLibraryVersion}",
+            customTabs         : "com.android.support:customtabs:${androidSupportLibraryVersion}",
+            palette            : "com.android.support:palette-v7:${androidSupportLibraryVersion}",
+            percent            : "com.android.support:percent:${androidSupportLibraryVersion}",
+            butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            picasso            : "com.squareup.picasso:picasso:${picassoVersion}",
+            rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            photoView          : "com.github.chrisbanes:PhotoView:${photoViewVersion}",
+            eventBus           : "org.greenrobot:eventbus:${eventBusVersion}",
+            timber             : "com.jakewharton.timber:timber:${timberVersion}",
+            glide              : "com.github.bumptech.glide:glide:${glideVersion}",
+            acra               : "com.faendir:acra:${acraVersion}"
     ]
 
     appTestDependencies = [
-            jUnit:              "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}"
+            jUnit  : "junit:junit:${jUnitVersion}",
+            mockito: "org.mockito:mockito-core:${mockitoVersion}"
     ]
 
     appAndroidTestDependencies = [
-            espressoCore:       "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
-            testRunner:         "com.android.support.test:runner:${testRunnerVersion}",
-            testRules:          "com.android.support.test:rules:${testRunnerVersion}",
-            supportAnnotation:  "com.android.support:support-annotations:${androidSupportLibraryVersion}"
+            espressoCore     : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            testRunner       : "com.android.support.test:runner:${testRunnerVersion}",
+            testRules        : "com.android.support.test:rules:${testRunnerVersion}",
+            supportAnnotation: "com.android.support:support-annotations:${androidSupportLibraryVersion}"
     ]
 }

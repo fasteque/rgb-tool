@@ -43,7 +43,7 @@ import com.fastebro.androidrgbtool.settings.Preferences;
 import com.fastebro.androidrgbtool.utils.BaseAlbumDirFactory;
 import com.fastebro.androidrgbtool.utils.ColorUtils;
 import com.fastebro.androidrgbtool.utils.CommonUtils;
-import com.fastebro.androidrgbtool.utils.FragmentUtil;
+import com.fastebro.androidrgbtool.utils.FragmentUtils;
 import com.fastebro.androidrgbtool.utils.ImageUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,372 +65,372 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends EventBaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
-    @BindView(R.id.bottomView) BottomNavigationView bottomBar;
-    private String currentPhotoPath;
-    private BaseAlbumDirFactory albumStorageDirFactory = null;
+	private static final int REQUEST_OPEN_GALLERY = 1;
+	private static final int REQUEST_IMAGE_CAPTURE = 2;
+	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+	@BindView(R.id.bottomView)
+	BottomNavigationView bottomBar;
+	private String currentPhotoPath;
+	private BaseAlbumDirFactory albumStorageDirFactory = null;
+	private int redColor = 0;
+	private int greenColor = 0;
+	private int blueColor = 0;
+	private int opacity = 255;
+	private ShareActionProvider shareActionProvider;
+	private Subscription scalePictureSubscription;
 
-    private int redColor = 0;
-    private int greenColor = 0;
-    private int blueColor = 0;
-    private int opacity = 255;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    private static final int REQUEST_OPEN_GALLERY = 1;
-    private static final int REQUEST_IMAGE_CAPTURE = 2;
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayShowTitleEnabled(true);
+		}
 
-    private ShareActionProvider shareActionProvider;
-    private Subscription scalePictureSubscription;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-        }
-
-        setContentView(R.layout.activity_main_rgb);
-        ButterKnife.bind(this);
-        FragmentUtil.iterate(MainActivity.this, R.id.main_container, new MainColorFragment());
-        bottomBar.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.bottom_main:
-                    FragmentUtil.iterate(MainActivity.this, R.id.main_container, new MainColorFragment());
-                    item.setChecked(true);
-                    Preferences.saveTabPosition(0);
-                    break;
-                case R.id.bottom_details:
-                    FragmentUtil.iterate(MainActivity.this, R.id.main_container, new ColorDetailsFragment());
-                    item.setChecked(true);
-                    Preferences.saveTabPosition(1);
-                    break;
-                case R.id.bottom_list:
-                    FragmentUtil.iterate(MainActivity.this, R.id.main_container, new ColorListFragment());
-                    item.setChecked(true);
-                    Preferences.saveTabPosition(2);
-                    break;
-            }
-            return false;
-        });
-        restorePreferences();
-    }
+		setContentView(R.layout.activity_main_rgb);
+		ButterKnife.bind(this);
+		FragmentUtils.iterate(MainActivity.this, R.id.main_container, new MainColorFragment());
+		bottomBar.setOnNavigationItemSelectedListener(item -> {
+			switch (item.getItemId()) {
+				case R.id.bottom_main:
+					FragmentUtils.iterate(MainActivity.this, R.id.main_container, new MainColorFragment());
+					item.setChecked(true);
+					Preferences.saveTabPosition(0);
+					break;
+				case R.id.bottom_details:
+					FragmentUtils.iterate(MainActivity.this, R.id.main_container, new ColorDetailsFragment());
+					item.setChecked(true);
+					Preferences.saveTabPosition(1);
+					break;
+				case R.id.bottom_list:
+					FragmentUtils.iterate(MainActivity.this, R.id.main_container, new ColorListFragment());
+					item.setChecked(true);
+					Preferences.saveTabPosition(2);
+					break;
+			}
+			return false;
+		});
+		restorePreferences();
+	}
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
+	@Override
+	protected void onStop() {
+		super.onStop();
 
-        if (scalePictureSubscription != null && scalePictureSubscription.isUnsubscribed()) {
-            scalePictureSubscription.unsubscribe();
-        }
+		if (scalePictureSubscription != null && scalePictureSubscription.isUnsubscribed()) {
+			scalePictureSubscription.unsubscribe();
+		}
 
-        savePreferences();
-    }
+		savePreferences();
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
 
-        // Set overflow menu icons visible
-        if (menu instanceof MenuBuilder){
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
+		// Set overflow menu icons visible
+		if (menu instanceof MenuBuilder) {
+			MenuBuilder m = (MenuBuilder) menu;
+			m.setOptionalIconsVisible(true);
+		}
 
-        // Check if the device has a camera.
-        MenuItem item = menu.findItem(R.id.action_camera);
+		// Check if the device has a camera.
+		MenuItem item = menu.findItem(R.id.action_camera);
 
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            item.setVisible(true);
-        } else {
-            item.setVisible(false);
-        }
+		if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+			item.setVisible(true);
+		} else {
+			item.setVisible(false);
+		}
 
-        item = menu.findItem(R.id.action_share);
-        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-        updateSharedColor();
+		item = menu.findItem(R.id.action_share);
+		shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+		updateSharedColor();
 
-        return super.onCreateOptionsMenu(menu);
-    }
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_camera:
-                checkWriteExternalStoragePermissions();
-                return true;
-            case R.id.action_print:
-                showPrintColorDialog(PrintJobDialogFragment.PRINT_COLOR_JOB);
-                return true;
-            case R.id.action_about:
-                showAbout();
-                return true;
-            case R.id.action_live_picker:{
-                startActivity(new Intent(this, LivePickerActivity.class));
-                return true;
-            }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_camera:
+				checkWriteExternalStoragePermissions();
+				return true;
+			case R.id.action_print:
+				showPrintColorDialog(PrintJobDialogFragment.PRINT_COLOR_JOB);
+				return true;
+			case R.id.action_about:
+				showAbout();
+				return true;
+			case R.id.action_live_picker: {
+				startActivity(new Intent(this, LivePickerActivity.class));
+				return true;
+			}
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 
-    private void checkWriteExternalStoragePermissions() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
-                .PERMISSION_GRANTED) {
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Snackbar.make(findViewById(android.R.id.content), getString(R.string.rationale_external_storage),
-                        Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), view -> {
-                    // Request the permission
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                }).show();
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-            }
-        } else {
-            showSelectPictureDialog();
-        }
-    }
+	private void checkWriteExternalStoragePermissions() {
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
+				.PERMISSION_GRANTED) {
+			// Should we show an explanation?
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission
+					.WRITE_EXTERNAL_STORAGE)) {
+				Snackbar.make(findViewById(android.R.id.content), getString(R.string.rationale_external_storage),
+						Snackbar.LENGTH_INDEFINITE).setAction(getString(android.R.string.ok), view -> {
+					// Request the permission
+					ActivityCompat.requestPermissions(MainActivity.this,
+							new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+							PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+				}).show();
+			} else {
+				ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+			}
+		} else {
+			showSelectPictureDialog();
+		}
+	}
 
-    private void showSelectPictureDialog() {
-        SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
-        dialogFragment.setCancelable(true);
-        dialogFragment.show(getSupportFragmentManager(), null);
-    }
+	private void showSelectPictureDialog() {
+		SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
+		dialogFragment.setCancelable(true);
+		dialogFragment.show(getSupportFragmentManager(), null);
+	}
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Snackbar.make(findViewById(android.R.id.content), R.string.permissions_granted, Snackbar
-                        .LENGTH_SHORT).show();
-            } else {
-                Snackbar.make(findViewById(android.R.id.content), R.string.permissions_not_granted, Snackbar
-                        .LENGTH_SHORT).show();
-            }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
+			grantResults) {
+		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+			if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				Snackbar.make(findViewById(android.R.id.content), R.string.permissions_granted, Snackbar
+						.LENGTH_SHORT).show();
+			} else {
+				Snackbar.make(findViewById(android.R.id.content), R.string.permissions_not_granted, Snackbar
+						.LENGTH_SHORT).show();
+			}
+		} else {
+			super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		}
+	}
 
-    private void showAbout() {
-        startActivity(new Intent(this, AboutActivity.class), ActivityOptions
-                .makeSceneTransitionAnimation(this).toBundle());
-    }
+	private void showAbout() {
+		startActivity(new Intent(this, AboutActivity.class), ActivityOptions
+				.makeSceneTransitionAnimation(this).toBundle());
+	}
 
-    private void printColor(String message) {
-        // Get a PrintManager instance
-        PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+	private void printColor(String message) {
+		// Get a PrintManager instance
+		PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
 
-        // Set job name, which will be displayed in the print queue
-        String jobName = getString(R.string.app_name) + "_Color";
+		// Set job name, which will be displayed in the print queue
+		String jobName = getString(R.string.app_name) + "_Color";
 
-        // Start a print job, passing in a PrintDocumentAdapter implementation
-        printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, redColor, greenColor, blueColor,
-                opacity), null);
-    }
+		// Start a print job, passing in a PrintDocumentAdapter implementation
+		printManager.print(jobName, new RGBToolPrintColorAdapter(this, message, redColor, greenColor, blueColor,
+				opacity), null);
+	}
 
-    private void updateSharedColor() {
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getColorMessage(redColor, greenColor, blueColor,
-                opacity));
-        shareIntent.setType("text/plain");
-        setShareIntent(shareIntent);
-    }
+	private void updateSharedColor() {
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_TEXT, ColorUtils.getColorMessage(redColor, greenColor, blueColor,
+				opacity));
+		shareIntent.setType("text/plain");
+		setShareIntent(shareIntent);
+	}
 
-    private void setShareIntent(Intent shareIntent) {
-        if (shareActionProvider != null) {
-            shareActionProvider.setShareIntent(shareIntent);
-        }
-    }
+	private void setShareIntent(Intent shareIntent) {
+		if (shareActionProvider != null) {
+			shareActionProvider.setShareIntent(shareIntent);
+		}
+	}
 
-    public void openDeviceGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
-    }
+	public void openDeviceGallery() {
+		Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+		galleryIntent.setType("image/*");
+		startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
+	}
 
-    public void openRGBToolGallery() {
-        startActivity(new Intent(this, RGBToolGalleryActivity.class), ActivityOptions
-                .makeSceneTransitionAnimation(this).toBundle());
-    }
+	public void openRGBToolGallery() {
+		startActivity(new Intent(this, RGBToolGalleryActivity.class), ActivityOptions
+				.makeSceneTransitionAnimation(this).toBundle());
+	}
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_OPEN_GALLERY) {
-            if (resultCode == RESULT_OK) {
-                if (data != null) {
-                    currentPhotoPath = getRealPathFromURI(data.getData());
-                    handlePhoto(true);
-                }
-            }
-        } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            if (resultCode == RESULT_OK) {
-                handlePhoto(false);
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_OPEN_GALLERY) {
+			if (resultCode == RESULT_OK) {
+				if (data != null) {
+					currentPhotoPath = getRealPathFromURI(data.getData());
+					handlePhoto(true);
+				}
+			}
+		} else if (requestCode == REQUEST_IMAGE_CAPTURE) {
+			if (resultCode == RESULT_OK) {
+				handlePhoto(false);
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
 
-    public void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File f;
+	public void dispatchTakePictureIntent() {
+		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		File f;
 
-        albumStorageDirFactory = new BaseAlbumDirFactory();
+		albumStorageDirFactory = new BaseAlbumDirFactory();
 
-        try {
-            f = setUpPhotoFile();
-            currentPhotoPath = f.getAbsolutePath();
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-        } catch (IOException e) {
-            currentPhotoPath = null;
-        }
+		try {
+			f = setUpPhotoFile();
+			currentPhotoPath = f.getAbsolutePath();
+			takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		} catch (IOException e) {
+			currentPhotoPath = null;
+		}
 
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-    }
+		startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+	}
 
-    private File setUpPhotoFile() throws IOException {
-        File f = createImageFile();
-        currentPhotoPath = f.getAbsolutePath();
+	private File setUpPhotoFile() throws IOException {
+		File f = createImageFile();
+		currentPhotoPath = f.getAbsolutePath();
 
-        return f;
-    }
+		return f;
+	}
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
+	private File createImageFile() throws IOException {
+		// Create an image file name
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
 
-        String imageFileName = ImageUtils.JPEG_FILE_PREFIX + timeStamp + "_";
+		String imageFileName = ImageUtils.JPEG_FILE_PREFIX + timeStamp + "_";
 
-        File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX, getAlbumDir());
-        currentPhotoPath = image.getAbsolutePath();
+		File image = File.createTempFile(imageFileName, ImageUtils.JPEG_FILE_SUFFIX, getAlbumDir());
+		currentPhotoPath = image.getAbsolutePath();
 
-        return image;
-    }
+		return image;
+	}
 
-    // Photo album for this application
-    private String getAlbumName() {
-        return getString(R.string.album_name);
-    }
+	// Photo album for this application
+	private String getAlbumName() {
+		return getString(R.string.album_name);
+	}
 
-    private File getAlbumDir() {
-        File storageDir = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            storageDir = albumStorageDirFactory.getAlbumStorageDir(getAlbumName());
-            if (storageDir != null) {
-                if (!storageDir.mkdirs()) {
-                    if (!storageDir.exists()) {
-                        return null;
-                    }
-                }
-            }
-        }
+	private File getAlbumDir() {
+		File storageDir = null;
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+			storageDir = albumStorageDirFactory.getAlbumStorageDir(getAlbumName());
+			if (storageDir != null) {
+				if (!storageDir.mkdirs()) {
+					if (!storageDir.exists()) {
+						return null;
+					}
+				}
+			}
+		}
 
-        return storageDir;
-    }
+		return storageDir;
+	}
 
-    private void handlePhoto(boolean useTempFile) {
-        String destinationPath;
+	private void handlePhoto(boolean useTempFile) {
+		String destinationPath;
 
-        if (currentPhotoPath != null && (ContextCompat.checkSelfPermission(this, Manifest.permission
-                .WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-            if (useTempFile) {
-                destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
-            } else {
-                destinationPath = currentPhotoPath;
-            }
+		if (currentPhotoPath != null && (ContextCompat.checkSelfPermission(this, Manifest.permission
+				.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+			if (useTempFile) {
+				destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
+			} else {
+				destinationPath = currentPhotoPath;
+			}
 
-            scalePictureSubscription =
-                    PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath)
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Observer<ScaledPicture>() {
-                                @Override
-                                public void onCompleted() {
-                                    // Nothing to do.
-                                }
+			scalePictureSubscription =
+					PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath)
+							.subscribeOn(Schedulers.newThread())
+							.observeOn(AndroidSchedulers.mainThread())
+							.subscribe(new Observer<ScaledPicture>() {
+								@Override
+								public void onCompleted() {
+									// Nothing to do.
+								}
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    // Nothing to do.
-                                }
+								@Override
+								public void onError(Throwable e) {
+									// Nothing to do.
+								}
 
-                                @Override
-                                public void onNext(ScaledPicture scaledPicture) {
-                                    EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
-                                            scaledPicture.isTempFile()));
-                                }
-                            });
-        } else {
-            Snackbar.make(findViewById(android.R.id.content),
-                    getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
-        }
-    }
+								@Override
+								public void onNext(ScaledPicture scaledPicture) {
+									EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
+											scaledPicture.isTempFile()));
+								}
+							});
+		} else {
+			Snackbar.make(findViewById(android.R.id.content),
+					getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
+		}
+	}
 
-    private String getRealPathFromURI(Uri contentUri) {
-        String path = null;
-        String document_id = null;
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            document_id = cursor.getString(0);
-            document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-            cursor.close();
-        }
+	private String getRealPathFromURI(Uri contentUri) {
+		String path = null;
+		String document_id = null;
+		Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+			document_id = cursor.getString(0);
+			document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+			cursor.close();
+		}
 
-        if (document_id != null) {
-            cursor = getContentResolver().query(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                cursor.close();
-            }
-        }
-        return path;
-    }
+		if (document_id != null) {
+			cursor = getContentResolver().query(
+					MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+					null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+			if (cursor != null) {
+				cursor.moveToFirst();
+				path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+				cursor.close();
+			}
+		}
+		return path;
+	}
 
-    private void updateRGBColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent) {
-        redColor = RGBRComponent;
-        greenColor = RGBGComponent;
-        blueColor = RGBBComponent;
-        opacity = RGBOComponent;
-    }
+	private void updateRGBColor(int RGBRComponent, int RGBGComponent, int RGBBComponent, int RGBOComponent) {
+		redColor = RGBRComponent;
+		greenColor = RGBGComponent;
+		blueColor = RGBBComponent;
+		opacity = RGBOComponent;
+	}
 
-    private void restorePreferences() {
-        SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
+	private void restorePreferences() {
+		SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
 
-        updateRGBColor(settings.getInt(CommonUtils.PREFS_R_COLOR, 0),
-                settings.getInt(CommonUtils.PREFS_G_COLOR, 0),
-                settings.getInt(CommonUtils.PREFS_B_COLOR, 0),
-                settings.getInt(CommonUtils.PREFS_OPACITY, 255));
-        // restore last selected tab item
-        bottomBar.setSelectedItemId(Preferences.getTabPosition());
-    }
+		updateRGBColor(settings.getInt(CommonUtils.PREFS_R_COLOR, 0),
+				settings.getInt(CommonUtils.PREFS_G_COLOR, 0),
+				settings.getInt(CommonUtils.PREFS_B_COLOR, 0),
+				settings.getInt(CommonUtils.PREFS_OPACITY, 255));
+		// restore last selected tab item
+		bottomBar.setSelectedItemId(Preferences.getTabPosition());
+	}
 
-    public void savePreferences() {
-        SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt(CommonUtils.PREFS_R_COLOR, redColor);
-        editor.putInt(CommonUtils.PREFS_G_COLOR, greenColor);
-        editor.putInt(CommonUtils.PREFS_B_COLOR, blueColor);
-        editor.putInt(CommonUtils.PREFS_OPACITY, opacity);
-        editor.apply();
-    }
+	public void savePreferences() {
+		SharedPreferences settings = getSharedPreferences(CommonUtils.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(CommonUtils.PREFS_R_COLOR, redColor);
+		editor.putInt(CommonUtils.PREFS_G_COLOR, greenColor);
+		editor.putInt(CommonUtils.PREFS_B_COLOR, blueColor);
+		editor.putInt(CommonUtils.PREFS_OPACITY, opacity);
+		editor.apply();
+	}
 
-    @Subscribe
-    public void onColorSelectEvent(ColorSelectEvent event) {
-        updateRGBColor(event.RGBRComponent,
-                event.RGBGComponent,
-                event.RGBBComponent,
-                event.RGBOComponent);
+	@Subscribe
+	public void onColorSelectEvent(ColorSelectEvent event) {
+		updateRGBColor(event.getRGBRComponent(),
+				event.getRGBGComponent(),
+				event.getRGBBComponent(),
+				event.getRGBOComponent());
 
 //        refreshUI();
 
@@ -439,71 +439,71 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 //        seekBarBlue.setProgress(event.RGBBComponent);
 //        seekBarOpacity.setProgress(event.RGBOComponent);
 
-        savePreferences();
-    }
+		savePreferences();
+	}
 
-    @Subscribe
-    public void onPhotoScaledEvent(PhotoScaledEvent event) {
-        /**
-         * Tell the media scanner about the new file so that it is
-         * immediately available to the user.
-         */
-        MediaScannerConnection.scanFile(getApplicationContext(),
-                new String[]{event.photoPath}, null,
-                (path, uri) -> {
-                });
+	@Subscribe
+	public void onPhotoScaledEvent(PhotoScaledEvent event) {
+		/**
+		 * Tell the media scanner about the new file so that it is
+		 * immediately available to the user.
+		 */
+		MediaScannerConnection.scanFile(getApplicationContext(),
+				new String[]{event.getPhotoPath()}, null,
+				(path, uri) -> {
+				});
 
-        Intent colorPickerIntent = new Intent(this, ColorPickerActivity.class);
-        colorPickerIntent.putExtra(ImageUtils.EXTRA_JPEG_FILE_PATH, event.photoPath);
-        colorPickerIntent.putExtra(ImageUtils.EXTRA_DELETE_FILE, event.deleteFile);
-        startActivity(colorPickerIntent);
-    }
+		Intent colorPickerIntent = new Intent(this, ColorPickerActivity.class);
+		colorPickerIntent.putExtra(ImageUtils.EXTRA_JPEG_FILE_PATH, event.getPhotoPath());
+		colorPickerIntent.putExtra(ImageUtils.EXTRA_DELETE_FILE, event.getDeleteFile());
+		startActivity(colorPickerIntent);
+	}
 
-    @Subscribe
-    public void onPrintColorEvent(PrintColorEvent event) {
-        printColor(event.message);
-    }
+	@Subscribe
+	public void onPrintColorEvent(PrintColorEvent event) {
+		printColor(event.getMessage());
+	}
 
-    @SuppressWarnings("UnusedParameters")
-    @Subscribe
-    public void onUpdateSaveColorUIEvent(UpdateSaveColorUIEvent event) {
+	@SuppressWarnings("UnusedParameters")
+	@Subscribe
+	public void onUpdateSaveColorUIEvent(UpdateSaveColorUIEvent event) {
 //        updateSaveColorButton();
-    }
+	}
 
-    @Subscribe
-    public void onErrorMessageEvent(ErrorMessageEvent event) {
-        Snackbar.make(findViewById(android.R.id.content), event.message, Snackbar.LENGTH_SHORT).show();
-    }
+	@Subscribe
+	public void onErrorMessageEvent(ErrorMessageEvent event) {
+		Snackbar.make(findViewById(android.R.id.content), event.getMessage(), Snackbar.LENGTH_SHORT).show();
+	}
 
-    public int getRedColor() {
-        return redColor;
-    }
+	public int getRedColor() {
+		return redColor;
+	}
 
-    public void setRedColor(int redColor) {
-        this.redColor = redColor;
-    }
+	public void setRedColor(int redColor) {
+		this.redColor = redColor;
+	}
 
-    public int getGreenColor() {
-        return greenColor;
-    }
+	public int getGreenColor() {
+		return greenColor;
+	}
 
-    public void setGreenColor(int greenColor) {
-        this.greenColor = greenColor;
-    }
+	public void setGreenColor(int greenColor) {
+		this.greenColor = greenColor;
+	}
 
-    public int getBlueColor() {
-        return blueColor;
-    }
+	public int getBlueColor() {
+		return blueColor;
+	}
 
-    public void setBlueColor(int blueColor) {
-        this.blueColor = blueColor;
-    }
+	public void setBlueColor(int blueColor) {
+		this.blueColor = blueColor;
+	}
 
-    public int getOpacity() {
-        return opacity;
-    }
+	public int getOpacity() {
+		return opacity;
+	}
 
-    public void setOpacity(int opacity) {
-        this.opacity = opacity;
-    }
+	public void setOpacity(int opacity) {
+		this.opacity = opacity;
+	}
 }

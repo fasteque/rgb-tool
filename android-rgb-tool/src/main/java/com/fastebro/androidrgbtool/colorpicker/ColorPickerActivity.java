@@ -46,312 +46,310 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 public class ColorPickerActivity extends BaseActivity {
-    @BindView(R.id.color_picker_main_layout)
-    RelativeLayout mainLayout;
-    @BindView(R.id.iv_photo)
-    ImageView imageView;
-    @BindView(R.id.color_picker_image) ImageView emptyImage;
-    @BindView(R.id.color_picker_text)
-    TextView emptyText;
+	private final static float PHOTO_SCALING_FACTOR = 3.0f;
+	private static final int REQUEST_OPEN_GALLERY = 1;
+	@BindView(R.id.color_picker_main_layout)
+	RelativeLayout mainLayout;
+	@BindView(R.id.iv_photo)
+	ImageView imageView;
+	@BindView(R.id.color_picker_image)
+	ImageView emptyImage;
+	@BindView(R.id.color_picker_text)
+	TextView emptyText;
+	private PhotoViewAttacher attacher;
+	private Bitmap bitmap;
+	private View.OnTouchListener imgSourceOnTouchListener;
+	private RGBPanelData rgbPanelDataLayout;
+	private Subscription scalePictureSubscription;
+	private String currentPath = null;
+	private String currentPhotoPath;
+	private boolean deleteFile = false;
 
-    private PhotoViewAttacher attacher;
-    private Bitmap bitmap;
-    private View.OnTouchListener imgSourceOnTouchListener;
-    private RGBPanelData rgbPanelDataLayout;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_color_picker);
+		AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+		ButterKnife.bind(this);
 
-    private Subscription scalePictureSubscription;
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 
-    private String currentPath = null;
-    private String currentPhotoPath;
-    private boolean deleteFile = false;
-    private final static float PHOTO_SCALING_FACTOR = 3.0f;
-    private static final int REQUEST_OPEN_GALLERY = 1;
+		rgbPanelDataLayout = new RGBPanelData(this);
+		rgbPanelDataLayout.setVisibility(View.GONE);
 
+		if (getIntent() != null) {
+			// get the path of the image and set it.
+			Bundle bundle = getIntent().getExtras();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_color_picker);
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        ButterKnife.bind(this);
+			if (bundle != null) {
+				currentPath = bundle.getString(ImageUtils.EXTRA_JPEG_FILE_PATH);
+				deleteFile = bundle.getBoolean(ImageUtils.EXTRA_DELETE_FILE);
+			}
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+			if (currentPath != null) {
+				try {
+					bitmap = BitmapFactory.decodeFile(currentPath);
+					imageView.setImageBitmap(bitmap);
+					imageView.setOnTouchListener(imgSourceOnTouchListener);
+					attacher = new PhotoViewAttacher(imageView);
+					attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
+					attacher.setOnViewTapListener(new PhotoViewTapListener());
+					attacher.setOnPhotoTapListener(new PhotoViewTapListener());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-        rgbPanelDataLayout = new RGBPanelData(this);
-        rgbPanelDataLayout.setVisibility(View.GONE);
+		mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+				.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT));
 
-        if (getIntent() != null) {
-            // get the path of the image and set it.
-            Bundle bundle = getIntent().getExtras();
+		// Activity launched via shortcut
+		if (bitmap == null) {
+			emptyImage.setVisibility(View.VISIBLE);
+			emptyText.setVisibility(View.VISIBLE);
+			emptyImage.setOnClickListener(v -> openDeviceGallery());
+		}
+	}
 
-            if (bundle != null) {
-                currentPath = bundle.getString(ImageUtils.EXTRA_JPEG_FILE_PATH);
-                deleteFile = bundle.getBoolean(ImageUtils.EXTRA_DELETE_FILE);
-            }
+	@Override
+	protected void onStop() {
+		super.onStop();
+		if (scalePictureSubscription != null && scalePictureSubscription.isUnsubscribed()) {
+			scalePictureSubscription.unsubscribe();
+		}
+	}
 
-            if (currentPath != null) {
-                try {
-                    bitmap = BitmapFactory.decodeFile(currentPath);
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setOnTouchListener(imgSourceOnTouchListener);
-                    attacher = new PhotoViewAttacher(imageView);
-                    attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
-                    attacher.setOnViewTapListener(new PhotoViewTapListener());
-                    attacher.setOnPhotoTapListener(new PhotoViewTapListener());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+	@Override
+	protected void onDestroy() {
+		if (deleteFile) {
+			//noinspection ResultOfMethodCallIgnored
+			new File(currentPath).delete();
+			getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+					MediaStore.Images.Media.DATA + "=?", new String[]{currentPath});
+		}
+		super.onDestroy();
+	}
 
-        mainLayout.addView(rgbPanelDataLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT));
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.color_picker, menu);
+		return true;
+	}
 
-        // Activity launched via shortcut
-        if (bitmap == null) {
-            emptyImage.setVisibility(View.VISIBLE);
-            emptyText.setVisibility(View.VISIBLE);
-            emptyImage.setOnClickListener(v -> openDeviceGallery());
-        }
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				finishAfterTransition();
+				return true;
+			case R.id.action_palette:
+				generatePalette();
+				return true;
+			case R.id.action_load: {
+				openDeviceGallery();
+				return true;
+			}
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (scalePictureSubscription != null && scalePictureSubscription.isUnsubscribed()) {
-            scalePictureSubscription.unsubscribe();
-        }
-    }
+	private void generatePalette() {
+		if (bitmap != null) {
+			Palette.Builder paletteBuilder = Palette.from(bitmap);
+			paletteBuilder.generate(palette -> {
+				Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
 
-    @Override
-    protected void onDestroy() {
-        if (deleteFile) {
-            //noinspection ResultOfMethodCallIgnored
-            new File(currentPath).delete();
-            getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    MediaStore.Images.Media.DATA + "=?", new String[]{currentPath});
-        }
-        super.onDestroy();
-    }
+				ArrayList<PaletteSwatch> swatches = new ArrayList<>();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.color_picker, menu);
-        return true;
-    }
+				if (palette.getVibrantSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
+							PaletteSwatch.SwatchType.VIBRANT));
+				}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finishAfterTransition();
-                return true;
-            case R.id.action_palette:
-                generatePalette();
-                return true;
-            case R.id.action_load: {
-                openDeviceGallery();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
+				if (palette.getMutedSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
+							PaletteSwatch.SwatchType.MUTED));
+				}
 
-    private void generatePalette() {
-        if (bitmap != null) {
-            Palette.Builder paletteBuilder = Palette.from(bitmap);
-            paletteBuilder.generate(palette -> {
-                Intent intent = new Intent(ColorPickerActivity.this, ImagePaletteActivity.class);
+				if (palette.getLightVibrantSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
+							PaletteSwatch.SwatchType.LIGHT_VIBRANT));
+				}
 
-                ArrayList<PaletteSwatch> swatches = new ArrayList<>();
+				if (palette.getLightMutedSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
+							PaletteSwatch.SwatchType.LIGHT_MUTED));
+				}
 
-                if (palette.getVibrantSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getVibrantSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.VIBRANT));
-                }
+				if (palette.getDarkVibrantSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
+							PaletteSwatch.SwatchType.DARK_VIBRANT));
+				}
 
-                if (palette.getMutedSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getMutedSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.MUTED));
-                }
+				if (palette.getDarkMutedSwatch() != null) {
+					swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
+							PaletteSwatch.SwatchType.DARK_MUTED));
+				}
 
-                if (palette.getLightVibrantSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getLightVibrantSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.LIGHT_VIBRANT));
-                }
+				intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
 
-                if (palette.getLightMutedSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getLightMutedSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.LIGHT_MUTED));
-                }
+				intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath != null ?
+						currentPath : currentPhotoPath).getLastPathSegment());
 
-                if (palette.getDarkVibrantSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getDarkVibrantSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.DARK_VIBRANT));
-                }
+				startActivity(intent,
+						ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
+			});
+		}
+	}
 
-                if (palette.getDarkMutedSwatch() != null) {
-                    swatches.add(new PaletteSwatch(palette.getDarkMutedSwatch().getRgb(),
-                            PaletteSwatch.SwatchType.DARK_MUTED));
-                }
+	@Override
+	public void onBackPressed() {
+		finishAfterTransition();
+	}
 
-                intent.putParcelableArrayListExtra(ImagePaletteActivity.EXTRA_SWATCHES, swatches);
+	// Copypaste from MainActivity
+	private void openDeviceGallery() {
+		Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+		galleryIntent.setType("image/*");
+		startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
+	}
 
-                intent.putExtra(ImagePaletteActivity.FILENAME, Uri.parse(currentPath != null ?
-                        currentPath : currentPhotoPath).getLastPathSegment());
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_OPEN_GALLERY && resultCode == RESULT_OK && data != null) {
+			currentPhotoPath = getRealPathFromURI(data.getData());
+			handlePhoto(true);
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
 
-                startActivity(intent,
-                        ActivityOptions.makeSceneTransitionAnimation(ColorPickerActivity.this).toBundle());
-            });
-        }
-    }
+	private String getRealPathFromURI(Uri contentUri) {
+		String path = null;
+		String document_id = null;
+		Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+			document_id = cursor.getString(0);
+			document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+			cursor.close();
+		}
 
-    private class PhotoViewTapListener
-            implements PhotoViewAttacher.OnViewTapListener,
-            PhotoViewAttacher.OnPhotoTapListener {
-        @Override
-        public void onViewTap(View view, float x, float y) {
-            // Not being used so far.
-        }
+		if (document_id != null) {
+			cursor = getContentResolver().query(
+					MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+					null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+			if (cursor != null) {
+				cursor.moveToFirst();
+				path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+				cursor.close();
+			}
+		}
 
-        @Override
-        public void onOutsidePhotoTap() {
-            // Not being used so far.
-        }
+		return path;
+	}
 
-        @Override
-        public void onPhotoTap(View view, float x, float y) {
-            // x and y represent the percentage of the Drawable where the user clicked.
-            int imageX = (int) (x * bitmap.getWidth());
-            int imageY = (int) (y * bitmap.getHeight());
+	private void handlePhoto(boolean useTempFile) {
+		String destinationPath;
 
-            int touchedRGB = bitmap.getPixel(imageX, imageY);
+		if (currentPhotoPath != null && (ContextCompat.checkSelfPermission(this, Manifest.permission
+				.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+			if (useTempFile) {
+				destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
+			} else {
+				destinationPath = currentPhotoPath;
+			}
 
-            if (imageY < bitmap.getHeight() / 2) {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
-                        .WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                rgbPanelDataLayout.setLayoutParams(params);
-                rgbPanelDataLayout.updateData(touchedRGB);
+			scalePictureSubscription =
+					PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath)
+							.subscribeOn(Schedulers.newThread())
+							.observeOn(AndroidSchedulers.mainThread())
+							.subscribe(new Observer<ScaledPicture>() {
+								@Override
+								public void onCompleted() {
+									// Nothing to do.
+								}
 
-                if (rgbPanelDataLayout.getVisibility() == View.GONE) {
-                    rgbPanelDataLayout.setVisibility(View.VISIBLE);
-                }
-            } else {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
-                        .WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                rgbPanelDataLayout.setLayoutParams(params);
-                rgbPanelDataLayout.updateData(touchedRGB);
+								@Override
+								public void onError(Throwable e) {
+									// Nothing to do.
+								}
 
-                if (rgbPanelDataLayout.getVisibility() == View.GONE) {
-                    rgbPanelDataLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        }
-    }
+								@Override
+								public void onNext(ScaledPicture scaledPicture) {
+									EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
+											scaledPicture.isTempFile()));
+								}
+							});
 
-    @Override
-    public void onBackPressed() {
-        finishAfterTransition();
-    }
+			if (currentPhotoPath != null) {
+				try {
+					bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+					imageView.setImageBitmap(bitmap);
+					imageView.setOnTouchListener(imgSourceOnTouchListener);
+					attacher = new PhotoViewAttacher(imageView);
+					attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
+					attacher.setOnViewTapListener(new PhotoViewTapListener());
+					attacher.setOnPhotoTapListener(new PhotoViewTapListener());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			Snackbar.make(findViewById(android.R.id.content),
+					getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
+		}
+	}
 
-    // Copypaste from MainActivity
-    private void openDeviceGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, REQUEST_OPEN_GALLERY);
-    }
+	private class PhotoViewTapListener
+			implements PhotoViewAttacher.OnViewTapListener,
+			PhotoViewAttacher.OnPhotoTapListener {
+		@Override
+		public void onViewTap(View view, float x, float y) {
+			// Not being used so far.
+		}
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_OPEN_GALLERY && resultCode == RESULT_OK && data != null) {
-            currentPhotoPath = getRealPathFromURI(data.getData());
-            handlePhoto(true);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+		@Override
+		public void onOutsidePhotoTap() {
+			// Not being used so far.
+		}
 
-    private String getRealPathFromURI(Uri contentUri) {
-        String path = null;
-        String document_id = null;
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            document_id = cursor.getString(0);
-            document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-            cursor.close();
-        }
+		@Override
+		public void onPhotoTap(View view, float x, float y) {
+			// x and y represent the percentage of the Drawable where the user clicked.
+			int imageX = (int) (x * bitmap.getWidth());
+			int imageY = (int) (y * bitmap.getHeight());
 
-        if (document_id != null) {
-            cursor = getContentResolver().query(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                cursor.close();
-            }
-        }
+			int touchedRGB = bitmap.getPixel(imageX, imageY);
 
-        return path;
-    }
+			if (imageY < bitmap.getHeight() / 2) {
+				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+						.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+				rgbPanelDataLayout.setLayoutParams(params);
+				rgbPanelDataLayout.updateData(touchedRGB);
 
-    private void handlePhoto(boolean useTempFile) {
-        String destinationPath;
+				if (rgbPanelDataLayout.getVisibility() == View.GONE) {
+					rgbPanelDataLayout.setVisibility(View.VISIBLE);
+				}
+			} else {
+				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams
+						.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+				rgbPanelDataLayout.setLayoutParams(params);
+				rgbPanelDataLayout.updateData(touchedRGB);
 
-        if (currentPhotoPath != null && (ContextCompat.checkSelfPermission(this, Manifest.permission
-                .WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-            if (useTempFile) {
-                destinationPath = getFilesDir() + new File(currentPhotoPath).getName();
-            } else {
-                destinationPath = currentPhotoPath;
-            }
-
-            scalePictureSubscription =
-                    PictureScalingManager.scalePictureObservable(currentPhotoPath, destinationPath)
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Observer<ScaledPicture>() {
-                                @Override
-                                public void onCompleted() {
-                                    // Nothing to do.
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    // Nothing to do.
-                                }
-
-                                @Override
-                                public void onNext(ScaledPicture scaledPicture) {
-                                    EventBus.getDefault().post(new PhotoScaledEvent(scaledPicture.getPicturePath(),
-                                            scaledPicture.isTempFile()));
-                                }
-                            });
-
-            if (currentPhotoPath != null) {
-                try {
-                    bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setOnTouchListener(imgSourceOnTouchListener);
-                    attacher = new PhotoViewAttacher(imageView);
-                    attacher.setMaximumScale(attacher.getMaximumScale() * PHOTO_SCALING_FACTOR);
-                    attacher.setOnViewTapListener(new PhotoViewTapListener());
-                    attacher.setOnPhotoTapListener(new PhotoViewTapListener());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            Snackbar.make(findViewById(android.R.id.content),
-                    getString(R.string.error_open_gallery_image), Snackbar.LENGTH_SHORT).show();
-        }
-    }
+				if (rgbPanelDataLayout.getVisibility() == View.GONE) {
+					rgbPanelDataLayout.setVisibility(View.VISIBLE);
+				}
+			}
+		}
+	}
 }
