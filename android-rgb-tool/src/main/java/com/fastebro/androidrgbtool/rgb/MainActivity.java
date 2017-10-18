@@ -19,7 +19,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -128,12 +127,6 @@ public class MainActivity extends EventBaseActivity implements ActivityCompat.On
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
-
-		// Set overflow menu icons visible
-		if (menu instanceof MenuBuilder) {
-			MenuBuilder m = (MenuBuilder) menu;
-			m.setOptionalIconsVisible(true);
-		}
 
 		// Check if the device has a camera.
 		MenuItem item = menu.findItem(R.id.action_camera);
