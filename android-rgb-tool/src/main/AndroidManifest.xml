@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    package="com.fastebro.androidrgbtool"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.fastebro.androidrgbtool">
 
     <supports-screens
         android:largeScreens="true"
@@ -29,17 +29,18 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1"/>
+
         <activity
             android:name=".rgb.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:resizeableActivity="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Rgbtool.Launcher"
-            android:resizeableActivity="true"
             tools:targetApi="n">
             <meta-data
                 android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
+                android:resource="@xml/shortcuts"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -58,8 +59,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/rgb_gallery_name"
-            android:screenOrientation="portrait"
             android:resizeableActivity="true"
+            android:screenOrientation="portrait"
             tools:targetApi="n">
         </activity>
         <activity
@@ -67,8 +68,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_about"
-            android:screenOrientation="portrait"
             android:resizeableActivity="true"
+            android:screenOrientation="portrait"
             tools:targetApi="n">
         </activity>
         <activity
@@ -76,26 +77,21 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_palette"
-            android:screenOrientation="portrait"
             android:resizeableActivity="true"
+            android:screenOrientation="portrait"
             tools:targetApi="n">
         </activity>
         <activity
-            android:label="@string/title_activity_live_picker"
             android:name=".livepicker.LivePickerActivity"
+            android:label="@string/title_activity_live_picker"
             android:theme="@style/LivePicker">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
         </activity>
 
         <provider
             android:name=".colors.RGBToolContentProvider"
             android:authorities="com.fastebro.androidrgbtool.rgbtoolprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
         </provider>
 
     </application>

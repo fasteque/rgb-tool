@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.Rgbtool" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/light_primary</item>
         <item name="colorPrimaryDark">@color/light_primary_dark</item>
@@ -16,24 +17,6 @@
 
         <!-- ActionBar contextual mode -->
         <item name="actionModeBackground">@color/light_primary_light</item>
-    </style>
-
-    <style name="Theme.Rgbtool.Dark" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/dark_primary</item>
-        <item name="colorPrimaryDark">@color/dark_primary_dark</item>
-        <item name="colorAccent">@color/dark_accent</item>
-        <item name="colorControlHighlight">@color/transparent_accent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/dark_splash_screen</item>
-        <item name="android:popupTheme">@style/ThemeOverlay.AppCompat</item>
-        <item name="android:navigationBarColor">@color/dark_primary_dark</item>
-        <item name="vectorColor">@color/dark_vector_icons</item>
-        <item name="ctxVectorColor">@color/dark_ctx_vector_icons</item>
-        <item name="viewBackground">@color/dark_splash_screen</item>
-        <item name="cardStyle">@style/CardViewDark</item>
-
-        <!-- ActionBar contextual mode -->
-        <item name="actionModeBackground">@color/dark_primary_light</item>
     </style>
 
     <style name="Theme.Rgbtool.Launcher">
