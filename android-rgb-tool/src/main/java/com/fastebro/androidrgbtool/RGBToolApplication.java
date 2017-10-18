@@ -54,8 +54,6 @@ public class RGBToolApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		// ACRA initialization
-		ACRA.init(this);
 		// See javadoc for details
 		hackVmPolicy();
 
@@ -64,6 +62,8 @@ public class RGBToolApplication extends Application {
 
 		if (BuildConfig.DEBUG) {
 			Timber.plant(new Timber.DebugTree());
+			// ACRA initialization
+			ACRA.init(this);
 		}
 	}
 
