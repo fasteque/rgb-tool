@@ -52,7 +52,7 @@ class RGBToolImagesCursorAdapter extends CursorAdapter {
 
 		ViewHolder holder = (ViewHolder) view.getTag();
 
-		Picasso.with(context)
+		PicassoProvider.get()
 				.load(imageUri)
 				.resize(256, 256)
 				.centerCrop()
