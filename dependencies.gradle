@@ -11,32 +11,32 @@ ext {
     androidTargetSdkVersion = 28
     androidCompileSdkVersion = 28
 
-    androidSupportLibraryVersion = '28.0.0-alpha3'
-    rxAndroidVersion = '1.2.1'
+    supportLibVersion = '28.0.0-beta01'
+    rxAndroidVersion = '2.0.2'
     butterKnifeVersion = '8.8.1'
     picassoVersion = '2.71828'
-    photoViewVersion = '1.3.1'
+    photoViewVersion = '2.1.4'
     eventBusVersion = '3.1.1'
     timberVersion = '4.7.1'
     glideVersion = '4.7.1'
 
     jUnitVersion = '4.12'
-    mockitoVersion = '2.19.0'
+    mockitoVersion = '2.21.0'
     espressoCoreVersion = '3.0.2'
     testRunnerVersion = '1.0.2'
 
     appDependencies = [
-            appCompat          : "com.android.support:appcompat-v7:${androidSupportLibraryVersion}",
-            design             : "com.android.support:design:${androidSupportLibraryVersion}",
-            recyclerView       : "com.android.support:recyclerview-v7:${androidSupportLibraryVersion}",
-            cardView           : "com.android.support:cardview-v7:${androidSupportLibraryVersion}",
-            customTabs         : "com.android.support:customtabs:${androidSupportLibraryVersion}",
-            palette            : "com.android.support:palette-v7:${androidSupportLibraryVersion}",
-            percent            : "com.android.support:percent:${androidSupportLibraryVersion}",
+            appCompat          : "com.android.support:appcompat-v7:${supportLibVersion}",
+            design             : "com.android.support:design:${supportLibVersion}",
+            recyclerView       : "com.android.support:recyclerview-v7:${supportLibVersion}",
+            cardView           : "com.android.support:cardview-v7:${supportLibVersion}",
+            customTabs         : "com.android.support:customtabs:${supportLibVersion}",
+            palette            : "com.android.support:palette-v7:${supportLibVersion}",
+            percent            : "com.android.support:percent:${androidSupportLibVersion}",
             butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
             butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             picasso            : "com.squareup.picasso:picasso:${picassoVersion}",
-            rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             photoView          : "com.github.chrisbanes:PhotoView:${photoViewVersion}",
             eventBus           : "org.greenrobot:eventbus:${eventBusVersion}",
             timber             : "com.jakewharton.timber:timber:${timberVersion}",
@@ -52,6 +52,6 @@ ext {
             espressoCore     : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
             testRunner       : "com.android.support.test:runner:${testRunnerVersion}",
             testRules        : "com.android.support.test:rules:${testRunnerVersion}",
-            supportAnnotation: "com.android.support:support-annotations:${androidSupportLibraryVersion}"
+            supportAnnotation: "com.android.support:support-annotations:${supportLibVersion}"
     ]
 }
