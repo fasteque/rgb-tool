@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="?viewBackground">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?viewBackground"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/main_container"
@@ -12,12 +12,12 @@
         android:layout_above="@+id/bottomView" />
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:itemBackground="?colorPrimary"
         app:itemIconTint="@drawable/selector_bottombar"
         app:itemTextColor="@drawable/selector_bottombar"
-        app:menu="@menu/main_tabs"
-        android:id="@+id/bottomView" />
+        app:menu="@menu/main_tabs" />
 </RelativeLayout>

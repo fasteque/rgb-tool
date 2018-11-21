@@ -5,19 +5,20 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    tools:context=".palette.ImagePaletteActivity"
-    android:animateLayoutChanges="true" >
+    android:animateLayoutChanges="true"
+    tools:context=".palette.ImagePaletteActivity">
 
     <GridView
         android:id="@+id/palette_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
-        android:verticalSpacing="7dp"
         android:horizontalSpacing="7dp"
+        android:numColumns="2"
         android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
         android:verticalScrollbarPosition="right"
-        android:scrollbars="vertical">
+        android:verticalSpacing="7dp">
+
     </GridView>
 
 </RelativeLayout>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rgb_top_panel"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -12,152 +12,155 @@
         android:padding="7dp"
         android:stretchColumns="0,1,2,3,4">
 
-        <TableRow android:minHeight="36dp"
-            android:gravity="center_vertical">
+        <TableRow
+            android:gravity="center_vertical"
+            android:minHeight="36dp">
 
             <TextView
+                style="@style/RGBPanelLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
-                style="@style/RGBPanelLabel"
                 android:text="@string/rgb_label" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_red" />
 
             <TextView
                 android:id="@+id/textView_RGB_R"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_green" />
 
             <TextView
                 android:id="@+id/textView_RGB_G"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_blue" />
 
             <TextView
                 android:id="@+id/textView_RGB_B"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_opacity" />
 
             <TextView
                 android:id="@+id/textView_RGB_O"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
         </TableRow>
 
-        <TableRow android:minHeight="36dp"
-            android:gravity="center_vertical">
+        <TableRow
+            android:gravity="center_vertical"
+            android:minHeight="36dp">
 
             <TextView
+                style="@style/RGBPanelLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
-                style="@style/RGBPanelLabel"
                 android:text="@string/hsb_label" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_hue" />
 
             <TextView
                 android:id="@+id/textView_HSB_H"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_saturation" />
 
             <TextView
                 android:id="@+id/textView_HSB_S"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="40"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent"/>
+                android:textIsSelectable="true" />
 
             <TextView
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                style="@style/RGBPanelComponentLabel"
                 android:text="@string/color_brightness" />
 
             <TextView
                 android:id="@+id/textView_HSB_B"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="90"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
         </TableRow>
 
-        <TableRow android:minHeight="36dp"
-            android:gravity="center_vertical">
+        <TableRow
+            android:gravity="center_vertical"
+            android:minHeight="36dp">
 
             <TextView
+                style="@style/RGBPanelLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
-                style="@style/RGBPanelLabel"
                 android:text="@string/color_hexadecimal_label" />
 
             <TextView
                 android:id="@+id/textView_Hexadecimal"
+                style="@style/RGBPanelComponent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="120"
-                android:textIsSelectable="true"
-                style="@style/RGBPanelComponent" />
+                android:textIsSelectable="true" />
 
         </TableRow>
 

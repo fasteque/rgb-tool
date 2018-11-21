@@ -2,37 +2,41 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/empty"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <TextView android:id="@+id/list_empty_text"
+    <TextView
+        android:id="@+id/list_empty_text"
+        style="@style/RGBPanelLabel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/RGBPanelLabel"
-        android:textSize="18.0sp"
         android:gravity="center"
         android:text="@string/color_list_empty"
+        android:textSize="18.0sp"
         android:visibility="gone" />
 
-    <LinearLayout android:id="@+id/list_empty_progress"
+    <LinearLayout
+        android:id="@+id/list_empty_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:visibility="gone" >
+        android:visibility="gone">
 
-        <ProgressBar android:id="@+id/list_empty_progress_bar"
+        <ProgressBar
+            android:id="@+id/list_empty_progress_bar"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5.0dip"
-            android:indeterminate="true"
-            style="?android:attr/progressBarStyleLarge" />
+            android:indeterminate="true" />
 
-        <TextView android:id="@+id/list_empty_progress_text"
-            android:textSize="18.0sp"
+        <TextView
+            android:id="@+id/list_empty_progress_text"
+            style="@style/RGBPanelLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5.0dip"
-            style="@style/RGBPanelLabel"
-            android:text="@string/loading" />
+            android:layout_marginStart="5.0dip"
+            android:text="@string/loading"
+            android:textSize="18.0sp" />
     </LinearLayout>
 </FrameLayout>

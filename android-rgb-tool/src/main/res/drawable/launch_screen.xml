@@ -1,8 +1,9 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
-    <item android:drawable="?colorAccent"/>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="?colorAccent" />
     <item>
         <bitmap
-            android:src="@drawable/product_logo"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:src="@drawable/product_logo" />
     </item>
 </layer-list>
