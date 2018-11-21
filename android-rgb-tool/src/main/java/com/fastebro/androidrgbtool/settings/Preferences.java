@@ -8,13 +8,13 @@ import com.fastebro.androidrgbtool.RGBToolApplication;
  */
 
 public class Preferences {
-    public static void saveTabPosition(int position){
+    public static void saveTabPosition(int position) {
         RGBToolApplication.getCtx().getPreferences().edit().putInt("last_tab", position).apply();
     }
 
-    public static int getTabPosition(){
+    public static int getTabPosition() {
         int baseInt = RGBToolApplication.getCtx().getPreferences().getInt("last_tab", 0);
-        switch (baseInt){
+        switch (baseInt) {
             case 0:
                 return R.id.bottom_main;
             case 1:

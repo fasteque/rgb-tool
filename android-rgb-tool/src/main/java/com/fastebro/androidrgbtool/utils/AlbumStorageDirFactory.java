@@ -9,5 +9,5 @@ import java.io.File;
  * Project: rgb-tool
  */
 abstract class AlbumStorageDirFactory {
-	public abstract File getAlbumStorageDir(@NonNull String albumName);
+    public abstract File getAlbumStorageDir(@NonNull String albumName);
 }

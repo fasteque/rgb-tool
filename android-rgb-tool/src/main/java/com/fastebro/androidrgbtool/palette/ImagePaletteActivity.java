@@ -33,12 +33,10 @@ import butterknife.ButterKnife;
  * Project: rgb-tool
  */
 public class ImagePaletteActivity extends EventBaseActivity {
-    @BindView(R.id.palette_grid)
-    GridView paletteGrid;
-
     public static final String EXTRA_SWATCHES = "com.fastebro.androidrgbtool.EXTRA_SWATCHES";
     public static final String FILENAME = "com.fastebro.androidrgbtool.EXTRA_FILENAME";
-
+    @BindView(R.id.palette_grid)
+    GridView paletteGrid;
     private String filename;
     private ArrayList<PaletteSwatch> swatches;
     private ShareActionProvider shareActionProvider;
@@ -69,7 +67,7 @@ public class ImagePaletteActivity extends EventBaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.image_palette, menu);
         // Set overflow menu icons visible
-        if (menu instanceof MenuBuilder){
+        if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
         }

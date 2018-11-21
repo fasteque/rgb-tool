@@ -27,226 +27,226 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class LivePickerActivity extends AppCompatActivity implements LivePickerTextureView.OnColorPointedListener,
-		View.OnClickListener {
-	private static final String TAG = LivePickerActivity.class.getName();
+public class LivePickerActivity extends AppCompatActivity
+        implements LivePickerTextureView.OnColorPointedListener, View.OnClickListener {
+    private static final String TAG = LivePickerActivity.class.getName();
 
-	@BindView(R.id.live_picker_preview_container)
-	FrameLayout livePreviewContainer;
-	@BindView(R.id.live_picker_pointer_stroke)
-	View pointerRing;
-	@BindView(R.id.live_picker_btn_back)
-	ImageButton btnBack;
-	@BindView(R.id.live_picker_last_color)
-	CircleView lastColor;
-	@BindView(R.id.live_picker_btn_save_color)
-	ImageButton btnSaveColor;
-	@BindView(R.id.live_picker_btn_flash)
-	ImageButton btnFlashToggle;
-	@BindView(R.id.live_picker_hex_color)
-	TextView txtHexValue;
+    @BindView(R.id.live_picker_preview_container)
+    FrameLayout livePreviewContainer;
+    @BindView(R.id.live_picker_pointer_stroke)
+    View pointerRing;
+    @BindView(R.id.live_picker_btn_back)
+    ImageButton btnBack;
+    @BindView(R.id.live_picker_last_color)
+    CircleView lastColor;
+    @BindView(R.id.live_picker_btn_save_color)
+    ImageButton btnSaveColor;
+    @BindView(R.id.live_picker_btn_flash)
+    ImageButton btnFlashToggle;
+    @BindView(R.id.live_picker_hex_color)
+    TextView txtHexValue;
 
-	private Camera mCamera;
-	private CameraAsyncTask mCameraAsyncTask;
+    private Camera mCamera;
+    private CameraAsyncTask mCameraAsyncTask;
 
-	private LivePickerTextureView livePickerTextureView;
-	private boolean isPortrait;
-	private int mPointedColor;
+    private LivePickerTextureView livePickerTextureView;
+    private boolean isPortrait;
+    private int mPointedColor;
 
-	private boolean isFlashOn;
+    private boolean isFlashOn;
 
-	private static Camera getFacingBackCameraInstance() {
-		Camera camera = null;
-		try {
-			camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
-		} catch (Exception e) {
-			Timber.d("Error getting mCamera instance: %s", e.getMessage());
-		}
-		return camera;
-	}
+    private static Camera getFacingBackCameraInstance() {
+        Camera camera = null;
+        try {
+            camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
+        } catch (Exception e) {
+            Timber.d("Error getting mCamera instance: %s", e.getMessage());
+        }
+        return camera;
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_live_picker);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_live_picker);
 
-		ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
-		initViews();
-	}
+        initViews();
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-		isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
-		mCameraAsyncTask = new CameraAsyncTask();
-		mCameraAsyncTask.execute();
-	}
+        mCameraAsyncTask = new CameraAsyncTask();
+        mCameraAsyncTask.execute();
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-		if (mCameraAsyncTask != null) {
-			mCameraAsyncTask.cancel(true);
-		}
+        if (mCameraAsyncTask != null) {
+            mCameraAsyncTask.cancel(true);
+        }
 
-		releaseCameraPreview();
-		releaseCamera();
-	}
+        releaseCameraPreview();
+        releaseCamera();
+    }
 
-	@Override
-	protected void onStop() {
-		super.onStop();
+    @Override
+    protected void onStop() {
+        super.onStop();
 
-		toggleFlash();
-	}
+        toggleFlash();
+    }
 
-	private void initViews() {
-		btnBack.setOnClickListener(view -> {
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
-			finish();
-		});
+    private void initViews() {
+        btnBack.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
-		btnSaveColor.setOnClickListener(view -> {
-			// TODO
-		});
+        btnSaveColor.setOnClickListener(view -> {
+            // TODO
+        });
 
-		if (isFlashSupported()) {
-			btnFlashToggle.setVisibility(View.VISIBLE);
-			btnFlashToggle.setOnClickListener(view -> toggleFlash());
-		}
+        if (isFlashSupported()) {
+            btnFlashToggle.setVisibility(View.VISIBLE);
+            btnFlashToggle.setOnClickListener(view -> toggleFlash());
+        }
 
-		txtHexValue.setOnClickListener(view -> {
-			ClipboardUtils.copyToClipboard(txtHexValue.getText().toString().substring(1));
-			Toast.makeText(LivePickerActivity.this, String.format("%s %s",
-					txtHexValue.getText().toString().substring(1),
-					getString(R.string.clipboard)), Toast.LENGTH_SHORT).show();
-		});
-	}
+        txtHexValue.setOnClickListener(view -> {
+            ClipboardUtils.copyToClipboard(txtHexValue.getText().toString().substring(1));
+            Toast.makeText(LivePickerActivity.this, String.format("%s %s",
+                    txtHexValue.getText().toString().substring(1),
+                    getString(R.string.clipboard)), Toast.LENGTH_SHORT).show();
+        });
+    }
 
-	private void releaseCameraPreview() {
-		if (livePickerTextureView != null) {
-			livePreviewContainer.removeView(livePickerTextureView);
-		}
-	}
+    private void releaseCameraPreview() {
+        if (livePickerTextureView != null) {
+            livePreviewContainer.removeView(livePickerTextureView);
+        }
+    }
 
-	private void releaseCamera() {
-		if (mCamera != null) {
-			mCamera.stopPreview();
-			mCamera.setPreviewCallback(null);
-			mCamera.release();
-			mCamera = null;
-		}
-	}
+    private void releaseCamera() {
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.setPreviewCallback(null);
+            mCamera.release();
+            mCamera = null;
+        }
+    }
 
-	@Override
-	public void onColorPointed(int newColor) {
-		mPointedColor = newColor;
-		pointerRing.getBackground().setColorFilter(mPointedColor, PorterDuff.Mode.SRC_ATOP);
-	}
+    @Override
+    public void onColorPointed(int newColor) {
+        mPointedColor = newColor;
+        pointerRing.getBackground().setColorFilter(mPointedColor, PorterDuff.Mode.SRC_ATOP);
+    }
 
-	@Override
-	public void onClick(View v) {
-		// TODO
-		// Set humanized color drawable
-		lastColor.setBackground(new ColorDrawable(mPointedColor));
-		// Set hex color value
-		txtHexValue.setText(String.format("#%06X", (0xffffff & mPointedColor)));
-	}
+    @Override
+    public void onClick(View v) {
+        // TODO
+        // Set humanized color drawable
+        lastColor.setBackground(new ColorDrawable(mPointedColor));
+        // Set hex color value
+        txtHexValue.setText(String.format("#%06X", (0xffffff & mPointedColor)));
+    }
 
-	private boolean isFlashSupported() {
-		return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-	}
+    private boolean isFlashSupported() {
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+    }
 
-	private void toggleFlash() {
-		if (mCamera != null) {
-			final Camera.Parameters parameters = mCamera.getParameters();
-			final String flashParameter = isFlashOn ? Camera.Parameters.FLASH_MODE_OFF : Camera.Parameters
-					.FLASH_MODE_TORCH;
-			parameters.setFlashMode(flashParameter);
-			mCamera.stopPreview();
-			mCamera.setParameters(parameters);
-			mCamera.startPreview();
-			isFlashOn = !isFlashOn;
+    private void toggleFlash() {
+        if (mCamera != null) {
+            final Camera.Parameters parameters = mCamera.getParameters();
+            final String flashParameter = isFlashOn ? Camera.Parameters.FLASH_MODE_OFF : Camera.Parameters
+                    .FLASH_MODE_TORCH;
+            parameters.setFlashMode(flashParameter);
+            mCamera.stopPreview();
+            mCamera.setParameters(parameters);
+            mCamera.startPreview();
+            isFlashOn = !isFlashOn;
 
-			if (btnFlashToggle != null) {
-				if (isFlashOn) {
-					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
-							.ic_flash_off_white));
-				} else {
-					btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
-							.ic_flash_on_white));
-				}
-			}
-		}
-	}
+            if (btnFlashToggle != null) {
+                if (isFlashOn) {
+                    btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
+                            .ic_flash_off_white));
+                } else {
+                    btnFlashToggle.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable
+                            .ic_flash_on_white));
+                }
+            }
+        }
+    }
 
-	private class CameraAsyncTask extends AsyncTask<Void, Void, Camera> {
+    private class CameraAsyncTask extends AsyncTask<Void, Void, Camera> {
 
-		FrameLayout.LayoutParams previewParams;
+        FrameLayout.LayoutParams previewParams;
 
-		@Override
-		protected Camera doInBackground(Void... params) {
-			return getFacingBackCameraInstance();
-		}
+        @Override
+        protected Camera doInBackground(Void... params) {
+            return getFacingBackCameraInstance();
+        }
 
-		@Override
-		protected void onPostExecute(Camera camera) {
-			if (!isCancelled()) {
-				mCamera = camera;
-				if (mCamera == null) {
-					LivePickerActivity.this.finish();
-				} else {
-					Camera.Parameters cameraParameters = camera.getParameters();
-					Camera.Size bestSize = CameraUtils.getBestPreviewSize(
-							cameraParameters.getSupportedPreviewSizes()
-							, livePreviewContainer.getWidth()
-							, livePreviewContainer.getHeight()
-							, isPortrait);
-					// Set optimal mCamera preview
-					cameraParameters.setPreviewSize(bestSize.width, bestSize.height);
-					// Set focus mode
-					if (cameraParameters.getSupportedFocusModes().contains(
-							Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
-						cameraParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-					}
+        @Override
+        protected void onPostExecute(Camera camera) {
+            if (!isCancelled()) {
+                mCamera = camera;
+                if (mCamera == null) {
+                    LivePickerActivity.this.finish();
+                } else {
+                    Camera.Parameters cameraParameters = camera.getParameters();
+                    Camera.Size bestSize = CameraUtils.getBestPreviewSize(
+                            cameraParameters.getSupportedPreviewSizes()
+                            , livePreviewContainer.getWidth()
+                            , livePreviewContainer.getHeight()
+                            , isPortrait);
+                    // Set optimal mCamera preview
+                    cameraParameters.setPreviewSize(bestSize.width, bestSize.height);
+                    // Set focus mode
+                    if (cameraParameters.getSupportedFocusModes().contains(
+                            Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+                        cameraParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                    }
 
-					camera.setParameters(cameraParameters);
+                    camera.setParameters(cameraParameters);
 
-					// Set mCamera orientation to match with current device orientation
-					CameraUtils.setCameraDisplayOrientation(LivePickerActivity.this, camera);
+                    // Set mCamera orientation to match with current device orientation
+                    CameraUtils.setCameraDisplayOrientation(LivePickerActivity.this, camera);
 
-					// Get proportional dimension for the layout used to display preview according to the preview size
-					// used
-					int[] adaptedDimension = CameraUtils.getProportionalDimension(
-							bestSize
-							, livePreviewContainer.getWidth()
-							, livePreviewContainer.getHeight()
-							, isPortrait);
+                    // Get proportional dimension for the layout used to display preview according to the preview size
+                    // used
+                    int[] adaptedDimension = CameraUtils.getProportionalDimension(
+                            bestSize
+                            , livePreviewContainer.getWidth()
+                            , livePreviewContainer.getHeight()
+                            , isPortrait);
 
-					// Set up params for the layout used to display the preview
-					previewParams = new FrameLayout.LayoutParams(adaptedDimension[0], adaptedDimension[1]);
-					previewParams.gravity = Gravity.CENTER;
+                    // Set up params for the layout used to display the preview
+                    previewParams = new FrameLayout.LayoutParams(adaptedDimension[0], adaptedDimension[1]);
+                    previewParams.gravity = Gravity.CENTER;
 
-					// Set up mCamera preview
-					livePickerTextureView = new LivePickerTextureView(LivePickerActivity.this, mCamera);
-					livePickerTextureView.setOnColorPointedListener(LivePickerActivity.this);
-					livePickerTextureView.setOnClickListener(LivePickerActivity.this);
+                    // Set up mCamera preview
+                    livePickerTextureView = new LivePickerTextureView(LivePickerActivity.this, mCamera);
+                    livePickerTextureView.setOnColorPointedListener(LivePickerActivity.this);
+                    livePickerTextureView.setOnClickListener(LivePickerActivity.this);
 
-					livePreviewContainer.addView(livePickerTextureView, 0, previewParams);
-				}
-			}
-		}
+                    livePreviewContainer.addView(livePickerTextureView, 0, previewParams);
+                }
+            }
+        }
 
-		@Override
-		protected void onCancelled(Camera camera) {
-			if (camera != null) {
-				camera.release();
-			}
-		}
-	}
+        @Override
+        protected void onCancelled(Camera camera) {
+            if (camera != null) {
+                camera.release();
+            }
+        }
+    }
 }

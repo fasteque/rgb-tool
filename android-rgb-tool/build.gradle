@@ -65,12 +65,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation project(':model')
 
-    implementation "com.android.support:design:${supportLib}"
+    implementation "com.android.support:support-v4:${supportLib}"
     implementation "com.android.support:appcompat-v7:${supportLib}"
     implementation "com.android.support:cardview-v7:${supportLib}"
     implementation "com.android.support:recyclerview-v7:${supportLib}"
     implementation "com.android.support:palette-v7:${supportLib}"
     implementation "com.android.support:customtabs:${supportLib}"
+    implementation "com.android.support:design:${supportLib}"
+    implementation "com.android.support:exifinterface:${supportLib}"
     implementation "com.android.support:percent:${supportLib}"
 
     implementation "com.jakewharton:butterknife:${butterKnife}"

@@ -53,24 +53,6 @@ public class RGBPanelData extends LinearLayout {
         setupPanel(context);
     }
 
-    private class ClipboardLongClickListener implements OnLongClickListener {
-        final Context context;
-        final CharSequence label;
-
-        public ClipboardLongClickListener(Context context, CharSequence label) {
-            this.context = context;
-            this.label = label;
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            CharSequence text = ((TextView)v).getText();
-            ClipboardUtils.copyToClipboard(text.toString());
-            Snackbar.make(v, text + " " + context.getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
-            return true;
-        }
-    }
-
     private void setupPanel(final Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.rgb_data_panel_small, this);
@@ -120,7 +102,25 @@ public class RGBPanelData extends LinearLayout {
         }
     }
 
-    private void setColorView(int color){
+    private void setColorView(int color) {
         mColorView.setBackgroundColor(color);
+    }
+
+    private class ClipboardLongClickListener implements OnLongClickListener {
+        final Context context;
+        final CharSequence label;
+
+        public ClipboardLongClickListener(Context context, CharSequence label) {
+            this.context = context;
+            this.label = label;
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            CharSequence text = ((TextView) v).getText();
+            ClipboardUtils.copyToClipboard(text.toString());
+            Snackbar.make(v, text + " " + context.getString(R.string.clipboard), Snackbar.LENGTH_SHORT).show();
+            return true;
+        }
     }
 }
