@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.fastebro.androidrgbtool.widgets.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                             android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"
-                                                             android:background="?android:attr/listChoiceBackgroundIndicator" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/listChoiceBackgroundIndicator">
+
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"

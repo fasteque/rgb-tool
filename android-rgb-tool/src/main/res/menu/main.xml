@@ -1,28 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context=".rgb.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".rgb.MainActivity">
 
     <item
         android:id="@+id/action_camera"
         android:icon="@drawable/ic_menu_camera"
         android:orderInCategory="100"
         android:title="@string/action_camera"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_live_picker"
         android:icon="@drawable/ic_action_live_picker"
         android:orderInCategory="102"
         android:title="@string/title_activity_live_picker"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_print"
         android:icon="@drawable/ic_menu_print"
         android:orderInCategory="103"
         android:title="@string/action_print"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_share"
@@ -30,12 +30,12 @@
         android:orderInCategory="104"
         android:title="@string/action_share"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
-        app:showAsAction="never|withText"/>
+        app:showAsAction="never|withText" />
 
     <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_action_info_about"
         android:orderInCategory="105"
         android:title="@string/action_about"
-        app:showAsAction="never|withText"/>
+        app:showAsAction="never|withText" />
 </menu>

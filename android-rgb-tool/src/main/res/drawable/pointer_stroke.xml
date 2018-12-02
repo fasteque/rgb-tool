@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="ring"
-       android:thickness="@dimen/live_picker_pointer_stroke_thickness"
-       android:useLevel="false">
+    android:shape="ring"
+    android:thickness="@dimen/live_picker_pointer_stroke_thickness"
+    android:useLevel="false">
 
-    <solid android:color="@color/live_picker_pointer_stroke"/>
+    <solid android:color="@color/live_picker_pointer_stroke" />
 
     <size
         android:width="30dp"
-        android:height="30dp"/>
+        android:height="30dp" />
 </shape>

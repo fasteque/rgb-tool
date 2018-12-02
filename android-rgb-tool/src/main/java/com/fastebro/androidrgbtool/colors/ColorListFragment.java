@@ -36,7 +36,9 @@ import butterknife.Unbinder;
  * Created by danielealtomare on 15/02/15.
  * Project: rgb-tool
  */
-public class ColorListFragment extends EventBaseFragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class ColorListFragment extends EventBaseFragment
+        implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+    private static final int GET_COLORS_REQUEST_ID = 0;
     @BindView(android.R.id.list)
     ListView listView;
     @BindView(R.id.list_empty_progress)
@@ -44,8 +46,6 @@ public class ColorListFragment extends EventBaseFragment implements AdapterView.
     @BindView(R.id.list_empty_text)
     TextView emptyListMessage;
     private Unbinder unbinder;
-
-    private static final int GET_COLORS_REQUEST_ID = 0;
     private ColorListAdapter adapter;
 
     @Nullable
@@ -157,13 +157,13 @@ public class ColorListFragment extends EventBaseFragment implements AdapterView.
 
     @Subscribe
     public void onColorShareEvent(ColorShareEvent event) {
-        String[] projection = { ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
+        String[] projection = {ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R,
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G,
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_B,
                 ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_A
         };
         String selectionClause = ColorDataContract.ColorEntry._ID + "=?";
-        String[] selectionArgs = { String.valueOf(event.getColorId()) };
+        String[] selectionArgs = {String.valueOf(event.getColorId())};
 
         Cursor cursor = getActivity().getContentResolver().query(RGBToolContentProvider.CONTENT_URI,
                 projection,
@@ -171,7 +171,7 @@ public class ColorListFragment extends EventBaseFragment implements AdapterView.
                 selectionArgs,
                 null);
 
-        if(cursor != null) {
+        if (cursor != null) {
             cursor.moveToFirst();
             int rgbRValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_R));
             int rgbGValue = cursor.getInt(cursor.getColumnIndex(ColorDataContract.ColorEntry.COLUMN_COLOR_RGB_G));

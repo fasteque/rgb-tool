@@ -9,15 +9,15 @@ import org.greenrobot.eventbus.EventBus;
  * Project: rgb-tool
  */
 public class EventBaseDialogFragment extends DialogFragment {
-	@Override
-	public void onStart() {
-		super.onStart();
-		EventBus.getDefault().register(this);
-	}
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
-	@Override
-	public void onStop() {
-		EventBus.getDefault().unregister(this);
-		super.onStop();
-	}
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
 }

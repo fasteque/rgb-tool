@@ -1,26 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:id="@+id/slider_container"
+        style="?cardStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/default_margin"
-        style="?cardStyle">
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/default_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/default_margin"
+            android:paddingStart="4dp"
             android:paddingEnd="4dp"
-            android:paddingStart="4dp">
+            android:paddingBottom="@dimen/default_margin">
 
             <TextView
                 android:id="@+id/red_tool_tip"
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textColor="@color/red"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <SeekBar
                 android:id="@+id/red_seek_bar"
@@ -38,7 +38,7 @@
                 android:maxHeight="3dp"
                 android:minHeight="3dp"
                 android:progressDrawable="@drawable/red_progress"
-                android:thumbTint="@color/red"/>
+                android:thumbTint="@color/red" />
 
             <TextView
                 android:id="@+id/green_tool_tip"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textColor="@color/green"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <SeekBar
                 android:id="@+id/green_seek_bar"
@@ -56,7 +56,7 @@
                 android:maxHeight="3dp"
                 android:minHeight="3dp"
                 android:progressDrawable="@drawable/green_progress"
-                android:thumbTint="@color/green"/>
+                android:thumbTint="@color/green" />
 
             <TextView
                 android:id="@+id/blue_tool_tip"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textColor="@color/blue"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <SeekBar
                 android:id="@+id/blue_seek_bar"
@@ -74,7 +74,7 @@
                 android:maxHeight="3dp"
                 android:minHeight="3dp"
                 android:progressDrawable="@drawable/blue_progress"
-                android:thumbTint="@color/blue"/>
+                android:thumbTint="@color/blue" />
 
             <TextView
                 android:id="@+id/opacity_tool_tip"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textColor="@color/gray"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <SeekBar
                 android:id="@+id/opacity_seek_bar"
@@ -92,7 +92,7 @@
                 android:maxHeight="3dp"
                 android:minHeight="3dp"
                 android:progressDrawable="@drawable/gray_progress"
-                android:thumbTint="@color/gray"/>
+                android:thumbTint="@color/gray" />
 
         </LinearLayout>
 
@@ -106,29 +106,29 @@
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:textColor="@color/dark_gray"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/hexadecimalCopy"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="@dimen/default_margin"
-        app:srcCompat="@drawable/ic_content_copy"
-        android:background="?selectableItemBackgroundBorderless"
         android:layout_below="@+id/cardView"
-        android:layout_toEndOf="@+id/tv_hexadecimal" />
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_toEndOf="@+id/tv_hexadecimal"
+        android:background="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/ic_content_copy" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        style="?cardStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/tv_hexadecimal"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/default_margin"
-        style="?cardStyle"
-        android:id="@+id/cardView">
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/default_margin">
 
         <ImageView
             android:id="@+id/main_picker_image"
@@ -136,12 +136,12 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"/>
+            android:scaleType="centerInside" />
 
         <View
             android:id="@+id/color_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </android.support.v7.widget.CardView>
 

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:descendantFocusability="blocksDescendants"
-    android:background="@android:color/white">
+    android:orientation="horizontal">
 
     <RelativeLayout
-        android:orientation="vertical"
         android:layout_width="56dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="@dimen/rgb_panel_margin_top"
-        android:layout_marginBottom="@dimen/rgb_panel_margin_top">
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="@dimen/rgb_panel_margin_top"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/robot"
-            android:layout_marginTop="@dimen/rgb_panel_margin_top"
-            android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-            android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-            android:layout_marginRight="@dimen/rgb_panel_margin_right"
             android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/rgb_panel_margin_left"
+            android:layout_marginTop="@dimen/rgb_panel_margin_top"
+            android:layout_marginEnd="@dimen/rgb_panel_margin_right"
+            android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            android:src="@drawable/robot" />
 
         <com.fastebro.androidrgbtool.widgets.CircleView
             android:id="@+id/rgb_panel_color"
@@ -34,41 +34,41 @@
             android:layout_height="56dp"
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
+            app:circleGap="0dp"
             app:circleRadius="28dp"
-            app:strokeWidth="0dp"
-            app:circleGap="0dp"/>
+            app:strokeWidth="0dp" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/rgb_panel"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rgb_panel_color_list_margin"
         android:layout_marginTop="@dimen/rgb_panel_margin_top"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="@dimen/rgb_panel_margin_bottom"
-        android:layout_marginLeft="@dimen/rgb_panel_color_list_margin"
-        android:layout_marginRight="16dp" >
+        android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
+                style="@style/RGBPanelLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/RGBPanelLabel"
                 android:text="@string/argb_label" />
 
             <TextView
                 android:id="@+id/rgb_value"
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                style="@style/RGBPanelComponentLabel" />
+                android:layout_marginStart="@dimen/rgb_panel_margin_left" />
 
         </LinearLayout>
 
@@ -76,50 +76,50 @@
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
+                style="@style/RGBPanelLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/RGBPanelLabel"
                 android:text="@string/hsb_label" />
 
             <TextView
                 android:id="@+id/hsb_value"
+                style="@style/RGBPanelComponentLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                style="@style/RGBPanelComponentLabel" />
+                android:layout_marginStart="@dimen/rgb_panel_margin_left" />
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="28dp" >
+            android:layout_height="28dp">
 
             <TextView
                 android:id="@+id/hex_text"
+                style="@style/RGBPanelLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                style="@style/RGBPanelLabel"
                 android:text="@string/color_hexadecimal_label" />
 
             <TextView
                 android:id="@+id/hex_value"
+                style="@style/RGBPanelComponent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/rgb_panel_margin_left"
-                android:layout_toRightOf="@id/hex_text"
-                style="@style/RGBPanelComponent" />
+                android:layout_marginStart="@dimen/rgb_panel_margin_left"
+                android:layout_toEndOf="@id/hex_text" />
 
             <ImageButton
                 android:id="@+id/btn_popup_menu"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
                 android:background="@null"
                 android:focusable="false"
                 android:focusableInTouchMode="false"

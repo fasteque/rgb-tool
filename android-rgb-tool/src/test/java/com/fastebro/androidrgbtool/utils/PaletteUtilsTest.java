@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
@@ -44,36 +44,36 @@ public class PaletteUtilsTest {
     @Test
     public void paletteUtils_getVibrantSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(PaletteSwatch.SwatchType.VIBRANT);
-        assertTrue(description.equals(mockContext.getString(R.string.swatch_vibrant)));
+        assertEquals(description, mockContext.getString(R.string.swatch_vibrant));
     }
 
     @Test
     public void paletteUtils_getLightVibrantSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(PaletteSwatch.SwatchType.LIGHT_VIBRANT);
-        assertTrue(description.equals(mockContext.getString(R.string.swatch_light_vibrant)));
+        assertEquals(description, mockContext.getString(R.string.swatch_light_vibrant));
     }
 
     @Test
     public void paletteUtils_getDarkVibrantSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(PaletteSwatch.SwatchType.DARK_VIBRANT);
-        assertTrue(description.equals(mockContext.getString(R.string.swatch_dark_vibrant)));
+        assertEquals(description, mockContext.getString(R.string.swatch_dark_vibrant));
     }
 
     @Test
     public void paletteUtils_getMutedSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(PaletteSwatch.SwatchType.MUTED);
-        assertTrue(description.equals(mockContext.getString(R.string.swatch_muted)));
+        assertEquals(description, mockContext.getString(R.string.swatch_muted));
     }
 
     @Test
     public void paletteUtils_getLightMutedSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(PaletteSwatch.SwatchType.LIGHT_MUTED);
-        assertTrue(description.equals(mockContext.getString(R.string.swatch_light_muted)));
+        assertEquals(description, mockContext.getString(R.string.swatch_light_muted));
     }
 
     @Test
     public void paletteUtils_getDarkMutedSwatchDescription() {
         String description = PaletteUtils.getSwatchDescription(PaletteSwatch.SwatchType.DARK_MUTED);
-        assertTrue(description.equals(mockContext.getString(R.string.swatch_dark_muted)));
+        assertEquals(description, mockContext.getString(R.string.swatch_dark_muted));
     }
 }

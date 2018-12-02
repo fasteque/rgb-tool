@@ -30,9 +30,9 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.Rgbtool.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="Theme.Rgbtool.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Theme.Rgbtool.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="Theme.Rgbtool.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="RGBTabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/light_accent</item>
@@ -47,12 +47,15 @@
         <item name="vectorColor">@color/dark_vector_icons</item>
     </style>
 
-    <style name="ACRA" parent="Base.Theme.AppCompat.Dialog.MinWidth"/>
-    <style name="CardViewLight" parent="CardView"/>
+    <style name="ACRA" parent="Base.Theme.AppCompat.Dialog.MinWidth" />
+
+    <style name="CardViewLight" parent="CardView" />
+
     <style name="CardViewDark" parent="CardView.Dark">
         <item name="cardBackgroundColor">@color/dark_card</item>
     </style>
 
-    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog"/>
-    <style name="BottomSheetDialog.Dark" parent="Theme.Design.BottomSheetDialog"/>
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog" />
+
+    <style name="BottomSheetDialog.Dark" parent="Theme.Design.BottomSheetDialog" />
 </resources>

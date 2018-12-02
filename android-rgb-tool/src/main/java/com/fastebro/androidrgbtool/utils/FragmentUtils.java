@@ -9,9 +9,10 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class FragmentUtils {
-	public static void iterate(AppCompatActivity activity, int resId, @NonNull Fragment fragment) {
-		activity.getSupportFragmentManager().beginTransaction()
-				.replace(resId, fragment)
-				.commit();
-	}
+    public static void iterate(AppCompatActivity activity, int resId, @NonNull Fragment fragment) {
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(resId, fragment)
+                .commit();
+    }
 }

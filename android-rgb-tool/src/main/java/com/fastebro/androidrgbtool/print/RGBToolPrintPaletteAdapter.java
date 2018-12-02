@@ -29,159 +29,159 @@ import java.util.ArrayList;
  * Project: rgb-tool
  */
 public class RGBToolPrintPaletteAdapter extends PrintDocumentAdapter {
-	private final Context context;
-	private final String message;
-	private final String filename;
-	private final ArrayList<PaletteSwatch> swatches;
+    private final Context context;
+    private final String message;
+    private final String filename;
+    private final ArrayList<PaletteSwatch> swatches;
 
-	private PrintedPdfDocument pdfDocument;
+    private PrintedPdfDocument pdfDocument;
 
-	public RGBToolPrintPaletteAdapter(@NonNull Context context,
-	                                  String message,
-	                                  String filename,
-	                                  ArrayList<PaletteSwatch> swatches) {
-		this.context = context;
-		this.message = message;
-		this.filename = filename;
-		this.swatches = swatches;
-	}
+    public RGBToolPrintPaletteAdapter(@NonNull Context context,
+                                      String message,
+                                      String filename,
+                                      ArrayList<PaletteSwatch> swatches) {
+        this.context = context;
+        this.message = message;
+        this.filename = filename;
+        this.swatches = swatches;
+    }
 
-	@Override
-	public void onLayout(PrintAttributes oldAttributes,
-	                     PrintAttributes newAttributes,
-	                     CancellationSignal cancellationSignal,
-	                     LayoutResultCallback callback, Bundle extras) {
-		// Create a new PdfDocument with the requested page attributes
-		pdfDocument = new PrintedPdfDocument(context, newAttributes);
+    @Override
+    public void onLayout(PrintAttributes oldAttributes,
+                         PrintAttributes newAttributes,
+                         CancellationSignal cancellationSignal,
+                         LayoutResultCallback callback, Bundle extras) {
+        // Create a new PdfDocument with the requested page attributes
+        pdfDocument = new PrintedPdfDocument(context, newAttributes);
 
-		// Respond to cancellation request
-		if (cancellationSignal.isCanceled()) {
-			Toast.makeText(context, context.getString(R.string.print_job_canceled),
-					Toast.LENGTH_SHORT).show();
+        // Respond to cancellation request
+        if (cancellationSignal.isCanceled()) {
+            Toast.makeText(context, context.getString(R.string.print_job_canceled),
+                    Toast.LENGTH_SHORT).show();
 
-			callback.onLayoutCancelled();
+            callback.onLayoutCancelled();
 
-			return;
-		}
+            return;
+        }
 
-		// Compute the expected number of printed pages
-		int pages = computePageCount(newAttributes);
+        // Compute the expected number of printed pages
+        int pages = computePageCount(newAttributes);
 
-		if (pages > 0) {
-			// Return print information to print framework
-			PrintDocumentInfo info = new PrintDocumentInfo.Builder(
-					"rgbtool_" + filename + "_palette.pdf")
-					.setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
-					.setPageCount(pages)
-					.build();
+        if (pages > 0) {
+            // Return print information to print framework
+            PrintDocumentInfo info = new PrintDocumentInfo.Builder(
+                    "rgbtool_" + filename + "_palette.pdf")
+                    .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                    .setPageCount(pages)
+                    .build();
 
-			// Content layout reflow is complete
-			callback.onLayoutFinished(info, true);
-		} else {
-			// Otherwise report an error to the print framework
-			callback.onLayoutFailed("Page count calculation failed.");
-		}
+            // Content layout reflow is complete
+            callback.onLayoutFinished(info, true);
+        } else {
+            // Otherwise report an error to the print framework
+            callback.onLayoutFailed("Page count calculation failed.");
+        }
 
-	}
+    }
 
-	@Override
-	public void onWrite(PageRange[] pages,
-	                    ParcelFileDescriptor destination,
-	                    CancellationSignal cancellationSignal,
-	                    WriteResultCallback callback) {
-		PdfDocument.Page page = pdfDocument.startPage(0);
+    @Override
+    public void onWrite(PageRange[] pages,
+                        ParcelFileDescriptor destination,
+                        CancellationSignal cancellationSignal,
+                        WriteResultCallback callback) {
+        PdfDocument.Page page = pdfDocument.startPage(0);
 
-		// check for cancellation
-		if (cancellationSignal.isCanceled()) {
-			Toast.makeText(context, context.getString(R.string.print_job_canceled),
-					Toast.LENGTH_SHORT).show();
+        // check for cancellation
+        if (cancellationSignal.isCanceled()) {
+            Toast.makeText(context, context.getString(R.string.print_job_canceled),
+                    Toast.LENGTH_SHORT).show();
 
-			callback.onWriteCancelled();
-			pdfDocument.close();
-			pdfDocument = null;
+            callback.onWriteCancelled();
+            pdfDocument.close();
+            pdfDocument = null;
 
-			return;
-		}
+            return;
+        }
 
-		// Draw page content for printing
-		drawPage(page);
+        // Draw page content for printing
+        drawPage(page);
 
-		// Rendering is complete, so page can be finalized.
-		pdfDocument.finishPage(page);
+        // Rendering is complete, so page can be finalized.
+        pdfDocument.finishPage(page);
 
-		// Write PDF document to file
-		try {
-			pdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
-		} catch (IOException e) {
-			Toast.makeText(context, context.getString(R.string.print_error),
-					Toast.LENGTH_SHORT).show();
+        // Write PDF document to file
+        try {
+            pdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
+        } catch (IOException e) {
+            Toast.makeText(context, context.getString(R.string.print_error),
+                    Toast.LENGTH_SHORT).show();
 
-			callback.onWriteFailed(e.toString());
+            callback.onWriteFailed(e.toString());
 
-			return;
-		} finally {
-			pdfDocument.close();
-			pdfDocument = null;
-		}
+            return;
+        } finally {
+            pdfDocument.close();
+            pdfDocument = null;
+        }
 
-		// Signal the print framework the document is complete
-		callback.onWriteFinished(pages);
-	}
+        // Signal the print framework the document is complete
+        callback.onWriteFinished(pages);
+    }
 
 
-	@SuppressWarnings("SameReturnValue")
-	private int computePageCount(PrintAttributes printAttributes) {
-		return 1;
-	}
+    @SuppressWarnings("SameReturnValue")
+    private int computePageCount(PrintAttributes printAttributes) {
+        return 1;
+    }
 
-	@SuppressWarnings("SameReturnValue")
-	private int getPrintItemCount() {
-		return 1;
-	}
+    @SuppressWarnings("SameReturnValue")
+    private int getPrintItemCount() {
+        return 1;
+    }
 
-	private void drawPage(PdfDocument.Page page) {
-		Canvas canvas = page.getCanvas();
-		StringBuilder token;
+    private void drawPage(PdfDocument.Page page) {
+        Canvas canvas = page.getCanvas();
+        StringBuilder token;
 
-		// units are in points (1/72 of an inch)
-		int titleBaseLine = 72;
-		int leftMargin = 54;
+        // units are in points (1/72 of an inch)
+        int titleBaseLine = 72;
+        int leftMargin = 54;
 
-		Paint paint = new Paint();
-		paint.setColor(Color.BLACK);
-		paint.setTextSize(20);
-		canvas.drawText(context.getString(R.string.app_name), leftMargin, titleBaseLine, paint);
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(20);
+        canvas.drawText(context.getString(R.string.app_name), leftMargin, titleBaseLine, paint);
 
-		paint.setTextSize(16);
-		canvas.drawText(filename + " palette", leftMargin, titleBaseLine + 25, paint);
+        paint.setTextSize(16);
+        canvas.drawText(filename + " palette", leftMargin, titleBaseLine + 25, paint);
 
-		// Color description summary.
-		paint.setTextSize(14);
-		for (int i = 0; i < swatches.size(); i++) {
-			paint.setColor(Color.BLACK);
-			token = new StringBuilder();
-			token.append("Type: ");
-			token.append(PaletteUtils.getSwatchDescription(swatches.get(i).getType()));
-			canvas.drawText(token.toString(), leftMargin, titleBaseLine + (50 + (i * 100)), paint);
+        // Color description summary.
+        paint.setTextSize(14);
+        for (int i = 0; i < swatches.size(); i++) {
+            paint.setColor(Color.BLACK);
+            token = new StringBuilder();
+            token.append("Type: ");
+            token.append(PaletteUtils.getSwatchDescription(swatches.get(i).getType()));
+            canvas.drawText(token.toString(), leftMargin, titleBaseLine + (50 + (i * 100)), paint);
 
-			token = new StringBuilder();
-			token.append("HEX: ");
-			token.append(Integer.toHexString(swatches.get(i).getRgb()).toUpperCase());
-			canvas.drawText(token.toString(), leftMargin, titleBaseLine + (75 + (i * 100)), paint);
+            token = new StringBuilder();
+            token.append("HEX: ");
+            token.append(Integer.toHexString(swatches.get(i).getRgb()).toUpperCase());
+            canvas.drawText(token.toString(), leftMargin, titleBaseLine + (75 + (i * 100)), paint);
 
-			paint.setColor(swatches.get(i).getRgb());
-			canvas.drawRect(leftMargin,
-					titleBaseLine + (90 + (i * 100)),
-					126,
-					titleBaseLine + (90 + (i * 100)) + 30,
-					paint);
-		}
+            paint.setColor(swatches.get(i).getRgb());
+            canvas.drawRect(leftMargin,
+                    titleBaseLine + (90 + (i * 100)),
+                    126,
+                    titleBaseLine + (90 + (i * 100)) + 30,
+                    paint);
+        }
 
-		// User message.
-		if (message != null) {
-			paint.setColor(Color.BLACK);
-			paint.setTextSize(10);
-			canvas.drawText(message, leftMargin, titleBaseLine + (50 + (swatches.size() * 100)) + 10, paint);
-		}
-	}
+        // User message.
+        if (message != null) {
+            paint.setColor(Color.BLACK);
+            paint.setTextSize(10);
+            canvas.drawText(message, leftMargin, titleBaseLine + (50 + (swatches.size() * 100)) + 10, paint);
+        }
+    }
 }

@@ -13,17 +13,17 @@ import com.fastebro.androidrgbtool.print.PrintJobDialogFragment;
  * Project: rgb-tool
  */
 public abstract class BaseActivity extends AppCompatActivity {
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		getWindow().setEnterTransition(new Explode());
-		getWindow().setExitTransition(new Fade());
-		getWindow().setAllowEnterTransitionOverlap(true);
-	}
+        getWindow().setEnterTransition(new Explode());
+        getWindow().setExitTransition(new Fade());
+        getWindow().setAllowEnterTransitionOverlap(true);
+    }
 
-	protected void showPrintColorDialog(int jobType) {
-		DialogFragment dialog = PrintJobDialogFragment.newInstance(jobType);
-		dialog.show(getSupportFragmentManager(), null);
-	}
+    protected void showPrintColorDialog() {
+        DialogFragment dialog = PrintJobDialogFragment.newInstance(PrintJobDialogFragment.PRINT_COLOR_JOB);
+        dialog.show(getSupportFragmentManager(), null);
+    }
 }

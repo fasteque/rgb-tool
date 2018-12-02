@@ -4,45 +4,44 @@
         <Preference android:title="@string/pref_report_issue">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/fasteque/rgb-tool/issues/new"/>
+                android:data="https://github.com/fasteque/rgb-tool/issues/new" />
         </Preference>
         <Preference android:title="@string/pref_send_feedback">
             <intent
                 android:action="android.intent.action.SENDTO"
-                android:data="daniele.altomare@gmail.com"/>
+                android:data="daniele.altomare@gmail.com" />
         </Preference>
         <Preference android:title="@string/pref_github">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/fasteque/rgb-tool/"/>
+                android:data="https://github.com/fasteque/rgb-tool/" />
         </Preference>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/pref_open_source_libs">
+    <PreferenceCategory android:title="@string/pref_open_source_libs">
         <Preference android:title="@string/prefs_picasso">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="http://square.github.io/picasso/"/>
+                android:data="https://square.github.io/picasso/" />
         </Preference>
         <Preference android:title="@string/prefs_butter_knife">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="http://jakewharton.github.io/butterknife/"/>
+                android:data="https://jakewharton.github.io/butterknife/" />
         </Preference>
         <Preference android:title="@string/prefs_photoview">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/chrisbanes/PhotoView"/>
+                android:data="https://github.com/chrisbanes/PhotoView" />
         </Preference>
         <Preference android:title="@string/prefs_eventbus">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/greenrobot/EventBus"/>
+                android:data="https://github.com/greenrobot/EventBus" />
         </Preference>
         <Preference android:title="@string/prefs_rxandroid">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/ReactiveX/RxAndroid"/>
+                android:data="https://github.com/ReactiveX/RxAndroid" />
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

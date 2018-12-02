@@ -2,19 +2,19 @@
 <resources>
 
     <declare-styleable name="CircleView">
-        <attr name="strokeWidth" format="dimension"/>
-        <attr name="strokeColor" format="color|reference"/>
-        <attr name="fillColor" format="color|reference"/>
-        <attr name="circleRadius" format="dimension"/>
-        <attr name="circleGap" format="dimension"/>
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="strokeColor" format="color|reference" />
+        <attr name="fillColor" format="color|reference" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="circleGap" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="RGBTool">
-        <attr name="viewBackground" format="color"/>
-        <attr name="vectorColor" format="color"/>
-        <attr name="ctxVectorColor" format="color"/>
-        <attr name="cardStyle" format="reference"/>
-        <attr name="tabTextColor" format="color"/>
-        <attr name="bottomSheetStyle" format="reference"/>
+        <attr name="viewBackground" format="color" />
+        <attr name="vectorColor" format="color" />
+        <attr name="ctxVectorColor" format="color" />
+        <attr name="cardStyle" format="reference" />
+        <attr name="tabTextColor" format="color" />
+        <attr name="bottomSheetStyle" format="reference" />
     </declare-styleable>
 </resources>
